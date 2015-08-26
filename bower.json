@@ -1,0 +1,49 @@
+{
+  "name": "e-boook.com",
+  "version": "2.1.5",
+  "homepage": "https://github.com/uusa35/ebook",
+  "authors": [
+    "usama ahmed <uusa35@gmail.com>"
+  ],
+  "description": "ebook site",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "ebook",
+    "books",
+    "library",
+    "kuwait"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": null,
+    "bootstrap-datepicker": "~1.4.0",
+    "bootstrap-material-design": "~0.3.0",
+    "bootstrap-material-design-sass": "bootstrap-material-design-sass#*",
+    "bootstrap-rtl": null,
+    "bootstrap-sass": "~3.3.5",
+    "bootstrap-social": "~4.9.1",
+    "colorbox": "~1.6.0",
+    "datatables": "~1.10.8",
+    "dropzone": "~4.0.1",
+    "fineuploader-dist": "~5.1.3",
+    "font-awesome": "~4.4.0",
+    "fontawesome": null,
+    "jquery": null,
+    "jquery.cookie": "~1.4.1",
+    "modernizr": "~2.8.3",
+    "morris.js": "morrisjs#~0.5.1",
+    "nivoslider": "*",
+    "normalize.scss": "~3.0.2+normalize.3.0.2",
+    "respond": "~1.4.2",
+    "tinymce": "~4.1.10"
+  }
+}
