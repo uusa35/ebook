@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.modules.book.index');
+});
+
+Route::get('/backend', function () {
+    return view('starter');
 });

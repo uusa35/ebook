@@ -1,0 +1,5 @@
+body, html { background-color:  white !important;}
+.widget-user-header {
+    height: auto !important;
+    min-height: 320px;
+}
