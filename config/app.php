@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => 'http://www.e-boook.com',
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ar',
 
     /*
     |--------------------------------------------------------------------------
@@ -143,6 +143,23 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        'Zizaco\Entrust\EntrustServiceProvider',
+        'Intervention\Image\ImageServiceProvider',
+        Collective\Html\HtmlServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+
+
+        'Barryvdh\Snappy\ServiceProvider',
+        'Barryvdh\HttpCache\ServiceProvider',
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+
+
+
+
+
+
 
     ],
 
@@ -191,6 +208,15 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Form'      => Collective\Html\FormFacade::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
+        'Entrust'   => 'Zizaco\Entrust\EntrustFacade',
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
+        'Image'     => 'Intervention\Image\Facades\Image',
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Flash'     => 'Laracasts\Flash\Flash',
+        'PDF'      => 'Barryvdh\Snappy\Facades\SnappyPdf',
+        'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
 
     ],
 

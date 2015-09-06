@@ -4,34 +4,38 @@
     <meta charset="UTF-8">
     <title></title>
     @section('styles')
-        @include('frontend.styles.stylesheets')
+        @include('styles.stylesheets')
     @show
 </head>
 <body>
 
 @section('toolbar')
     @include('frontend.partials.toolbar')
+
+@show
+@section('header')
+    @include('frontend.partials.header')
 @show
 
+
+@yield('slider')
+
 <div class="container">
+
     <div class="row">
-
-        @section('header')
-
-            @include('frontend.partials.header')
-
-        @show
 
 
         @section('layout')
         @show
 
     </div>
-
 </div>
 
+@include('frontend.partials.footer')
+
+
 @section('scripts')
-    @include('frontend.scripts.allscripts')
+    @include('scripts.allscripts')
 @show
 </body>
 </html>

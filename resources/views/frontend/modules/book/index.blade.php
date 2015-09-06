@@ -1,6 +1,10 @@
 @extends('frontend.layouts.one_col')
 
 
+@section('slider')
+    @include('frontend.partials.slider')
+@stop
+
 @section('content')
 
 

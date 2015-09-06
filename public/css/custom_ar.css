@@ -1,0 +1,9 @@
+
+
+.navbar .nav > li > .dropdown-menu {
+ right: -4px;
+}
+
+.main-sidebar {
+ right: 0px !important;
+}

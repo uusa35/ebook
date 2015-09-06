@@ -11,10 +11,94 @@
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.modules.book.index');
+
+/***************************************************************************************************
+ * ▂ ▃ ▅ ▆ █ Frontend  █ ▆ ▅ ▃ ▂
+ ***************************************************************************************************/
+
+/***************************************************************************************************
+ * Authentication
+ ***************************************************************************************************/
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);
+
+Route::get('/',['as'=>'home','uses'=> 'HomeController@index']);
+Route::get('/home',['uses'=> 'HomeController@index']);
+
+/***************************************************************************************************
+ * Localization
+ ***************************************************************************************************/
+Route::get('/lang/{lang}', ['uses' => 'LanguageController@changeLocale']);
+
+
+Route::group(['prefix' => 'frontend'], function () {
+
+    Route::get('/', function () {
+
+        return view('frontend.modules.book.index');
+    });
+
+    /***************************************************************************************************
+     * Index ( Main Page ) BookController
+     ***************************************************************************************************/
+
 });
 
-Route::get('/backend', function () {
-    return view('starter');
+/***************************************************************************************************
+ * ▂ ▃ ▅ ▆ █ Backend  █ ▆ ▅ ▃ ▂
+ ***************************************************************************************************/
+/*
+ * Active Middleware to check the user is active or not
+ * CollectData Middleware to gather all information about the Authenticated user and all his permissions for the Backend
+ * CollectData will create cache that will last for One Minute
+ * */
+Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active','collectData']], function () {
+
+
+    /***************************************************************************************************
+     * Dashboard Module
+     ***************************************************************************************************/
+    Route::get('/', ['as'=>'backend','uses'=>'Backend\DashboardController@index']);
+    Route::get('/home', ['as' => 'home', 'uses' => 'Backend\DashboardController@index']);
+    Route::get('/dashbaord', 'Backend\DashboardController@index');
+
+
+    // Middleware RolePermissionRouteAccess
+    Route::group(['middleware' => 'access:Users'], function () {
+        /***************************************************************************************************
+         * User Module
+         ***************************************************************************************************/
+        Route::resource('users', 'Backend\UsersController');
+        Route::post('users/active/{id}/{status}', 'Backend\UsersController@postChangeActiveStatus');
+
+    });
+
+    Route::group(['middleware' => 'access:Roles'], function () {
+        /***************************************************************************************************
+         * Role Module
+         ***************************************************************************************************/
+        Route::resource('roles', 'Backend\RolesController');
+    });
+
+    Route::group(['middleware' => 'access:Permissions'], function () {
+        /***************************************************************************************************
+         * Permission Module
+         ***************************************************************************************************/
+        Route::resource('permissions', 'Backend\PermissionsController');
+
+    });
+
+});
+
+
+/***************************************************************************************************
+ * ▂ ▃ ▅ ▆ █ API  █ ▆ ▅ ▃ ▂
+ ***************************************************************************************************/
+
+Route::group(['prefix' => 'api'], function () {
+    Route::get('/', function () {
+        return 'this is the api route';
+    });
 });

@@ -3,3 +3,10 @@ body, html { background-color:  white !important;}
     height: auto !important;
     min-height: 320px;
 }
+.form-control:not(textarea):not(select), fieldset[disabled] .form-control:focus:not(textarea):not(select), fieldset[disabled] .form-control.focus:not(textarea):not(select), .form-control-wrapper .form-control:not(textarea):not(select), .form-control-wrapper .form-control:focus:not(textarea):not(select), .form-control-wrapper .form-control.focus:not(textarea):not(select), .form-control:not(textarea):not(select), .form-control:focus:not(textarea):not(select), .form-control.focus:not(textarea):not(select) {
+    border-bottom: 1px solid lightgrey !important;
+}
+.form-control:focus {
+    background-color: transparent !important;
+    background-image : none !important;
+}

@@ -1,2 +1,7 @@
-body, html { background-color:  white !important;}
+body, html {
+    background-color:  white !important;
+}
+.wrapper {
+    min-height: 1000px !important;
+}
 

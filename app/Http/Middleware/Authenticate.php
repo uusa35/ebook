@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Events\OnUserLogin;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
