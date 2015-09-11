@@ -3,9 +3,9 @@
 @section('content')
     {!! Breadcrumbs::render('permissions') !!}
     @section('titlebar')
-            <a class="btn  btn-default btn-material-indigo-300 btn-sm "
+            <a class="{{ Config::get('button.btn-create') }}"
                href="{{ action('Backend\PermissionsController@create') }}"><i
-                        class="fa fa-x1 fa-plus icon-material-indigo-200"></i> create</a>
+                        class="fa fa-x1 fa-plus icon-material-indigo-200"></i></a>
     @stop
 
 <div class="panel-body">

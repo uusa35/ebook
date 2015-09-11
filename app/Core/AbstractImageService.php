@@ -10,7 +10,6 @@ namespace App\Core;
 
 
 use Illuminate\Support\Str;
-use Intervention\Image\Image;
 
 class AbstractImageService
 {
@@ -22,7 +21,7 @@ class AbstractImageService
 
         $fileName = $currentImage->getClientOriginalName();
 
-        $fileName = Str::random(5) . '' . $fileName;
+        $fileName = rand(0,10000) . '' . $fileName;
 
         $realPath = $currentImage->getRealPath();
 

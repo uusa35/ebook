@@ -85,11 +85,13 @@ class UsersController extends AbstractController
     public function edit($id)
     {
         $this->getPageTitle('edit');
+
         $user = $this->userRepository->model->with('roles')->find($id);
+
         $userListRoleIds = $user->roles->Lists('name');
-        //dd(in_array('admin',$userListRoleIds->toArray(),'true'));
+
         $roles = $this->roleRepository->model->get();
-        //$rolesList = $roles->lists('name', 'id');
+
         return view('backend.modules.users.edit', compact('user', 'roles', 'userListRoleIds'));
     }
 
@@ -110,7 +112,8 @@ class UsersController extends AbstractController
 
         } catch (Exception $e) {
 
-            return redirect()->action('Backend\UsersController@index')->with('error', trans('word.messages.error.avatar'));
+            return redirect()->action('Backend\UsersController@index')->with('error',
+                trans('word.messages.error.avatar'));
 
         }
 
@@ -127,7 +130,7 @@ class UsersController extends AbstractController
         /*
          * Abstract CreateImages Job (Model , $request, FolderName, FieldsName , Default thumbnail sizes , Default large sizes
          * */
-        $this->dispatch(new CreateImages($user,$request, 'avatar',['avatar']));
+        $this->dispatch(new CreateImages($user, $request, 'avatar', ['avatar']));
 
         return redirect()->action('Backend\UsersController@index')->with(['success' => trans('messages.success.edit_user')]);
     }
@@ -152,7 +155,7 @@ class UsersController extends AbstractController
             'active' => $newStatus
         ]);
         $user->save();
-        return redirect()->action('Backend\UsersController@index')->with(['success'=> trans('messages.sucess.change_active_status')]);
+        return redirect()->action('Backend\UsersController@index')->with(['success' => trans('messages.sucess.change_active_status')]);
     }
 
 }

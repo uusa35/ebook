@@ -9,6 +9,11 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
+/**
+ * App\Src\User\User
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Config::get('entrust.role')[] $roles
+ */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, EntrustUserTrait;

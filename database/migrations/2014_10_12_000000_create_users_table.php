@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->string('avatar');
             $table->enum('active',[0,1]);
+            $table->integer('level');
             $table->rememberToken();
             $table->timestamps();
         });

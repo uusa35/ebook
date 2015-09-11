@@ -11,6 +11,10 @@ namespace App\Core;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Core\AbstractRepository
+ *
+ */
 class AbstractRepository extends Model
 {
 

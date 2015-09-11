@@ -26,17 +26,17 @@
         <ul class="sidebar-menu">
             @if(Cache::has('Admin'))
                 @foreach(Cache::get('Admin') as $perm)
-                    <li><a href="{{ URL::to('backend/'.strtolower($perm)) }}"><i class="fa fa-users"></i>
+                    <li><a href="{{ URL::to('backend/'.strtolower($perm)) }}"><i class="fa fa-folder"></i>
                             <span>{{ $perm }}</span></a></li>
                 @endforeach
             @elseif(Cache::has('Editor'))
                 @foreach(Cache::get('Editor') as $perm)
-                    <li><a href="{{ URL::to('backend/'.strtolower($perm)) }}"><i class="fa fa-users"></i>
+                    <li><a href="{{ URL::to('backend/'.strtolower($perm)) }}"><i class="fa fa-folder"></i>
                             <span>{{ $perm }}</span></a></li>
                 @endforeach
             @elseif(Cache::has('Author'))
                 @foreach(Cache::get('Author') as $perm)
-                    <li><a href="{{ URL::to('backend/'.strtolower($perm)) }}"><i class="fa fa-users"></i>
+                    <li><a href="{{ URL::to('backend/'.strtolower($perm)) }}"><i class="fa fa-folder"></i>
                             <span>{{ $perm }}</span></a></li>
                 @endforeach
             @endif

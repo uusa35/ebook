@@ -24,8 +24,8 @@ Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('/',['as'=>'home','uses'=> 'HomeController@index']);
-Route::get('/home',['uses'=> 'HomeController@index']);
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+Route::get('/home', ['uses' => 'HomeController@index']);
 
 /***************************************************************************************************
  * Localization
@@ -43,6 +43,14 @@ Route::group(['prefix' => 'frontend'], function () {
     /***************************************************************************************************
      * Index ( Main Page ) BookController
      ***************************************************************************************************/
+    Route::resource('book', 'BookController');
+
+    /***************************************************************************************************
+     *                                          Report
+     *
+     ***************************************************************************************************/
+    Route::get('/report/{user}/{book}',['uses'=>'BookController@getCreateNewReportAbuse']);
+
 
 });
 
@@ -54,13 +62,13 @@ Route::group(['prefix' => 'frontend'], function () {
  * CollectData Middleware to gather all information about the Authenticated user and all his permissions for the Backend
  * CollectData will create cache that will last for One Minute
  * */
-Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active','collectData']], function () {
+Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collectData']], function () {
 
 
     /***************************************************************************************************
      * Dashboard Module
      ***************************************************************************************************/
-    Route::get('/', ['as'=>'backend','uses'=>'Backend\DashboardController@index']);
+    Route::get('/', ['as' => 'backend', 'uses' => 'Backend\DashboardController@index']);
     Route::get('/home', ['as' => 'home', 'uses' => 'Backend\DashboardController@index']);
     Route::get('/dashbaord', 'Backend\DashboardController@index');
 
@@ -89,6 +97,54 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active','collectD
         Route::resource('permissions', 'Backend\PermissionsController');
 
     });
+    Route::group(['middleware' => 'access:Books'], function () {
+        /***************************************************************************************************
+         * Books Module
+         ***************************************************************************************************/
+        Route::resource('books', 'Backend\BooksController');
+
+    });
+    Route::group(['middleware' => 'access:Comments'], function () {
+        /***************************************************************************************************
+         * Comments Module
+         ***************************************************************************************************/
+        Route::resource('comments', 'Backend\CommentsController');
+
+    });
+
+
+    //==================
+
+
+    Route::group(['prefix' => 'categories'], function () {
+
+        Route::group(['middleware' => 'access:Categories'], function () {
+
+            Route::resource('field', 'Backend\FieldCategoryController', ['except' => 'delete']);
+
+            Route::resource('lang', 'Backend\LangCategoryController', ['except' => 'delete']);
+        });
+
+
+    });
+
+
+    /***************************************************************************************************
+     *                                          Ads
+     *
+     ***************************************************************************************************/
+    Route::group(['middleware' => 'access:Books'], function () {
+        Route::resource('ads', 'Backend\AdController');
+    });
+
+
+    /***************************************************************************************************
+     * Contact Us
+     ***************************************************************************************************/
+    Route::get('contactus/edit', 'Backend\ContactUsController@edit');
+    Route::post('contactus', 'Backend\ContactUsController@update');
+    Route::get('conditions', 'Backend\UserController@getEditCondtions');
+    Route::post('conditions', 'Backend\UserController@postEditCondtions');
 
 });
 

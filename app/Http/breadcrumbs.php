@@ -63,3 +63,26 @@ Breadcrumbs::register('role_edit', function($breadcrumbs)
     $breadcrumbs->push(trans('word.general.role_edit'), action('Backend\RolesController@edit'));
 });
 
+Breadcrumbs::register('books', function($breadcrumbs)
+{
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push(trans('word.general.books'), action('Backend\BooksController@index'));
+});
+
+Breadcrumbs::register('book_create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('books');
+    $breadcrumbs->push(trans('word.general.create'), action('Backend\BooksController@create'));
+});
+Breadcrumbs::register('book_edit', function($breadcrumbs)
+{
+    $breadcrumbs->parent('books');
+    $breadcrumbs->push(trans('word.general.book_edit'), action('Backend\BooksController@edit'));
+});
+
+Breadcrumbs::register('book_chapter', function($breadcrumbs)
+{
+    $breadcrumbs->parent('books');
+    $breadcrumbs->push(trans('word.general.book_chapter'), action('Backend\BooksController@show'));
+});
+

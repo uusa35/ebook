@@ -1,6 +1,7 @@
 /vendor
 /node_modules
 /resources/assets/bower_components/*
+/public/images/uploads/*
 /AdminLTE-2.3.0
 Homestead.yaml
 .env

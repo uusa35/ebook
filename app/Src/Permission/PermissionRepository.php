@@ -5,6 +5,10 @@ use App\Src\Permission\Permission;
 
 
 
+/**
+ * App\Src\Permission\PermissionRepository
+ *
+ */
 class PermissionRepository extends AbstractRepository
 {
 

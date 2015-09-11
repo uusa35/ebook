@@ -16,70 +16,69 @@ class EntrustTableSeeder extends Seeder {
 		DB::table('permissions')->truncate();
 
 		$admin = new Role(); // 1
-		$admin->name = 'admin';
+		$admin->name = 'Admin';
 		$admin->display_name = "Administrator";
 		$admin->level = 10;
 		$admin->save();
 
 		$editor = new Role(); // 2
-		$editor->name = 'editor';
+		$editor->name = 'Editor';
 		$editor->display_name = "Editor";
 		$editor->level = 5;
 		$editor->save();
 
 		$userRole = new Role(); // 3
-		$userRole->name = 'user';
-		$userRole->display_name = "User";
+		$userRole->name = 'Author';
+		$userRole->display_name = "Author";
 		$userRole->level = 1;
 		$userRole->save();
 
-		$user = User::where('email', '=', 'admin@admin.com')->first();
-		$user->attachRole($admin);
-		//$user->roles()->attach($admin->id); Eloquent basic
+		$user = User::where('email', '=', 'admin@email.com')->first();
+		$user->roles()->attach($admin->id);
 
-		$user1 = User::where('email', '=', 'editor@editor.com')->first();
-		$user1->attachRole($editor);
+		$user1 = User::where('email', '=', 'editor@email.com')->first();
+		//$user1->attachRole($editor);
 
-		$user2 = User::where('email', '=', 'user@user.com')->first();
-		$user2->attachRole($userRole);
+		$user2 = User::where('email', '=', 'author@email.com')->first();
+		//$user2->attachRole($userRole);
 
 		$manageRoles = new Permission();
-		$manageRoles->name = 'manage_roles';
-		$manageRoles->display_name = "Manage roles";
+		$manageRoles->name = 'Users';
+		$manageRoles->display_name = "Users Managment";
 		$manageRoles->description = "";
-		$manageRoles->route = "roles";
+		//$manageRoles->route = "roles";
 		$manageRoles->save();
 
 		$createRoles = new Permission();
-		$createRoles->name = 'create_roles';
+		$createRoles->name = 'Roles';
 		$createRoles->display_name = "Create roles";
 		$createRoles->description = "";
-		$createRoles->route = "roles/create";
+		//$createRoles->route = "roles/create";
 		$createRoles->save();
 
 		$updateRoles = new Permission();
-		$updateRoles->name = 'update_roles';
-		$updateRoles->display_name = "Update roles";
+		$updateRoles->name = 'Permissions';
+		$updateRoles->display_name = "Permissions Managment";
 		$updateRoles->description = "";
-		$updateRoles->route = "roles/{roles}/edit";
+		//$updateRoles->route = "roles/{roles}/edit";
 		$updateRoles->save();
 
 		$destroyRoles = new Permission();
-		$destroyRoles->name = 'delete_roles';
-		$destroyRoles->display_name = "Delete roles";
+		$destroyRoles->name = 'Books';
+		$destroyRoles->display_name = "Books Managment";
 		$destroyRoles->description = "";
-		$destroyRoles->route = "roles/{roles}";
+		//$destroyRoles->route = "roles/{roles}";
 		$destroyRoles->save();
 
 
 		$manageUsers = new Permission();
-		$manageUsers->name = 'manage_users';
-		$manageUsers->display_name = "Manager users";
+		$manageUsers->name = 'Comments';
+		$manageUsers->display_name = "Comments Managment";
 		$manageUsers->description = "";
-		$manageUsers->route = "users";
+		//$manageUsers->route = "users";
 		$manageUsers->save();
 
-		$createUsers = new Permission();
+		/*$createUsers = new Permission();
 		$createUsers->name = 'create_users';
 		$createUsers->display_name = "Create users";
 		$createUsers->description = "";
@@ -132,7 +131,7 @@ class EntrustTableSeeder extends Seeder {
 		$admin->attachPermissions([$manageRoles, $createRoles, $updateRoles, $destroyRoles, $manageUsers, $createUsers, $updateUsers, $destroyUsers, $managePerms, $createPerms, $updatePerms, $destroyPerms]);
 		//$admin->perms()->sync([$manageRoles->id, $manageUsers->id, $managePerms->id]); Eloquent basic
 
-		$editor->attachPermissions([$managePerms, $createPerms, $updatePerms, $destroyPerms]);
+		$editor->attachPermissions([$managePerms, $createPerms, $updatePerms, $destroyPerms]);*/
 	}
 
 }

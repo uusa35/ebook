@@ -148,6 +148,9 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
+
+
 
 
         'Barryvdh\Snappy\ServiceProvider',

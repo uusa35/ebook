@@ -42,6 +42,8 @@ class AuthUserCollectData
 
                 \Cache::put($role->name, $AuthUserRolePerms, 1);
 
+
+
                 foreach ($AuthUserRolePerms as $perm) {
 
                     \Session::put('permission.' . $perm, \Crypt::encrypt($perm));

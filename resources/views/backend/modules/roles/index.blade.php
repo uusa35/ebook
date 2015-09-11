@@ -3,7 +3,7 @@
 @section('content')
     {!! Breadcrumbs::render('roles') !!}
     @section('titlebar')
-        <a href="{{ action('Backend\RolesController@create') }}" class="btn btn-primary">Create</a>
+        <a href="{{ action('Backend\RolesController@create') }}" class="{{ Config::get('button.btn-create') }}"><i class="fa fa-plus"></i></a>
         @stop
 <div class="panel-body">
     <table class="table">

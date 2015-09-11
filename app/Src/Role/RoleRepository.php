@@ -4,6 +4,10 @@ use App\Core\AbstractRepository;
 
 
 
+/**
+ * App\Src\Role\RoleRepository
+ *
+ */
 class RoleRepository extends AbstractRepository
 {
 

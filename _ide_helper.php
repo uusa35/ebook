@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.10 (LTS) on 2015-08-28.
+ * Generated for Laravel 5.1.16 (LTS) on 2015-09-07.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -762,7 +762,7 @@ namespace {
         /**
          * Register a shared binding in the container.
          *
-         * @param string $abstract
+         * @param string|array $abstract
          * @param \Closure|string|null $concrete
          * @return void 
          * @static 
@@ -1270,7 +1270,7 @@ namespace {
         /**
          * Get the currently authenticated user.
          *
-         * @return \App\User|null 
+         * @return \App\Src\User\User|null 
          * @static 
          */
         public static function user(){
@@ -1372,7 +1372,7 @@ namespace {
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \App\User 
+         * @return \App\Src\User\User 
          * @static 
          */
         public static function loginUsingId($id, $remember = false){
@@ -1477,7 +1477,7 @@ namespace {
         /**
          * Return the currently cached user.
          *
-         * @return \App\User|null 
+         * @return \App\Src\User\User|null 
          * @static 
          */
         public static function getUser(){
@@ -1519,7 +1519,7 @@ namespace {
         /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \App\User 
+         * @return \App\Src\User\User 
          * @static 
          */
         public static function getLastAttempted(){
@@ -2943,6 +2943,17 @@ namespace {
         }
         
         /**
+         * Is Doctrine available?
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function isDoctrineAvailable(){
+            //Method inherited from \Illuminate\Database\Connection            
+            return \Illuminate\Database\MySqlConnection::isDoctrineAvailable();
+        }
+        
+        /**
          * Get a Doctrine Schema Column instance.
          *
          * @param string $table
@@ -3441,6 +3452,7 @@ namespace {
          * @param string $pageName
          * @param int|null $page
          * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator 
+         * @throws \InvalidArgumentException
          * @static 
          */
         public static function paginate($perPage = null, $columns = array(), $pageName = 'page', $page = null){
@@ -6765,6 +6777,18 @@ namespace {
     class Lang extends \Illuminate\Support\Facades\Lang{
         
         /**
+         * Determine if a translation exists.
+         *
+         * @param string $key
+         * @param string $locale
+         * @return bool 
+         * @static 
+         */
+        public static function has($key, $locale = null){
+            return \Illuminate\Translation\Translator::has($key, $locale);
+        }
+        
+        /**
          * Get the translation for the given key.
          *
          * @param string $key
@@ -6774,29 +6798,7 @@ namespace {
          * @static 
          */
         public static function get($key, $replace = array(), $locale = null){
-            return \Barryvdh\TranslationManager\Translator::get($key, $replace, $locale);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */
-        public static function setTranslationManager($manager){
-            return \Barryvdh\TranslationManager\Translator::setTranslationManager($manager);
-        }
-        
-        /**
-         * Determine if a translation exists.
-         *
-         * @param string $key
-         * @param string $locale
-         * @return bool 
-         * @static 
-         */
-        public static function has($key, $locale = null){
-            //Method inherited from \Illuminate\Translation\Translator            
-            return \Barryvdh\TranslationManager\Translator::has($key, $locale);
+            return \Illuminate\Translation\Translator::get($key, $replace, $locale);
         }
         
         /**
@@ -6810,8 +6812,7 @@ namespace {
          * @static 
          */
         public static function choice($key, $number, $replace = array(), $locale = null){
-            //Method inherited from \Illuminate\Translation\Translator            
-            return \Barryvdh\TranslationManager\Translator::choice($key, $number, $replace, $locale);
+            return \Illuminate\Translation\Translator::choice($key, $number, $replace, $locale);
         }
         
         /**
@@ -6825,8 +6826,7 @@ namespace {
          * @static 
          */
         public static function trans($id, $parameters = array(), $domain = 'messages', $locale = null){
-            //Method inherited from \Illuminate\Translation\Translator            
-            return \Barryvdh\TranslationManager\Translator::trans($id, $parameters, $domain, $locale);
+            return \Illuminate\Translation\Translator::trans($id, $parameters, $domain, $locale);
         }
         
         /**
@@ -6841,8 +6841,7 @@ namespace {
          * @static 
          */
         public static function transChoice($id, $number, $parameters = array(), $domain = 'messages', $locale = null){
-            //Method inherited from \Illuminate\Translation\Translator            
-            return \Barryvdh\TranslationManager\Translator::transChoice($id, $number, $parameters, $domain, $locale);
+            return \Illuminate\Translation\Translator::transChoice($id, $number, $parameters, $domain, $locale);
         }
         
         /**
@@ -6855,8 +6854,7 @@ namespace {
          * @static 
          */
         public static function load($namespace, $group, $locale){
-            //Method inherited from \Illuminate\Translation\Translator            
-            \Barryvdh\TranslationManager\Translator::load($namespace, $group, $locale);
+            \Illuminate\Translation\Translator::load($namespace, $group, $locale);
         }
         
         /**
@@ -6868,8 +6866,7 @@ namespace {
          * @static 
          */
         public static function addNamespace($namespace, $hint){
-            //Method inherited from \Illuminate\Translation\Translator            
-            \Barryvdh\TranslationManager\Translator::addNamespace($namespace, $hint);
+            \Illuminate\Translation\Translator::addNamespace($namespace, $hint);
         }
         
         /**
@@ -6880,8 +6877,7 @@ namespace {
          * @static 
          */
         public static function parseKey($key){
-            //Method inherited from \Illuminate\Translation\Translator            
-            return \Barryvdh\TranslationManager\Translator::parseKey($key);
+            return \Illuminate\Translation\Translator::parseKey($key);
         }
         
         /**
@@ -6891,8 +6887,7 @@ namespace {
          * @static 
          */
         public static function getSelector(){
-            //Method inherited from \Illuminate\Translation\Translator            
-            return \Barryvdh\TranslationManager\Translator::getSelector();
+            return \Illuminate\Translation\Translator::getSelector();
         }
         
         /**
@@ -6903,8 +6898,7 @@ namespace {
          * @static 
          */
         public static function setSelector($selector){
-            //Method inherited from \Illuminate\Translation\Translator            
-            \Barryvdh\TranslationManager\Translator::setSelector($selector);
+            \Illuminate\Translation\Translator::setSelector($selector);
         }
         
         /**
@@ -6914,8 +6908,7 @@ namespace {
          * @static 
          */
         public static function getLoader(){
-            //Method inherited from \Illuminate\Translation\Translator            
-            return \Barryvdh\TranslationManager\Translator::getLoader();
+            return \Illuminate\Translation\Translator::getLoader();
         }
         
         /**
@@ -6925,8 +6918,7 @@ namespace {
          * @static 
          */
         public static function locale(){
-            //Method inherited from \Illuminate\Translation\Translator            
-            return \Barryvdh\TranslationManager\Translator::locale();
+            return \Illuminate\Translation\Translator::locale();
         }
         
         /**
@@ -6936,8 +6928,7 @@ namespace {
          * @static 
          */
         public static function getLocale(){
-            //Method inherited from \Illuminate\Translation\Translator            
-            return \Barryvdh\TranslationManager\Translator::getLocale();
+            return \Illuminate\Translation\Translator::getLocale();
         }
         
         /**
@@ -6948,8 +6939,7 @@ namespace {
          * @static 
          */
         public static function setLocale($locale){
-            //Method inherited from \Illuminate\Translation\Translator            
-            \Barryvdh\TranslationManager\Translator::setLocale($locale);
+            \Illuminate\Translation\Translator::setLocale($locale);
         }
         
         /**
@@ -6959,8 +6949,7 @@ namespace {
          * @static 
          */
         public static function getFallback(){
-            //Method inherited from \Illuminate\Translation\Translator            
-            return \Barryvdh\TranslationManager\Translator::getFallback();
+            return \Illuminate\Translation\Translator::getFallback();
         }
         
         /**
@@ -6971,8 +6960,7 @@ namespace {
          * @static 
          */
         public static function setFallback($fallback){
-            //Method inherited from \Illuminate\Translation\Translator            
-            \Barryvdh\TranslationManager\Translator::setFallback($fallback);
+            \Illuminate\Translation\Translator::setFallback($fallback);
         }
         
         /**
@@ -6985,7 +6973,7 @@ namespace {
          */
         public static function setParsedKey($key, $parsed){
             //Method inherited from \Illuminate\Support\NamespacedItemResolver            
-            \Barryvdh\TranslationManager\Translator::setParsedKey($key, $parsed);
+            \Illuminate\Translation\Translator::setParsedKey($key, $parsed);
         }
         
     }
@@ -13354,335 +13342,6 @@ namespace {
     }
 
 
-    class Flash extends \Laracasts\Flash\Flash{
-        
-        /**
-         * Flash an information message.
-         *
-         * @param string $message
-         * @static 
-         */
-        public static function info($message){
-            return \Laracasts\Flash\FlashNotifier::info($message);
-        }
-        
-        /**
-         * Flash a success message.
-         *
-         * @param string $message
-         * @return $this 
-         * @static 
-         */
-        public static function success($message){
-            return \Laracasts\Flash\FlashNotifier::success($message);
-        }
-        
-        /**
-         * Flash an error message.
-         *
-         * @param string $message
-         * @return $this 
-         * @static 
-         */
-        public static function error($message){
-            return \Laracasts\Flash\FlashNotifier::error($message);
-        }
-        
-        /**
-         * Flash a warning message.
-         *
-         * @param string $message
-         * @return $this 
-         * @static 
-         */
-        public static function warning($message){
-            return \Laracasts\Flash\FlashNotifier::warning($message);
-        }
-        
-        /**
-         * Flash an overlay modal.
-         *
-         * @param string $message
-         * @param string $title
-         * @return $this 
-         * @static 
-         */
-        public static function overlay($message, $title = 'Notice'){
-            return \Laracasts\Flash\FlashNotifier::overlay($message, $title);
-        }
-        
-        /**
-         * Flash a general message.
-         *
-         * @param string $message
-         * @param string $level
-         * @return $this 
-         * @static 
-         */
-        public static function message($message, $level = 'info'){
-            return \Laracasts\Flash\FlashNotifier::message($message, $level);
-        }
-        
-        /**
-         * Add an "important" flash to the session.
-         *
-         * @return $this 
-         * @static 
-         */
-        public static function important(){
-            return \Laracasts\Flash\FlashNotifier::important();
-        }
-        
-    }
-
-
-    class LaravelLocalization extends \Mcamara\LaravelLocalization\Facades\LaravelLocalization{
-        
-        /**
-         * Set and return current locale
-         *
-         * @param string $locale Locale to set the App to (optional)
-         * @return string Returns locale (if route has any) or null (if route does not have a locale)
-         * @static 
-         */
-        public static function setLocale($locale = null){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::setLocale($locale);
-        }
-        
-        /**
-         * Set and return supported locales
-         *
-         * @param array $locales Locales that the App supports
-         * @static 
-         */
-        public static function setSupportedLocales($locales){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::setSupportedLocales($locales);
-        }
-        
-        /**
-         * Returns an URL adapted to $locale or current locale
-         *
-         * @param string $url URL to adapt. If not passed, the current url would be taken.
-         * @param string|boolean $locale Locale to adapt, false to remove locale
-         * @throws UnsupportedLocaleException
-         * @return string URL translated
-         * @static 
-         */
-        public static function localizeURL($url = null, $locale = null){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::localizeURL($url, $locale);
-        }
-        
-        /**
-         * Returns an URL adapted to $locale
-         *
-         * @throws SupportedLocalesNotDefined
-         * @throws UnsupportedLocaleException
-         * @param string|boolean $locale Locale to adapt, false to remove locale
-         * @param string|false $url URL to adapt in the current language. If not passed, the current url would be taken.
-         * @param array $attributes Attributes to add to the route, if empty, the system would try to extract them from the url.
-         * @return string|false URL translated, False if url does not exist
-         * @static 
-         */
-        public static function getLocalizedURL($locale = null, $url = null, $attributes = array()){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::getLocalizedURL($locale, $url, $attributes);
-        }
-        
-        /**
-         * Returns an URL adapted to the route name and the locale given
-         *
-         * @throws SupportedLocalesNotDefined
-         * @throws UnsupportedLocaleException
-         * @param string|boolean $locale Locale to adapt
-         * @param string $transKeyName Translation key name of the url to adapt
-         * @param array $attributes Attributes for the route (only needed if transKeyName needs them)
-         * @return string|false URL translated
-         * @static 
-         */
-        public static function getURLFromRouteNameTranslated($locale, $transKeyName, $attributes = array()){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::getURLFromRouteNameTranslated($locale, $transKeyName, $attributes);
-        }
-        
-        /**
-         * It returns an URL without locale (if it has it)
-         * Convenience function wrapping getLocalizedURL(false)
-         *
-         * @param string|false $url URL to clean, if false, current url would be taken
-         * @return string URL with no locale in path
-         * @static 
-         */
-        public static function getNonLocalizedURL($url = null){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::getNonLocalizedURL($url);
-        }
-        
-        /**
-         * Returns default locale
-         *
-         * @return string 
-         * @static 
-         */
-        public static function getDefaultLocale(){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::getDefaultLocale();
-        }
-        
-        /**
-         * Return an array of all supported Locales
-         *
-         * @throws SupportedLocalesNotDefined
-         * @return array 
-         * @static 
-         */
-        public static function getSupportedLocales(){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::getSupportedLocales();
-        }
-        
-        /**
-         * Returns current locale name
-         *
-         * @return string current locale name
-         * @static 
-         */
-        public static function getCurrentLocaleName(){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::getCurrentLocaleName();
-        }
-        
-        /**
-         * Returns current locale direction
-         *
-         * @return string current locale direction
-         * @static 
-         */
-        public static function getCurrentLocaleDirection(){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::getCurrentLocaleDirection();
-        }
-        
-        /**
-         * Returns current locale script
-         *
-         * @return string current locale script
-         * @static 
-         */
-        public static function getCurrentLocaleScript(){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::getCurrentLocaleScript();
-        }
-        
-        /**
-         * Returns current language's native reading
-         *
-         * @return string current language's native reading
-         * @static 
-         */
-        public static function getCurrentLocaleNativeReading(){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::getCurrentLocaleNativeReading();
-        }
-        
-        /**
-         * Returns current language
-         *
-         * @return string current language
-         * @static 
-         */
-        public static function getCurrentLocale(){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::getCurrentLocale();
-        }
-        
-        /**
-         * Returns supported languages language key
-         *
-         * @return array keys of supported languages
-         * @static 
-         */
-        public static function getSupportedLanguagesKeys(){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::getSupportedLanguagesKeys();
-        }
-        
-        /**
-         * Check if Locale exists on the supported locales array
-         *
-         * @param string|boolean $locale string|bool Locale to be checked
-         * @throws SupportedLocalesNotDefined
-         * @return boolean is the locale supported?
-         * @static 
-         */
-        public static function checkLocaleInSupportedLocales($locale){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::checkLocaleInSupportedLocales($locale);
-        }
-        
-        /**
-         * Set current route name
-         *
-         * @param string $routeName current route name
-         * @static 
-         */
-        public static function setRouteName($routeName){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::setRouteName($routeName);
-        }
-        
-        /**
-         * Translate routes and save them to the translated routes array (used in the localize route filter)
-         *
-         * @param string $routeName Key of the translated string
-         * @return string Translated string
-         * @static 
-         */
-        public static function transRoute($routeName){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::transRoute($routeName);
-        }
-        
-        /**
-         * Returns the translation key for a given path
-         *
-         * @param string $path Path to get the key translated
-         * @return string|false Key for translation, false if not exist
-         * @static 
-         */
-        public static function getRouteNameFromAPath($path){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::getRouteNameFromAPath($path);
-        }
-        
-        /**
-         * Returns the config repository for this instance
-         *
-         * @return \Mcamara\LaravelLocalization\Repository Configuration repository
-         * @static 
-         */
-        public static function getConfigRepository(){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::getConfigRepository();
-        }
-        
-        /**
-         * Returns the translation key for a given path
-         *
-         * @return boolean Returns value of hideDefaultLocaleInURL in config.
-         * @static 
-         */
-        public static function hideDefaultLocaleInURL(){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::hideDefaultLocaleInURL();
-        }
-        
-        /**
-         * Create an url from the uri
-         *
-         * @param string $uri Uri
-         * @return string Url for the given uri
-         * @static 
-         */
-        public static function createUrlFromUri($uri){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::createUrlFromUri($uri);
-        }
-        
-        /**
-         * Sets the base url for the site
-         *
-         * @param string $url Base url for the site
-         * @static 
-         */
-        public static function setBaseUrl($url){
-            return \Mcamara\LaravelLocalization\LaravelLocalization::setBaseUrl($url);
-        }
-        
-    }
-
-
     class PDF extends \Barryvdh\Snappy\Facades\SnappyPdf{
         
         /**
@@ -13825,6 +13484,159 @@ namespace {
          */
         public static function stream($filename = 'document.pdf'){
             return \Barryvdh\Snappy\PdfWrapper::stream($filename);
+        }
+        
+    }
+
+
+    class Breadcrumbs extends \DaveJamesMiller\Breadcrumbs\Facade{
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function register($name, $callback){
+            return \DaveJamesMiller\Breadcrumbs\Manager::register($name, $callback);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function exists($name = null){
+            return \DaveJamesMiller\Breadcrumbs\Manager::exists($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function generate($name = null){
+            return \DaveJamesMiller\Breadcrumbs\Manager::generate($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function generateArray($name, $params = array()){
+            return \DaveJamesMiller\Breadcrumbs\Manager::generateArray($name, $params);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function generateIfExists($name = null){
+            return \DaveJamesMiller\Breadcrumbs\Manager::generateIfExists($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function generateIfExistsArray($name, $params = array()){
+            return \DaveJamesMiller\Breadcrumbs\Manager::generateIfExistsArray($name, $params);
+        }
+        
+        /**
+         * 
+         *
+         * @deprecated Since 3.0.0
+         * @see generateIfExistsArray
+         * @static 
+         */
+        public static function generateArrayIfExists(){
+            return \DaveJamesMiller\Breadcrumbs\Manager::generateArrayIfExists();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function render($name = null){
+            return \DaveJamesMiller\Breadcrumbs\Manager::render($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function renderArray($name, $params = array()){
+            return \DaveJamesMiller\Breadcrumbs\Manager::renderArray($name, $params);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function renderIfExists($name = null){
+            return \DaveJamesMiller\Breadcrumbs\Manager::renderIfExists($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function renderIfExistsArray($name, $params = array()){
+            return \DaveJamesMiller\Breadcrumbs\Manager::renderIfExistsArray($name, $params);
+        }
+        
+        /**
+         * 
+         *
+         * @deprecated Since 3.0.0
+         * @see renderIfExistsArray
+         * @static 
+         */
+        public static function renderArrayIfExists(){
+            return \DaveJamesMiller\Breadcrumbs\Manager::renderArrayIfExists();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setCurrentRoute($name){
+            return \DaveJamesMiller\Breadcrumbs\Manager::setCurrentRoute($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setCurrentRouteArray($name, $params = array()){
+            return \DaveJamesMiller\Breadcrumbs\Manager::setCurrentRouteArray($name, $params);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function clearCurrentRoute(){
+            return \DaveJamesMiller\Breadcrumbs\Manager::clearCurrentRoute();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setView($view){
+            return \DaveJamesMiller\Breadcrumbs\Manager::setView($view);
         }
         
     }

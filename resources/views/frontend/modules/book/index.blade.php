@@ -13,7 +13,7 @@
             <h3>Recent Books</h3> <hr>
         </div>
         @for($i=0;$i<=3;$i++)
-            <div class="col-lg-3">
+            <div class="col-lg-3"><a class="" href="{{ action('BookController@show',$i) }}">
                 <div class=" box box-widget widget-user shadow-z-1">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-white"
@@ -60,6 +60,7 @@
                     </div>
                 </div>
                 <!-- /.widget-user -->
+                </a>
             </div>
         @endfor
 
@@ -184,5 +185,4 @@
     </div>
 
     </div>
-
 @stop

@@ -48,21 +48,26 @@ class CreateImages extends Job implements SelfHandling
      */
     public function handle()
     {
+
         foreach ($this->fieldNames as $currentRequestImage) {
 
             if ($this->request->hasFile($currentRequestImage)) {
 
-                $fileName = $this->imageService->CreateImage($this->request->file($currentRequestImage), $this->folderName, $this->thumbSizes,
+                $fileName = $this->imageService->CreateImage($this->request->file($currentRequestImage),
+                    $this->folderName, $this->thumbSizes,
                     $this->largeSizes);
 
                 // folderName is the Coloumn Table Name :)
+                if ($fileName) {
 
-                $this->model->update([$this->folderName => $fileName]);
+                    $this->model->update([$this->folderName => strtolower($fileName)]);
 
-                $this->model->save();
-
+                    $this->model->save();
+                }
+                else {
+                    dd('pics create image job error');
+                }
             }
-
         }
 
     }

@@ -5,6 +5,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
+
+    private $tables = [
+        'users',
+        'roles',
+        'role_user',
+        'password_resets',
+        'fields_categories',
+        'langs_categories',
+        'books',
+        'previews',
+        'book_previews',
+        'book_readers',
+        'book_metas',
+        'purchases',
+        'book_user',
+        'messages'
+    ];
+
     /**
      * Run the database seeds.
      *
@@ -12,10 +30,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
+        if (App::environment() == 'local') {
+            Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+            $this->cleanDatabase();
+            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+            $this->call('UsersTableSeeder');
+            $this->call('EntrustTableSeeder');
+            $this->call('BooksTableSeeder');
+            $this->call('fieldsCategoriesTableSeeder');
+            $this->call('langsCategoriesTableSeeder');
+            $this->call('BookMetasTableSeeder');
+            $this->call('ContactusTableSeeder');
+            //$this->call('RolesTableSeeder');
+            $this->call('AdvertisementTableSeeder');
+            DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        }
 
-        Model::reguard();
+    }
+
+    private function cleanDatabase()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        foreach ($this->tables as $table) {
+            DB::table($table)->truncate();
+        }
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }
