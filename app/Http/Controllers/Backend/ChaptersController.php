@@ -16,7 +16,7 @@ class ChaptersController extends Controller
      */
     public function index()
     {
-        return view('backend.modules.book.chapter.index');
+        return 'index';
     }
 
     /**
@@ -26,7 +26,7 @@ class ChaptersController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.modules.book.chapter.create');
     }
 
     /**

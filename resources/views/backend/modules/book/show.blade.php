@@ -15,7 +15,7 @@
     {!! Breadcrumbs::render('book_chapter') !!}
 
     @section('titlebar')
-        <a class="{{ Config::get('button.btn-create') }}" href="#"><i class="fa fa-plus"></i></a>
+        <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\ChaptersController@create') }}"><i class="fa fa-plus"></i></a>
         @endsection
 
     <div class="panel-body">

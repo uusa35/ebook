@@ -102,6 +102,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
          * Books Module
          ***************************************************************************************************/
         Route::resource('books', 'Backend\BooksController');
+        Route::resource('chapters', 'Backend\ChaptersController');
 
     });
     Route::group(['middleware' => 'access:Comments'], function () {
