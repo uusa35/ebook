@@ -52,7 +52,7 @@
                 <td width="50">
                     {!! Form::open(['action' => ['Backend\UsersController@postChangeActiveStatus', $user->id,$user->active], 'method' => 'post']) !!}
 
-                    <button type="submit" class=" {{ Config::get('button.btn-active') }} {{ ($user->active) ? 'btn-material-green' : 'btn-material-red-200' }}"><i
+                    <button type="submit" class=" {{ ($user->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active') }}"><i
                                 class="fa fa-xs fa-check"></i></button>
                     {!! Form::close() !!}
                 </td>

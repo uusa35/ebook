@@ -16,11 +16,15 @@
 
     <div class="panel-body">
 
+        @section('titlebar')
+            <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\BooksController@create') }}"><i class="fa fa-plus"></i></a>
+            @stop
+
         <div class="row">
             <div class="col-xs-12">
 
                 <!-- START CONTENT ITEM -->
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs btn-material-blue-grey-400">
                     <li id="tab-1" class="" href="#step1"><a href="#step1" data-toggle="tab"><i
                                     class="fa fa-aw fa-book"></i>&nbsp;{{ trans('word.general.volumes') }} </a></li>
                     @if(Cache::get('Admin'))
@@ -46,6 +50,8 @@
                                             <th>{{ trans('word.general.total-pages') }}</th>
                                             <th>{{ trans('word.general.free') }}</th>
                                             <th>{{ trans('word.general.created-at') }}</th>
+                                            <th>{{ trans('word.general.view') }}</th>
+                                            <th>{{ trans('word.general.add') }}</th>
                                             <th>{{ trans('word.general.active') }}</th>
                                             <th>{{ trans('word.general.edit') }}</th>
                                             @if(Cache::get('role') === 'Admin')
@@ -67,13 +73,21 @@
 
                                                 </td>
                                                 <td>
-                                                    <span> {{ ($book->free === 1) ? 'free' : 'paid' }} </span>
+                                                    <span> {{ ($book->free) ? 'free' : 'paid' }} </span>
                                                 </td>
                                                 <td>
                                                     <span> {{ $book->created_at->format('Y-m-d') }} </span>
                                                 </td>
+                                                <td>
+                                                    <a class="{{ Config::get('button.btn-view') }}" href="{{ action('Backend\BooksController@show', $book->id) }}"><i class="fa fa-xs fa-eye"></i></a>
+                                                </td>
+                                                <td>
+                                                    <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\ChaptersController@create',['bookId'=>$book->id]) }}" data-toggle="tooltip"  title="Add Chapter"><i class="fa fa-xs fa-plus"></i></a>
+                                                </td>
                                                 <td class="text-center">
-                                                    {{ $book->active }}
+                                                    <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}" href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->user->id,$book->active]) }}">
+                                                        <i class="fa fa-xs {{ ($book->active) ? 'fa-times' : 'fa-check' }}"></i>
+                                                    </a>
                                                 </td>
                                                 <td class="text-center">
                                                     <a class="{{ Config::get('button.btn-edit') }}" href="{{ action('Backend\BooksController@edit',$book->id) }}"><i class="fa fa-edit"></i></a>

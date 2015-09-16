@@ -16,6 +16,11 @@
         </div>
 
         <div class="form-group">
+            {!! Form::label('level', 'level') !!}
+            {!! Form::select('level', ['1'=>'1','2'=>'2'], ['class' => 'form-control']) !!}
+        </div>
+
+        <div class="form-group">
             {!! Form::label('description', 'Description') !!}
             {!! Form::text('description', null, ['class' => 'form-control']) !!}
         </div>

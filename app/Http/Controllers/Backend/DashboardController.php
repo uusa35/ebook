@@ -39,7 +39,7 @@ class DashboardController extends AbstractController
 
     public function index()
     {
-        if (\Cache::has('role')) {
+        if (\Cache::has('roles')) {
             $this->getPageTitle('index');
             return view('backend.modules.users.dashboard.index');
         }

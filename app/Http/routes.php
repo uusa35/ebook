@@ -60,9 +60,23 @@ Route::group(['prefix' => 'frontend'], function () {
 /*
  * Active Middleware to check the user is active or not
  * CollectData Middleware to gather all information about the Authenticated user and all his permissions for the Backend
- * CollectData will create cache that will last for One Minute
+ * collectData will create cache that will last for One Minute
+ *
+ *
+ * ::: Roles :::
+ * Admin Role : create + edit + delete
+ * Editor Role : edit
+ * Author : only books Module (create + edit)
+ *
+ * ::: Permissions ::: (the module itself)
+ * Admin : Books Module + Users Module + Roles Module + Permissions Module ... and so on
+ * Editor :
+ *
+ * **** still one middleware is missing to check if the user has the right to edit his own books and other staff !!!!!
+ *
+ *
  * */
-Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collectData']], function () {
+Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collectData','crudAccess']], function () {
 
 
     /***************************************************************************************************
@@ -103,6 +117,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
          ***************************************************************************************************/
         Route::resource('books', 'Backend\BooksController');
         Route::resource('chapters', 'Backend\ChaptersController');
+        Route::get('/activation/{bookId}/{userId}/{activeStatus}','Backend\BooksController@getChangeActivationBook');
 
     });
     Route::group(['middleware' => 'access:Comments'], function () {
@@ -142,10 +157,10 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
     /***************************************************************************************************
      * Contact Us
      ***************************************************************************************************/
-    Route::get('contactus/edit', 'Backend\ContactUsController@edit');
-    Route::post('contactus', 'Backend\ContactUsController@update');
-    Route::get('conditions', 'Backend\UserController@getEditCondtions');
-    Route::post('conditions', 'Backend\UserController@postEditCondtions');
+    //Route::get('contactus/edit', 'Backend\ContactUsController@edit');
+    //Route::post('contactus', 'Backend\ContactUsController@update');
+    //Route::get('conditions', 'Backend\UserController@getEditCondtions');
+    //Route::post('conditions', 'Backend\UserController@postEditCondtions');
 
 });
 

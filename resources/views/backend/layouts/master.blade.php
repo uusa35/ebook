@@ -41,6 +41,7 @@
 
     @section('scripts')
         @include('scripts.allscripts')
+            {{--<link rel="stylesheet" href="/css/flat.css"/>--}}
     @show
 
 

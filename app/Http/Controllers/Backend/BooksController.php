@@ -11,6 +11,7 @@ use App\Jobs\CreateCustomizedPreview;
 use App\Jobs\CreateImages;
 use App\Src\Book\BookHelpers;
 use App\Src\Book\BookRepository;
+use App\Src\Book\Chapter\ChapterRepository;
 use App\Src\Category\Field\FieldCategory;
 use App\Src\Category\Lang\LangCategory;
 use App\Src\Purchase\PurchaseRepository;
@@ -35,6 +36,7 @@ class BooksController extends AbstractController
     public $roleRepository;
     public $fieldCategory;
     public $langCategory;
+    public $chapterRepository;
     use BookHelpers;
 
     /**
@@ -50,19 +52,19 @@ class BooksController extends AbstractController
         LangCategory $langCategory,
         PurchaseRepository $purchaseRepository,
         UserRepository $userRepository,
-        RoleRepository $roleRepository
+        RoleRepository $roleRepository,
+        ChapterRepository $chapterRepository
     ) {
+
+        //$this->middleware('EditorLimitAccess',['only'=>'edit','update']);
+        //$this->middleware('AuthorLimitAccess',['except'=>'getActivationChangeStatus']);
         $this->bookRepository = $book;
         $this->fieldCategory = $fieldCategory;
         $this->langCategory = $langCategory;
         $this->purchaseRepository = $purchaseRepository;
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
-        $this->titles = [
-            'index' => trans('word.general.books'),
-            'create' => trans('word.general.create_book'),
-            'edit' => trans('word.general.edit_book'),
-        ];
+        $this->chapterRepository = $chapterRepository;
     }
 
     /**
@@ -73,10 +75,11 @@ class BooksController extends AbstractController
     public function index()
     {
 
-        $this->getPageTitle('index');
+        $this->getPageTitle(\Config::get('title.books.index'));
+
         if (\Cache::get('role') === 'Admin' || \Cache::get('role') === 'Editor') {
 
-            $books = $this->bookRepository->model->with('meta')->orderBy('created_at', 'desc')->get();
+            $books = $this->bookRepository->model->with('meta','user')->orderBy('created_at', 'desc')->get();
 
             //$allCustomizedPreviews = $this->bookRepository->getCustomizedPreviews();
 
@@ -106,16 +109,19 @@ class BooksController extends AbstractController
      */
     public function create()
     {
-        $this->getPageTitle('create');
+        $this->getPageTitle(\Config::get('title.books.create'));
+
         $fieldsCategories = $this->fieldCategory->all();
+
         $langsCategories = $this->langCategory->all();
 
         $getLang = App()->getLocale();
 
-        $fields = $fieldsCategories->lists('name_' . $getLang, 'id');
-        $langs = $langsCategories->lists('name_' . $getLang, 'id');
+        $fieldsCategories = $fieldsCategories->lists('name_' . $getLang, 'id');
 
-        return view('backend.modules.book.create', ['fields' => $fields, 'langs' => $langs]);
+        $langsCategories = $langsCategories->lists('name_' . $getLang, 'id');
+
+        return view('backend.modules.book.create', ['fieldsCategories' => $fieldsCategories, 'langsCategories' => $langsCategories]);
     }
 
     /**
@@ -126,46 +132,27 @@ class BooksController extends AbstractController
      */
     public function store(CreateBook $request)
     {
-        /*
-        - Job will handle the Storing the Book in the DB + Firing an event for PDF creation
-        */
-
-        $request->merge(['url' => $this->generateFileName(), 'user_id' => Auth::id()]);
-
-        // create a book
-        // create a book meta
-        // create a pdf
-        // create images
-        // pass the book and images to update the book with cover url
 
         // create a book record
-        $book = $this->bookRepository->model->create($request->except('_token', 'price', 'cover_ar', 'cover_en'));
-
-        // a job to generate the serial of created book
-        $serial = $this->bookRepository->createBookSerial($request->user()->id, $book->id);
-
-        $book->update(['serial' => $serial]);
-
-        $book->save();
-
-        // create a pdf
-        $price = ($request->input('price') > 0) ? $request->input('price') : '00.0';
-
-        // Create Meta
-        $book->meta()->create(['price' => $price]);
-
-        event(new BookPublished($book));
-        // create images wit a job
-        // create meta for a book
-
-        $this->dispatch(new CreateBookCover($book, $request));
+        $book = $this->bookRepository->model->create($request->except('_token', 'cover'));
 
         if ($book) {
 
-            return redirect()->back()->with(['success' => trans('word.book-created')]);
+            $active = ($request->get('active')) ? 1 : 0;
+            // create serial and update the book
+            $serial = $this->createBookSerial($request->user()->id, $book->id);
+
+            $book->update(['serial' => $serial,'active'=> $active]);
+
+            $book->save();
+
+            // create a cover
+            $this->CreateBookCover($request, $book);
+
+            return redirect()->action('Backend\BooksController@index')->with(['success' => trans('word.messages.success.book_created')]);
         }
 
-        return redirect()->back()->with(['error' => trans('word.book-not-created')]);
+        return redirect()->back()->with(['error' => trans('word.messages.error.book_not_created')]);
     }
 
     /**
@@ -176,7 +163,7 @@ class BooksController extends AbstractController
      */
     public function show($id)
     {
-        $book = $this->bookRepository->model->where('id','=',$id)->with('meta')->first();
+        $book = $this->bookRepository->model->where('id', '=', $id)->with('meta')->first();
 
         return view('backend.modules.book.show', compact('book'));
 
@@ -190,25 +177,28 @@ class BooksController extends AbstractController
      */
     public function edit($id)
     {
-        $this->getPageTitle('edit');
+        $this->getPageTitle(\Config::get('title.books.edit'));
 
         $fieldsCategories = $this->fieldCategory->all();
+
         $langsCategories = $this->langCategory->all();
 
         $getLang = App()->getLocale();
 
         $fieldsCategories = $fieldsCategories->lists('name_' . $getLang, 'id');
+
         $langsCategories = $langsCategories->lists('name_' . $getLang, 'id');
 
-        if (\Cache::get('role') === 'Admin' || \Cache::get('role') === 'Editor') {
+        if (\Cache::get('role')) {
 
             $book = $this->bookRepository->model->where('id', '=', $id)->with('meta')->first();
+
+            return view('backend.modules.book.edit',
+                ['book' => $book, 'fieldsCategories' => $fieldsCategories, 'langsCategories' => $langsCategories]);
         }
 
-        $getLang = App()->getLocale();
+        return redirect()->to('/')->with(['error' => 'messages.error.not_authenticated']);
 
-        return view('backend.modules.book.edit',
-            ['book' => $book, 'fieldsCategories' => $fieldsCategories, 'langsCategories' => $langsCategories]);
     }
 
     /**
@@ -227,22 +217,7 @@ class BooksController extends AbstractController
         $book = $this->bookRepository->model->find($id);
 
 
-        // check if cover_ar changed
-        if ($request->hasFile('cover_ar')) {
-
-            /*
-         * Abstract CreateImages Job (Model , $request, FolderName, FieldsName , Default thumbnail sizes , Default large sizes
-         * */
-            $this->dispatch(new CreateImages($book, $request, 'cover_ar', ['cover_ar']));
-
-        }
-
-        // check if the cover_en changed
-        if ($request->hasFile('cover_en')) {
-
-            $this->dispatch(new CreateImages($book, $request, 'cover_en', ['cover_en']));
-
-        }
+        $this->CreateBookCover($request, $book);
 
         if (is_null($request->get('active'))) {
 
@@ -251,7 +226,7 @@ class BooksController extends AbstractController
             $request->merge(['active' => 1]);
         }
 
-        $book->update($request->except(['cover_en', 'cover_ar']));
+        $book->update($request->except(['cover']));
 
         return redirect()->action('Backend\BooksController@index')->with('success', trans('word.success-update'));
 
@@ -431,6 +406,23 @@ class BooksController extends AbstractController
     }
 
 
+    public function getChangeActivationBook($bookId, $userId, $activeStatus)
+    {
+
+        /*
+         * Admin and Editor can activate/deactivate a book
+         * */
+        if ($this->isAdminOrEditor()) {
+
+            $this->bookRepository->changeActivationBook($bookId, $userId, $activeStatus);
+
+            return redirect()->back()->with(['success' => 'messages.success.book_activation']);
+
+        }
+
+        return redirect()->back()->with(['error' => 'messages.error.not_authorized']);
+
+    }
     /*    public function getBookByType ($type = 'book') {
 
         if(Session::get('role.admin') || Session::get('role.editor')) {

@@ -14,6 +14,8 @@ class AuthUserCollectData
     }
 
     /**
+     *
+     * Only Checks for the role of a user
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request $request
@@ -23,45 +25,46 @@ class AuthUserCollectData
     public function handle($request, Closure $next)
     {
 
+
+
+
+        if (!\Cache::has('roles')) {
+
         $authUserRoles = $request->user()->roles()->get();
-
-        //\Session::flush();
-
-        //dd(\Cache::get('role'));
-
-        if (!\Cache::has('role')) {
-
 
             foreach ($authUserRoles as $role) {
 
-                \Session::put('role', str_random(16));
+                \Session::put('roles', str_random(16));
 
-                \Cache::put('role', str_random(16), 1);
+                // roles => 'rand'
+                \Cache::put('roles', str_random(16), 1);
 
-                $AuthUserRolePerms = $role->perms()->get()->lists('name')->toArray();
+                $AuthUserRolePerms = $role->perms()->where('level', '=', '1')->get()->lists('name')->toArray();
 
-                \Cache::put($role->name, $AuthUserRolePerms, 1);
+                $AuthUserRolePermsWithLevels = $role->perms()->get(['name', 'level']);
 
+                foreach ($AuthUserRolePermsWithLevels as $perm) {
 
+                    // level_create_user , 2
+                    \Cache::put('level_' . $perm->name, $perm->level, 0);
 
-                foreach ($AuthUserRolePerms as $perm) {
-
-                    \Session::put('permission.' . $perm, \Crypt::encrypt($perm));
-
-                    \Cache::put($perm, $perm, 1);
+                    // permission_create_user , create_user
+                    \Cache::put('permission_' . $perm->name, $perm->name, 0);
 
                 }
 
                 \Session::put('role.' . $role->name, \Crypt::encrypt($role->display_name));
 
-                \Cache::put('role', $role->name, 1);
+                // 'Modules_Admin' => 'Users', 'Books' ....
+
+                \Cache::put('Modules_'.$role->name, $AuthUserRolePerms, 0);
+
+                //dd(\Cache::get('Modules_Admin'));
 
             }
 
 
         }
-
-        //     dd(\Session::all());
 
         return $next($request);
     }

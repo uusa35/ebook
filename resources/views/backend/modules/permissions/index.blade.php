@@ -15,6 +15,7 @@
             <th>#</th>
             <th>{{ trans('word.general.display_name') }}</th>
             <th>{{ trans('word.general.name') }}</th>
+            <th>{{ trans('word.general.level') }}</th>
             <th>{{ trans('word.general.edit') }}</th>
             <th>{{ trans('word.general.delete') }}</th>
         </tr>
@@ -25,6 +26,7 @@
                 <td>{{ $permission->id }}</td>
                 <td>{{ $permission->display_name }}</td>
                 <td>{{ $permission->name }}</td>
+                <td>{{ $permission->level }} - {!! ($permission->level === '1') ? "<span class=\"label label-info\">Module</span>" : '' !!}</td>
 
 
                 <td width="80"><a class="{{ Config::get('button.btn-edit') }}" href="{{ action('Backend\PermissionsController@edit', $permission->id) }}"><i class="fa faw fa-edit"></i></a></td>

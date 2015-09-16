@@ -7,6 +7,7 @@
  */
 namespace App\Src\Book;
 
+use App\Jobs\CreateImages;
 use Illuminate\Support\Facades\Mail;
 
 trait BookHelpers
@@ -16,9 +17,9 @@ trait BookHelpers
      * @return string
      * Generate PDF file Name for the Book
      */
-    private function generateFileName()
+    private function generateFileName($userId)
     {
-        return md5(uniqid(mt_rand(10, 1202020), true)) . '.pdf';
+        return $userId.md5(uniqid(mt_rand(10, 1202020), true)) . '.pdf';
     }
 
     public function NotifyChangeStageOrder($data = [])
@@ -36,11 +37,25 @@ trait BookHelpers
         });
     }
 
-    public function createBookSerial($userId,$bookId) {
+    public function createBookSerial($userId, $bookId)
+    {
 
-        return $serial = $userId.'-'.date('Y-m-d').'-'.$bookId;
+        return $serial = $userId . '-' . date('Y-m-d') . '-' . $bookId;
 
 
+    }
+
+    public function CreateBookCover($request, $book)
+    {
+        // check if cover_ar changed
+        if ($request->hasFile('cover')) {
+
+            /*
+         * Abstract CreateImages Job (Model , $request, FolderName, FieldsName , Default thumbnail sizes , Default large sizes
+         * */
+            $this->dispatch(new CreateImages($book, $request, 'cover', ['cover']));
+
+        }
     }
 
 

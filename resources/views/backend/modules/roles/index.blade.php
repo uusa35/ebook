@@ -25,7 +25,7 @@
                 <td>{{ $role->name }}</td>
                 <td>
                     @foreach($role->perms as $permission)
-                        <span class="label label-info">{{ $permission->name }}</span>
+                        <span class="label well-material-orange-600 " style="line-height: 2; border-radius: 5px;">{{ $permission->name }}</span>
                     @endforeach
                 </td>
                 <td width="80"><a class="{{ Config::get('button.btn-edit') }}" href="{{ action('Backend\RolesController@edit', $role->id) }}"><i class="fa faw fa-edit"></i></a></td>

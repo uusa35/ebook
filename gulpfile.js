@@ -40,7 +40,7 @@ elixir(function (mix) {
  /* frontend */
  mix.styles([
   "custom_frontend.css",
-     // Graphs
+
  ], 'public/css/frontend.css');
  /* material Design */
  mix.styles([
@@ -92,7 +92,6 @@ elixir(function (mix) {
    /*"js/abstract-js.js"*/
   /*"bower_components/fineuploader-dist/dist/jquery.fine-uploader.min.js",*/
  ], 'public/js/app.js', 'resources/assets/', './');
-
  mix.version([
   'public/css/frontend.css',
   'public/css/backend.css',

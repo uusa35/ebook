@@ -18,15 +18,11 @@ class CheckPermBeforeAccessModule
     public function handle($request, Closure $next, $perm)
     {
 
-        //$authUserRoles = $request->user()->roles()->first();
+        // Cached within the Middleware CollectData for a authenticated user
 
-        //$AuthUserRolePerms = $authUserRoles->perms()->get()->lists('name')->toArray();
+        //dd(\Cache::get('permission_Roles'));
 
-        //dd(\Crypt::decrypt(\Session::get('permission.Users')));
-
-        //dd($perm);
-        //dd(\Cache::get($perm));
-        if (in_array($perm, [\Cache::get($perm)], true)) {
+        if (in_array($perm, [\Cache::get('permission_'.$perm)], true)) {
 
             return $next($request);
         }

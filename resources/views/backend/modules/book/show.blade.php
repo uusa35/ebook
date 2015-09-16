@@ -24,7 +24,7 @@
                 <div class=" box box-widget widget-user shadow-z-1">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-white"
-                         style="background: url(' {{ asset('images/uploads/cover_'.App::getLocale().'/large/'.$book->cover) }}') center center;">
+                         style="background: url(' {{ asset('images/uploads/cover/large/'.$book->cover) }}') center center no-repeat; background-size: 100%; ">
                     </div>
                     <div class="box-footer">
                         <!-- /.row -->
@@ -32,8 +32,6 @@
                             <div class="col-lg-12">
                                 <span class="description-text">
                                     {{ $book->title }}
-
-                                    <hr>
                                     <p>
                                         {{ $book->description }}
                                     </p>

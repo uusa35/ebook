@@ -15,7 +15,13 @@ class CreateBook extends Request
 
     public function authorize()
     {
-        return true;
+        if (\Cache::get('role')) {
+
+            return true;
+        }
+
+        return false;
+
     }
 
     /**
@@ -26,13 +32,15 @@ class CreateBook extends Request
     public function rules()
     {
         return [
-            'title_en'    => 'min:5',
-            'title_ar'    => 'min:5',
-            'body'        => 'min:20',
-            'price'       => 'numeric|max:500',
-            'cover_ar'    => 'min:5',
-            'cover_en'    => 'min:5',
-            'type'        => 'required'
+            //'title_en'    => 'min:5',
+            //'title_ar'    => 'min:5',
+            'title' => 'min:5|alpha|required|max:500',
+            //'price'       => 'numeric|max:500',
+            'cover' => 'image|required',
+            'description' => 'required|min:5',
+            //'cover_ar'    => 'min:5',
+            //'cover_en'    => 'min:5',
+            //'type'        => 'required'
         ];
     }
 }

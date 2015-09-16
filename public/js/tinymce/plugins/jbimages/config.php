@@ -38,7 +38,7 @@
 | -------------------------------------------------------------------*/
 
 //($_SERVER['HTTP_HOST'].'/img/uploads/cv-vr3.jpg');
-$config['img_path'] = '/img/uploads'; // Relative to domain name
+$config['img_path'] = '/images/uploads/books/'; // Relative to domain name
 $config['upload_path'] = $_SERVER['DOCUMENT_ROOT'].$config['img_path']; // Physical path. [Usually works fine like this]
 
 

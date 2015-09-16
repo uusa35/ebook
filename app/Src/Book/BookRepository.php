@@ -102,46 +102,51 @@ class BookRepository extends AbstractRepository
         return $favorites;
     }
 
-    public function getCustomizedPreviews($userId='',$paginate='10') {
+    public function getCustomizedPreviews($userId = '', $paginate = '10')
+    {
 
-        return $this->model->customizedPreviews($userId,$paginate);
-
-    }
-
-    public function ShowNewCustomizedPreviewForAdmin($bookId,$authorId) {
-
-        return $this->model
-                ->selectRaw('books.*')
-                ->selectRaw('book_previews.*')
-                ->join('book_previews','book_previews.book_id','=','books.id')
-                ->where('book_previews.author_id','=',$authorId)
-                ->where('books.id',$bookId)
-                ->where('books.user_id',$authorId)
-                ->first();
+        return $this->model->customizedPreviews($userId, $paginate);
 
     }
 
-    public function ShowNewCustomizedPreviewForUsers($bookId,$authorId) {
+    public function ShowNewCustomizedPreviewForAdmin($bookId, $authorId)
+    {
 
         return $this->model
             ->selectRaw('books.*')
             ->selectRaw('book_previews.*')
-            ->join('book_previews','book_previews.book_id','=','books.id')
-            ->where('book_previews.author_id','=',$authorId)
-            ->where('books.id',$bookId)
-            ->where('books.user_id',$authorId)
-            ->where('book_previews.user_id',Session::get('auth.id'))
+            ->join('book_previews', 'book_previews.book_id', '=', 'books.id')
+            ->where('book_previews.author_id', '=', $authorId)
+            ->where('books.id', $bookId)
+            ->where('books.user_id', $authorId)
             ->first();
 
     }
 
-    public function deleteNewCustomizedPreview($bookId,$authorId) {
+    public function ShowNewCustomizedPreviewForUsers($bookId, $authorId)
+    {
 
-        return DB::table('book_previews')->where(['book_id'=>$bookId,'author_id'=>$authorId])->delete();
+        return $this->model
+            ->selectRaw('books.*')
+            ->selectRaw('book_previews.*')
+            ->join('book_previews', 'book_previews.book_id', '=', 'books.id')
+            ->where('book_previews.author_id', '=', $authorId)
+            ->where('books.id', $bookId)
+            ->where('books.user_id', $authorId)
+            ->where('book_previews.user_id', Session::get('auth.id'))
+            ->first();
 
     }
 
-    public function getReportsAbuse($paginate = 10) {
+    public function deleteNewCustomizedPreview($bookId, $authorId)
+    {
+
+        return DB::table('book_previews')->where(['book_id' => $bookId, 'author_id' => $authorId])->delete();
+
+    }
+
+    public function getReportsAbuse($paginate = 10)
+    {
 
         /*return DB::table('book_report')
 
@@ -157,11 +162,25 @@ class BookRepository extends AbstractRepository
             ->selectRaw('books.*')
             ->selectRaw('book_report.*')
             ->selectRaw('users.*')
-            ->join('book_report','book_report.book_id','=','books.id')
-            ->leftjoin('users','book_report.user_id','=','users.id')
+            ->join('book_report', 'book_report.book_id', '=', 'books.id')
+            ->leftjoin('users', 'book_report.user_id', '=', 'users.id')
             ->orderBy('book_report.created_at', 'DESC')
             ->paginate($paginate);
 
     }
+
+    public function changeActivationBook($bookId, $userId, $activeStatus)
+    {
+
+        $book = $this->model->where(['id' => $bookId, 'user_id' => $userId])->first();
+
+        $activeStatus = ($activeStatus === '1') ? 0 : 1;
+
+        $book->update(['active' => $activeStatus]);
+
+        $book->save();
+
+    }
+
 
 }

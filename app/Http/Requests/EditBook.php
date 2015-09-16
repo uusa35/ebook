@@ -25,11 +25,12 @@ class EditBook extends Request
     public function rules()
     {
         return [
-            'title_en'    => 'required|min:5',
-            'title_ar'    => 'required|min:5',
-            'price'       => 'numeric|max:500',
-            'cover_ar'    => 'mimes:jpeg,bmp,png',
-            'cover_en'    => 'mimes:jpeg,bmp,png',
+            //'title_en'    => 'required|min:5',
+            //'title_ar'    => 'required|min:5',
+            'title' => 'alpha|required|min:5',
+            //'price'       => 'numeric|max:500',
+            'cover'        => 'mimes:jpeg,bmp,png|required',
+            'description' => 'required|min:5'
         ];
     }
 }

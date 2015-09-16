@@ -5,3 +5,12 @@ body, html {
     min-height: 1000px !important;
 }
 
+.sidebar ul {
+    border: none !important;
+}
+
+fieldset[disabled] .form-control, .form-control-wrapper .form-control, .form-control, fieldset[disabled] .form-control:focus, .form-control-wrapper .form-control:focus, .form-control:focus, fieldset[disabled] .form-control.focus, .form-control-wrapper .form-control.focus, .form-control.focus {
+    border-bottom: 1px solid #a9a9a9 !important;
+}
+
+

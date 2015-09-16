@@ -20,7 +20,7 @@ class Book extends AbstractModel
 
     protected $guarded = ['id'];
 
-    protected $localeStrings = ['title', 'cover', 'description'];
+    protected $localeStrings = [];
 
     /**
      * one to Many Relation

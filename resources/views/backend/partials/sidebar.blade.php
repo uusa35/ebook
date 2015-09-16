@@ -24,20 +24,26 @@
         </div>
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
-            @if(Cache::has('Admin'))
-                @foreach(Cache::get('Admin') as $perm)
+            @if(Cache::has('Modules_Admin'))
+                @foreach(Cache::get('Modules_Admin') as $perm)
+
                     <li><a href="{{ URL::to('backend/'.strtolower($perm)) }}"><i class="fa fa-folder"></i>
                             <span>{{ $perm }}</span></a></li>
+
                 @endforeach
-            @elseif(Cache::has('Editor'))
+            @elseif(Cache::has('Modules_Editor'))
                 @foreach(Cache::get('Editor') as $perm)
+
                     <li><a href="{{ URL::to('backend/'.strtolower($perm)) }}"><i class="fa fa-folder"></i>
                             <span>{{ $perm }}</span></a></li>
+
                 @endforeach
-            @elseif(Cache::has('Author'))
+            @elseif(Cache::has('Modules_Author'))
                 @foreach(Cache::get('Author') as $perm)
+
                     <li><a href="{{ URL::to('backend/'.strtolower($perm)) }}"><i class="fa fa-folder"></i>
                             <span>{{ $perm }}</span></a></li>
+                    
                 @endforeach
             @endif
 

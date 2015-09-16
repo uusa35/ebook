@@ -40,6 +40,7 @@ class EntrustSetupTables extends Migration
             $table->string('name')->unique();
             $table->string('display_name')->nullable();
             $table->string('description')->nullable();
+            $table->enum('level',[2,1]);
             $table->timestamps();
         });
 

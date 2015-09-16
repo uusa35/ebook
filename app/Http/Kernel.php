@@ -33,7 +33,8 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'active' => \App\Http\Middleware\AfterUserLoginActiveCheck::class,
         'collectData' => \App\Http\Middleware\AuthUserCollectData::class,
-        'access' => \App\Http\Middleware\CheckPermBeforeAccessModule::class
+        'access' => \App\Http\Middleware\CheckPermBeforeAccessModule::class,
+        'crudAccess' => \App\Http\Middleware\BeforeCrudAccess::class,
 
     ];
 }

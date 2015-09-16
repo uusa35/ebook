@@ -20,6 +20,7 @@ $factory->define('App\Src\User\User', function ($faker) {
             'email' => "admin@email.com",
             'active' => 1,
             'password' => Hash::make("admin"),
+            'avatar' => 'http://lorempixel.com/150/150/sports'
         ];
 });
 
@@ -27,20 +28,29 @@ $factory->define('App\Src\Book\Book', function ($faker) {
     return [
         'user_id' => 1,
         'serial' => $faker->numberBetween(10000000, 9999999999),
-        'cover_en' => '',
-        'cover_ar' => '',
+        'cover' => 'cover.png',
+        //'cover_en' => '',
+        //'cover_ar' => '',
         'views' => '',
         'field_category_id' => $faker->numberBetween(1, 10),
         'lang_category_id' => 1,
-        'title_en' => $faker->word,
-        'title_ar' => $faker->word,
-        'cover_en' => 'book.png',
-        'cover_ar' => 'book_ar.jpg',
-        'description_ar' => 'تفاصيل الموضوع تفاصيل الموضوع',
-        'description_en' => $faker->paragraph(2),
+        'title'=> $faker->word,
+        //'title_en' => $faker->word,
+        //'title_ar' => $faker->word,
+        'description' => $faker->paragraph(2),
+        //'description_ar' => 'تفاصيل الموضوع تفاصيل الموضوع',
+        //'description_en' => $faker->paragraph(2),
         'active' => 1,
-        'url' => 'test.pdf',
         'free' => 0,
+    ];
+});
+
+$factory->define('App\Src\Book\Chapter\Chapter', function ($faker) {
+    return [
+        'title' => $faker->word(5),
+        'book_id' => $faker->numberBetween(1,10),
+        'status' => $faker->array_rand(['pending','published','drafted','rejected']),
+        'body' => $faker->paragraph(10)
     ];
 });
 
@@ -92,7 +102,7 @@ $factory->define('App\Src\Advertisement\Advertisement', function ($faker) {
     ];
 });
 
-for ($i = 0; $i <= 2; $i++) {
+for ($i = 0; $i <= 23; $i++) {
     /*DB::table('user_roles')->insert([
         'user_id' => '1',
         'role_id' => rand(1, 3)
@@ -104,8 +114,8 @@ for ($i = 0; $i <= 2; $i++) {
     ]);
 
     DB::table('permission_role')->insert([
-        'permission_id' => rand(1, 3),
-        'role_id' => rand(1, 3)
+        'permission_id' => $i,
+        'role_id' => 1
     ]);
 
 }
