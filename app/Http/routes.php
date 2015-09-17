@@ -76,7 +76,7 @@ Route::group(['prefix' => 'frontend'], function () {
  *
  *
  * */
-Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collectData','crudAccess']], function () {
+Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collectData']], function () {
 
 
     /***************************************************************************************************
@@ -88,39 +88,27 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
 
 
     // Middleware RolePermissionRouteAccess
-    Route::group(['middleware' => 'access:Users'], function () {
+    Route::group(['middleware' => 'access'], function () {
         /***************************************************************************************************
          * User Module
          ***************************************************************************************************/
         Route::resource('users', 'Backend\UsersController');
         Route::post('users/active/{id}/{status}', 'Backend\UsersController@postChangeActiveStatus');
-
-    });
-
-    Route::group(['middleware' => 'access:Roles'], function () {
         /***************************************************************************************************
          * Role Module
          ***************************************************************************************************/
         Route::resource('roles', 'Backend\RolesController');
-    });
-
-    Route::group(['middleware' => 'access:Permissions'], function () {
         /***************************************************************************************************
          * Permission Module
          ***************************************************************************************************/
         Route::resource('permissions', 'Backend\PermissionsController');
-
-    });
-    Route::group(['middleware' => 'access:Books'], function () {
         /***************************************************************************************************
          * Books Module
          ***************************************************************************************************/
         Route::resource('books', 'Backend\BooksController');
         Route::resource('chapters', 'Backend\ChaptersController');
         Route::get('/activation/{bookId}/{userId}/{activeStatus}','Backend\BooksController@getChangeActivationBook');
-
-    });
-    Route::group(['middleware' => 'access:Comments'], function () {
+        Route::get('/books/chapters/pdf/{chapterId}/{chapterUrl}',['as'=>'backend.books.chapters.pdf.preview','uses'=>'Backend\ChaptersController@getPdfFile']);
         /***************************************************************************************************
          * Comments Module
          ***************************************************************************************************/

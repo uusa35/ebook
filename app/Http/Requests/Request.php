@@ -6,5 +6,18 @@ use Illuminate\Foundation\Http\FormRequest;
 
 abstract class Request extends FormRequest
 {
-    //
+
+    public function checkAccessForEachPermission($permission) {
+
+        $role = \Cache::get('role');
+
+        $array = (\Cache::get('Permission.'.$role));
+
+        if (in_array($permission, $array, true)) {
+
+            return true;
+        }
+
+        return false;
+    }
 }

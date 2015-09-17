@@ -1,13 +1,14 @@
 <?php namespace App\Listeners;
 
-use App\Events\BookPublished;
+
+use App\Events\CreateChapter;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Session;
 use Knp\Snappy\Pdf;
 
 
-class CalculateBookPage implements ShouldQueue
+class CalculateChapterPage implements ShouldQueue
 {
 
     private $uploadPath;
@@ -27,21 +28,21 @@ class CalculateBookPage implements ShouldQueue
      * @param  BookPublished $event
      * @return void
      */
-    public function handle(ChapterCreated $event)
+    public function handle(CreateChapter $event)
     {
         // create PDF
 
         $fpdi = new \FPDI();
 
         // count the book page
-        $pageCount = $fpdi->setSourceFile($this->uploadPath.$event->book->url);
+        $pageCount = $fpdi->setSourceFile($this->uploadPath.$event->chapter->url);
 
         // this one is used within the CreatePDF to include it within the template
         Session::put('total_pages',$pageCount);
 
         // update the database with total page count
-        $event->book->meta->total_pages = $pageCount;
-        $event->book->meta->save();
+        //$event->book->meta->total_pages = $pageCount;
+        //$event->book->meta->save();
 
 
     }

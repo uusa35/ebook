@@ -26,11 +26,12 @@
                 <td>{{ $permission->id }}</td>
                 <td>{{ $permission->display_name }}</td>
                 <td>{{ $permission->name }}</td>
-                <td>{{ $permission->level }} - {!! ($permission->level === '1') ? "<span class=\"label label-info\">Module</span>" : '' !!}</td>
+                <td> {!! ($permission->level === '1') ? "<span class='label label-info'>Module</span>" : "<span class='label label-warning'>Permission</span>" !!}</td>
 
-
+                @if(Cache::get('Permission.permission_edit'))
                 <td width="80"><a class="{{ Config::get('button.btn-edit') }}" href="{{ action('Backend\PermissionsController@edit', $permission->id) }}"><i class="fa faw fa-edit"></i></a></td>
-                @if(Cache::get('Admin'))
+                @endif
+                @if(Cache::get('Permission.permission_delete'))
                     <td width="80">{!! Form::open(['action' => ['Backend\PermissionsController@update', $permission->id], 'method' => 'DELETE']) !!}
                         <button type="submit" class="{{ Config::get('button.btn-delete') }}"><i class="fa fa=fw fa-times"></i></button>
                         {!!  Form::close() !!}</td>

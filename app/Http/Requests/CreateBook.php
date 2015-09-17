@@ -15,12 +15,8 @@ class CreateBook extends Request
 
     public function authorize()
     {
-        if (\Cache::get('role')) {
 
-            return true;
-        }
-
-        return false;
+        return $this->checkAccessForEachPermission('book_create');
 
     }
 
@@ -34,7 +30,7 @@ class CreateBook extends Request
         return [
             //'title_en'    => 'min:5',
             //'title_ar'    => 'min:5',
-            'title' => 'min:5|alpha|required|max:500',
+            'title' => 'min:5|required|max:500',
             //'price'       => 'numeric|max:500',
             'cover' => 'image|required',
             'description' => 'required|min:5',

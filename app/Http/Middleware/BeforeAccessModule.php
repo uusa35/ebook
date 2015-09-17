@@ -3,10 +3,12 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Crypt;
 
 
-class CheckPermBeforeAccessModule
+class BeforeAccessModule
 {
     /**
      * Handle an incoming request.
@@ -15,14 +17,25 @@ class CheckPermBeforeAccessModule
      * @param  \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $perm)
+    public function handle($request, Closure $next)
     {
 
         // Cached within the Middleware CollectData for a authenticated user
 
-        //dd(\Cache::get('permission_Roles'));
+        $routeName = explode('.', \Route::currentRouteName(), 3);
 
-        if (in_array($perm, [\Cache::get('permission_'.$perm)], true)) {
+        if (count($routeName) > 1) {
+            \Session::put('module', ucfirst($routeName[1]));
+        }
+
+        //$permName = $routeName[2];
+        $role = \Cache::get('role');
+        $array = (\Cache::get('Module.' . $role));
+        //dd($array);
+
+        //dd(\Session::get('module'));
+
+        if (in_array(\Session::get('module'), $array, true)) {
 
             return $next($request);
         }

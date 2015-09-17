@@ -29,7 +29,7 @@
                     @endforeach
                 </td>
                 <td width="80"><a class="{{ Config::get('button.btn-edit') }}" href="{{ action('Backend\RolesController@edit', $role->id) }}"><i class="fa faw fa-edit"></i></a></td>
-                @if(Cache::get('Admin'))
+                @if(Cache::get('permission_role_delete'))
                     <td width="80">{!! Form::open(['action' => ['Backend\RolesController@update', $role->id], 'method' => 'DELETE']) !!}
                         <button type="submit" class="{{ Config::get('button.btn-delete') }}"><i class="fa fa=fw fa-times"></i></button>
                         {!!  Form::close() !!}</td>

@@ -30,17 +30,15 @@ class DashboardController extends AbstractController
     {
         //$this->middleware('guest');
         //$this->middleware('auth', ['only' => 'logged']);
-        $this->titles = [
-            'index' => trans('word.general.dashboard')
-        ];
         //$roles = $this->authUserRoles = Auth::user()->roles()->get();
 
     }
 
     public function index()
     {
-        if (\Cache::has('roles')) {
-            $this->getPageTitle('index');
+        if (\Cache::has('role')) {
+
+            $this->getPageTitle('title');
             return view('backend.modules.users.dashboard.index');
         }
         Auth::logout();

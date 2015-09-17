@@ -77,7 +77,7 @@ class BooksController extends AbstractController
 
         $this->getPageTitle(\Config::get('title.books.index'));
 
-        if (\Cache::get('role') === 'Admin' || \Cache::get('role') === 'Editor') {
+        if (\Cache::get('Module.Admin') || \Cache::get('Module.Editor')) {
 
             $books = $this->bookRepository->model->with('meta','user')->orderBy('created_at', 'desc')->get();
 
@@ -164,8 +164,9 @@ class BooksController extends AbstractController
     public function show($id)
     {
         $book = $this->bookRepository->model->where('id', '=', $id)->with('meta')->first();
+        $chapters = $this->chapterRepository->model->where(['book_id'=> $id])->get();
 
-        return view('backend.modules.book.show', compact('book'));
+        return view('backend.modules.book.show', compact('book','chapters'));
 
     }
 
@@ -423,19 +424,6 @@ class BooksController extends AbstractController
         return redirect()->back()->with(['error' => 'messages.error.not_authorized']);
 
     }
-    /*    public function getBookByType ($type = 'book') {
 
-        if(Session::get('role.admin') || Session::get('role.editor')) {
-            $books = $this->bookRepository->model->where('type','=',$type)->with('meta')->orderBy('created_at','desc')->paginate(15);
-        }
-        else {
-            $books = $this->bookRepository->model
-                ->where('user_id','=',Auth::user()->id)->with('meta')
-                ->where('type','=',$type)
-                ->orderBy('created_at', 'ASC')->paginate(15);
-        }
-
-        return view('backend.modules.book.index',['books' => $books]);
-    }*/
 
 }

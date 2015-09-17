@@ -16,6 +16,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\OnUserLogin' => [
             'App\Listeners\CollectDataAfterLogin',
         ],
+        'App\Events\CreateChapter' => [
+            'App\Listeners\CreatePdf',
+            'App\Listeners\CalculateChapterPage'
+        ]
     ];
 
     /**

@@ -1,6 +1,7 @@
 <?php namespace App\Listeners;
 
 use App\Events\BookPublished;
+use App\Events\CreateChapter;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Knp\Snappy\Pdf;
@@ -31,24 +32,22 @@ class CreatePdf implements ShouldQueue
      * @param  BookPublished $event
      * @return void
      */
-    public function handle(BookPublished $event)
+    public function handle(CreateChapter $event)
     {
+
         // to enforce the app to use UTF-8 for arabic content
 
         // create PDF
         //dd($this->uploadPath . $event->book->url);
 
-
-
-
-        $body = $this->cleanBody($event->book->body);
+        $body = $this->cleanBody($event->chapter->body);
 
 
         $body = '<div style="border: 1px dotted #d7d7d7 !important;">'. $body .'</div>';
 
         $this->pdf->setOption('encoding', 'UTF-8');
 
-        $this->pdf->generateFromHtml($body, $this->uploadPath . $event->book->url,['encoding'=>'UTF-8','images'=> true,'enable-external-links' => true]);
+        $this->pdf->generateFromHtml($body, $this->uploadPath . $event->chapter->url,['encoding'=>'UTF-8','images'=> true,'enable-external-links' => true]);
 
         return true;
     }

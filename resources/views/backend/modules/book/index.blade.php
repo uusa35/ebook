@@ -27,7 +27,7 @@
                 <ul class="nav nav-tabs btn-material-blue-grey-400">
                     <li id="tab-1" class="" href="#step1"><a href="#step1" data-toggle="tab"><i
                                     class="fa fa-aw fa-book"></i>&nbsp;{{ trans('word.general.volumes') }} </a></li>
-                    @if(Cache::get('Admin'))
+                    @if(Cache::get('Module.Admin'))
                         <li id="tab-2"><a href="#step2" data-toggle="tab"><i
                                         class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('word.general.report') }}
                             </a></li>
@@ -54,7 +54,7 @@
                                             <th>{{ trans('word.general.add') }}</th>
                                             <th>{{ trans('word.general.active') }}</th>
                                             <th>{{ trans('word.general.edit') }}</th>
-                                            @if(Cache::get('role') === 'Admin')
+                                            @if(Cache::get('Module.Admin'))
                                                 <th>{{ trans('word.general.delete') }}</th>
                                             @endif
                                         </tr>
@@ -82,7 +82,7 @@
                                                     <a class="{{ Config::get('button.btn-view') }}" href="{{ action('Backend\BooksController@show', $book->id) }}"><i class="fa fa-xs fa-eye"></i></a>
                                                 </td>
                                                 <td>
-                                                    <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\ChaptersController@create',['bookId'=>$book->id]) }}" data-toggle="tooltip"  title="Add Chapter"><i class="fa fa-xs fa-plus"></i></a>
+                                                    <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\ChaptersController@create',['book_id' => $book->id]) }}" data-toggle="tooltip"  title="Add Chapter"><i class="fa fa-xs fa-plus"></i></a>
                                                 </td>
                                                 <td class="text-center">
                                                     <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}" href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->user->id,$book->active]) }}">
@@ -116,7 +116,7 @@
                     </div>
 
                     {{--Abuse Reports --}}
-                    @if(Cache::get('role') === 'Admin')
+                    @if(Cache::get('Module.Admin'))
                         <div class="tab-pane" id="step2">
                             <div class="row">
                                 <div class="col-xs-12 paddingTop10">

@@ -26,45 +26,42 @@ class AuthUserCollectData
     {
 
 
+        if (!\Cache::has('role')) {
+
+            $authUserRole = $request->user()->roles()->first();
+
+            \Cache::put($authUserRole->name, $authUserRole->name, 0);
+
+            $modules = $authUserRole->perms()->where('level', '=', '1')->get();
+
+            $modulesList = $modules->lists('name', 'id')->toArray();
+
+            $permissions = $authUserRole->perms()->where('level', '=', '2')->get();
+
+            $permissionsList = $permissions->lists('name', 'id')->toArray();
+            /*
+             * 'Module.Admin' => [List of Modules]
+             * */
+            //dd(array_values($modulesList));
+            \Cache::put('Module.' . $authUserRole->name, array_values($modulesList), 0);
 
 
-        if (!\Cache::has('roles')) {
+            /*
+             * 'Permission.user_edit' => [List of Permissions]
+             * */
+            \Cache::put('Permission.' . $authUserRole->name, array_values($permissionsList), 0);
 
-        $authUserRoles = $request->user()->roles()->get();
 
-            foreach ($authUserRoles as $role) {
+            \Session::put('roles', str_random(16));
 
-                \Session::put('roles', str_random(16));
-
-                // roles => 'rand'
-                \Cache::put('roles', str_random(16), 1);
-
-                $AuthUserRolePerms = $role->perms()->where('level', '=', '1')->get()->lists('name')->toArray();
-
-                $AuthUserRolePermsWithLevels = $role->perms()->get(['name', 'level']);
-
-                foreach ($AuthUserRolePermsWithLevels as $perm) {
-
-                    // level_create_user , 2
-                    \Cache::put('level_' . $perm->name, $perm->level, 0);
-
-                    // permission_create_user , create_user
-                    \Cache::put('permission_' . $perm->name, $perm->name, 0);
-
-                }
-
-                \Session::put('role.' . $role->name, \Crypt::encrypt($role->display_name));
-
-                // 'Modules_Admin' => 'Users', 'Books' ....
-
-                \Cache::put('Modules_'.$role->name, $AuthUserRolePerms, 0);
-
-                //dd(\Cache::get('Modules_Admin'));
-
-            }
-
+            // roles => 'rand'
+            // role = Admin
+            \Cache::put('role',$authUserRole->name, 1);
+            // role.Admin = Admin
+            \Cache::put('role.'.$authUserRole->name,$authUserRole->name, 1);
 
         }
+
 
         return $next($request);
     }

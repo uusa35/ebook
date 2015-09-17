@@ -11,7 +11,6 @@ class Chapter extends AbstractModel
 
     public function book()
     {
-
         return $this->belongsTo('App\Src\Book\Book');
     }
 }

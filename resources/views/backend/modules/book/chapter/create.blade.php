@@ -4,8 +4,7 @@
     <div class="panel-body">
 
         {!! Form::open(['action'=>'Backend\ChaptersController@store','method' => 'post', 'files'=>'true'], ['class'=>'form-horizontal']) !!}
-
-
+        {!! Form::hidden('book_id',$bookId) !!}
         <div class="form-group">
             {!! Form::label('title',trans('word.general.title')) !!}
             {!! Form::text('title', null, ['class' => 'form-control','placeholder'=> trans('word.general.title')]) !!}

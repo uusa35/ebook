@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class CreateCategory extends Request
+class CreateChapter extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,10 +13,9 @@ class CreateCategory extends Request
      */
     public function authorize()
     {
-        if(\Cache::get('Module.Admin')) {
-            return true;
-        }
-        return false;
+
+        return $this->checkAccessForEachPermission('chapter_create');
+
     }
 
     /**
@@ -27,8 +26,9 @@ class CreateCategory extends Request
     public function rules()
     {
         return [
-            'name_ar' => 'required|min:3|max:255',
-            'name_en' => 'required|min:3|max:255',
+            'title' => 'min:5|required|max:500',
+            'book_id' => 'required',
+            'body' => 'required|min:10',
         ];
     }
 }

@@ -1,12 +1,43 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Jobs\CreateBookPreview;
+use App\Jobs\CreateChapterPreview;
+use App\Src\Advertisement\Advertisement;
+use App\Src\Book\Book;
+use App\Src\Book\BookRepository;
+use App\Src\Favorite\FavoriteRepository;
+use App\Src\Purchase\PurchaseRepository;
+use App\Src\User\UserRepository;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 
 class BookController extends Controller
 {
 
 
+    public $bookRepository;
+    public $favoriteRepository;
+    public $userRepository;
+    public $purchaseRepository;
+    public $ad;
+    public $authUser;
+    public $book;
+
+    public function __construct(
+        BookRepository $book,
+        FavoriteRepository $favoriteRepository,
+        UserRepository $userRepository,
+        PurchaseRepository $purchaseRepository,
+        Advertisement $ad
+    ) {
+        $this->bookRepository = $book;
+        $this->favoriteRepository = $favoriteRepository;
+        $this->userRepository = $userRepository;
+        $this->purchaseRepository = $purchaseRepository;
+    }
 
     /**
      * Display a listing of the resource.
@@ -15,8 +46,15 @@ class BookController extends Controller
      */
     public function index()
     {
+        $paginate = 4;
+        // get 4 published books for index
+        $books = $this->bookRepository->model->with('users')->with('meta')->where('status', '=', 'published')->orderBy('created_at',
+            'desc')->paginate($paginate);
 
-        return view('frontend.modules.book.index');
+        // get 4 published and most favorite books for index
+        $mostFavoriteBooks = $this->bookRepository->getMostFavorited($paginate);
+
+        return view('frontend.modules.book.index', compact('books', 'mostFavoriteBooks'));
     }
 
     /**
@@ -25,11 +63,232 @@ class BookController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function show()
+    public function show($id)
     {
+        // get all books by book ID
+        $book = $this->bookRepository->model->with(['user', 'meta'])->find($id);
 
-        return view('frontend.modules.book.show');
+        /*redirec if the book is not published with a not published message*/
+
+        if ($book->status != 'published') {
+
+            return redirect('/')->with(['error'=>'word.error-book-not-published']);
+        }
+
+        // get the author of the book
+        $author = $book->user;
+
+        // book info
+        $bookMeta = $book->meta;
+
+        return view('frontend.modules.book.show', ['book' => $book, 'author' => $author, 'bookMeta' => $bookMeta]);
     }
 
+
+    /**
+     * @param $userId
+     * @param $bookId
+     * create new favorite for a book
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getCreateNewFavoriteList($userId, $bookId)
+    {
+
+        $checkFavorite = $this->favoriteRepository->model->where(['book_id' => $bookId, 'user_id' => $userId])->first();
+
+        if (is_null($checkFavorite)) {
+
+            $favorited = $this->favoriteRepository->model->create([
+                'book_id' => $bookId,
+                'user_id' => $userId
+            ]);
+
+            if ($favorited) {
+                return redirect()->back()->with(['success' => trans('word.success-book-favorites')]);
+            }
+
+        }
+
+        return redirect()->back()->with(['error' => trans('word.error-book-favorites')]);
+    }
+
+    /**
+     * @param $userId
+     * @param $bookId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getRemoveBookFromUserFavoriteList($userId, $bookId)
+    {
+
+        if ($this->favoriteRepository->model->where(['book_id' => $bookId, 'user_id' => $userId])->delete()) {
+            return redirect()->back()->with(['success', trans('word.success-favorite-remove')]);
+        }
+
+        return redirect()->back()->with(['error', trans('word.error-favorite-remove')]);
+
+    }
+
+    /**
+     * @param $userId
+     * @param $bookId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getRemoveBookFromUserOrderList($userId, $bookId)
+    {
+
+        if ($this->purchaseRepository->model->where([
+            'book_id' => $bookId,
+            'user_id' => $userId,
+            'stage'   => 'order'
+        ])->delete()
+        ) {
+            return redirect()->back()->with(['success', trans('word.success-order-remove')]);
+        }
+
+        return redirect()->back()->with(['error', trans('word.error-order-remove')]);
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function getAllBooks()
+    {
+        $books = $this->bookRepository->model->with('meta')->where('status', '=', 'published')->orderBy('created_at',
+            'desc')->paginate(10);
+
+        $render = true;
+
+        return view('frontend.modules.book.index', compact('books', 'render'));
+    }
+
+    /**
+     * @param Request $request
+     * @return search function responsible to search all books title , descriptions and even content of each book
+     */
+    public function getShowSearchResults(Request $request)
+    {
+
+        $searchResults = $this->bookRepository->SearchBooks($request->input('search'));
+
+        if (count($searchResults) > 0) {
+
+            return view('frontend.modules.book.index', ['books' => $searchResults]);
+
+        } else {
+
+            return redirect()->back()->with(['error' => trans('word.no-results')]);
+
+        }
+    }
+
+    /**
+     * @param $bookUrl
+     * @return full link of the free book
+     */
+    public function getFreePdfFile($bookId,$bookUrl)
+    {
+
+        $book = $this->bookRepository->model->where(['url' => $bookUrl,'id'=> $bookId])->first();
+
+        if ($book) {
+
+            // every request on preview .. View will be increased
+            $this->bookRepository->increaseBookViewById($book->id);
+
+            //$link = storage_path('app/pdfs/') . $bookUrl;
+
+            $this->dispatchAndShowPreviews($bookUrl,$book->title_en,$book->title_ar,$book->free);
+
+        }
+
+        return redirect()->back()->with(['error' => trans('word.no-file')]);
+    }
+
+
+    /**
+     * @param $bookUrl
+     * @return creating on the fly a link with 10 pages of a pdf file of a book
+     */
+    public function getFirstTenPagesForPaidBooks($bookId,$bookUrl)
+    {
+        $book = $this->bookRepository->model->where(['url' => $bookUrl,'id'=> $bookId])->first();
+
+        // every request on preview .. View will be increaseds
+        $this->bookRepository->increaseBookViewByUrl($bookUrl);
+
+        $this->dispatchAndShowPreviews($bookUrl,$book->title_en,$book->title_ar,$book->free);
+
+    }
+
+
+    /**
+     * @param $bookId
+     * @param $authId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getCreateNewOrder($bookId, $authId)
+    {
+
+        if ($this->purchaseRepository->checkOrderExists($bookId, $authId)) {
+
+            return redirect()->back()->with(['error' => trans('word.error-order-repeated')]);
+        }
+
+        if ($this->purchaseRepository->createNewOrder($bookId, $authId)) {
+
+            return redirect()->back()->with(['success' => trans('word.success-order-created')]);
+
+        }
+
+        return redirect()->back()->with(['error' => trans('word.error-order-created')]);
+
+    }
+
+    /**
+     * Dispatch Job for createBookPreview + returning the response of the output to create PDF Preview for free and 10 pages of the paid
+     * @param $bookUrl
+     * @param $title_en
+     * @param $title_ar
+     * @param $free
+     * @return mixed
+     */
+    function dispatchAndShowPreviews($bookUrl,$title_en,$title_ar,$free) {
+
+        $outPut = $this->dispatch(new CreateChapterPreview($bookUrl,$title_en,$title_ar,$free));
+
+        $fileOutput = file_get_contents($outPut);
+
+        return Response::make($fileOutput, 200, [
+
+            'Content-Type'        => 'application/pdf',
+            'Content-Disposition' => 'inline; ' . $bookUrl,
+
+        ]);
+    }
+
+    /**
+     * add report abuse within the admin interfrace
+     * @return string
+     */
+    function getCreateNewReportAbuse ($userId,$bookId) {
+
+        $checkReportAbuse = DB::table('book_report')->where(['book_id' => $bookId, 'user_id' => $userId])->first();
+
+        if (is_null($checkReportAbuse)) {
+
+            $reportAbuse = DB::table('book_report')->insert([
+                'book_id' => $bookId,
+                'user_id' => $userId,
+                'created_at' => Carbon::now(),
+            ]);
+
+            if ($reportAbuse) {
+                return redirect()->back()->with(['success' => trans('word.success-book-report')]);
+            }
+
+        }
+
+        return redirect()->back()->with(['error' => trans('word.error-book-report')]);
+    }
 
 }

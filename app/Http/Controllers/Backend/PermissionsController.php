@@ -45,7 +45,7 @@ class PermissionsController extends AbstractController
 
         $permission = $this->permissionRepository->model->create($request->all());
 
-        $role = $this->roleRepository->model->where('name','=', 'Admin')->first();
+        $role = $this->roleRepository->model->where('name', '=', 'Admin')->first();
 
         $role->perms()->sync([$permission->id], false);
 
@@ -68,17 +68,25 @@ class PermissionsController extends AbstractController
 
         $permission = $this->permissionRepository->model->find($id);
         $permission->update($request->all());
-
+        $permission->save();
         return redirect()->action('Backend\PermissionsController@index')->with(['success' => 'messages.success.permission_update']);
     }
 
     public function destroy($id)
     {
-        $permission = $this->permissionRepository->model->find($id)->first();
 
-        $permission->delete();
+        $permission = $this->permissionRepository->model->where('id', '=', $id)->first();
 
-        return redirect()->action('Backend\PermissionsController@index')->with(['success' => 'messages.success.permission_delete']);
+        $role = $this->roleRepository->model->where('name', '=', 'Admin')->first();
+
+        $role->perms()->sync([$permission->id], false);
+
+        if ($permission->delete()) {
+            return redirect()->action('Backend\PermissionsController@index')->with(['success' => 'messages.success.permission_delete']);
+
+        }
+        return redirect()->action('Backend\PermissionsController@index')->with(['error' => 'messages.error.permission_delete']);
+
     }
 
 }
