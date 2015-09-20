@@ -27,21 +27,25 @@
 
         <div class="form-group">
 
+            {!! Form::label('permissions', trans('word.general.permissions')) !!}
             <div class="row">
 
-                {!! Form::label('permissions', trans('word.general.permissions')) !!}
-
                 @foreach($permissions as $permission)
-                    <div class="col-lg-2">
-                        <div class="checkbox">
+                    <div class="col-lg-3">
+                        <div class="col-lg-2">
+                            <div class="checkbox">
+                                <label>
+                                    {!! Form::checkbox('perms[]', $permission->id) !!}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-10 well-material-grey-100">
                             {{ $permission->display_name }}
-                            <label>
-                                {!! Form::checkbox('perms[]', $permission->id) !!}
-                            </label>
                         </div>
                     </div>
                 @endforeach
             </div>
+
         </div>
 
         @include('backend.partials.buttons.form_btn_create')

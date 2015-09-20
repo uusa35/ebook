@@ -17,8 +17,10 @@
     <div class="panel-body">
 
         @section('titlebar')
-            <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\BooksController@create') }}"><i class="fa fa-plus"></i></a>
-            @stop
+            <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\BooksController@create') }}"
+               title="{{ trans('word.general.book_create') }}">
+                <i class="fa fa-plus"></i></a>
+        @stop
 
         <div class="row">
             <div class="col-xs-12">
@@ -47,9 +49,9 @@
                                         <tr style="background-color:#E0E0E0;">
                                             <th class="hidden-xs">{{ trans('word.general.id') }}</th>
                                             <th>{{ trans('word.general.title') }}</th>
-                                            <th>{{ trans('word.general.total-pages') }}</th>
+                                            <th>{{ trans('word.general.total_pages') }}</th>
                                             <th>{{ trans('word.general.free') }}</th>
-                                            <th>{{ trans('word.general.created-at') }}</th>
+                                            <th>{{ trans('word.general.created_at') }}</th>
                                             <th>{{ trans('word.general.view') }}</th>
                                             <th>{{ trans('word.general.add') }}</th>
                                             <th>{{ trans('word.general.active') }}</th>
@@ -64,7 +66,8 @@
                                             <tr>
                                                 <td class="hidden-xs">{{ $book->id }}</td>
                                                 <td>
-                                                    <a href="{{ action('Backend\BooksController@show', $book->id) }}"> {!!
+                                                    <a href="{{ action('Backend\BooksController@show', $book->id) }}">
+                                                        {!!
                                                         $book->title
                                                         !!} </a>
                                                 </td>
@@ -79,21 +82,36 @@
                                                     <span> {{ $book->created_at->format('Y-m-d') }} </span>
                                                 </td>
                                                 <td>
-                                                    <a class="{{ Config::get('button.btn-view') }}" href="{{ action('Backend\BooksController@show', $book->id) }}"><i class="fa fa-xs fa-eye"></i></a>
+                                                    <a class="{{ Config::get('button.btn-view') }}"
+                                                       href="{{ action('Backend\BooksController@show', $book->id) }}"
+                                                       title="{{ trans('word.general.view') }}">
+                                                        <i class="fa fa-xs fa-eye"></i>
+                                                    </a>
                                                 </td>
                                                 <td>
-                                                    <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\ChaptersController@create',['book_id' => $book->id]) }}" data-toggle="tooltip"  title="Add Chapter"><i class="fa fa-xs fa-plus"></i></a>
+                                                    <a class="{{ Config::get('button.btn-create') }}"
+                                                       title="{{ trans('word.general.add_chapter') }}"
+                                                       href="{{ action('Backend\ChaptersController@create',['book_id' => $book->id]) }}">
+                                                        <i class="fa fa-xs fa-plus"></i>
+                                                    </a>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}" href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->user->id,$book->active]) }}">
+                                                    <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}"
+                                                       title="{{ ($book->active) ? trans('word.general.active') : trans('word.general.not_active') }}"
+                                                       href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->user->id,$book->active]) }}">
                                                         <i class="fa fa-xs {{ ($book->active) ? 'fa-times' : 'fa-check' }}"></i>
                                                     </a>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a class="{{ Config::get('button.btn-edit') }}" href="{{ action('Backend\BooksController@edit',$book->id) }}"><i class="fa fa-edit"></i></a>
+                                                    <a class="{{ Config::get('button.btn-edit') }}"
+                                                       title="{{ trans('word.general.edit') }}"
+                                                       href="{{ action('Backend\BooksController@edit',$book->id) }}"><i
+                                                                class="fa fa-edit"></i></a>
                                                 </td>
                                                 <td class="text-center">
-                                                    <button type="button" class="{{ Config::get('button.btn-delete') }}" data-toggle="modal"
+                                                    <button type="button" class="{{ Config::get('button.btn-delete') }}"
+                                                            title="{{ trans('word.general.delete') }}"
+                                                            data-toggle="modal"
                                                             data-target="#myModal" href="">
                                                         <i class="fa fa-trash-o"></i>
                                                     </button>
@@ -108,7 +126,7 @@
                                     <div class="alert alert-warning"
                                          role="alert">
                                         <i class="fa fa-2x fa-info-circle fa-fw"></i>
-                                        {{ trans('word.general.no-books-found') }}</div>
+                                        {{ trans('word.general.no_books_found') }}</div>
                                 @endif
                             </div>
 

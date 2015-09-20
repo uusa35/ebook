@@ -6,6 +6,7 @@ use App\Src\Role\RoleRepository;
 use App\Src\Permission\PermissionRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Laracasts\Flash\Flash;
 
 class RolesController extends AbstractController
@@ -24,11 +25,7 @@ class RolesController extends AbstractController
         $this->roleRepository = $roleRepository;
         $this->permissionRepository = $permissionRepository;
         $this->userRepository = $userRepository;
-        $this->titles = [
-            'index' => trans('word.general.roles'),
-            'create' => trans('word.general.role_create'),
-            'edit' => trans('word.general.role_edit'),
-        ];
+
     }
 
     public function index()
@@ -42,6 +39,7 @@ class RolesController extends AbstractController
 
     public function create()
     {
+        \Auth::user()->canDo('BeforeCreate',[]);
         $this->getPageTitle('create');
         $permissions = $this->permissionRepository->model->all();
 
@@ -77,6 +75,7 @@ class RolesController extends AbstractController
 
     public function update(Request $request, $id)
     {
+
         $this->validate($request, array('name' => 'required', 'display_name' => 'required'));
 
         $role = $this->roleRepository->model->find($id);

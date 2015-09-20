@@ -25,7 +25,7 @@ class AuthUserCollectData
     public function handle($request, Closure $next)
     {
 
-
+//dd(\Cache::get('Module.Admin'));
         if (!\Cache::has('role')) {
 
             $authUserRole = $request->user()->roles()->first();
@@ -47,18 +47,27 @@ class AuthUserCollectData
 
 
             /*
-             * 'Permission.user_edit' => [List of Permissions]
+             * 'Permission.Admin' => [List of Permissions]
              * */
             \Cache::put('Permission.' . $authUserRole->name, array_values($permissionsList), 0);
+
+            /*
+             * 'Permission.role_edit' => role_edit
+             * */
+            foreach ($permissions as $perm) {
+
+                \Cache::put('Permission.' . $perm->name, $perm->name, 0);
+
+            }
 
 
             \Session::put('roles', str_random(16));
 
             // roles => 'rand'
             // role = Admin
-            \Cache::put('role',$authUserRole->name, 1);
+            \Cache::put('role', $authUserRole->name, 1);
             // role.Admin = Admin
-            \Cache::put('role.'.$authUserRole->name,$authUserRole->name, 1);
+            \Cache::put('role.' . $authUserRole->name, $authUserRole->name, 1);
 
         }
 

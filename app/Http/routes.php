@@ -58,11 +58,14 @@ Route::group(['prefix' => 'frontend'], function () {
  * ▂ ▃ ▅ ▆ █ Backend  █ ▆ ▅ ▃ ▂
  ***************************************************************************************************/
 /*
- * Active Middleware to check the user is active or not
- * CollectData Middleware to gather all information about the Authenticated user and all his permissions for the Backend
+ * - Active Middleware :
+ * to check the user is active or not
+ * - CollectData Middleware :
+ * to gather all information about the Authenticated user and all his permissions for the Backend
  * collectData will create cache that will last for One Minute
- *
- *
+ * - ModuleAccess Middleware :
+ * to check the Module.Users is within the array of cache .. if so it will go to the Users Module and so on
+ * - PermissionAccess
  * ::: Roles :::
  * Admin Role : create + edit + delete
  * Editor Role : edit
@@ -70,13 +73,14 @@ Route::group(['prefix' => 'frontend'], function () {
  *
  * ::: Permissions ::: (the module itself)
  * Admin : Books Module + Users Module + Roles Module + Permissions Module ... and so on
- * Editor :
+ *
+ * Editor : still Miss
  *
  * **** still one middleware is missing to check if the user has the right to edit his own books and other staff !!!!!
  *
  *
  * */
-Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collectData']], function () {
+Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collectData' => ['only' => 'index']]], function () {
 
 
     /***************************************************************************************************

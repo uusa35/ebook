@@ -21,30 +21,39 @@ class BeforeAccessModule
     {
 
         // Cached within the Middleware CollectData for a authenticated user
+        /*
+         *
+         * 1- get the Route Name then make sure it's the Index of the Module
+         * 2- to make sure the Module is stored within the cache and assigned to the current authenticated user
+         * */
 
-        $routeName = explode('.', \Route::currentRouteName(), 3);
+        $requestedRouteName = explode('.', \Route::currentRouteName(), 3);
 
-        if (count($routeName) > 1) {
-            \Session::put('module', ucfirst($routeName[1]));
+        if (count($requestedRouteName) > 1 && $requestedRouteName[2] === 'index') {
+
+            $moduleEncrypted = \Crypt::encrypt(ucfirst($requestedRouteName[1]));
+
+            $moduleDecrypted = \Crypt::decrypt($moduleEncrypted);
+
+            \Session::put('module', $moduleEncrypted);
+
+            $role = \Cache::get('role');
+
+            $array = (\Cache::get('Module.' . $role));
+
+            if (in_array($moduleDecrypted, $array, true)) {
+
+                return $next($request);
+
+            }
+            dd('blocked cookie here');
         }
 
-        //$permName = $routeName[2];
-        $role = \Cache::get('role');
-        $array = (\Cache::get('Module.' . $role));
-        //dd($array);
+        /*
+         * to the next level which is permission middleware
+         * */
+        return $next($request);
 
-        //dd(\Session::get('module'));
-
-        if (in_array(\Session::get('module'), $array, true)) {
-
-            return $next($request);
-        }
-
-        //Auth::logout();
-
-        dd('blocked cookie here');
-        /*return redirect('home')->with(['error' => 'messages.error.access_denied'])
-            ->withCookie(Cookie::make('blocked', Crypt::encrypt('blocked'), '1'));*/
 
     }
 }

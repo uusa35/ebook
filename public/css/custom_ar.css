@@ -1,9 +1,22 @@
+.wrapper{
+ background-color: white !important;
+}
 
+.main-header>.navbar {
+ margin-left: 0px !important;
+}
 
+.sidebar {
+ min-height: 1000px !important;
+}
 .navbar .nav > li > .dropdown-menu {
  right: -4px;
 }
 
+.main-header .navbar-custom-menu, .main-header .navbar-right {
+ float: left !important;
+ margin-left: 130px;
+}
 .main-sidebar {
  right: 0px !important;
 }

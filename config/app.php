@@ -142,6 +142,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         'Zizaco\Entrust\EntrustServiceProvider',
         'Intervention\Image\ImageServiceProvider',
@@ -220,6 +221,7 @@ return [
         'Flash'     => 'Laracasts\Flash\Flash',
         'PDF'      => 'Barryvdh\Snappy\Facades\SnappyPdf',
         'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
+        'Gate' => Illuminate\Support\Facades\Gate::class,
 
     ],
 

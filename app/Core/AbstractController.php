@@ -26,7 +26,7 @@ class AbstractController extends Controller
 
     public function isAdmin()
     {
-        if (\Cache::get('Admin')) {
+        if (\Cache::get('role') === 'Admin') {
             return true;
         }
 
@@ -36,7 +36,17 @@ class AbstractController extends Controller
     public function isEditor()
     {
 
-        if (\Cache::get('Editor')) {
+        if (\Cache::get('role') === 'Editor') {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isAuthor()
+    {
+
+        if (\Cache::get('role') === 'Author') {
             return true;
         }
 

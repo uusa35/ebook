@@ -7,6 +7,18 @@
 @stop
 
 <div class="panel-body">
-    this is dashbaord
+    <ol>
+        <li>how many users.</li>
+        <li>how many favorites.</li>
+        <li>how many books.</li>
+        <li>how many followers.</li>
+        <li>how many views for all related books.</li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
+
 </div>
 @endsection

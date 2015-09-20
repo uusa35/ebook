@@ -22,12 +22,12 @@
         <thead>
         <tr>
             <th>id</th>
-            <th>{{ trans('word.name_en') }}</th>
-            <th>{{ trans('word.name_ar') }}</th>
-            <th>{{ trans('word.email') }}</th>
-            <th>{{ trans('word.role') }}</th>
-            <th>{{ trans('word.edit') }}</th>
-            <th>{{ trans('word.activation') }}</th>
+            <th>{{ trans('word.general.name_en') }}</th>
+            <th>{{ trans('word.general.name_ar') }}</th>
+            <th>{{ trans('word.general.email') }}</th>
+            <th>{{ trans('word.general.role') }}</th>
+            <th>{{ trans('word.general.edit') }}</th>
+            <th>{{ trans('word.general.activation') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -45,15 +45,20 @@
                 </td>
 
 
-                <td width="50"><a class="{{ Config::get('button.btn-edit') }}"
-                                  href="{{ action('Backend\UsersController@edit', $user->id) }}"><i
+                <td width="50">
+                    <a class="{{ Config::get('button.btn-edit') }}"
+                       title="{{ trans('word.general.edit') }}"
+                       href="{{ action('Backend\UsersController@edit', $user->id) }}"><i
                                 class="fa fa-xs fa-edit"></i></a>
                 </td>
                 <td width="50">
-                    {!! Form::open(['action' => ['Backend\UsersController@postChangeActiveStatus', $user->id,$user->active], 'method' => 'post']) !!}
+                    {!! Form::open(['action' => ['Backend\UsersController@postChangeActiveStatus',
+                    $user->id,$user->active], 'method' => 'post']) !!}
 
-                    <button type="submit" class=" {{ ($user->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active') }}"><i
-                                class="fa fa-xs fa-check"></i></button>
+                    <button type="submit"
+                            title="{{ ($user->active) ? trans('word.general.not_active') : trans('word.general.active') }}"
+                            class=" {{ ($user->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active') }}">
+                        <i class="fa fa-xs fa-check"></i></button>
                     {!! Form::close() !!}
                 </td>
             </tr>
