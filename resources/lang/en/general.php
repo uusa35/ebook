@@ -2,7 +2,7 @@
 
 return [
     
-    'general' => [
+
         'home'                  => 'Home',
         'admin'                 => 'Admin',
         'login'                 => 'login',
@@ -220,6 +220,6 @@ return [
         'permission_create' => 'Create Permission',
         'back_to_site' => 'Main Page'
 
-    ],
+
 
 ];

@@ -1,31 +1,21 @@
 @extends('backend.layouts.dashboard')
 
 @section('content')
-    <div class="row">
 
-        <div class="col-lg-6 col-md-6 col-lg-offset-3">
-            <div class="panel panel-default">
-
-                <div class="panel-heading">
-                    {{ trans('word.edit').trans('word.ads') }}
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4">
+                <img class="img-responsive thumbnail" src="{{ asset('images/uploads/ads/large/'.$ad->ads) }}" alt=""/>
+            </div>
+            <div class="col-lg-6 col-lg-offset-3">
+                {!! Form::open(['action'=>['Backend\AdsController@update',$id],'method'=>'put','files'=>'true'],['class'=>'form-horizontal']) !!}
+                {!! Form::hidden('id',$id) !!}
+                <div class="form-group">
+                    {!! Form::label('ads',trans('general.ad')) !!}
+                    {!! Form::file('ads',null,['class'=>'form-control','placeholder'=>trans('general.ad')]) !!}
                 </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-4 col-lg-offset-4">
-                            <img class="img-responsive thumbnail" src="{{ $ad->url }}" alt=""/>
-                        </div>
-                    </div>
-                    {!! Form::open(['action'=>['Backend\AdController@update',$id],'method'=>'put','files'=>'true'],['class'=>'form-horizontal']) !!}
-                    {!! Form::hidden('id',$id) !!}
-                    <div class="form-group">
-                        {!! Form::label('name_ar',trans('word.category-ar')) !!}
-                        {!! Form::file('url',['class'=>'form-control','placeholder'=>trans('word.category-ar')]) !!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::submit(trans('word.save'),['class'=>'btn btn-success form-control']) !!}
-                    </div>
-                    {!! Form::close() !!}
-                </div>
+                @include('backend.partials.buttons.form_btn_update')
+                {!! Form::close() !!}
             </div>
         </div>
 

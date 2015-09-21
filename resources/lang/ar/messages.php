@@ -13,5 +13,8 @@ return [
     'error' => [
         'general_message' => 'خطأ بالنظام ـ لم تتم العملية بنجاح',
         'edit_user' => 'error occurred'
+    ],
+    'info' => [
+        'no_books_found' => 'لا توجد كتب بهذه القائمة',
     ]
 ];

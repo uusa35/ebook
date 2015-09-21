@@ -14,14 +14,13 @@ use Illuminate\Support\Str;
 class AbstractImageService
 {
 
-
     public function CreateImage($currentImage, $folderName, $thumbResize, $largeResize)
     {
 
 
         $fileName = $currentImage->getClientOriginalName();
 
-        $fileName = rand(0,10000) . '' . $fileName;
+        $fileName = rand(0, 10000) . '' . $fileName;
 
         $realPath = $currentImage->getRealPath();
 

@@ -49,7 +49,7 @@ Route::group(['prefix' => 'frontend'], function () {
      *                                          Report
      *
      ***************************************************************************************************/
-    Route::get('/report/{user}/{book}',['uses'=>'BookController@getCreateNewReportAbuse']);
+    Route::get('/report/{user}/{book}', ['uses' => 'BookController@getCreateNewReportAbuse']);
 
 
 });
@@ -80,7 +80,7 @@ Route::group(['prefix' => 'frontend'], function () {
  *
  *
  * */
-Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collectData' => ['only' => 'index']]], function () {
+Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collectData']], function () {
 
 
     /***************************************************************************************************
@@ -111,40 +111,32 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
          ***************************************************************************************************/
         Route::resource('books', 'Backend\BooksController');
         Route::resource('chapters', 'Backend\ChaptersController');
-        Route::get('/activation/{bookId}/{userId}/{activeStatus}','Backend\BooksController@getChangeActivationBook');
-        Route::get('/books/chapters/pdf/{chapterId}/{chapterUrl}',['as'=>'backend.books.chapters.pdf.preview','uses'=>'Backend\ChaptersController@getPdfFile']);
+        Route::get('/activation/{bookId}/{userId}/{activeStatus}', 'Backend\BooksController@getChangeActivationBook');
+        Route::get('/books/chapters/pdf/{chapterId}/{chapterUrl}',
+            ['as' => 'backend.books.chapters.pdf.preview', 'uses' => 'Backend\ChaptersController@getPdfFile']);
         /***************************************************************************************************
          * Comments Module
          ***************************************************************************************************/
         Route::resource('comments', 'Backend\CommentsController');
-
-    });
-
-
-    //==================
-
-
-    Route::group(['prefix' => 'categories'], function () {
-
-        Route::group(['middleware' => 'access:Categories'], function () {
+        /***************************************************************************************************
+         *                                          Ads
+         *
+         ***************************************************************************************************/
+        Route::resource('ads', 'Backend\AdsController');
+        /***************************************************************************************************
+         *                                          Categories
+         *
+         ***************************************************************************************************/
+        Route::group(['prefix' => 'categories'], function () {
 
             Route::resource('field', 'Backend\FieldCategoryController', ['except' => 'delete']);
 
             Route::resource('lang', 'Backend\LangCategoryController', ['except' => 'delete']);
+
         });
 
 
     });
-
-
-    /***************************************************************************************************
-     *                                          Ads
-     *
-     ***************************************************************************************************/
-    Route::group(['middleware' => 'access:Books'], function () {
-        Route::resource('ads', 'Backend\AdController');
-    });
-
 
     /***************************************************************************************************
      * Contact Us

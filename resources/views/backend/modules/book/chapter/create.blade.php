@@ -1,16 +1,22 @@
 @extends('backend.layouts.dashboard')
 
+@section('scripts')
+    @parent
+    @include('scripts.tinymce')
+@stop
+
+
 @section('content')
     <div class="panel-body">
 
         {!! Form::open(['action'=>'Backend\ChaptersController@store','method' => 'post', 'files'=>'true'], ['class'=>'form-horizontal']) !!}
         {!! Form::hidden('book_id',$bookId) !!}
         <div class="form-group">
-            {!! Form::label('title',trans('word.general.title')) !!}
-            {!! Form::text('title', null, ['class' => 'form-control','placeholder'=> trans('word.general.title')]) !!}
+            {!! Form::label('title',trans('general.title')) !!}
+            {!! Form::text('title', null, ['class' => 'form-control','placeholder'=> trans('general.title')]) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('body', trans('word.general.content'), ['class' => 'control-label']) !!}*
+            {!! Form::label('body', trans('general.content'), ['class' => 'control-label']) !!}*
             {!! Form::textarea('body', null, ['class' => 'form-control editor']) !!}
         </div>
 
@@ -18,10 +24,5 @@
 
     </div>
 
-@stop
-
-@section('scripts')
-    @parent
-    @include('scripts.tinymce')
 @stop
 

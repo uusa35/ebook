@@ -160,12 +160,12 @@
                             class="fa fa-fw fa-cogs"></i><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="{{ URL::to('/') }}">{{ trans('word.general.back_to_site') }}</a>
+                        <a href="{{ URL::to('/') }}">{{ trans('general.back_to_site') }}</a>
                     </li>
                     <li class="divider"></li>
                     <li><a href="javascript:void(0)">Separated link</a></li>
                     <li><a href="/lang/{{ (App::getLocale() === 'ar') ? 'en' : 'ar' }}">
-                            {{ (App::getLocale() === 'ar') ? trans('word.general.english') : trans('word.general.arabic')  }}
+                            {{ (App::getLocale() === 'ar') ? trans('general.english') : trans('general.arabic')  }}
                         </a></li>
                 </ul>
             </li>

@@ -16,10 +16,17 @@ use Illuminate\Support\Facades\Session;
 class AbstractController extends Controller
 {
 
+    public $requestedRoute;
     public $titles;
+
+    public function __construct()
+    {
+
+    }
 
     public function getPageTitle($title)
     {
+        $title = \Config::get('title.' . $title);
         return Session::put('title', trans($title));
     }
 

@@ -35,7 +35,8 @@ class BeforeAccessModule
 
             $moduleDecrypted = \Crypt::decrypt($moduleEncrypted);
 
-            \Session::put('module', $moduleEncrypted);
+            \Session::put('module', $moduleDecrypted);
+            \Cache::put('module',$moduleDecrypted,120);
 
             $role = \Cache::get('role');
 

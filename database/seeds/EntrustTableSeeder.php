@@ -34,7 +34,7 @@ class EntrustTableSeeder extends Seeder {
 		$userRole->save();
 
 		$user = User::where('email', '=', 'admin@email.com')->first();
-		$user->roles()->attach($admin->id);
+		//$user->roles()->attach($admin->id);
 
 		$user1 = User::where('email', '=', 'editor@email.com')->first();
 		//$user1->attachRole($editor);
@@ -58,12 +58,16 @@ class EntrustTableSeeder extends Seeder {
 
 		$permissions = [
 			// Modules
-			'Users','Roles','Permissions','Books','Chapters','Comments','Messages','Contactus','Blog','Gallery',
+			'Users','Roles','Permissions','Books','Chapters','Comments','Messages','Contactus','Blog','Gallery','Ads',
 			// Modules Permissions
-			'user_create','user_edit','user_delete',
-			'role_create','role_edit','role_delete','permission_create','permission_edit','permission_delete',
+			'user_create','user_edit','user_change','user_delete',
+			'role_create','role_edit','role_change','role_delete',
+			'permission_create','permission_edit','permission_change','permission_delete',
 			'book_create','book_edit','book_delete','book_change','chapter_create','chapter_edit','chapter_delete','chapter_change',
-			'blog_create','blog_edit','blog_delete','gallery_create','gallery_edit','gallery_delete'
+			'blog_create','blog_edit','blog_delete', 'blog_change',
+			'gallery_create','gallery_edit','gallery_delete', 'gallery_change',
+			'ad_create','ad_edit','ad_delete', 'ad_change'
+
 		];
 
 		foreach($permissions as $permission) {

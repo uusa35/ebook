@@ -10,7 +10,7 @@ class UsersTableSeeder extends Seeder {
 	{
 		//DB::table('users')->truncate();
 
-		factory('App\Src\User\User',1)->create();
+		factory('App\Src\User\User',3)->create();
 
 
 	}

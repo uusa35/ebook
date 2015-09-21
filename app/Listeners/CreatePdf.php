@@ -42,6 +42,7 @@ class CreatePdf implements ShouldQueue
 
         $body = $this->cleanBody($event->chapter->body);
 
+        //dd($body);
 
         $body = '<div style="border: 1px dotted #d7d7d7 !important;">'. $body .'</div>';
 

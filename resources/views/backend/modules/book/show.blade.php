@@ -15,8 +15,10 @@
     {!! Breadcrumbs::render('book_chapter') !!}
 
 @section('titlebar')
-    <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\ChaptersController@create') }}"><i
+    @can('create')
+    <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\ChaptersController@create',['book_id'=>$book->id]) }}"><i
                 class="fa fa-plus"></i></a>
+    @endcan
 @endsection
 
 <div class="panel-body">

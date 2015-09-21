@@ -17,7 +17,7 @@ $factory->define('App\Src\User\User', function ($faker) {
         return [
             'name_en' => $faker->name,
             'name_ar' => $faker->country,
-            'email' => "admin@email.com",
+            'email' => "user".$faker->numberBetween(0,9)."@email.com",
             'active' => 1,
             'password' => Hash::make("admin"),
             'avatar' => 'http://lorempixel.com/150/150/sports'
@@ -98,11 +98,11 @@ $factory->define('App\Src\Book\BookMeta', function ($faker) {
 
 $factory->define('App\Src\Advertisement\Advertisement', function ($faker) {
     return [
-        'url' => '/images/uploads/ads/ads.png'
+        'ads' => '/images/uploads/ads/ads.png'
     ];
 });
 
-for ($i = 0; $i <= 23; $i++) {
+for ($i = 1; $i <= 23; $i++) {
     /*DB::table('user_roles')->insert([
         'user_id' => '1',
         'role_id' => rand(1, 3)
@@ -114,7 +114,7 @@ for ($i = 0; $i <= 23; $i++) {
     ]);
 
     DB::table('permission_role')->insert([
-        'permission_id' => $i,
+        'permission_id' => $i+1,
         'role_id' => 1
     ]);
 

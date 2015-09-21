@@ -6,25 +6,34 @@
  * Time: 9:12 AM
  */
 return [
-    'books' => [
-        'index' => 'word.general.books',
-        'create' => 'word.general.book_create',
-        'edit' => 'word.general.book_edit',
+    'book' => [
+        'index' => 'general.books',
+        'create' => 'general.book_create',
+        'edit' => 'general.book_edit',
+        'show' => 'general.book_show'
     ],
-    'users' => [
-        'index' => 'word.general.users',
-        'create' => 'word.general.user_create',
-        'edit' => 'word.general.user_edit',
+    'user' => [
+        'index' => 'general.users',
+        'create' => 'general.user_create',
+        'edit' => 'general.user_edit',
     ],
-    'permissions' => [
-        'index' => 'word.general.permissions',
-        'create' => 'word.general.permission_create',
-        'edit' => 'word.general.permission_edit'
+    'permission' => [
+        'index' => 'general.permissions',
+        'create' => 'general.permission_create',
+        'edit' => 'general.permission_edit'
     ],
-    'roles' => [
-        'index' => 'word.general.roles',
-        'create' => 'word.general.role_create',
-        'edit' => 'word.general.role_edit',
+    'role' => [
+        'index' => 'general.roles',
+        'create' => 'general.role_create',
+        'edit' => 'general.role_edit',
+    ],
+    'dashboard' => [
+        'index' => 'general.dashboard',
+    ],
+    'ad' => [
+        'index' => 'general.ads',
+        'create' => 'general.ad_create',
+        'edit' => 'general.ad_edit',
     ],
 
 ];

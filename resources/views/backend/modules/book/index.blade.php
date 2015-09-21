@@ -17,9 +17,12 @@
     <div class="panel-body">
 
         @section('titlebar')
+            @can('create')
             <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\BooksController@create') }}"
-               title="{{ trans('word.general.book_create') }}">
-                <i class="fa fa-plus"></i></a>
+               title="{{ trans('general.book_create') }}">
+                {!! Config::get('button.icon-create')!!}
+            </a>
+            @endcan
         @stop
 
         <div class="row">
@@ -28,10 +31,10 @@
                 <!-- START CONTENT ITEM -->
                 <ul class="nav nav-tabs btn-material-blue-grey-400">
                     <li id="tab-1" class="" href="#step1"><a href="#step1" data-toggle="tab"><i
-                                    class="fa fa-aw fa-book"></i>&nbsp;{{ trans('word.general.volumes') }} </a></li>
+                                    class="fa fa-aw fa-book"></i>&nbsp;{{ trans('general.volumes') }} </a></li>
                     @if(Cache::get('Module.Admin'))
                         <li id="tab-2"><a href="#step2" data-toggle="tab"><i
-                                        class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('word.general.report') }}
+                                        class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.report') }}
                             </a></li>
                     @endif
                 </ul>
@@ -47,17 +50,17 @@
                                     <table class="table table-striped table-order" id="booksTable">
                                         <thead>
                                         <tr style="background-color:#E0E0E0;">
-                                            <th class="hidden-xs">{{ trans('word.general.id') }}</th>
-                                            <th>{{ trans('word.general.title') }}</th>
-                                            <th>{{ trans('word.general.total_pages') }}</th>
-                                            <th>{{ trans('word.general.free') }}</th>
-                                            <th>{{ trans('word.general.created_at') }}</th>
-                                            <th>{{ trans('word.general.view') }}</th>
-                                            <th>{{ trans('word.general.add') }}</th>
-                                            <th>{{ trans('word.general.active') }}</th>
-                                            <th>{{ trans('word.general.edit') }}</th>
+                                            <th class="hidden-xs">{{ trans('general.id') }}</th>
+                                            <th>{{ trans('general.title') }}</th>
+                                            <th>{{ trans('general.chapters') }}</th>
+                                            <th>{{ trans('general.free') }}</th>
+                                            <th>{{ trans('general.created_at') }}</th>
+                                            <th>{{ trans('general.view') }}</th>
+                                            <th>{{ trans('general.add') }}</th>
+                                            <th>{{ trans('general.active') }}</th>
+                                            <th>{{ trans('general.edit') }}</th>
                                             @if(Cache::get('Module.Admin'))
-                                                <th>{{ trans('word.general.delete') }}</th>
+                                                <th>{{ trans('general.delete') }}</th>
                                             @endif
                                         </tr>
                                         </thead>
@@ -84,38 +87,49 @@
                                                 <td>
                                                     <a class="{{ Config::get('button.btn-view') }}"
                                                        href="{{ action('Backend\BooksController@show', $book->id) }}"
-                                                       title="{{ trans('word.general.view') }}">
-                                                        <i class="fa fa-xs fa-eye"></i>
+                                                       title="{{ trans('general.view') }}">
+                                                        {!! Config::get('button.icon-view') !!}
                                                     </a>
                                                 </td>
                                                 <td>
+                                                    {{-- Notice that you can not create Chapter if you don't have permission to Access the book --}}
+                                                    @can('edit')
                                                     <a class="{{ Config::get('button.btn-create') }}"
-                                                       title="{{ trans('word.general.add_chapter') }}"
+                                                       title="{{ trans('general.add_chapter') }}"
                                                        href="{{ action('Backend\ChaptersController@create',['book_id' => $book->id]) }}">
-                                                        <i class="fa fa-xs fa-plus"></i>
+                                                        {!! Config::get('button.icon-create') !!}
                                                     </a>
+                                                    @endcan
                                                 </td>
                                                 <td class="text-center">
+                                                    @can('change')
                                                     <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}"
-                                                       title="{{ ($book->active) ? trans('word.general.active') : trans('word.general.not_active') }}"
+                                                       title="{{ ($book->active) ? trans('general.active') : trans('general.not_active') }}"
                                                        href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->user->id,$book->active]) }}">
-                                                        <i class="fa fa-xs {{ ($book->active) ? 'fa-times' : 'fa-check' }}"></i>
+                                                        {!! ($book->active) ? Config::get('button.icon-not-active') :
+                                                        Config::get('icon-active') !!}
                                                     </a>
+                                                    @endcan
                                                 </td>
                                                 <td class="text-center">
+                                                    @can('edit')
                                                     <a class="{{ Config::get('button.btn-edit') }}"
-                                                       title="{{ trans('word.general.edit') }}"
-                                                       href="{{ action('Backend\BooksController@edit',$book->id) }}"><i
-                                                                class="fa fa-edit"></i></a>
+                                                       title="{{ trans('general.edit') }}"
+                                                       href="{{ action('Backend\BooksController@edit',$book->id) }}">
+                                                        {!! Config::get('button.icon-edit') !!}
+                                                    </a>
+                                                    @endcan
                                                 </td>
                                                 <td class="text-center">
+                                                    @can('delete')
                                                     <button type="button" class="{{ Config::get('button.btn-delete') }}"
-                                                            title="{{ trans('word.general.delete') }}"
+                                                            title="{{ trans('general.delete') }}"
                                                             data-toggle="modal"
-                                                            data-target="#myModal" href="">
-                                                        <i class="fa fa-trash-o"></i>
+                                                            data-target="#myModal">
+                                                        {!! Config::get('button.icon-delete') !!}
                                                     </button>
                                                     @include('backend.partials._delete_modal')
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -126,7 +140,7 @@
                                     <div class="alert alert-warning"
                                          role="alert">
                                         <i class="fa fa-2x fa-info-circle fa-fw"></i>
-                                        {{ trans('word.general.no_books_found') }}</div>
+                                        {{ trans('general.no_books_found') }}</div>
                                 @endif
                             </div>
 
@@ -142,12 +156,12 @@
                                         <table class="table table-striped table-order">
                                             <thead>
                                             <tr>
-                                                <th class="hidden-xs">{{ trans('word.general.id') }}</th>
-                                                <th>{{ trans('word.general.subject') }}</th>
-                                                <th>{{ trans('word.general.sender') }}</th>
-                                                <th>{{ trans('word.general.status') }}</th>
-                                                <th>{{ trans('word.general.remove') }}</th>
-                                                <th>{{ trans('word.general.created-at') }}</th>
+                                                <th class="hidden-xs">{{ trans('general.id') }}</th>
+                                                <th>{{ trans('general.subject') }}</th>
+                                                <th>{{ trans('general.sender') }}</th>
+                                                <th>{{ trans('general.status') }}</th>
+                                                <th>{{ trans('general.remove') }}</th>
+                                                <th>{{ trans('general.created-at') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -179,7 +193,7 @@
                                         </table>
                                     @else
                                         <div class="alert alert-warning"
-                                             role="alert">{{ trans('word.general.no-books-found') }}</div>
+                                             role="alert">{{ trans('messages.info.no_books_found') }}</div>
                                     @endif
                                 </div>
                             </div>

@@ -1,13 +1,11 @@
 <?php namespace App\Http\Controllers\Backend;
 
 use App\Core\AbstractController;
-use App\Http\Controllers\Controller;
 use App\Src\Role\RoleRepository;
 use App\Src\Permission\PermissionRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Laracasts\Flash\Flash;
 
 class RolesController extends AbstractController
 {
@@ -31,7 +29,7 @@ class RolesController extends AbstractController
     public function index()
     {
         //$roles = $this->role->pushCriteria(new RolesWithPermissions())->paginate(10);
-        $this->getPageTitle('index');
+        $this->getPageTitle('role.index');
         $roles = $this->roleRepository->model->with('users', 'perms')->get();
 
         return view('backend.modules.roles.index', compact('roles'));
@@ -39,8 +37,8 @@ class RolesController extends AbstractController
 
     public function create()
     {
-        \Auth::user()->canDo('BeforeCreate',[]);
-        $this->getPageTitle('create');
+        $this->getPageTitle('role.create');
+
         $permissions = $this->permissionRepository->model->all();
 
         return view('backend.modules.roles.create', compact('permissions'));
@@ -62,7 +60,7 @@ class RolesController extends AbstractController
 
     public function edit($id)
     {
-        $this->getPageTitle('edit');
+        $this->getPageTitle('role.edit');
 
         $role = $this->roleRepository->model->find($id);
 
@@ -76,15 +74,21 @@ class RolesController extends AbstractController
     public function update(Request $request, $id)
     {
 
-        $this->validate($request, array('name' => 'required', 'display_name' => 'required'));
+        if (Gate::allows('edit')) {
 
-        $role = $this->roleRepository->model->find($id);
+            $this->validate($request, array('name' => 'required', 'display_name' => 'required'));
 
-        $role->update($request->all());
+            $role = $this->roleRepository->model->find($id);
 
-        $role->savePermissions($request->get('perms'));
+            $role->update($request->all());
 
-        return redirect()->action('Backend\RolesController@index')->with(['success' => 'messeages.success.role_update']);
+            $role->savePermissions($request->get('perms'));
+
+            return redirect()->action('Backend\RolesController@index')->with(['success' => 'messeages.success.role_edit']);
+        }
+
+        return redirect()->action('Backend\RolesController@index')->with(['error' => 'messeages.error.role_edit']);
+
     }
 
     public function destroy($id)

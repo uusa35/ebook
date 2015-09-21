@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class UpdateUserRequest extends Request {
+class UpdateUser extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -11,7 +11,7 @@ class UpdateUserRequest extends Request {
 	 */
 	public function authorize()
 	{
-		return true;
+		return \Gate::allows('edit');
 	}
 
 	/**
@@ -22,7 +22,7 @@ class UpdateUserRequest extends Request {
 	public function rules()
 	{
 		return [
-
+			'name_en' => 'required'
 		];
 	}
 

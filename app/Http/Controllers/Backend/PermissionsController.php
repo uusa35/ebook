@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Src\Permission\PermissionRepository;
 use App\Src\Role\RoleRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Gate;
 
 class PermissionsController extends AbstractController
 {
@@ -20,7 +22,7 @@ class PermissionsController extends AbstractController
 
     public function index()
     {
-        $this->getPageTitle(\Config::get('title.permissions.index'));
+        $this->getPageTitle('permission.index');
 
         $permissions = $this->permissionRepository->model->all();
 
@@ -30,7 +32,7 @@ class PermissionsController extends AbstractController
     public function create()
     {
 
-        $this->getPageTitle(\Config::get('title.permissions.create'));
+        $this->getPageTitle('permission.create');
 
         return view('backend.modules.permissions.create');
     }
@@ -54,7 +56,7 @@ class PermissionsController extends AbstractController
 
     public function edit($id)
     {
-        $this->getPageTitle(\Config::get('title.permissions.edit'));
+        $this->getPageTitle('permission.edit');
 
         $permission = $this->permissionRepository->model->find($id);
 

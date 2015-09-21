@@ -3,21 +3,21 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><i class="fa fa-lg fa-warning"></i> {!! trans('word.general.delete') !!}</h4>
+                <h4 class="modal-title"><i class="fa fa-lg fa-warning"></i> {!! trans('general.delete') !!}</h4>
             </div>
             <div class="modal-body">
-                <p>{!! trans('word.general.are-u-sure') !!}</p>
+                <p>{!! trans('messages.check.are_u_sure') !!}</p>
             </div>
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3">
                         <div class="col-lg-6">
-                            <button type="button" class="btn btn-success" data-dismiss="modal">{!! trans('word.close') !!}</button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal">{!! trans('close') !!}</button>
                         </div>
                         <div class="col-lg-6">
                             {!! Form::open(['action' => ['Backend\BooksController@destroy',$book->id],'method'=>'DELETE'],['class'=>'form-horizontal']) !!}
                             <div class="form-group">
-                                <button type="submit" class="btn btn-danger">{!! trans('word.general.delete') !!}</button>
+                                <button type="submit" class="btn btn-danger">{!! trans('general.delete') !!}</button>
                             </div>
                             {!! Form::close() !!}
                         </div>

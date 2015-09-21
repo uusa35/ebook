@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class EditBook extends Request
+class UpdateBook extends Request
 {
 
     /**

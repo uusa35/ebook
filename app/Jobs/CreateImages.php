@@ -19,11 +19,11 @@ class CreateImages extends Job implements SelfHandling
     public $thumbSizes;
     public $largeSizes;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
+    /*
+    * Abstract CreateImages Job (Model , $request, FolderName, [FieldsName] , [Default thumbnail sizes] , [Default large sizes]
+    * */
+
+
     public function __construct(
         Model $model,
         Request $request,
@@ -49,6 +49,7 @@ class CreateImages extends Job implements SelfHandling
     public function handle()
     {
 
+
         foreach ($this->fieldNames as $currentRequestImage) {
 
             if ($this->request->hasFile($currentRequestImage)) {
@@ -63,11 +64,15 @@ class CreateImages extends Job implements SelfHandling
                     $this->model->update([$this->folderName => strtolower($fileName)]);
 
                     $this->model->save();
+
+                    return true;
                 }
                 else {
-                    dd('pics create image job error');
+                    abort(404,'CreateImages error');
                 }
             }
+
+            abort(404,'CreateImages after if');
         }
 
     }

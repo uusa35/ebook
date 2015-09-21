@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Core\AbstractController;
+use App\Jobs\CreateImages;
 use App\Jobs\UpdateAd;
 use App\Src\Advertisement\Advertisement;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class AdController extends Controller
+class AdsController extends AbstractController
 {
     public $ad;
-    public function __construct(Advertisement $ad) {
+
+    public function __construct(Advertisement $ad)
+    {
         $this->ad = $ad;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,6 +25,7 @@ class AdController extends Controller
      */
     public function index()
     {
+        $this->getPageTitle('ad.index');
 
         $allAdsStored = $this->ad->take(2)->get();
 
@@ -35,6 +39,8 @@ class AdController extends Controller
      */
     public function create()
     {
+        $this->getPageTitle('ad.create');
+
         return view('backend.modules.ad.create');
     }
 
@@ -51,7 +57,7 @@ class AdController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
@@ -62,41 +68,48 @@ class AdController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function edit($id)
     {
-        $ad = $this->ad->where('id','=',$id)->first();
-        return view('backend.modules.ad.edit',['id'=>$id,'ad'=> $ad]);
+        $this->getPageTitle('ad.edit');
+
+        $ad = $this->ad->where('id', '=', $id)->first();
+
+        return view('backend.modules.ad.edit', compact('id', 'ad'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function update(Requests\EditAd $request)
     {
-        $ad = $this->ad->where('id','=',$request->get('id'))->first();
+        $ad = $this->ad->where('id', '=', $request->get('id'))->first();
 
-        $updateAd = $this->dispatch(new UpdateAd($ad,$request));
+        /*
+      * Abstract CreateImages Job (Model , $request, FolderName, [FieldsName] , [Default thumbnail sizes] , [Default large sizes]
+      * */
 
-        if($updateAd) {
+        $updateAd = $this->dispatch(new CreateImages($ad, $request, 'ads', ['ads'], ['200', '50'], ['200', '50']));;
 
-            return redirect()->back()->with(['success'=>trans('sucess.ad-updated')]);
+        if ($updateAd) {
+
+            return redirect()->action('Backend\AdsController@index')->with(['success' => trans('sucess.ad-updated')]);
 
         }
 
-        return redirect()->back()->with(['error'=>trans('sucess.ad-not-updated')]);
+        return redirect()->action('Backend\AdsController@index')->with(['error' => trans('sucess.ad-not-updated')]);
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)

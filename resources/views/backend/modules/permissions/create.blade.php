@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="panel-heading">
+    <div class="panel-body">
         {!! Form::open(['action' => 'Backend\PermissionsController@store']) !!}
 
         <div class="form-group">

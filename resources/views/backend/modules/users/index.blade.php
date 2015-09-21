@@ -14,7 +14,11 @@
 @section('content')
     {!! Breadcrumbs::render('users') !!}
 @section('titlebar')
-
+    @can('create')
+    <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\UsersController@create') }}"
+       title="{{ trans('general.user_create') }}">
+        {!! Config::get('button.icon-create')!!}</a>
+    @endcan
 @stop
 
 <div class="panel-body">
@@ -23,7 +27,7 @@
         <tr>
             <th>id</th>
             <th>{{ trans('word.general.name_en') }}</th>
-            <th>{{ trans('word.general.name_ar') }}</th>
+            <th>{{ trans('word.general.phone') }}</th>
             <th>{{ trans('word.general.email') }}</th>
             <th>{{ trans('word.general.role') }}</th>
             <th>{{ trans('word.general.edit') }}</th>
@@ -36,7 +40,7 @@
 
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name_en }}</td>
-                <td>{{ $user->name_ar }}</td>
+                <td>{{ $user->phone }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
                     @foreach($user->roles as $role)
@@ -46,12 +50,15 @@
 
 
                 <td width="50">
+                    @can('edit')
                     <a class="{{ Config::get('button.btn-edit') }}"
                        title="{{ trans('word.general.edit') }}"
                        href="{{ action('Backend\UsersController@edit', $user->id) }}"><i
                                 class="fa fa-xs fa-edit"></i></a>
+                    @endcan
                 </td>
                 <td width="50">
+                    @can('change')
                     {!! Form::open(['action' => ['Backend\UsersController@postChangeActiveStatus',
                     $user->id,$user->active], 'method' => 'post']) !!}
 
@@ -60,6 +67,7 @@
                             class=" {{ ($user->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active') }}">
                         <i class="fa fa-xs fa-check"></i></button>
                     {!! Form::close() !!}
+                    @endcan
                 </td>
             </tr>
         @endforeach

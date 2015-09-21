@@ -69,6 +69,8 @@ class ChaptersController extends Controller
         if ($chapter) {
 
             event(new CreateChapter($chapter));
+
+            return redirect()->action('Backend\BooksController@show',$request->get('book_id'))->with(['success' => 'messages.success.chapter_create']);
         }
 
     }

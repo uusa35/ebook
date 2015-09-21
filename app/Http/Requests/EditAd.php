@@ -14,13 +14,7 @@ class EditAd extends Request
      */
     public function authorize()
     {
-        if(Session::get('role.admin')) {
-
-            return true;
-
-        }
-
-        return false;
+        return true;
     }
 
     /**
@@ -31,7 +25,7 @@ class EditAd extends Request
     public function rules()
     {
         return [
-            'url' => 'required|image'
+            'ads' => 'required|image'
         ];
     }
 }

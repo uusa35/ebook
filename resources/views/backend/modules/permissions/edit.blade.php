@@ -14,6 +14,10 @@
             {!! Form::label('display_name', 'Display name') !!}
             {!! Form::text('display_name', null, ['class' => 'form-control']) !!}
         </div>
+        <div class="form-group">
+            {!! Form::label('level', 'level') !!}
+            {!! Form::select('level', ['1'=>'1','2'=>'2'],$permission->level, ['class' => 'form-control']) !!}
+        </div>
 
         <div class="form-group">
             {!! Form::label('description', 'Description') !!}

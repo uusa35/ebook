@@ -2,13 +2,14 @@
 
 use App\Core\AbstractController;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\CreateUser;
+use App\Http\Requests\UpdateUser;
 use App\Jobs\CreateImages;
 use App\Jobs\CreateUserAvatar;
 use App\Repositories\Criteria\User\UsersWithRoles;
 use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
+use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
@@ -32,11 +33,6 @@ class UsersController extends AbstractController
     {
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
-        $this->titles = [
-            'index' => 'Users',
-            'create' => 'Create User',
-            'edit' => 'Edit User'
-        ];
     }
 
     /**
@@ -44,7 +40,7 @@ class UsersController extends AbstractController
      */
     public function index()
     {
-        $this->getPageTitle('index');
+        $this->getPageTitle('user.index');
         $users = $this->userRepository->model->with('roles')->get();
         return view('backend.modules.users.index', compact('users'));
     }
@@ -55,7 +51,7 @@ class UsersController extends AbstractController
     public function create()
     {
 
-        $this->getPageTitle('create');
+        $this->getPageTitle('user.create');
         $roles = $this->roleRepository->model->all();
         return view('backend.modules.users.create', compact('roles'));
     }
@@ -65,8 +61,11 @@ class UsersController extends AbstractController
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(CreateUserRequest $request)
+    public function store(CreateUser $request)
     {
+
+        $request->merge(['active' , 1]);
+
         $user = $this->userRepository->model->create($request->all());
 
         if ($request->get('role')) {
@@ -84,9 +83,10 @@ class UsersController extends AbstractController
      */
     public function edit($id)
     {
-        $this->getPageTitle('edit');
+        $this->getPageTitle('user.edit');
 
         $user = $this->userRepository->model->with('roles')->find($id);
+
 
         $userListRoleIds = $user->roles->Lists('name');
 
@@ -99,22 +99,22 @@ class UsersController extends AbstractController
      * @param $id
      * @param UpdateUserRequest $request
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UpdateUser $request, $id)
     {
 
         $user = $this->userRepository->model->find($id);
 
-        try {
-            $user->update([
-                'name_en' => $request->get('name_en'),
-                'name_ar' => $request->get('name_ar'),
-            ]);
 
-        } catch (Exception $e) {
+        $user->update([
+            'name_en' => $request->get('name_en'),
+            'phone' => $request->get('phone'),
+        ]);
 
-            return redirect()->action('Backend\UsersController@index')->with('error',
-                trans('word.messages.error.avatar'));
-
+        if ($request->hasFile('avatar')) {
+            /*
+            * Abstract CreateImages Job (Model , $request, FolderName, FieldsName , Default thumbnail sizes , Default large sizes
+            * */
+            $this->dispatch(new CreateImages($user, $request, 'avatar', ['avatar']));
         }
 
 
@@ -127,12 +127,8 @@ class UsersController extends AbstractController
             $user->roles()->sync([]);
         }
 
-        /*
-         * Abstract CreateImages Job (Model , $request, FolderName, FieldsName , Default thumbnail sizes , Default large sizes
-         * */
-        $this->dispatch(new CreateImages($user, $request, 'avatar', ['avatar']));
+        return redirect()->action('Backend\UsersController@index')->with(['success' => trans('messages.success.user_edit')]);
 
-        return redirect()->action('Backend\UsersController@index')->with(['success' => trans('messages.success.edit_user')]);
     }
 
     /**

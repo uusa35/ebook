@@ -13,5 +13,5 @@ class Advertisement extends Model
 
     public $table = 'ads';
 
-    public $fillable = ['url'];
+    public $fillable = ['ads'];
 }

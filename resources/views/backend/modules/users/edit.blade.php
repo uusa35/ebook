@@ -19,15 +19,14 @@
             {!! Form::password('password', ['class' => 'form-control','disabled'=> 'disabled']) !!}
         </div>
 
-
-        <div class="form-group">
-            {!! Form::label('name_ar', trans('word.name_ar')) !!}
-            {!! Form::text('name_ar', null, ['class' => 'form-control']) !!}
-        </div>
-
         <div class="form-group">
             {!! Form::label('name_en', trans('word.name_en')) !!}
             {!! Form::text('name_en', null, ['class' => 'form-control']) !!}
+        </div>
+
+        <div class="form-group">
+            {!! Form::label('phone', trans('word.phone')) !!}
+            {!! Form::text('phone', null, ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">

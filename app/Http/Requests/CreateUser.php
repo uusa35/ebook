@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class CreateUserRequest extends Request {
+class CreateUser extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -11,7 +11,7 @@ class CreateUserRequest extends Request {
 	 */
 	public function authorize()
 	{
-		return true;
+		return \Gate::allows('create');
 	}
 
 	/**
@@ -24,6 +24,7 @@ class CreateUserRequest extends Request {
 		return [
 			'email' => 'required|unique:users',
 			'password' => 'required|confirmed',
+			'name_en' => 'required',
 		];
 	}
 

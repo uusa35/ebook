@@ -38,7 +38,7 @@ class DashboardController extends AbstractController
     {
         if (\Cache::has('role')) {
 
-            $this->getPageTitle('title');
+            $this->getPageTitle('dashboard.index');
             return view('backend.modules.users.dashboard.index');
         }
         Auth::logout();

@@ -3,7 +3,7 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
-            {{ trans('word.ads') }}
+            {{ trans('general.ads') }}
         </div>
         <div class="panel-body">
             <div class="row">
@@ -12,10 +12,10 @@
                         <thead>
                         <tr style="background-color:#E0E0E0;">
                             <th class="hidden-xs">&nbsp;</th>
-                            <th>{{ trans('word.id') }}</th>
-                            <th>{{ trans('word.image') }}</th>
-                            <th>{{ trans('word.created-at') }}</th>
-                            <th>{{ trans('word.edit') }}</th>
+                            <th>{{ trans('general.id') }}</th>
+                            <th>{{ trans('general.image') }}</th>
+                            <th>{{ trans('general.created_at') }}</th>
+                            <th>{{ trans('general.edit') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -26,13 +26,17 @@
                                     <span>{{ $ad->name }}</span>
                                 </td>
                                 <td>
-                                    <img  class="img-responsive" src="{{ $ad->url  }}" alt="" style="width:10%; height:auto;"/>
+                                    <img  class="img-responsive" src="{{ asset('images/uploads/ads/large/'.$ad->ads) }}" alt="" style="width:50%; height:auto;"/>
                                 </td>
                                 <td>
                                     <span> {{ $ad->created_at->format('Y-m-d') }} </span>
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm" href="{{ action('Backend\AdController@edit',$ad->id) }}"><i class="fa fa-fw fa-sm fa-edit"></i></a>
+                                    @can('edit')
+                                    <a class="{{ Config::get('button.btn-edit') }}" href="{{ action('Backend\AdsController@edit',$ad->id) }}">
+                                        {!! Config::get('button.icon-edit') !!}
+                                        </a>
+                                    @endcan
                                 </td>
 
                             </tr>

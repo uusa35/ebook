@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Core\AbstractController;
 use App\Http\Requests;
 use App\Http\Requests\CreateBook;
-use App\Http\Requests\EditBook;
+use App\Http\Requests\UpdateBook;
 use App\Jobs\CreateBookCover;
 use App\Jobs\CreateCustomizedPreview;
-use App\Jobs\CreateImages;
 use App\Src\Book\BookHelpers;
 use App\Src\Book\BookRepository;
 use App\Src\Book\Chapter\ChapterRepository;
@@ -19,9 +18,9 @@ use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Gate;
+
 
 /**
  * Class AdminBookController
@@ -30,6 +29,7 @@ use Illuminate\Support\Facades\Session;
 class BooksController extends AbstractController
 {
 
+    public $gate;
     public $bookRepository;
     public $purchaseRepository;
     public $userRepository;
@@ -38,6 +38,7 @@ class BooksController extends AbstractController
     public $langCategory;
     public $chapterRepository;
     use BookHelpers;
+
 
     /**
      * @param BookRepository $book
@@ -58,6 +59,7 @@ class BooksController extends AbstractController
 
         //$this->middleware('EditorLimitAccess',['only'=>'edit','update']);
         //$this->middleware('AuthorLimitAccess',['except'=>'getActivationChangeStatus']);
+
         $this->bookRepository = $book;
         $this->fieldCategory = $fieldCategory;
         $this->langCategory = $langCategory;
@@ -75,19 +77,26 @@ class BooksController extends AbstractController
     public function index()
     {
 
-        $this->getPageTitle(\Config::get('title.books.index'));
+        //dd(\Cache::get('Module.Admin'));
+        //dd(Gate::allows('change'));
+
+        $this->getPageTitle('book.index');
 
         if (\Cache::get('Module.Admin') || \Cache::get('Module.Editor')) {
 
-            $books = $this->bookRepository->model->with('meta','user')->orderBy('created_at', 'desc')->get();
+            $books = $this->bookRepository->model->with('meta', 'user')->orderBy('created_at', 'desc')->get();
+
+            $booksReported = $this->bookRepository->getReportsAbuse();
 
             //$allCustomizedPreviews = $this->bookRepository->getCustomizedPreviews();
 
+        } elseif (\Cache::get('Module.Author')) {
+
+            $books = $this->bookRepository->model->where(['user_id' => Auth::id()])->with('meta', 'user')->orderBy('created_at', 'desc')->get();
+            $booksReported = [];
         }
 
         //$orders = $this->purchaseRepository->model->orderBy('created_at', 'desc')->with('book')->with('user')->get();
-
-        $booksReported = $this->bookRepository->getReportsAbuse();
 
         if ($books) {
 
@@ -97,7 +106,7 @@ class BooksController extends AbstractController
                     'booksReported' => $booksReported
                 ]);
         }
-        return redirect()->back()->with(['error' => trans('word.no-books')]);
+        return redirect()->back()->with(['error' => trans('messages.info.no_books_found')]);
 
     }
 
@@ -109,19 +118,28 @@ class BooksController extends AbstractController
      */
     public function create()
     {
-        $this->getPageTitle(\Config::get('title.books.create'));
 
-        $fieldsCategories = $this->fieldCategory->all();
+        $this->getPageTitle('book.create');
 
-        $langsCategories = $this->langCategory->all();
+        if (Gate::check('create')) {
 
-        $getLang = App()->getLocale();
+            $fieldsCategories = $this->fieldCategory->all();
 
-        $fieldsCategories = $fieldsCategories->lists('name_' . $getLang, 'id');
+            $langsCategories = $this->langCategory->all();
 
-        $langsCategories = $langsCategories->lists('name_' . $getLang, 'id');
+            $getLang = App()->getLocale();
 
-        return view('backend.modules.book.create', ['fieldsCategories' => $fieldsCategories, 'langsCategories' => $langsCategories]);
+            $fieldsCategories = $fieldsCategories->lists('name_' . $getLang, 'id');
+
+            $langsCategories = $langsCategories->lists('name_' . $getLang, 'id');
+
+            return view('backend.modules.book.create',
+                ['fieldsCategories' => $fieldsCategories, 'langsCategories' => $langsCategories]);
+        }
+
+        return redirect()->action('Backend\BooksController@index')->with(['error' => 'messages.error.book_create']);
+
+
     }
 
     /**
@@ -142,7 +160,13 @@ class BooksController extends AbstractController
             // create serial and update the book
             $serial = $this->createBookSerial($request->user()->id, $book->id);
 
-            $book->update(['serial' => $serial,'active'=> $active]);
+            $book->meta()->create([
+                'book_id' => $book->id,
+                'total_chapters' => 0,
+                'total_pages' => 0
+            ]);
+
+            $book->update(['serial' => $serial, 'active' => $active]);
 
             $book->save();
 
@@ -163,10 +187,15 @@ class BooksController extends AbstractController
      */
     public function show($id)
     {
-        $book = $this->bookRepository->model->where('id', '=', $id)->with('meta')->first();
-        $chapters = $this->chapterRepository->model->where(['book_id'=> $id])->get();
+        $this->getPageTitle('book.show');
 
-        return view('backend.modules.book.show', compact('book','chapters'));
+        $book = $this->bookRepository->model->where('id', '=', $id)->with('meta')->first();
+
+        \Session::put('book_id', $id);
+
+        $chapters = $this->chapterRepository->model->where(['book_id' => $id])->get();
+
+        return view('backend.modules.book.show', compact('book', 'chapters'));
 
     }
 
@@ -178,7 +207,7 @@ class BooksController extends AbstractController
      */
     public function edit($id)
     {
-        $this->getPageTitle(\Config::get('title.books.edit'));
+        $this->getPageTitle('book.edit');
 
         $fieldsCategories = $this->fieldCategory->all();
 
@@ -213,24 +242,28 @@ class BooksController extends AbstractController
      * create new pdf file
      * get the url of the new file and add to the request
      */
-    public function update(EditBook $request, $id)
+    public function update(UpdateBook $request, $id)
     {
-        $book = $this->bookRepository->model->find($id);
+        $book = $this->bookRepository->getById($id);
 
+        if (\Auth::user()->canDo('update', $book)) {
 
-        $this->CreateBookCover($request, $book);
+            $this->CreateBookCover($request, $book);
 
-        if (is_null($request->get('active'))) {
+            if (is_null($request->get('active'))) {
 
-            $request->merge(['active' => 0]);
-        } else {
-            $request->merge(['active' => 1]);
+                $request->merge(['active' => 0]);
+            } else {
+                $request->merge(['active' => 1]);
+            }
+
+            $book->update($request->except(['cover']));
+
+            return redirect()->action('Backend\BooksController@index')->with('success',
+                trans('messages.success.book_edit'));
         }
 
-        $book->update($request->except(['cover']));
-
-        return redirect()->action('Backend\BooksController@index')->with('success', trans('word.success-update'));
-
+        return redirect()->action('Backend\BooksController@index')->with('error', trans('messages.error.book_edit'));
     }
 
     /**
@@ -241,7 +274,13 @@ class BooksController extends AbstractController
      */
     public function destroy($id)
     {
-        if ($this->bookRepository->getById($id)->delete()) {
+        $book = $this->bookRepository->model->where(['id' => $id])->first();
+
+        if ($book->delete()) {
+
+
+            $book->meta()->delete();
+
 
             return redirect()->back()->with('success', trans('word.success-delete'));
         }

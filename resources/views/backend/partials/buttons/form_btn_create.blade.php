@@ -1,10 +1,10 @@
 <div class="form-group">
     <div class="row">
         <div class="col-lg-1">
-            {!! Form::submit(trans('word.general.create'), ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit(trans('general.create'), ['class' => 'btn btn-primary']) !!}
         </div>
         <div class="col-lg-1 col-lg-offset-1">
-            <a class="btn btn-danger" href="{{ URL::to('/backend') }}">{{ trans('word.general.cancel') }}</a>
+            <a class="btn btn-danger" href="{{ URL::to('/backend') }}">{{ trans('general.cancel') }}</a>
         </div>
     </div>
 
