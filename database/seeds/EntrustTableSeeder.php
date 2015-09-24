@@ -64,6 +64,7 @@ class EntrustTableSeeder extends Seeder {
 			'role_create','role_edit','role_change','role_delete',
 			'permission_create','permission_edit','permission_change','permission_delete',
 			'book_create','book_edit','book_delete','book_change','chapter_create','chapter_edit','chapter_delete','chapter_change',
+			'message_create','message_edit','message_delete', 'message_change',
 			'blog_create','blog_edit','blog_delete', 'blog_change',
 			'gallery_create','gallery_edit','gallery_delete', 'gallery_change',
 			'ad_create','ad_edit','ad_delete', 'ad_change'

@@ -1,41 +1,72 @@
 @extends('backend.layouts.dashboard')
 
+
+@section('scripts')
+    @parent
+    <script type="text/javascript">
+        $(function () {
+            $("#messages").DataTable();
+        });
+    </script>
+@endsection
+
 @section('content')
+    {!! Breadcrumbs::render('messages') !!}
 
-    <div class="col-lg-6 col-lg-offset-3">
-        @if (Session::has('error_message'))
-            <div class="alert alert-danger" role="alert">
-                {!! Session::get('error_message') !!}
-            </div>
-        @endif
-        @if($threads->count() > 0)
+@section('titlebar')
+    @can('create')
+    <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\MessagesController@create') }}"
+       title="{{ trans('general.message_create') }}">
+        {!! Config::get('button.icon-create')!!}
+    </a>
+    @endcan
+@stop
+<div class="panel-body">
 
+    @if($threads->count() > 0)
+
+        <table class="table" id="messages" style="color:#000000;">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ trans('general.subject') }}</th>
+                <th>{{ trans('general.body') }}</th>
+                <th>{{ trans('general.participants') }}</th>
+                <th>{{ trans('word.general.delete') }}</th>
+            </tr>
+            </thead>
+            <tbody>
             @foreach($threads as $thread)
-                <div class="panel {{ ($thread->isUnread($currentUserId) ? 'panel-info' : 'panel-default')}}">
-                    <div class="panel-heading">
+                <tr class="{{ ($thread->isUnread($currentUserId) ? 'alert-info' : 'alert-default')}}">
+                    <td>
+                        {!! link_to('backend/messages/' . $thread->id, $thread->id) !!}
+                    </td>
+                    <td class="">
+                        {!! link_to('backend/messages/' . $thread->id, $thread->subject) !!}
+                    </td>
+                    <td>
+                        {!! link_to('backend/messages/' . $thread->id,
+                        \Illuminate\Support\Str::limit($thread->latestMessage->body,30,'..more')) !!}
+                    </td>
+                    <td style="color: #000011;">
+                        <small>
+                            {!! $thread->participantsString(Auth::id(), ['name_'.App::getLocale('lang')])!!}
+                        </small>
+                    </td>
+                    <td>
 
-                        <h4 class="">{!! link_to('app/messages/' . $thread->id, $thread->subject) !!}</h4>
-
-                    </div>
-
-                    <div class="panel-body">
-                        <p id="thread_list_{{$thread->id}}_text">{!! $thread->latestMessage->body !!}</p>
-
-                        <p>
-                            <small><strong>Participants:</strong> {!! $thread->participantsString(Auth::id(),
-                                ['name_'.App::getLocale('lang')])
-                                !!}
-                            </small>
-                        </p>
-                    </div>
-                </div>
+                    </td>
+                </tr>
             @endforeach
+        </table>
 
-            {!! $threads->render() !!}
-        @else
-            <p>Sorry, no threads.</p>
 
-        @endif
+        {!! $threads->render() !!}
+    @else
+        <p>Sorry, no threads.</p>
 
-    </div>
+    @endif
+
+
+</div>
 @stop

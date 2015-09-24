@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Core\AbstractController;
 use Carbon\Carbon;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 use App\Services\PusherWrapper as Pusher;
 use App\Src\User\User;
 
-class MessagesController extends Controller
+class MessagesController extends AbstractController
 {
 
     /**
@@ -58,7 +58,7 @@ class MessagesController extends Controller
 
             Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
 
-            return redirect('app/messages');
+            return redirect()->action('Backend\MessagesController@show',$id);
         }
 
         // don't show the current user in list
@@ -125,7 +125,7 @@ class MessagesController extends Controller
 
         $this->oooPushIt($message);
 
-        return redirect('app/messages');
+        return redirect()->action('Backend\MessagesController@index');
     }
 
     /**
@@ -138,11 +138,13 @@ class MessagesController extends Controller
     {
         try {
             $thread = $this->thread->findOrFail($id);
+
         } catch (ModelNotFoundException $e) {
             Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
 
-            return redirect('app/messages');
+            return redirect()->action('Backend\MessagesController@index');
         }
+
 
         $thread->activateAllParticipants();
 
@@ -165,14 +167,18 @@ class MessagesController extends Controller
         $participant->last_read = new Carbon;
         $participant->save();
 
+
         // Recipients
         if (Input::has('recipients')) {
+
+
             $thread->addParticipants(Input::get('recipients'));
         }
 
         $this->oooPushIt($message);
 
-        return redirect('app/messages/' . $id);
+        //return 'here';
+        return redirect()->action('Backend\MessagesController@show',$id);
     }
 
     /**
@@ -189,7 +195,7 @@ class MessagesController extends Controller
             'thread_id' => $thread->id,
             'div_id' => 'thread_' . $thread->id,
             'sender_name' => $sender->first_name,
-            'thread_url' => route('messages.show', ['id' => $thread->id]),
+            'thread_url' => action('Backend\MessagesController@show', ['id' => $thread->id]),
             'thread_subject' => $thread->subject,
             'html' => view('backend.modules.messenger.html-message', compact('message'))->render(),
             'text' => str_limit($message->body, 50)

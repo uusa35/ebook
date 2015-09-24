@@ -18,6 +18,7 @@
         "intervention/image": "dev-master",
         "laravel/socialite": "^3.0@dev",
         "cmgmyr/messenger": "~2.0",
+        "pusher/pusher-php-server": "2.2.*",
         "barryvdh/laravel-httpcache": "0.2.x@dev",
         "barryvdh/laravel-ide-helper": "^2.1",
         "barryvdh/laravel-debugbar": "^2.0",

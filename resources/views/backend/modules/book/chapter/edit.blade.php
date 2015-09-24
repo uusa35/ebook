@@ -14,7 +14,7 @@
 
 @section('content')
 
-    {!! Breadcrumbs::render('books') !!}
+    {!! Breadcrumbs::render('book_edit') !!}
     <div class="panel-body">
 
 

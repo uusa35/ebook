@@ -123,20 +123,42 @@ Breadcrumbs::register('ads', function($breadcrumbs)
     $breadcrumbs->push(trans('general.ads'), action('Backend\AdsController@index'));
 });
 
-Breadcrumbs::register('book_create', function($breadcrumbs)
+Breadcrumbs::register('ad_create', function($breadcrumbs)
 {
     $breadcrumbs->parent('ads');
     $breadcrumbs->push(trans('general.ad_create'), action('Backend\AdsController@create'));
 });
-Breadcrumbs::register('book_edit', function($breadcrumbs)
+Breadcrumbs::register('ad_edit', function($breadcrumbs)
 {
     $breadcrumbs->parent('ads');
     $breadcrumbs->push(trans('general.ad_edit'), action('Backend\AdsController@edit'));
 });
 
-Breadcrumbs::register('book_chapter', function($breadcrumbs)
+Breadcrumbs::register('ad_show', function($breadcrumbs)
 {
     $breadcrumbs->parent('ads');
     $breadcrumbs->push(trans('general.ad_show'), action('Backend\AdsController@show'));
+});
+
+
+/*
+ * messages
+ * */
+Breadcrumbs::register('messages', function($breadcrumbs)
+{
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push(trans('general.messages'), action('Backend\MessagesController@index'));
+});
+
+Breadcrumbs::register('message_create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('messages');
+    $breadcrumbs->push(trans('general.message_create'), action('Backend\MessagesController@create'));
+});
+
+Breadcrumbs::register('message_show', function($breadcrumbs)
+{
+    $breadcrumbs->parent('messages');
+    $breadcrumbs->push(trans('general.message_show'), action('Backend\MessagesController@show'));
 });
 

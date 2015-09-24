@@ -24,11 +24,11 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>{{ trans('word.general.display_name') }}</th>
-            <th>{{ trans('word.general.name') }}</th>
-            <th>{{ trans('word.general.permission') }}</th>
-            <th>{{ trans('word.general.edit') }}</th>
-            <th>{{ trans('word.general.delete') }}</th>
+            <th>{{ trans('general.display_name') }}</th>
+            <th>{{ trans('general.name') }}</th>
+            <th>{{ trans('general.permission') }}</th>
+            <th>{{ trans('general.edit') }}</th>
+            <th>{{ trans('general.delete') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -39,8 +39,8 @@
                 <td>{{ $role->name }}</td>
                 <td>
                     @foreach($role->perms as $permission)
-                        <span class="label well-material-orange-600 "
-                              style="line-height: 2; border-radius: 5px;">{{ $permission->name }}</span>
+                        <span class="label small well-material-orange-600 "
+                              style="line-height: 2.5; border-radius: 7px;">{{ $permission->name }}</span>
                     @endforeach
                 </td>
                 <td width="80">

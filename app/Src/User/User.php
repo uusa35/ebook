@@ -2,6 +2,7 @@
 
 namespace App\Src\User;
 
+use Cmgmyr\Messenger\Traits\Messagable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, EntrustUserTrait;
+    use Authenticatable, Authorizable, CanResetPassword, EntrustUserTrait, Messagable;
 
     /**
      * The database table used by the model.
@@ -26,6 +27,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var string
      */
     protected $table = 'users';
+
+    public $localStrings = ['name_en','name_ar'];
 
     /**
      * The attributes that are mass assignable.

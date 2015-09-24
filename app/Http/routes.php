@@ -134,6 +134,24 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
             Route::resource('lang', 'Backend\LangCategoryController', ['except' => 'delete']);
 
         });
+        /***************************************************************************************************
+         *                                          Messages
+         *
+         ***************************************************************************************************/
+        Route::resource('messages','Backend\MessagesController');
+        //Route::group(['prefix' => 'backend'], function () {
+            /*Route::get('/', function () {
+                return 'working';
+            });*/
+           // Route::get('/', ['as' => 'messages.index', 'uses' => 'Backend\MessagesController@index']);
+            //Route::get('create', ['as' => 'messages.create', 'uses' => 'Backend\MessagesController@create']);
+            //Route::get('{id}/read', ['as' => 'messages.read', 'uses' => 'Backend\MessagesController@read']);
+            //Route::get('unread', ['as' => 'messages.unread', 'uses' => 'Backend\MessagesController@unread']);
+            //Route::post('/', ['as' => 'messages.store', 'uses' => 'Backend\MessagesController@store']);
+            //Route::get('{id}', ['as' => 'messages.show', 'uses' => 'Backend\MessagesController@show']);
+            //Route::put('{id}', ['as' => 'messages.update', 'uses' => 'Backend\MessagesController@update']);
+        //});
+
 
 
     });

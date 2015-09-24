@@ -29,6 +29,8 @@ class BeforeAccessModule
 
         $requestedRouteName = explode('.', \Route::currentRouteName(), 3);
 
+        //dd($requestedRouteName);
+
         if (count($requestedRouteName) > 1 && $requestedRouteName[2] === 'index') {
 
             $moduleEncrypted = \Crypt::encrypt(ucfirst($requestedRouteName[1]));
