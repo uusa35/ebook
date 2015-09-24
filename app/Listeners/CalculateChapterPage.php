@@ -41,8 +41,8 @@ class CalculateChapterPage implements ShouldQueue
         Session::put('total_pages',$pageCount);
 
         // update the database with total page count
-        //$event->book->meta->total_pages = $pageCount;
-        //$event->book->meta->save();
+        $event->chapter->update(['total_pages' => $pageCount]);
+        $event->chapter->save();
 
 
     }

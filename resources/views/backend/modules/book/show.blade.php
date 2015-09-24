@@ -12,7 +12,7 @@
 @stop
 
 @section('content')
-    {!! Breadcrumbs::render('book_chapter') !!}
+    {!! Breadcrumbs::render('book_show') !!}
 
 @section('titlebar')
     @can('create')

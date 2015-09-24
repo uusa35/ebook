@@ -2,6 +2,7 @@
 /node_modules
 /resources/assets/bower_components/*
 /public/images/uploads/*
+/public/images/uploads/avatar
 /AdminLTE-2.3.0
 Homestead.yaml
 .env

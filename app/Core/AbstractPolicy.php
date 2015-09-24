@@ -36,6 +36,7 @@ class AbstractPolicy
 
     public function create()
     {
+        //dd($this->userPermissions);
         if (in_array($this->moduleRequested . '_create', $this->userPermissions, true)) {
 
             return true;

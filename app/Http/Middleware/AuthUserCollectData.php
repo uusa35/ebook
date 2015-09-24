@@ -18,7 +18,8 @@ class AuthUserCollectData
      */
     public function handle($request, Closure $next)
     {
-        if (emptyArray(\Cache::get('role')) || is_null(\Cache::get('role'))) {
+
+        if (count(\Cache::get('role')) < 1 || is_null(\Cache::get('role'))) {
 
             $authUserRole = $request->user()->roles()->first();
 
@@ -63,7 +64,7 @@ class AuthUserCollectData
 
             return $next($request);
 
-        } elseif (\Cache::get('role')) {
+        } elseif (\Cache::get('role') && \Session::get('roles')) {
 
             return $next($request);
         }

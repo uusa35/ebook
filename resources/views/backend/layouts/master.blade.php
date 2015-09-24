@@ -9,42 +9,42 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+    <div class="wrapper">
 
 
-    @section('header')
-        @include('backend.partials.header')
-        <div class="col-lg-2">
-            @include('backend.partials.sidebar')
-        </div>
+        @section('header')
+            @include('backend.partials.header')
+            <div class="col-lg-2">
+                @include('backend.partials.sidebar')
+            </div>
 
-    @show
-
-
-    <div class="col-lg-10">
-        <hr>
-
-
-        @section('layout')
-            @yield('content')
         @show
 
 
-        <hr>
+        <div class="col-lg-10">
+            <hr>
+
+
+            @section('layout')
+                @yield('content')
+            @show
+
+
+            <hr>
+        </div>
+
+
+
+
+        @include('backend.partials.footer')
+
+
+        @section('scripts')
+            @include('scripts.allscripts')
+            <link rel="stylesheet" href="/css/flat.css"/>
+        @show
+
+
     </div>
-
-
-
-
-    @include('backend.partials.footer')
-
-
-    @section('scripts')
-        @include('scripts.allscripts')
-            {{--<link rel="stylesheet" href="/css/flat.css"/>--}}
-    @show
-
-
-</div>
 </body>
 </html>

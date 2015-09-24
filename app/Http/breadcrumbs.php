@@ -102,6 +102,12 @@ Breadcrumbs::register('book_edit', function($breadcrumbs)
     $breadcrumbs->push(trans('general.book_edit'), action('Backend\BooksController@edit'));
 });
 
+Breadcrumbs::register('book_show', function($breadcrumbs)
+{
+    $breadcrumbs->parent('books');
+    $breadcrumbs->push(trans('general.book_show'), action('Backend\BooksController@show'));
+});
+
 Breadcrumbs::register('book_chapter', function($breadcrumbs)
 {
     $breadcrumbs->parent('books');

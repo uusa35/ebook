@@ -1,11 +1,28 @@
 @extends('backend.layouts.dashboard')
 
+@section('styles')
+    @parent
+    <style type="text/css">
+        #myModal {
+            z-index: 9999999;
+        }
+    </style>
+@stop
 @section('scripts')
     @parent
     <script type="text/javascript">
         $(document).ready(function () {
             $('#booksTable').DataTable({
                 "order": [[0, "desc"]]
+            });
+            $("button[id^='delete-']").on('click', function () {
+                var btnId = $(this).attr('id');
+                var element = btnId.split("-", 2);
+                var btnId = element[1];
+                var action = $('#formDelete').attr('action');
+                var action = action.split('%', 2);
+                var action = (action[0] + btnId);
+                $('#formDelete').attr('action', action);
             });
         });
     </script>
@@ -123,18 +140,18 @@
                                                 <td class="text-center">
                                                     @can('delete')
                                                     <button type="button" class="{{ Config::get('button.btn-delete') }}"
+                                                            id="delete-{{$book->id}}"
                                                             title="{{ trans('general.delete') }}"
                                                             data-toggle="modal"
                                                             data-target="#myModal">
                                                         {!! Config::get('button.icon-delete') !!}
                                                     </button>
-                                                    @include('backend.partials._delete_modal')
                                                     @endcan
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        @include('backend.partials._delete_modal',['action'=> 'Backend\BooksController@destroy'])
                                         </tbody>
-
                                     </table>
                                 @else
                                     <div class="alert alert-warning"
@@ -203,15 +220,10 @@
                 </div>
 
                 <br>
-
             </div>
 
-
             <!-- END CONTENT ITEM -->
-
         </div>
     </div>
-
-
 @stop
 

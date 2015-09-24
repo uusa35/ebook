@@ -28,7 +28,7 @@
                         </div>
                     @show
 
-                        @yield('content')
+                    @yield('content')
 
                 </div>
 
@@ -38,4 +38,4 @@
     </div>
 
 
-@endsection
+@stop

@@ -57,8 +57,6 @@ class ChaptersController extends Controller
     public function store(Requests\CreateChapter $request)
     {
 
-        //dd($request->all());
-
         $chapter = $this->chapterRepository->model->create([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
@@ -70,7 +68,8 @@ class ChaptersController extends Controller
 
             event(new CreateChapter($chapter));
 
-            return redirect()->action('Backend\BooksController@show',$request->get('book_id'))->with(['success' => 'messages.success.chapter_create']);
+            return redirect()->action('Backend\BooksController@show',
+                $request->get('book_id'))->with(['success' => 'messages.success.chapter_create']);
         }
 
     }
@@ -94,7 +93,14 @@ class ChaptersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bookId = \Request::get('book_id');
+
+        $chapter = $this->chapterRepository->model->where(['id' => $id])->first();
+
+        if ($chapter) {
+
+            return view('backend.modules.book.chapter.edit', compact('chapter'));
+        }
     }
 
     /**
@@ -104,9 +110,26 @@ class ChaptersController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\UpdateChapter $request, $id)
     {
-        //
+
+        $chapter = $this->chapterRepository->model->where(['id' => $request->id])->first();
+
+        $request->merge([
+            'url' => rand(1, 9999) . str_random(10) . '.pdf',
+        ]);
+
+        $chapter->update($request->except('_token', '_method'));
+
+        if ($chapter) {
+
+            event(new CreateChapter($chapter));
+
+            return redirect()->action('Backend\BooksController@show',
+                $request->book_id)->with(['success' => 'messages.success.chapter_update']);
+        }
+        dd($chapter);
+
     }
 
     /**

@@ -3,10 +3,17 @@
 @section('scripts')
     @parent
     @include('scripts.tinymce')
+    {{--@include('scripts.trumbowyg')--}}
+@stop
+
+@section('styles')
+    @parent
+    {{--@include('styles.trumbowyg')--}}
 @stop
 
 
 @section('content')
+    {!! Breadcrumbs::render('books') !!}
     <div class="panel-body">
 
         {!! Form::open(['action'=>'Backend\ChaptersController@store','method' => 'post', 'files'=>'true'], ['class'=>'form-horizontal']) !!}
@@ -21,6 +28,7 @@
         </div>
 
         @include('backend.partials.buttons.form_btn_create')
+        {!! Form::close() !!}
 
     </div>
 

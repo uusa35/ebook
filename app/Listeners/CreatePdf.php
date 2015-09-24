@@ -42,13 +42,19 @@ class CreatePdf implements ShouldQueue
 
         $body = $this->cleanBody($event->chapter->body);
 
-        //dd($body);
-
         $body = '<div style="border: 1px dotted #d7d7d7 !important;">'. $body .'</div>';
 
         $this->pdf->setOption('encoding', 'UTF-8');
 
-        $this->pdf->generateFromHtml($body, $this->uploadPath . $event->chapter->url,['encoding'=>'UTF-8','images'=> true,'enable-external-links' => true]);
+        //dd($event->chapter->body);
+
+        $updated = $event->chapter->update(['body' => $body]);
+
+        $updated = $event->chapter->save();
+
+        //dd($updated);
+
+        $this->pdf->generateFromHtml($body, $this->uploadPath . $event->chapter->url,['encoding'=>'UTF-8','images'=> true,'enable-external-links' => true],true);
 
         return true;
     }
@@ -56,8 +62,11 @@ class CreatePdf implements ShouldQueue
 
     public function cleanBody ($body) {
 
-        $bodyContent = str_replace('../../..', public_path(), $body);
-        $bodyContent = str_replace('../../../../#', '#', $body);
+        //dd($body);
+        // http://ebook.app:8000/images/uploads/books/men6.jpg
+        $bodyContent = str_replace('../../images', '/home/vagrant/code/projects/ebook/public//images', $body);
+       //dd($bodyContent);
+        //$bodyContent = str_replace('../../../../#', '#', $body);
 
         return $bodyContent;
     }

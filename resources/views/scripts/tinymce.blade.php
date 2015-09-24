@@ -10,6 +10,8 @@
             ["save table contextmenu directionality emoticons template paste textcolor  directionality jbimages"]
         ],
         toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages | print preview media fullpage | forecolor backcolor emoticons | ltr rtl ",
-        relative_urls: true
+        relative_urls: true,
+        paste_data_images: true
     });
+
 </script>

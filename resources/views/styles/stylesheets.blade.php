@@ -1,4 +1,4 @@
-{{--@include('styles.fonts')--}}
+@include('styles.fonts')
 <link rel="stylesheet" href="/css/app.css"/>
 <link rel="stylesheet" href="/css/frontend.css"/>
 <link rel="stylesheet" href="/css/backend.css"/>
