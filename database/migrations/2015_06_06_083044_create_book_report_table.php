@@ -18,6 +18,7 @@ class CreateBookReportTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('book_id');
+            $table->integer('chapter_id');
             $table->timestamps();
         });
     }

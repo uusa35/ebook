@@ -11,7 +11,7 @@ class CreateUser extends Request {
 	 */
 	public function authorize()
 	{
-		return \Gate::allows('create');
+		return $this->checkAccessForEachPermission('user_create');
 	}
 
 	/**

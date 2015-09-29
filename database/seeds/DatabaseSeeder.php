@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
         'fields_categories',
         'langs_categories',
         'books',
-        'previews',
-        'book_previews',
+        'chapters',
+        'chapter_previews',
         'book_readers',
         'book_metas',
         'purchases',
@@ -42,7 +42,6 @@ class DatabaseSeeder extends Seeder
             $this->call('langsCategoriesTableSeeder');
             $this->call('BookMetasTableSeeder');
             $this->call('ContactusTableSeeder');
-            //$this->call('RolesTableSeeder');
             $this->call('AdvertisementTableSeeder');
             DB::statement('SET FOREIGN_KEY_CHECKS = 1');
         }

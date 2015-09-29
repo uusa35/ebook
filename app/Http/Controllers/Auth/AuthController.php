@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Core\AbstractController;
 use App\Src\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Laravel\Socialite\Facades\Socialite;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
-class AuthController extends Controller
+class AuthController extends AbstractController
 {
     /*
     |--------------------------------------------------------------------------
@@ -74,6 +76,41 @@ class AuthController extends Controller
         \Cache::flush();
         \Auth::logout();
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+    }
+
+
+    public function redirectToProvider()
+    {
+        return \Socialite::driver('facebook')->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+
+        $userSocilite = \Socialite::driver('facebook')->user();
+
+        $data = [
+            'name_en' => $userSocilite->name,
+            'email' => $userSocilite->email,
+            'password' => $userSocilite->token
+        ];
+
+        $user = User::where('email', '=', $userSocilite->email)->first();
+
+        if ($user) {
+
+           \ Auth::login($user);
+
+            return redirect('home');
+
+        } else {
+
+            \Auth::login(User::create($data));
+
+        }
+
+        redirect('home');
+
     }
 
 }

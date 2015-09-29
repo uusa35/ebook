@@ -12,7 +12,7 @@ class CreateInstructionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('instructions', function(Blueprint $table) {
+        Schema::create('conditions', function(Blueprint $table) {
             $table->increments('id');
             $table->string('title_ar');
             $table->string('title_en');
@@ -29,6 +29,6 @@ class CreateInstructionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('instructions');
+        Schema::drop('conditions');
     }
 }

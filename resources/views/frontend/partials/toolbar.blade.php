@@ -40,7 +40,7 @@
                         </a></li>
                     <li><a href="javascript:void(0)">Something else here</a></li>
                     <li class="divider"></li>
-                    <li><a href="javascript:void(0)">Separated link</a></li>
+                    <li><a href="/auth/logout">{{ trans('general.logout') }}</a></li>
                 </ul>
             </li>
             <li class="btn-material-blue"><a href="/auth/login"><i class="fa fa-fw fa-sign-in"></i> Login</a></li>

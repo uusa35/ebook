@@ -10,8 +10,10 @@ namespace App\Core;
 
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cache;
 
 class AbstractController extends Controller
 {
@@ -33,7 +35,10 @@ class AbstractController extends Controller
 
     public function isAdmin()
     {
-        if (\Cache::get('role') === 'Admin') {
+        if (Cache::get('role') === 'Admin') {
+
+            $this->getCountersForAdminAndEditor();
+
             return true;
         }
 
@@ -43,7 +48,10 @@ class AbstractController extends Controller
     public function isEditor()
     {
 
-        if (\Cache::get('role') === 'Editor') {
+        if (Cache::get('role') === 'Editor') {
+
+            $this->getCountersForAuthor();
+
             return true;
         }
 
@@ -53,7 +61,7 @@ class AbstractController extends Controller
     public function isAuthor()
     {
 
-        if (\Cache::get('role') === 'Author') {
+        if (Cache::get('role') === 'Author') {
             return true;
         }
 
@@ -63,13 +71,13 @@ class AbstractController extends Controller
     public function getUserRole()
     {
 
-        return \Cache::get('role');
+        return Cache::get('role');
 
     }
 
     public function isAdminOrEditor()
     {
-        if (\Cache::get('Admin') || \Cache::get('Editor')) {
+        if (Cache::get('Admin') || Cache::get('Editor')) {
 
             return true;
         }
@@ -79,9 +87,39 @@ class AbstractController extends Controller
 
     public function isOwner($userId)
     {
-        if ($userId === \Auth::id()) {
+        if ($userId === Auth::id()) {
             return true;
         }
         return false;
+    }
+
+    public function getCountersForAdminAndEditor() {
+
+        $counters = [
+            'users' => DB::table('users')->count('id'),
+            'books' => DB::table('books')->count('id'),
+            'reports' => DB::table('book_report')->count('id'),
+            'favorites' => DB::table('book_user')->count('id'),
+            'messages' => DB::table('messages')->count('id'),
+            'categories' => DB::table('fields_categories')->count('id')
+        ];
+
+        Cache::put('counters',$counters,120);
+
+    }
+
+    public function getCountersForAuthor () {
+
+        $counters = [
+
+            'books' => DB::table('books')->where(['author_id' => Auth::id()])->count('id'),
+            'reports' => DB::table('book_user')->where(['user_id'=> Auth::id()])->count('id'),
+            'favorites' => DB::table('book_user')->count('id'),
+            'messages' => DB::table('messages')->where(['user_id'=>Auth::id()])->count('id'),
+
+        ];
+
+        Cache::put('counters',$counters,120);
+
     }
 }

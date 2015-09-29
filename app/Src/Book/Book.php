@@ -46,7 +46,8 @@ class Book extends AbstractModel
         return $this->belongsToMany('App\Src\User\User', 'book_user');
     }
 
-    public function users_reports() {
+    public function users_reports()
+    {
 
         return $this->belongsToMany('App\Src\User\User', 'book_report');
     }
@@ -56,7 +57,8 @@ class Book extends AbstractModel
         return $this->hasOne('App\Src\Book\BookMeta');
     }
 
-    public function chapters() {
+    public function chapters()
+    {
         return $this->hasMany('App\Src\Book\Chapter\Chapter');
     }
 
@@ -84,32 +86,11 @@ class Book extends AbstractModel
             ->selectRaw('books.*, count(*) as book_count')
             ->with('meta')
             ->join('book_user', 'books.id', '=', 'book_user.book_id')
-            ->where('books.status','published')
+            ->where('books.status', 'published')
             ->groupBy('book_id')// responsible to get the sum of books returned
             ->orderBy('book_count', 'DESC')
             ->paginate($paginate);
     }
 
-    public function customizedPreviews($userId, $paginate = '10')
-    {
-
-        if (!$userId) {
-
-            return $this
-                ->selectRaw('books.*')
-                ->with('meta')
-                ->join('book_previews', 'books.id', '=', 'book_previews.book_id')
-                ->orderBy('book_previews.created_at', 'DESC')
-                ->paginate($paginate);
-        }
-
-        return $this
-            ->selectRaw('books.*')
-            ->with('meta')
-            ->join('book_previews', 'books.id', '=', 'book_previews.book_id')
-            ->where('book_previews.user_id', '=', $userId)
-            ->orderBy('book_previews.created_at', 'DESC')
-            ->paginate($paginate);
-    }
 
 }

@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\DB;
 
 $factory->define('App\Src\User\User', function ($faker) {
         return [
-            'name_en' => $faker->name,
-            'name_ar' => $faker->country,
+            'name' => $faker->name,
+            //'name_ar' => $faker->country,
             'email' => "user".$faker->numberBetween(0,9)."@email.com",
             'active' => 1,
             'password' => Hash::make("admin"),
@@ -26,7 +26,7 @@ $factory->define('App\Src\User\User', function ($faker) {
 
 $factory->define('App\Src\Book\Book', function ($faker) {
     return [
-        'user_id' => 1,
+        'author_id' => 1,
         'serial' => $faker->numberBetween(10000000, 9999999999),
         'cover' => 'cover.png',
         //'cover_en' => '',
@@ -41,7 +41,7 @@ $factory->define('App\Src\Book\Book', function ($faker) {
         //'description_ar' => 'تفاصيل الموضوع تفاصيل الموضوع',
         //'description_en' => $faker->paragraph(2),
         'active' => 1,
-        'free' => 0,
+        'free' => 1,
     ];
 });
 
@@ -120,7 +120,7 @@ for ($i = 1; $i <= 23; $i++) {
 
 }
 
-DB::table('instructions')->insert([
+DB::table('conditions')->insert([
     'title_ar' => 'this is title arabic',
     'title_en' => 'this is title english',
     'body_ar' => 'this is the content in arabic',

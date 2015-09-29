@@ -30,7 +30,7 @@
                                 <button type="submit" name="submit"
                                         class="btn btn-primary">{{ trans('word.general.login') }}</button>
                                 <a class="btn btn-info"
-                                   href="{{ url('/conditions') }}">{{ trans('word.general.register') }}</a>
+                                   href="{{ url('frontend/conditions') }}">{{ trans('word.general.register') }}</a>
                                 <a class="btn btn-material-purple-200"
                                    href="{{ url('/password/email') }}">{{ trans('word.general.forgot_password') }}</a>
 

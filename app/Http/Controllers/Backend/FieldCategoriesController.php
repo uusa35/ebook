@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCategory;
-use App\Src\Category\Lang\LangCategory;
+use App\Src\Category\Field\FieldCategory;
 use Illuminate\Http\Request;
 
-class LangCategoryController extends Controller
+class FieldCategoriesController extends Controller
 {
-    public $langCategory;
+    public $fieldCategory;
 
-    public function __construct(LangCategory $langCategory)
+    public function __construct(FieldCategory $fieldCategory)
     {
-        $this->langCategory = $langCategory;
+        $this->fieldCategory = $fieldCategory;
     }
 
     /**
@@ -23,9 +23,9 @@ class LangCategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->langCategory->all();
+        $categories = $this->fieldCategory->all();
 
-        return view('backend.modules.category.index', ['categories' => $categories]);
+        return view('backend.modules.category.field.index', ['categories' => $categories]);
     }
 
     /**
@@ -35,7 +35,7 @@ class LangCategoryController extends Controller
      */
     public function create()
     {
-        return view('backend.modules.category.create');
+        return view('backend.modules.category.field.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class LangCategoryController extends Controller
      */
     public function store(CreateCategory $request)
     {
-        $this->langCategory->create($request->except('_token'));
+        $this->fieldCategory->create($request->except('_token'));
 
         return redirect()->back()->with('success', trans('word.create-success-category'));
     }
@@ -70,9 +70,9 @@ class LangCategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = $this->langCategory->find($id);
+        $category = $this->fieldCategory->find($id);
 
-        return view('backend.modules.category.edit', ['category' => $category]);
+        return view('backend.modules.category.field.edit', ['category' => $category]);
     }
 
     /**
@@ -84,7 +84,7 @@ class LangCategoryController extends Controller
      */
     public function update($id, Request $request)
     {
-        $this->langCategory->where('id', '=', $id)->update([
+        $this->fieldCategory->where('id', '=', $id)->update([
             'name_ar' => $request->input('name_ar'),
             'name_en' => $request->input('name_en')
         ]);

@@ -13,7 +13,7 @@
 
 
 @section('content')
-    {!! Breadcrumbs::render('books') !!}
+    {!! Breadcrumbs::render('chapter_create') !!}
     <div class="panel-body">
 
         {!! Form::open(['action'=>'Backend\ChaptersController@store','method' => 'post', 'files'=>'true'], ['class'=>'form-horizontal']) !!}

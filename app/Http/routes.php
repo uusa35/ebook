@@ -19,6 +19,8 @@
 /***************************************************************************************************
  * Authentication
  ***************************************************************************************************/
+Route::get('/auth/facebook', ['uses' => 'Auth\AuthController@redirectToProvider']);
+Route::get('/callback', ['uses' => 'Auth\AuthController@handleProviderCallback']);
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
@@ -33,7 +35,7 @@ Route::get('/home', ['uses' => 'HomeController@index']);
 Route::get('/lang/{lang}', ['uses' => 'LanguageController@changeLocale']);
 
 
-Route::group(['prefix' => 'frontend'], function () {
+Route::group(['prefix' => 'frontend', 'middleware' => 'guest'], function () {
 
     Route::get('/', function () {
 
@@ -50,6 +52,11 @@ Route::group(['prefix' => 'frontend'], function () {
      *
      ***************************************************************************************************/
     Route::get('/report/{user}/{book}', ['uses' => 'BookController@getCreateNewReportAbuse']);
+    /***************************************************************************************************
+     *                                          User
+     *
+     ***************************************************************************************************/
+    Route::get('/conditions', ['uses' => 'HomeController@getConditions']);
 
 
 });
@@ -114,6 +121,39 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
         Route::get('/activation/{bookId}/{userId}/{activeStatus}', 'Backend\BooksController@getChangeActivationBook');
         Route::get('/books/chapters/pdf/{chapterId}/{chapterUrl}',
             ['as' => 'backend.books.chapters.pdf.preview', 'uses' => 'Backend\ChaptersController@getPdfFile']);
+
+        /*
+        * Routes to create / post / delete Preview Book for Editor
+        * */
+
+//        Route::resource('previews','Backend\PreviewsController');
+
+        Route::get('/book/chapters/pedf/preview/customized/{chapterId}', [
+            'uses' => 'Backend\PreviewsController@index'
+        ]);
+
+        Route::get('/book/chapters/pdf/preview/customized/{chapterId}',
+            [
+                'uses' => 'Backend\PreviewsController@create'
+            ]);
+
+        Route::get('/book/chapters/pdf/preview/customized/{chapterId}/{preview_start}/{preview_end}',
+            [
+                'uses' => 'Backend\PreviewsController@show'
+            ]);
+
+        Route::post('/book/chapters/pdf/preview/customized',
+            [
+                'uses' => 'Backend\PreviewsController@store'
+            ]);
+
+
+        Route::get('/book/pdf/preview/delete/customized/{bookId}/{authorId}',
+            [
+                'uses' => 'Backend\ChaptersController@getDeleteNewCustomizedPreview'
+            ]);
+
+
         /***************************************************************************************************
          * Comments Module
          ***************************************************************************************************/
@@ -127,42 +167,47 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
          *                                          Categories
          *
          ***************************************************************************************************/
+
+
         Route::group(['prefix' => 'categories'], function () {
 
-            Route::resource('field', 'Backend\FieldCategoryController', ['except' => 'delete']);
+            Route::get('/', 'Backend\FieldCategoriesController@index');
 
-            Route::resource('lang', 'Backend\LangCategoryController', ['except' => 'delete']);
+            Route::resource('fields', 'Backend\FieldCategoriesController', ['except' => 'delete']);
 
+            Route::resource('langs', 'Backend\LangCategoriesController', ['except' => 'delete']);
         });
+
+
         /***************************************************************************************************
          *                                          Messages
          *
          ***************************************************************************************************/
-        Route::resource('messages','Backend\MessagesController');
+        Route::resource('messages', 'Backend\MessagesController');
         //Route::group(['prefix' => 'backend'], function () {
-            /*Route::get('/', function () {
-                return 'working';
-            });*/
-           // Route::get('/', ['as' => 'messages.index', 'uses' => 'Backend\MessagesController@index']);
-            //Route::get('create', ['as' => 'messages.create', 'uses' => 'Backend\MessagesController@create']);
-            //Route::get('{id}/read', ['as' => 'messages.read', 'uses' => 'Backend\MessagesController@read']);
-            //Route::get('unread', ['as' => 'messages.unread', 'uses' => 'Backend\MessagesController@unread']);
-            //Route::post('/', ['as' => 'messages.store', 'uses' => 'Backend\MessagesController@store']);
-            //Route::get('{id}', ['as' => 'messages.show', 'uses' => 'Backend\MessagesController@show']);
-            //Route::put('{id}', ['as' => 'messages.update', 'uses' => 'Backend\MessagesController@update']);
+        /*Route::get('/', function () {
+            return 'working';
+        });*/
+        // Route::get('/', ['as' => 'messages.index', 'uses' => 'Backend\MessagesController@index']);
+        //Route::get('create', ['as' => 'messages.create', 'uses' => 'Backend\MessagesController@create']);
+        //Route::get('{id}/read', ['as' => 'messages.read', 'uses' => 'Backend\MessagesController@read']);
+        //Route::get('unread', ['as' => 'messages.unread', 'uses' => 'Backend\MessagesController@unread']);
+        //Route::post('/', ['as' => 'messages.store', 'uses' => 'Backend\MessagesController@store']);
+        //Route::get('{id}', ['as' => 'messages.show', 'uses' => 'Backend\MessagesController@show']);
+        //Route::put('{id}', ['as' => 'messages.update', 'uses' => 'Backend\MessagesController@update']);
         //});
 
-
+        /***************************************************************************************************
+         * Contact Us
+         ***************************************************************************************************/
+        //Route::get('contactus',['as' => 'contactus.index','uses' => 'Backend\ContactUsController@edit']);
+        Route::get('contactus', ['as' => 'backend.contactus.index', 'uses' => 'Backend\ContactUsController@edit']);
+        Route::post('contactus', 'Backend\ContactUsController@update');
+        Route::get('conditions', 'Backend\UsersController@getEditConditions');
+        Route::post('conditions', 'Backend\UsersController@postEditConditions');
 
     });
 
-    /***************************************************************************************************
-     * Contact Us
-     ***************************************************************************************************/
-    //Route::get('contactus/edit', 'Backend\ContactUsController@edit');
-    //Route::post('contactus', 'Backend\ContactUsController@update');
-    //Route::get('conditions', 'Backend\UserController@getEditCondtions');
-    //Route::post('conditions', 'Backend\UserController@postEditCondtions');
 
 });
 

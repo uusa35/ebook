@@ -8,4 +8,11 @@ class HomeController extends Controller {
 		return view('frontend.modules.book.index');
 	}
 
+
+	public function getConditions () {
+
+		return view('frontend.pages.conditions');
+
+	}
+
 }

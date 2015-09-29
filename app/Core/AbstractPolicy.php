@@ -30,7 +30,6 @@ class AbstractPolicy
         $this->userRole = \Cache::get('role');
         $this->userPermissions = \Cache::get('Permission.' . $this->userRole);
         $this->moduleRequested = str_singular(strtolower(\Cache::get('module')));
-
     }
 
 
@@ -67,7 +66,7 @@ class AbstractPolicy
     public function change()
     {
 
-        if (in_array($this->moduleRequested. '_change', $this->userPermissions, true)) {
+        if (in_array($this->moduleRequested . '_change', $this->userPermissions, true)) {
 
             return true;
 
@@ -81,12 +80,38 @@ class AbstractPolicy
     public function delete()
     {
 
-        if (in_array($this->moduleRequested.'_delete', $this->userPermissions, true)) {
+        if (in_array($this->moduleRequested . '_delete', $this->userPermissions, true)) {
 
             return true;
 
         }
 
+        return false;
+    }
+
+    public function isAdmin()
+    {
+        if (\Cache::get('Module.Admin')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isEditor()
+    {
+
+        if (\Cache::get('Module.Editor')) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isAuthor()
+    {
+        if (\Cache::get('Module.Author')) {
+            return true;
+        }
         return false;
     }
 }

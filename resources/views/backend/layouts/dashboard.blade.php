@@ -24,7 +24,7 @@
                                     @section('titlebar')
                                     @show
                                 </div>
-                            </div>
+                            </div>w
                         </div>
                     @show
 

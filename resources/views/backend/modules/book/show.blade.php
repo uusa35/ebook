@@ -16,14 +16,19 @@
 
 @section('titlebar')
     @can('create')
-    <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\ChaptersController@create',['book_id'=>$book->id]) }}"><i
-                class="fa fa-plus"></i></a>
+    <a class="{{ Config::get('button.btn-create') }}"
+       href="{{ action('Backend\ChaptersController@create',['book_id'=>$book->id]) }}"
+       title="{{ trans('general.add') }}">
+        {!! Config::get('button.icon-create') !!}</a>
     @endcan
 @endsection
 
 <div class="panel-body">
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-12">
+            @include('backend.modules.book.chapter.index')
+        </div>
+        {{--<div class="col-lg-3">
             <div class=" box box-widget widget-user shadow-z-1">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-white"
@@ -44,10 +49,8 @@
                 </div>
             </div>
             <!-- /.widget-user -->
-        </div>
-        <div class="col-lg-9">
-            @include('backend.modules.book.chapter.index')
-        </div>
+        </div>--}}
+
     </div>
 </div>
 @stop

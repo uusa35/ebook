@@ -10,27 +10,27 @@
         'PATCH','files'=>'true','class'=>'form-vertical']) !!}
 
         <div class="form-group">
-            {!! Form::label('email', trans('word.email')) !!}
+            {!! Form::label('email', trans('general.email')) !!}
             {!! Form::text('email', null, ['class' => 'form-control','disabled'=>'disabled']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::label('password', trans('word.password')) !!}
+            {!! Form::label('password', trans('general.password')) !!}
             {!! Form::password('password', ['class' => 'form-control','disabled'=> 'disabled']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::label('name_en', trans('word.name_en')) !!}
+            {!! Form::label('name_en', trans('general.name_en')) !!}
             {!! Form::text('name_en', null, ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::label('phone', trans('word.phone')) !!}
+            {!! Form::label('phone', trans('general.phone')) !!}
             {!! Form::text('phone', null, ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::label('avatar', trans('word.avatar')) !!}
+            {!! Form::label('avatar', trans('general.avatar')) !!}
             {!! Form::file('avatar', null, ['class' => 'form-control']) !!}
         </div>
 

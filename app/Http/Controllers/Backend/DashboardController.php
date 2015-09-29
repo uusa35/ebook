@@ -2,24 +2,10 @@
 
 use App\Core\AbstractController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cache;
 
 class DashboardController extends AbstractController
 {
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Welcome Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller renders the "marketing page" for the application and
-    | is configured to only allow guests. Like most of the other sample
-    | controllers, you are free to modify or remove it as you desire.
-    |
-    */
-
-    public $authUserRoles;
 
     /**
      * Create a new controller instance.
@@ -36,12 +22,23 @@ class DashboardController extends AbstractController
 
     public function index()
     {
-        if (\Cache::has('role')) {
+        if (Cache::has('role')) {
 
             $this->getPageTitle('dashboard.index');
-            return view('backend.modules.users.dashboard.index');
+
+            if ($this->isAdmin() || $this->isEditor()) {
+
+                return view('backend.modules.user.dashboard.index');
+
+            } elseif ($this->isAuthor()) {
+
+                return view('backend.modules.user.dashboard.index');
+
+            }
         }
+
         Auth::logout();
+
         return redirect()->back()->with(['error' => 'messeages.error.roles_sessions_not_created']);
     }
 

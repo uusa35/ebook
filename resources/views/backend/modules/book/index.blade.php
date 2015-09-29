@@ -102,10 +102,10 @@
                                                     <span> {{ $book->created_at->format('Y-m-d') }} </span>
                                                 </td>
                                                 <td>
-                                                    <a class="{{ Config::get('button.btn-view') }}"
+                                                    <a class="{{ Config::get('button.btn-index') }}"
                                                        href="{{ action('Backend\BooksController@show', $book->id) }}"
                                                        title="{{ trans('general.view') }}">
-                                                        {!! Config::get('button.icon-view') !!}
+                                                        {!! Config::get('button.icon-index') !!}
                                                     </a>
                                                 </td>
                                                 <td>
@@ -119,12 +119,13 @@
                                                     @endcan
                                                 </td>
                                                 <td class="text-center">
+
                                                     @can('change')
+
                                                     <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}"
                                                        title="{{ ($book->active) ? trans('general.active') : trans('general.not_active') }}"
-                                                       href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->user->id,$book->active]) }}">
-                                                        {!! ($book->active) ? Config::get('button.icon-not-active') :
-                                                        Config::get('icon-active') !!}
+                                                       href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->user_id,$book->active]) }}">
+                                                        {!! ($book->active) ? Config::get('button.icon-not-active') : Config::get('icon-active') !!}
                                                     </a>
                                                     @endcan
                                                 </td>
@@ -188,10 +189,10 @@
                                                     <td class="hidden-xs">{{ $book->book_id }}</td>
                                                     <td>
                                                         <a href="{{ action('BookController@show',[$book->book_id]) }}">
-                                                            {!! $book->title_en !!}</a>
+                                                            {!! $book->title !!}</a>
                                                     </td>
                                                     <td>
-                                                        <span> {{ $book->name_ar }} </span>
+                                                        <span> {{ $book->user_id }} </span>
 
                                                     </td>
                                                     <td>

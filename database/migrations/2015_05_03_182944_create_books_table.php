@@ -16,7 +16,7 @@ class CreateBooksTable extends Migration {
 		{
             $table->increments('id');
             $table->string('serial');
-            $table->integer('user_id');
+            $table->integer('author_id');
             $table->integer('field_category_id');
             $table->integer('lang_category_id');
             $table->string('title');

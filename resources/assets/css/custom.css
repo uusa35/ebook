@@ -1,3 +1,7 @@
 .radio, .checkbox {
     margin-top : 0px !important;
 }
+
+.smalltd {
+    width:40px;
+}

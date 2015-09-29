@@ -31,4 +31,5 @@ class AbstractRepository extends Model
         return $this->model->where('id', '=', $id);
     }
 
+
 }

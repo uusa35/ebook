@@ -20,7 +20,7 @@ return [
     ],
 
     'mandrill' => [
-        'secret' => '',
+        'secret' => 'nO52nogLJGyYKNwAdv2WMQ',
     ],
 
     'ses' => [
@@ -30,9 +30,14 @@ return [
     ],
 
     'stripe' => [
-        'model'  => App\User::class,
+        'model'  => App\Src\User\User::class,
         'key'    => '',
         'secret' => '',
+    ],
+    'facebook' => [
+        'client_id' => '413897782151776',
+        'client_secret' => 'b7b2f4c78cccc6fa5a11bc56155e65c0',
+        'redirect' => 'http://ebook.app:8000/callback',
     ],
 
 ];

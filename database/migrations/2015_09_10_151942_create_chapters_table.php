@@ -16,7 +16,7 @@ class CreateChaptersTable extends Migration
             $table->increments('id');
             $table->integer('book_id');
             $table->string('title');
-            $table->text('body');
+            $table->longText('body');
             $table->text('url');
             $table->integer('total_pages');
             $table->enum('status',['pending','drafted','published','declined']);

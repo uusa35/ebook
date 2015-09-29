@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Events\CreateChapter;
 use App\Jobs\CreateChapterPreview;
+use App\Jobs\CreateCustomizedPreview;
 use App\Src\Book\BookRepository;
 use App\Src\Book\Chapter\Chapter;
 use App\Src\Book\Chapter\ChapterRepository;
+use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -17,12 +19,17 @@ class ChaptersController extends Controller
 
     public $bookRepository;
     public $chapterRepository;
+    public $userRepository;
 
-    public function __construct(BookRepository $bookRepository, ChapterRepository $chapterRepository)
-    {
+    public function __construct(
+        BookRepository $bookRepository,
+        ChapterRepository $chapterRepository,
+        UserRepository $userRepository
+    ) {
 
         $this->bookRepository = $bookRepository;
         $this->chapterRepository = $chapterRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -155,11 +162,6 @@ class ChaptersController extends Controller
 
         if ($chapter) {
 
-            // every request on preview .. View will be increased
-//            $this->chapterRepository->increaseBookViewById($chapter->id);
-
-            //$link = storage_path('app/pdfs/') . $bookUrl;
-
             $this->dispatchAndShowPdf($chapter);
 
         }
@@ -189,4 +191,48 @@ class ChaptersController extends Controller
 
         ]);
     }
+
+    public function getShowNewCustomizedPreviewForAdmin($bookId, $authorId)
+    {
+
+        $book = $this->bookRepository->ShowNewCustomizedPreviewForAdmin($bookId, $authorId);
+
+        return $this->dispatch(new CreateCustomizedPreview($book));
+    }
+
+    public function getShowNewCustomizedPreviewForUsers($bookId, $authorId)
+    {
+
+        $book = $this->bookRepository->ShowNewCustomizedPreviewForUsers($bookId, $authorId);
+
+        return $this->dispatch(new CreateCustomizedPreview($book));
+    }
+
+    public function getUpdateBookStatus($bookId, $status)
+    {
+        $book = $this->bookRepository->getById($bookId)->update([
+            'status' => $status
+        ]);
+
+        if ($book) {
+
+            return redirect()->back()->with(['success' => trans('word.success-status-updated')]);
+        }
+
+        return redirect()->back()->with(['error' => 'word.error-status-updated']);
+    }
+
+    public function removeReportAbuse($bookId)
+    {
+
+        $deletedReportAbuse = DB::table('book_report')->where(['book_id' => $bookId])->delete();
+
+        if ($deletedReportAbuse) {
+
+            return redirect()->back()->with(['success' => trans('word.success-report-removed')]);
+
+        }
+        return redirect()->back()->with(['error' => 'word.error-report-removed']);
+    }
+
 }

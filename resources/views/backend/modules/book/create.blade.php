@@ -52,9 +52,7 @@
             <div class="form-group col-md-3 col-lg-3">
 
                 {!! Form::label('field_category_id', trans('categories'), ['class' => 'control-label']) !!}*
-                {!! Form::select('field_category_id', $fieldsCategories ,null, ['class' =>
-                'form-control','style'=>'text-align:left
-                !important;']) !!}
+                {!! Form::select('field_category_id', $fieldsCategories ,null, ['class' =>'form-control','style'=>'text-align:left!important;']) !!}
             </div>
             <div class="form-group col-md-3 col-lg-3">
 

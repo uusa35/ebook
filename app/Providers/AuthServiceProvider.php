@@ -64,5 +64,28 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        // Admin
+        $gate->define('isAdmin', function () use ($policy) {
+
+            return $policy->isAdmin();
+
+        });
+
+
+        // book_delete
+        $gate->define('isEditor', function () use ($policy) {
+
+            return $policy->isEditor();
+
+        });
+
+        // book_delete
+        $gate->define('isAuthor', function () use ($policy) {
+
+            return $policy->isAuthor();
+
+        });
+
+
     }
 }

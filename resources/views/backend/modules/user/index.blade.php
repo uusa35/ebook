@@ -26,12 +26,12 @@
         <thead>
         <tr>
             <th>id</th>
-            <th>{{ trans('word.general.name_en') }}</th>
-            <th>{{ trans('word.general.phone') }}</th>
-            <th>{{ trans('word.general.email') }}</th>
-            <th>{{ trans('word.general.role') }}</th>
-            <th>{{ trans('word.general.edit') }}</th>
-            <th>{{ trans('word.general.activation') }}</th>
+            <th>{{ trans('general.name_en') }}</th>
+            <th>{{ trans('general.phone') }}</th>
+            <th>{{ trans('general.email') }}</th>
+            <th>{{ trans('general.role') }}</th>
+            <th>{{ trans('general.edit') }}</th>
+            <th>{{ trans('general.activation') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -52,7 +52,7 @@
                 <td width="50">
                     @can('edit')
                     <a class="{{ Config::get('button.btn-edit') }}"
-                       title="{{ trans('word.general.edit') }}"
+                       title="{{ trans('general.edit') }}"
                        href="{{ action('Backend\UsersController@edit', $user->id) }}"><i
                                 class="fa fa-xs fa-edit"></i></a>
                     @endcan
@@ -63,7 +63,7 @@
                     $user->id,$user->active], 'method' => 'post']) !!}
 
                     <button type="submit"
-                            title="{{ ($user->active) ? trans('word.general.not_active') : trans('word.general.active') }}"
+                            title="{{ ($user->active) ? trans('general.not_active') : trans('general.active') }}"
                             class=" {{ ($user->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active') }}">
                         <i class="fa fa-xs fa-check"></i></button>
                     {!! Form::close() !!}

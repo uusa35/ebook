@@ -2,82 +2,610 @@
     @parent
     <script type="text/javascript">
         $(function () {
-            $("#chapters").DataTable();
+            $('div[id^="chapters"]').DataTable();
+            $('.nav-tabs > li[id^="tab-"]').on('click', function () {
+                var idVal = $(this).attr('id');
+                var tabLink = idVal.split('-');
+                var tabLink = 'step' + tabLink[1];
+                $.cookie("tabLastSelected", idVal);
+                $.cookie('TabLastSelected', tabLink);
+            });
+
+            if ($.cookie('tabLastSelected')) {
+                var idVal = $.cookie('tabLastSelected');
+                var tabLink = $.cookie('TabLastSelected');
+                console.log('From Inside If Statement : ' + idVal);
+                $('#' + idVal + '> a').trigger('click');
+            }
+            else if (!$.cookie('TabLastSelected')) {
+                $.cookie('TabLastSelected', 'tab-1');
+            }
+        });
+        $('.nav-tabs > li[id^="tab-"]').on('click', function () {
+            var idVal = $(this).attr('id');
+            var tabLink = idVal.split('-');
+            var tabLink = 'step' + tabLink[1];
+            $.cookie("tabLastSelected", idVal);
+            $.cookie('TabLastSelected', tabLink);
+        });
+
+        if ($.cookie('tabLastSelected')) {
+            var idVal = $.cookie('tabLastSelected');
+            var tabLink = $.cookie('TabLastSelected');
+            console.log('From Inside If Statement : ' + idVal);
+            $('#' + idVal + '> a').trigger('click');
+        }
+        else if (!$.cookie('TabLastSelected')) {
+            $.cookie('TabLastSelected', 'tab-1');
+        }
+
+        $('#conditions').click(function () {
+            if ($(this).is(":checked")) {
+                $('#btncon').removeAttr('disabled');
+            }
+            else if ($(this).is(":not(:checked)")) {
+                $('#btncon').attr('disabled', 'disabled');
+
+            }
         });
     </script>
 @endsection
 
-@if(count($chapters) > 0)
-    <table class="table table-striped table-hover " id="chapters">
-        <thead>
-        <tr>
-            <th>{{ trans('general.id') }}</th>
-            <th>{{ trans('general.title') }}</th>
-            <th>{{ trans('general.status') }}</th>
-            <th>{{ trans('general.edit') }}</th>
-            <th>{{ trans('general.view') }}</th>
-            <th>{{ trans('general.submit') }}</th>
-            <th>{{ trans('general.total_pages') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($chapters as $chapter)
-            <tr>
+@if(count($allChapters) > 0)
+    <div class="row">
+        <div class="col-xs-12">
 
-                <td>{{ $chapter->id }}</td>
-                <td>{{ $chapter->title }}</td>
-                <td>
-                    @can('change')
-                        {{-- If the User just created the book --}}
-                        @if($chapter->status == 'pending')
-                            <a class="{!! Config::get('button.btn-drafted') !!}" href="" title="go draft">
-                                {!! Config::get('button.icon-drafted') !!}
-                            </a>
-                            {{-- if the user just submitted to admin for approval --}}
-                        @elseif($chapter->status == 'drafted')
-                            <a class="{!! Config::get('button.btn-published') !!}" href="" title="go draft">
-                                {!! Config::get('button.icon-published') !!}
-                            </a>
-                        {{-- if the admin approved the book --}}
-                        @elseif($chapter->status == 'published')
-                            <a class="{!! Config::get('button.btn-declined') !!}" href="" title="go declined">
-                                {!! Config::get('button.icon-declined') !!}
-                            </a>
-                        @endif
-                    @endcan
-                </td>
-                <td>
-                    <a class="{!! Config::get('button.btn-edit') !!}"
-                       href="{{ action('Backend\ChaptersController@edit',['chapter_id' => $chapter->id,'book_id'=>$book->id]) }}">
-                        {!! Config::get('button.icon-edit') !!}
-                    </a>
-                </td>
-                <td>
-                    <a class="{!! Config::get('button.btn-view') !!}"
-                       href="{{ action('Backend\ChaptersController@getPdfFile',[$chapter->id,$chapter->url]) }}">
-                        {!! Config::get('button.icon-view') !!}
-                    </a>
-                </td>
-                <td>
-                    <a class="{!! Config::get('button.btn-submit') !!}" href="#">
-                        {!! Config::get('button.icon-submit') !!}
-                    </a>
-                </td>
-                <td>
-                    {{ $chapter->total_pages }}
-                </td>
+            <!-- START CONTENT ITEM -->
+            <ul class="nav nav-tabs btn-material-blue-grey-400">
+                <li id="tab-1" class="" href="#step1"><a href="#step1" data-toggle="tab"><i
+                                class="fa fa-aw fa-book"></i>&nbsp;{{ trans('general.volumes') }} </a></li>
 
-            </tr>
-        @endforeach
+                <li id="tab-2"><a href="#step2" data-toggle="tab"><i
+                                class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.published') }}
+                    </a></li>
+                <li id="tab-3"><a href="#step3" data-toggle="tab"><i
+                                class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.pending') }}
+                    </a></li>
+                <li id="tab-4"><a href="#step4" data-toggle="tab"><i
+                                class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.drafted') }}
+                    </a></li>
+                <li id="tab-5"><a href="#step5" data-toggle="tab"><i
+                                class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.declined') }}
+                    </a></li>
+            </ul>
 
-        </tbody>
-    </table>
 
-@else
-    <div class="alert alert-dismissable alert-info">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <h4><i class="fa fa-times-circle fa-md"></i> {{ trans('general.alert') }}</h4>
+            <div class="tab-content">
 
-        <p>{{ trans('message.error.no_chapters') }}</p>
-    </div>
+
+                {{--All Chapters--}}
+                <div class="tab-pane" id="step1">
+                    <div class="row">
+                        <div class="col-xs-12 paddingTop10">
+                            <table class="table table-striped table-hover " id="chapters1">
+                                <thead>
+                                <tr>
+                                    <th>{{ trans('general.id') }}</th>
+                                    <th>{{ trans('general.title') }}</th>
+                                    <th>{{ trans('general.status') }}</th>
+                                    <th>{{ trans('general.change_status') }}</th>
+                                    <th>{{ trans('general.edit') }}</th>
+                                    <th>{{ trans('general.view') }}</th>
+                                    <th>{{ trans('general.create_preview') }}</th>
+                                    <th>{{ trans('general.all_previews') }}</th>
+                                    <th>{{ trans('general.submit') }}</th>
+                                    <th>{{ trans('general.total_pages') }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($allChapters as $chapter)
+                                    <tr>
+                                        <td>{{ $chapter->id }}</td>
+                                        <td>{{ $chapter->title }}</td>
+                                        <td>{{ $chapter->status }}</td>
+                                        <td>
+                                            @can('change')
+                                            {{-- If the User just created the book --}}
+                                            @if($chapter->status === 'pending')
+                                                <a class="{!! Config::get('button.btn-drafted') !!}" href=""
+                                                   title="{{ trans('general.title.go_drafted') }}">
+                                                    {!! Config::get('button.icon-drafted') !!}
+                                                </a>
+                                                {{-- if the user just submitted to admin for approval --}}
+                                            @elseif($chapter->status === 'drafted')
+                                                <a class="{!! Config::get('button.btn-published') !!}" href=""
+                                                   title="{{ trans('general.title.go_published') }}">
+                                                    {!! Config::get('button.icon-published') !!}
+                                                </a>
+                                            @endif
+                                            {{-- if the admin approved the book --}}
+                                            @if(Cache::get('Module.Admin'))
+                                                @if($chapter->status === 'published')
+                                                    <a class="{!! Config::get('button.btn-declined') !!}" href=""
+                                                       title="{{ trans('general.title.go_pending') }}">
+                                                        {!! Config::get('button.icon-pending') !!}
+                                                    </a>
+                                                    {{-- if the admin approved the book --}}
+                                                @elseif($chapter->status === 'declined')
+                                                    <a class="{!! Config::get('button.btn-pending') !!}" href=""
+                                                       title="{{ trans('general.title.declined') }}">
+                                                        {!! Config::get('button.icon-pending') !!}
+                                                    </a>
+                                                @endif
+                                            @endif
+                                            @endcan
+                                        </td>
+                                        <td>
+                                            <a class="{!! Config::get('button.btn-edit') !!}"
+                                               title="{{ trans('general.edit') }}"
+                                               href="{{ action('Backend\ChaptersController@edit',['chapter_id' => $chapter->id,'book_id'=>$book->id]) }}">
+                                                {!! Config::get('button.icon-edit') !!}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="{!! Config::get('button.btn-view') !!}"
+                                               title="{{ trans('general.view_pdf') }}"
+                                               href="{{ action('Backend\ChaptersController@getPdfFile',[$chapter->id,$chapter->url]) }}">
+                                                {!! Config::get('button.icon-view') !!}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="{!! Config::get('button.btn-create') !!}"
+                                               title="{{ trans('general.create_preview') }}"
+                                               href="{{ action('Backend\PreviewsController@create',[$chapter->id]) }}">
+                                                {!! Config::get('button.icon-create') !!}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="{!! Config::get('button.btn-index') !!}"
+                                               title="{{ trans('general.all_previews') }}"
+                                               href="{{ action('Backend\PreviewsController@index',[$chapter->id]) }}">
+                                                {!! Config::get('button.icon-index') !!}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="{!! Config::get('button.btn-submit') !!}" href="#"
+                                               title="{{ trans('general.submit') }}">
+                                                {!! Config::get('button.icon-submit') !!}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {{ $chapter->total_pages }}
+                                        </td>
+
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Published Chapters --}}
+                <div class="tab-pane active" id="step2">
+                    <div class="row">
+                        <div class="col-xs-12 paddingTop10">
+                            @if(!is_null($publishedChapters))
+                                <table class="table table-striped table-hover " id="chapters2">
+                                    <thead>
+                                    <tr>
+                                        <th>{{ trans('general.id') }}</th>
+                                        <th>{{ trans('general.title') }}</th>
+                                        <th>{{ trans('general.status') }}</th>
+                                        <th>{{ trans('general.edit') }}</th>
+                                        <th>{{ trans('general.view') }}</th>
+                                        <th>{{ trans('general.create_preview') }}</th>
+                                        <th>{{ trans('general.all_previews') }}</th>
+                                        <th>{{ trans('general.submit') }}</th>
+                                        <th>{{ trans('general.total_pages') }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($publishedChapters as $chapter)
+                                        <tr>
+
+                                            <td>{{ $chapter->id }}</td>
+                                            <td>{{ $chapter->title }}</td>
+                                            <td>
+                                                @can('change')
+                                                {{-- If the User just created the book --}}
+                                                @if($chapter->status == 'pending')
+                                                    <a class="{!! Config::get('button.btn-drafted') !!}" href=""
+                                                       title="{{ trans('general.title.go_drafted') }}">
+                                                        {!! Config::get('button.icon-drafted') !!}
+                                                    </a>
+                                                    {{-- if the user just submitted to admin for approval --}}
+                                                @elseif($chapter->status == 'drafted')
+                                                    <a class="{!! Config::get('button.btn-published') !!}" href=""
+                                                       title="{{ trans('general.title.go_published') }}">
+                                                        {!! Config::get('button.icon-published') !!}
+                                                    </a>
+                                                    {{-- if the admin approved the book --}}
+                                                @elseif($chapter->status == 'published')
+                                                    <a class="{!! Config::get('button.btn-declined') !!}" href=""
+                                                       title="{{ trans('general.title.declined') }}">
+                                                        {!! Config::get('button.icon-declined') !!}
+                                                    </a>
+                                                @endif
+                                                @endcan
+                                            </td>
+                                            <td>
+                                                <a class="{!! Config::get('button.btn-edit') !!}"
+                                                   title="{{ trans('general.edit') }}"
+                                                   href="{{ action('Backend\ChaptersController@edit',['chapter_id' => $chapter->id,'book_id'=>$book->id]) }}">
+                                                    {!! Config::get('button.icon-edit') !!}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="{!! Config::get('button.btn-view') !!}"
+                                                   title="{{ trans('general.view_pdf') }}"
+                                                   href="{{ action('Backend\ChaptersController@getPdfFile',[$chapter->id,$chapter->url]) }}">
+                                                    {!! Config::get('button.icon-view') !!}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="{!! Config::get('button.btn-create') !!}"
+                                                   title="{{ trans('general.create_preview') }}"
+                                                   href="{{ action('Backend\PreviewsController@create',[$chapter->id]) }}">
+                                                    {!! Config::get('button.icon-create') !!}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="{!! Config::get('button.btn-view') !!}"
+                                                   title="{{ trans('general.all_previews') }}"
+                                                   href="{{ action('Backend\PreviewsController@index',[$chapter->id]) }}">
+                                                    {!! Config::get('button.icon-view') !!}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="{!! Config::get('button.btn-submit') !!}" href="#"
+                                                   title="{{ trans('general.submit') }}">
+                                                    {!! Config::get('button.icon-submit') !!}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {{ $chapter->total_pages }}
+                                            </td>
+
+                                        </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+                            @else
+                                <div class="alert alert-dismissable alert-info">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <h4><i class="fa fa-times-circle fa-md"></i> {{ trans('general.alert') }}</h4>
+
+                                    <p>{{ trans('message.error.no_chapters') }}</p>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+
+                {{-- Pending Chapters --}}
+                <div class="tab-pane active" id="step3">
+                    <div class="row">
+                        <div class="col-xs-12 paddingTop10">
+                            @if(!is_null($publishedChapters))
+                                <table class="table table-striped table-hover " id="chapters3">
+                                    <thead>
+                                    <tr>
+                                        <th>{{ trans('general.id') }}</th>
+                                        <th>{{ trans('general.title') }}</th>
+                                        <th>{{ trans('general.status') }}</th>
+                                        <th>{{ trans('general.edit') }}</th>
+                                        <th>{{ trans('general.view') }}</th>
+                                        <th>{{ trans('general.create_preview') }}</th>
+                                        <th>{{ trans('general.all_previews') }}</th>
+                                        <th>{{ trans('general.submit') }}</th>
+                                        <th>{{ trans('general.total_pages') }}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($pendingChapters as $chapter)
+                                        <tr>
+
+                                            <td>{{ $chapter->id }}</td>
+                                            <td>{{ $chapter->title }}</td>
+                                            <td>
+                                                @can('change')
+                                                {{-- If the User just created the book --}}
+                                                @if($chapter->status == 'pending')
+                                                    <a class="{!! Config::get('button.btn-drafted') !!}" href=""
+                                                       title="{{ trans('general.title.go_drafted') }}">
+                                                        {!! Config::get('button.icon-drafted') !!}
+                                                    </a>
+                                                    {{-- if the user just submitted to admin for approval --}}
+                                                @elseif($chapter->status == 'drafted')
+                                                    <a class="{!! Config::get('button.btn-published') !!}" href=""
+                                                       title="{{ trans('general.title.go_published') }}">
+                                                        {!! Config::get('button.icon-published') !!}
+                                                    </a>
+                                                    {{-- if the admin approved the book --}}
+                                                @elseif($chapter->status == 'published')
+                                                    <a class="{!! Config::get('button.btn-declined') !!}" href=""
+                                                       title="{{ trans('general.title.declined') }}">
+                                                        {!! Config::get('button.icon-declined') !!}
+                                                    </a>
+                                                @endif
+                                                @endcan
+                                            </td>
+                                            <td>
+                                                <a class="{!! Config::get('button.btn-edit') !!}"
+                                                   title="{{ trans('general.edit') }}"
+                                                   href="{{ action('Backend\ChaptersController@edit',['chapter_id' => $chapter->id,'book_id'=>$book->id]) }}">
+                                                    {!! Config::get('button.icon-edit') !!}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="{!! Config::get('button.btn-view') !!}"
+                                                   title="{{ trans('general.view_pdf') }}"
+                                                   href="{{ action('Backend\ChaptersController@getPdfFile',[$chapter->id,$chapter->url]) }}">
+                                                    {!! Config::get('button.icon-view') !!}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="{!! Config::get('button.btn-create') !!}"
+                                                   title="{{ trans('general.create_preview') }}"
+                                                   href="{{ action('Backend\PreviewsController@create',[$chapter->id]) }}">
+                                                    {!! Config::get('button.icon-create') !!}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="{!! Config::get('button.btn-view') !!}"
+                                                   title="{{ trans('general.all_previews') }}"
+                                                   href="{{ action('Backend\PreviewsController@index',[$chapter->id]) }}">
+                                                    {!! Config::get('button.icon-view') !!}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="{!! Config::get('button.btn-submit') !!}" href="#"
+                                                   title="{{ trans('general.submit') }}">
+                                                    {!! Config::get('button.icon-submit') !!}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {{ $chapter->total_pages }}
+                                            </td>
+
+                                        </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+                            @else
+                                <div class="alert alert-dismissable alert-info">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <h4><i class="fa fa-times-circle fa-md"></i> {{ trans('general.alert') }}</h4>
+
+                                    <p>{{ trans('message.error.no_chapters') }}</p>
+                                    @endif
+                                </div>
+                        </div>
+                    </div>
+
+
+                    {{-- Drafted Chapters --}}
+                    <div class="tab-pane active" id="step4">
+                        <div class="row">
+                            <div class="col-xs-12 paddingTop10">
+                                @if(!is_null($draftedChapters))
+                                    <table class="table table-striped table-hover " id="chapters4">
+                                        <thead>
+                                        <tr>
+                                            <th>{{ trans('general.id') }}</th>
+                                            <th>{{ trans('general.title') }}</th>
+                                            <th>{{ trans('general.status') }}</th>
+                                            <th>{{ trans('general.edit') }}</th>
+                                            <th>{{ trans('general.view') }}</th>
+                                            <th>{{ trans('general.create_preview') }}</th>
+                                            <th>{{ trans('general.all_previews') }}</th>
+                                            <th>{{ trans('general.submit') }}</th>
+                                            <th>{{ trans('general.total_pages') }}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($draftedChapters as $chapter)
+                                            <tr>
+
+                                                <td>{{ $chapter->id }}</td>
+                                                <td>{{ $chapter->title }}</td>
+                                                <td>
+                                                    @can('change')
+                                                    {{-- If the User just created the book --}}
+                                                    @if($chapter->status == 'pending')
+                                                        <a class="{!! Config::get('button.btn-drafted') !!}" href=""
+                                                           title="{{ trans('general.title.go_drafted') }}">
+                                                            {!! Config::get('button.icon-drafted') !!}
+                                                        </a>
+                                                        {{-- if the user just submitted to admin for approval --}}
+                                                    @elseif($chapter->status == 'drafted')
+                                                        <a class="{!! Config::get('button.btn-published') !!}" href=""
+                                                           title="{{ trans('general.title.go_published') }}">
+                                                            {!! Config::get('button.icon-published') !!}
+                                                        </a>
+                                                        {{-- if the admin approved the book --}}
+                                                    @elseif($chapter->status == 'published')
+                                                        <a class="{!! Config::get('button.btn-declined') !!}" href=""
+                                                           title="{{ trans('general.title.declined') }}">
+                                                            {!! Config::get('button.icon-declined') !!}
+                                                        </a>
+                                                    @endif
+                                                    @endcan
+                                                </td>
+                                                <td>
+                                                    <a class="{!! Config::get('button.btn-edit') !!}"
+                                                       title="{{ trans('general.edit') }}"
+                                                       href="{{ action('Backend\ChaptersController@edit',['chapter_id' => $chapter->id,'book_id'=>$book->id]) }}">
+                                                        {!! Config::get('button.icon-edit') !!}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="{!! Config::get('button.btn-view') !!}"
+                                                       title="{{ trans('general.view_pdf') }}"
+                                                       href="{{ action('Backend\ChaptersController@getPdfFile',[$chapter->id,$chapter->url]) }}">
+                                                        {!! Config::get('button.icon-view') !!}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="{!! Config::get('button.btn-create') !!}"
+                                                       title="{{ trans('general.create_preview') }}"
+                                                       href="{{ action('Backend\PreviewsController@create',[$chapter->id]) }}">
+                                                        {!! Config::get('button.icon-create') !!}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="{!! Config::get('button.btn-view') !!}"
+                                                       title="{{ trans('general.all_previews') }}"
+                                                       href="{{ action('Backend\PreviewsController@index',[$chapter->id]) }}">
+                                                        {!! Config::get('button.icon-view') !!}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="{!! Config::get('button.btn-submit') !!}" href="#"
+                                                       title="{{ trans('general.submit') }}">
+                                                        {!! Config::get('button.icon-submit') !!}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    {{ $chapter->total_pages }}
+                                                </td>
+
+                                            </tr>
+                                        @endforeach
+
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <div class="alert alert-dismissable alert-info">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <h4><i class="fa fa-times-circle fa-md"></i> {{ trans('general.alert') }}</h4>
+
+                                        <p>{{ trans('message.error.no_chapters') }}</p>
+                                        @endif
+                                    </div>
+                            </div>
+                        </div>
+
+
+                        {{-- Declined Chapters --}}
+                        <div class="tab-pane active" id="step5">
+                            <div class="row">
+                                <div class="col-xs-12 paddingTop10">
+                                    @if(!is_null($declinedChapters))
+                                        <table class="table table-striped table-hover " id="chapter5s">
+                                            <thead>
+                                            <tr>
+                                                <th>{{ trans('general.id') }}</th>
+                                                <th>{{ trans('general.title') }}</th>
+                                                <th>{{ trans('general.status') }}</th>
+                                                <th>{{ trans('general.edit') }}</th>
+                                                <th>{{ trans('general.view') }}</th>
+                                                <th>{{ trans('general.create_preview') }}</th>
+                                                <th>{{ trans('general.all_previews') }}</th>
+                                                <th>{{ trans('general.submit') }}</th>
+                                                <th>{{ trans('general.total_pages') }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($declinedChapters as $chapter)
+                                                <tr>
+
+                                                    <td>{{ $chapter->id }}</td>
+                                                    <td>{{ $chapter->title }}</td>
+                                                    <td>
+                                                        @can('change')
+                                                        {{-- If the User just created the book --}}
+                                                        @if($chapter->status == 'pending')
+                                                            <a class="{!! Config::get('button.btn-drafted') !!}" href=""
+                                                               title="{{ trans('general.title.go_drafted') }}">
+                                                                {!! Config::get('button.icon-drafted') !!}
+                                                            </a>
+                                                            {{-- if the user just submitted to admin for approval --}}
+                                                        @elseif($chapter->status == 'drafted')
+                                                            <a class="{!! Config::get('button.btn-published') !!}"
+                                                               href=""
+                                                               title="{{ trans('general.title.go_published') }}">
+                                                                {!! Config::get('button.icon-published') !!}
+                                                            </a>
+                                                            {{-- if the admin approved the book --}}
+                                                        @elseif($chapter->status == 'published')
+                                                            <a class="{!! Config::get('button.btn-declined') !!}"
+                                                               href=""
+                                                               title="{{ trans('general.title.declined') }}">
+                                                                {!! Config::get('button.icon-declined') !!}
+                                                            </a>
+                                                        @endif
+                                                        @endcan
+                                                    </td>
+                                                    <td>
+                                                        <a class="{!! Config::get('button.btn-edit') !!}"
+                                                           title="{{ trans('general.edit') }}"
+                                                           href="{{ action('Backend\ChaptersController@edit',['chapter_id' => $chapter->id,'book_id'=>$book->id]) }}">
+                                                            {!! Config::get('button.icon-edit') !!}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="{!! Config::get('button.btn-view') !!}"
+                                                           title="{{ trans('general.view_pdf') }}"
+                                                           href="{{ action('Backend\ChaptersController@getPdfFile',[$chapter->id,$chapter->url]) }}">
+                                                            {!! Config::get('button.icon-view') !!}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="{!! Config::get('button.btn-create') !!}"
+                                                           title="{{ trans('general.create_preview') }}"
+                                                           href="{{ action('Backend\PreviewsController@create',[$chapter->id]) }}">
+                                                            {!! Config::get('button.icon-create') !!}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="{!! Config::get('button.btn-view') !!}"
+                                                           title="{{ trans('general.all_previews') }}"
+                                                           href="{{ action('Backend\PreviewsController@index',[$chapter->id]) }}">
+                                                            {!! Config::get('button.icon-view') !!}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="{!! Config::get('button.btn-submit') !!}" href="#"
+                                                           title="{{ trans('general.submit') }}">
+                                                            {!! Config::get('button.icon-submit') !!}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        {{ $chapter->total_pages }}
+                                                    </td>
+
+                                                </tr>
+                                            @endforeach
+
+                                            </tbody>
+                                        </table>
+                                    @else
+                                        <div class="alert alert-dismissable alert-info">
+                                            <button type="button" class="close" data-dismiss="alert">×</button>
+                                            <h4><i class="fa fa-times-circle fa-md"></i> {{ trans('general.alert') }}
+                                            </h4>
+
+                                            <p>{{ trans('message.error.no_chapters') }}</p>
+                                            @endif
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @else
+                    <div class="alert alert-dismissable alert-info">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <h4><i class="fa fa-times-circle fa-md"></i> {{ trans('general.alert') }}</h4>
+
+                        <p>{{ trans('message.error.no_chapters') }}</p>
+                    </div>
+
+            </div>
 @endif

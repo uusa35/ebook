@@ -42,7 +42,7 @@ class UsersController extends AbstractController
     {
         $this->getPageTitle('user.index');
         $users = $this->userRepository->model->with('roles')->get();
-        return view('backend.modules.users.index', compact('users'));
+        return view('backend.modules.user.index', compact('users'));
     }
 
     /**
@@ -53,7 +53,7 @@ class UsersController extends AbstractController
 
         $this->getPageTitle('user.create');
         $roles = $this->roleRepository->model->all();
-        return view('backend.modules.users.create', compact('roles'));
+        return view('backend.modules.user.create', compact('roles'));
     }
 
     /**
@@ -64,7 +64,7 @@ class UsersController extends AbstractController
     public function store(CreateUser $request)
     {
 
-        $request->merge(['active' , 1]);
+        $request->merge(['active'=> 1, 'level' => 3]);
 
         $user = $this->userRepository->model->create($request->all());
 
@@ -92,7 +92,7 @@ class UsersController extends AbstractController
 
         $roles = $this->roleRepository->model->get();
 
-        return view('backend.modules.users.edit', compact('user', 'roles', 'userListRoleIds'));
+        return view('backend.modules.user.edit', compact('user', 'roles', 'userListRoleIds'));
     }
 
     /**
@@ -152,6 +152,27 @@ class UsersController extends AbstractController
         ]);
         $user->save();
         return redirect()->action('Backend\UsersController@index')->with(['success' => trans('messages.sucess.change_active_status')]);
+    }
+
+    public function getEditConditions()
+    {
+        $terms = \DB::table('instructions')->first();
+
+        return view('backend.modules.user.conditions', ['terms' => $terms]);
+    }
+
+    public function postEditConditions()
+    {
+        $instructions = \DB::table('instructions')->update([
+            'title_ar' => Input::get('title_ar'),
+            'title_en' => Input::get('title_en'),
+            'body_ar' => Input::get('body_ar'),
+            'body_en' => Input::get('body_en'),
+        ]);
+        if ($instructions) {
+            return redirect()->back()->with(['success' => trans('word.success-updated')]);
+        }
+        return redirect()->back()->with(['success' => trans('word.error-updated')]);
     }
 
 }

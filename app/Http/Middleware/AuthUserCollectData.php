@@ -19,7 +19,7 @@ class AuthUserCollectData
     public function handle($request, Closure $next)
     {
 
-        if (count(\Cache::get('role')) < 1 || is_null(\Cache::get('role'))) {
+        if (is_null(\Session::get('roles'))) {
 
             $authUserRole = $request->user()->roles()->first();
 
@@ -53,7 +53,7 @@ class AuthUserCollectData
             }
 
 
-            \Session::put('roles', str_random(16));
+            \Session::put('roles', \Crypt::encrypt(str_random(16)));
 
             // roles => 'rand'
             // role = Admin
@@ -68,6 +68,8 @@ class AuthUserCollectData
 
             return $next($request);
         }
-        dd('no role cache ');
+        \Auth::logout();
+        return redirect('/');
+        //dd('no cache found');
     }
 }

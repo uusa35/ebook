@@ -80,7 +80,7 @@ class MessagesController extends AbstractController
     {
         $users = User::where('id', '!=', Auth::id())->get();
 
-        $usersList = $users->lists('name_'.App()->getLocale(),'id');
+        $usersList = $users->lists('name','id');
 
         return view('backend.modules.messenger.create', compact('usersList'));
     }

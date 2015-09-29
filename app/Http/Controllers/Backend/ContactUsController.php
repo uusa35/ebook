@@ -17,10 +17,19 @@ class ContactUsController extends Controller
         $this->contactus = $contactus;
     }
 
+    public function index() {
+
+        //Cache::forget('contactusInfo');
+
+        $contactInfo = $this->contactus->first();
+
+        return view('backend.modules.contactus.edit', ['contactInfo' => $contactInfo]);
+    }
+
     public function edit()
     {
 
-        Cache::forget('contactusInfo');
+        //Cache::forget('contactusInfo');
 
         $contactInfo = $this->contactus->first();
 

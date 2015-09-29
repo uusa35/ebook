@@ -84,7 +84,8 @@ class BooksController extends AbstractController
 
         if (\Cache::get('Module.Admin') || \Cache::get('Module.Editor')) {
 
-            $books = $this->bookRepository->model->with('meta', 'user')->orderBy('created_at', 'desc')->get();
+            $books = $this->bookRepository->model->with('meta', 'user', 'chapters')->orderBy('created_at',
+                'desc')->get();
 
             $booksReported = $this->bookRepository->getReportsAbuse();
 
@@ -92,19 +93,15 @@ class BooksController extends AbstractController
 
         } elseif (\Cache::get('Module.Author')) {
 
-            $books = $this->bookRepository->model->where(['user_id' => Auth::id()])->with('meta', 'user')->orderBy('created_at', 'desc')->get();
+            $books = $this->bookRepository->model->where(['user_id' => Auth::id()])->with('meta',
+                'user')->orderBy('created_at', 'desc')->get();
             $booksReported = [];
         }
-
-        //$orders = $this->purchaseRepository->model->orderBy('created_at', 'desc')->with('book')->with('user')->get();
 
         if ($books) {
 
             return view('backend.modules.book.index',
-                [
-                    'books' => $books,
-                    'booksReported' => $booksReported
-                ]);
+                compact('books', 'booksReported'));
         }
         return redirect()->back()->with(['error' => trans('messages.info.no_books_found')]);
 
@@ -193,9 +190,19 @@ class BooksController extends AbstractController
 
         \Session::put('book_id', $id);
 
-        $chapters = $this->chapterRepository->model->where(['book_id' => $id])->get();
+        $allChapters = $this->chapterRepository->model->where(['book_id' => $id])->get();
 
-        return view('backend.modules.book.show', compact('book', 'chapters'));
+        $publishedChapters = $this->chapterRepository->model->where(['book_id' => $id,'status' => 'published'])->get();
+
+        $pendingChapters = $this->chapterRepository->model->where(['book_id' => $id,'status' => 'pending'])->get();
+
+        $draftedChapters = $this->chapterRepository->model->where(['book_id' => $id,'status' => 'drafted'])->get();
+
+        $declinedChapters = $this->chapterRepository->model->where(['book_id' => $id,'status' => 'declined'])->get();
+
+        return view('backend.modules.book.show',
+            compact('book', 'allChapters', 'publishedChapters', 'draftedChapters', 'pendingChapters',
+                'declinedChapters'));
 
     }
 
