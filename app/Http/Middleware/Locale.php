@@ -20,7 +20,7 @@ class Locale
 
             Session::put('locale', 'en');
             /* Special Session to change direction of classes */
-            Session::put(['pullClass'=> 'pull-left', 'pullClassReverse'=> 'pull-right']);
+            Session::put(['pullClass'=> 'pull-right', 'pullClassReverse'=> 'pull-left']);
 
         } else {
             /* Special Session to change direction of classes */
@@ -39,7 +39,7 @@ class Locale
         if ($lang === 'ar') {
 
 
-            return Session::put(['pullClass'=> 'pull-right', 'pullClassReverse'=> 'pull-left']);
+            return Session::put(['pullClass'=> 'pull-left', 'pullClassReverse'=> 'pull-right']);
 
         }
 

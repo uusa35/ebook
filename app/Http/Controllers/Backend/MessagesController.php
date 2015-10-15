@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Backend;
 
 use App\Core\AbstractController;
+use App\Http\Requests\CreateMessage;
 use Carbon\Carbon;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
@@ -34,10 +35,13 @@ class MessagesController extends AbstractController
      */
     public function index()
     {
+
+        $this->getPageTitle('message.index');
+
         $currentUserId = Auth::user()->id;
 
         // All threads that user is participating in
-        $threads = $this->thread->forUser($currentUserId)->paginate(8);
+        $threads = $this->thread->forUser($currentUserId)->with('participants','messages','participants.user')->get();
 
         return view('backend.modules.messenger.index', compact('threads', 'currentUserId'));
     }
@@ -50,6 +54,8 @@ class MessagesController extends AbstractController
      */
     public function show($id)
     {
+
+        $this->getPageTitle('message.show');
         try {
 
             $thread = $this->thread->findOrFail($id);
@@ -58,17 +64,17 @@ class MessagesController extends AbstractController
 
             Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
 
-            return redirect()->action('Backend\MessagesController@show',$id);
+            return redirect()->action('Backend\MessagesController@show', $id);
         }
 
         // don't show the current user in list
         $userId = Auth::user()->id;
 
-        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
+        $usersList = User::whereNotIn('id', $thread->participantsUserIds($userId))->get()->lists('name', 'id');
 
         $thread->markAsRead($userId);
 
-        return view('backend.modules.messenger.show', compact('thread', 'users'));
+        return view('backend.modules.messenger.show', compact('thread', 'usersList'));
     }
 
     /**
@@ -78,9 +84,12 @@ class MessagesController extends AbstractController
      */
     public function create()
     {
+
+        $this->getPageTitle('message.create');
+
         $users = User::where('id', '!=', Auth::id())->get();
 
-        $usersList = $users->lists('name','id');
+        $usersList = $users->lists('name', 'id');
 
         return view('backend.modules.messenger.create', compact('usersList'));
     }
@@ -90,7 +99,7 @@ class MessagesController extends AbstractController
      *
      * @return mixed
      */
-    public function store()
+    public function store(CreateMessage $reqest)
     {
         $input = Input::all();
 
@@ -178,7 +187,7 @@ class MessagesController extends AbstractController
         $this->oooPushIt($message);
 
         //return 'here';
-        return redirect()->action('Backend\MessagesController@show',$id);
+        return redirect()->action('Backend\MessagesController@show', $id);
     }
 
     /**

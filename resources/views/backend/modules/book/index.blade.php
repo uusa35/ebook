@@ -15,6 +15,9 @@
             $('#booksTable').DataTable({
                 "order": [[0, "desc"]]
             });
+            $('#booksFavorited').DataTable({
+                "order": [[0, "desc"]]
+            });
             $("button[id^='delete-']").on('click', function () {
                 var btnId = $(this).attr('id');
                 var element = btnId.split("-", 2);
@@ -35,6 +38,7 @@
 
         @section('titlebar')
             @can('create')
+
             <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\BooksController@create') }}"
                title="{{ trans('general.book_create') }}">
                 {!! Config::get('button.icon-create')!!}
@@ -49,8 +53,11 @@
                 <ul class="nav nav-tabs btn-material-blue-grey-400">
                     <li id="tab-1" class="" href="#step1"><a href="#step1" data-toggle="tab"><i
                                     class="fa fa-aw fa-book"></i>&nbsp;{{ trans('general.volumes') }} </a></li>
+                    <li id="tab-2"><a href="#step2" data-toggle="tab"><i
+                                    class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.favorite') }}
+                        </a></li>
                     @if(Cache::get('Module.Admin'))
-                        <li id="tab-2"><a href="#step2" data-toggle="tab"><i
+                        <li id="tab-3"><a href="#step3" data-toggle="tab"><i
                                         class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.report') }}
                             </a></li>
                     @endif
@@ -87,9 +94,7 @@
                                                 <td class="hidden-xs">{{ $book->id }}</td>
                                                 <td>
                                                     <a href="{{ action('Backend\BooksController@show', $book->id) }}">
-                                                        {!!
-                                                        $book->title
-                                                        !!} </a>
+                                                        {{ $book->title }} </a>
                                                 </td>
                                                 <td>
                                                     <span> {{ ($book->meta) ? $book->meta->total_pages : 'N/A' }} </span>
@@ -124,7 +129,7 @@
 
                                                     <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}"
                                                        title="{{ ($book->active) ? trans('general.active') : trans('general.not_active') }}"
-                                                       href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->user_id,$book->active]) }}">
+                                                       href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->author_id,$book->active]) }}">
                                                         {!! ($book->active) ? Config::get('button.icon-not-active') : Config::get('icon-active') !!}
                                                     </a>
                                                     @endcan
@@ -165,9 +170,62 @@
                         </div>
                     </div>
 
+                    {{-- Books Favorited --}}
+                    <div class="tab-pane" id="step2">
+                        <div class="row">
+                            <div class="col-xs-12 paddingTop10">
+                                @if($booksFavorited->count() > 0)
+                                    <table class="table table-striped table-order" id="booksFavorited">
+                                        <thead>
+                                        <tr>
+                                            <th class="hidden-xs">{{ trans('general.serial') }}</th>
+                                            <th>{{ trans('general.subject') }}</th>
+                                            <th>{{ trans('general.author') }}</th>
+                                            <th>{{ trans('general.active') }}</th>
+                                            <th>{{ trans('general.remove') }}</th>
+                                            <th>{{ trans('general.created-at') }}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        @foreach($booksFavorited as $book)
+                                            <tr>
+                                                <td class="hidden-xs">{{ $book->serial }}</td>
+                                                <td>
+                                                    <a href="{{ action('BookController@show',[$book->book_id]) }}">
+                                                        {!! $book->title !!}</a>
+                                                </td>
+                                                <td>
+                                                    <span> {{ $book->author->name }} </span>
+
+                                                </td>
+                                                <td>
+                                                    <span> {{ $book->active }} </span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a class="{!! Config::get('button.btn-delete')!!}" href="">
+                                                        {!! Config::get('button.icon-delete') !!}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <span> {{ str_limit($book->created_at,10,'') }} </span>
+                                                </td>
+                                            </tr>
+
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <div class="alert alert-warning"
+                                         role="alert">{{ trans('messages.info.no_books_found') }}</div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
                     {{--Abuse Reports --}}
                     @if(Cache::get('Module.Admin'))
-                        <div class="tab-pane" id="step2">
+                        <div class="tab-pane" id="step3">
                             <div class="row">
                                 <div class="col-xs-12 paddingTop10">
                                     @if($booksReported->count() > 0)
@@ -176,7 +234,7 @@
                                             <tr>
                                                 <th class="hidden-xs">{{ trans('general.id') }}</th>
                                                 <th>{{ trans('general.subject') }}</th>
-                                                <th>{{ trans('general.sender') }}</th>
+                                                <th>{{ trans('general.author') }}</th>
                                                 <th>{{ trans('general.status') }}</th>
                                                 <th>{{ trans('general.remove') }}</th>
                                                 <th>{{ trans('general.created-at') }}</th>
@@ -186,13 +244,13 @@
 
                                             @foreach($booksReported as $book)
                                                 <tr>
-                                                    <td class="hidden-xs">{{ $book->book_id }}</td>
+                                                    <td class="hidden-xs">{{ $book->serial }}</td>
                                                     <td>
                                                         <a href="{{ action('BookController@show',[$book->book_id]) }}">
                                                             {!! $book->title !!}</a>
                                                     </td>
                                                     <td>
-                                                        <span> {{ $book->user_id }} </span>
+                                                        <span> {{ $book->author->name }} </span>
 
                                                     </td>
                                                     <td>
@@ -217,7 +275,6 @@
                             </div>
                         </div>
                     @endif
-
                 </div>
 
                 <br>

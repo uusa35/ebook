@@ -1,7 +1,25 @@
+html, body, h1, h2, h3, h4, h5, span, p, div, table, a, input {
+    font-family: 'Droid Arabic Kufi', 'Ubuntu';
+}
+
+.navbar-nav {
+ margin-right: 60px;
+    margin-left: 60px;
+}
 .radio, .checkbox {
     margin-top : 0px !important;
 }
 
 .smalltd {
     width:40px;
+}
+
+.table-details {
+    width: 90%;
+    margin: 3%;
+    line-height: 30px;
+}
+
+.table-details td {
+    padding: 8px;
 }

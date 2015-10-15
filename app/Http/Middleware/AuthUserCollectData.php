@@ -19,6 +19,8 @@ class AuthUserCollectData
     public function handle($request, Closure $next)
     {
 
+        //dd(Cache::get('Permission.Author'));
+
         if (is_null(\Session::get('roles'))) {
 
             $authUserRole = $request->user()->roles()->first();
@@ -32,6 +34,12 @@ class AuthUserCollectData
             $permissions = $authUserRole->perms()->where('level', '=', '2')->get();
 
             $permissionsList = $permissions->lists('name', 'id')->toArray();
+
+            $abilities = $authUserRole->perms()->get();;
+
+            $abilitiesList = $abilities->Lists('name', 'id')->toArray();
+
+
             /*
              * 'Module.Admin' => [List of Modules]
              * */
@@ -42,6 +50,15 @@ class AuthUserCollectData
              * 'Permission.Admin' => [List of Permissions]
              * */
             \Cache::put('Permission.' . $authUserRole->name, array_values($permissionsList), 120);
+
+
+            /*
+             * All Permissions and Roles in one array
+             *
+             * */
+
+            \Cache::put('Abilities.' . $authUserRole->name, array_values($abilitiesList), 120);
+
 
             /*
              * 'Permission.role_edit' => role_edit

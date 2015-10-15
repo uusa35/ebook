@@ -4,23 +4,23 @@
 
 
         <div class="col-lg-3">
-            <h3>Contact Information</h3>
+            <h3>{{ trans('general.contactus') }}</h3>
 
-            <p><i class="fa fa-fw fa-home"></i> Some Address 987, NY<br/>
-                <i class="fa fa-fw fa-phone"></i> +34 9884 4893 <br/>
-                <i class="fa fa-fw fa-mobile"></i> +34 59855 9853 <br/>
-                <span class="icon icon-envelop"></span> <a href="#"> agency@blacktie.co</a> <br/>
-                <span class="icon icon-twitter"></span> <a href="#"> @blacktie_co </a> <br/>
-                <span class="icon icon-facebook"></span> <a href="#"> BlackTie Agency </a> <br/>
+            <p><i class="fa fa-fw fa-home"></i> {{ $contactusInfo->address }}<br/>
+                <i class="fa fa-fw fa-phone"></i> {{ $contactusInfo->phone }}<br/>
+                <i class="fa fa-fw fa-mobile"></i>{{ $contactusInfo->mobile }}<br/>
+                <span class="fa ifa-fw fa-letter"></span> <a href="#"> {{ $contactusInfo->email }}</a> <br/>
+                <span class="fa fa-fw fa-twitter"></span> <a href="#"> {{ $contactusInfo->twitter }}</a> <br/>
+                <span class="fa fa-fw fa-instagram"></span> <a href="#"> {{ $contactusInfo->instagram }}</a> <br/>
+                <span class="fa fa-fw fa-youtube"></span> <a href="#"> {{ $contactusInfo->youtube }}</a>
             </p>
         </div>
         <!-- col -->
 
         <div class="col-lg-3">
-            <h3>Newsletter</h3>
+            <h3>{{ trans('general.newsletter') }}</h3>
 
-            <p>Register to our newsletter and be updated with the latests information regarding our services, offers and
-                much more.</p>
+            <p>{{ trans('general.newsletter_message') }}</p>
 
             <p>
 
@@ -51,19 +51,17 @@
         <!-- col -->
 
         <div class="col-lg-3">
-            <h3>Support Us</h3>
+            <h3>{{ trans('conditions') }}</h3>
+            <h4>{{ $conditions->title_en }}</h4>
 
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book.</p>
+            <p>{{ $conditions->body_en }}.</p>
         </div>
         <!-- col -->
         <div class="col-lg-3">
-            <h3>Support Us</h3>
+            <h3>{{ trans('conditions') }}</h3>
+            <h4>{{ $conditions->title_ar }}</h4>
 
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book.</p>
+            <p>{{ $conditions->body_ar }}.</p>
         </div>
         <!-- col -->
 

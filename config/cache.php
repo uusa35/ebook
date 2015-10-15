@@ -58,6 +58,7 @@ return [
 
         'redis' => [
             'driver' => 'redis',
+            //'driver' => 'memcached',
             'connection' => 'default',
         ],
 

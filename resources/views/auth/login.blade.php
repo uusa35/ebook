@@ -39,14 +39,18 @@
                         <div class="row {{ Session::get('pullClass') }}">
 
                             <div class="col-lg-12">
-                                <a class="btn btn-social btn-twitter btn-material-light-blue">
-                                    <i class="fa fa-fw fa-twitter"></i>  Sign in with Twitter
+                                <a class="btn btn-social btn-twitter btn-material-light-blue" href="{{ action('Auth\AuthController@redirectToTwitterProvider') }}">
+                                    <i class="fa fa-fw fa-twitter"></i>  {{ trans('buttons.twitter_login') }}
                                 </a>
-                                <a class="btn btn-social btn-twitter btn-material-blue ">
-                                    <i class="fa fa-facebook"></i> Sign in with Facebook
+                                <a class="btn btn-social btn-twitter btn-material-blue " href="{{ action('Auth\AuthController@redirectToFacebookProvider') }}">
+                                    <i class="fa fa-facebook"></i> {{ trans('buttons.facebook_login') }}
                                 </a>
-                                <a class="btn btn-social btn-google btn-material-red ">
-                                    <i class="fa fa-google"></i> Sign in with Google
+                                <a class="btn btn-social btn-google btn-material-red " href="{{ action('Auth\AuthController@redirectToGoogleProvider') }}">
+                                    <i class="fa fa-google"></i> {{ trans('buttons.google_login') }}
+                                </a>
+
+                                <a class="btn btn-social btn-google btn-material-grey-200 " href="{{ action('Auth\AuthController@redirectToGithubProvider') }}">
+                                    <i class="fa fa-github"></i> {{ trans('buttons.github_login') }}
                                 </a>
                             </div>
 

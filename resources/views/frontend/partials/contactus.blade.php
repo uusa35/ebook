@@ -5,25 +5,38 @@
 <div id="cf">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
-                <div id="mapwrap">
-                    <iframe height="400" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.es/maps?t=m&amp;ie=UTF8&amp;ll=52.752693,22.791016&amp;spn=67.34552,156.972656&amp;z=6&amp;output=embed"></iframe>
+            <div class="col-xs-12 col-lg-6">
+                <div class="well">
+                    <!-- START CONTENT ITEM -->
+                    <div class="googlemap col-lg-12">
+                        <img src="{{ asset('images/logo.png') }}" alt="" class="img-responsive text-center col-lg-3 col-md-3 col-lg-offset-4 col-md-offset-4"/>
+                    </div>
+                    <address>
+                        <strong>{{ $contactusInfo->company }}</strong><br>
+                        {{ $contactusInfo->address }}<br>
+                        {{ $contactusInfo->zipcode }}<br>
+                        {{ $contactusInfo->country }}<br>
+                        <br>
+                        <strong>{{ trans('word.phone') }}</strong>: {{ $contactusInfo->phone }}<br>
+                        <strong>{{ trans('word.mobile') }}</strong>: {{ $contactusInfo->mobile }}<br>
+                        <strong>{{ trans('word.email') }}</strong>: {{ $contactusInfo->email }}<br>
+                    </address>
+
+                    <div id="mapwrap">
+                        <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:429px;width:495px;'><div id='gmap_canvas' style='height:429px;width:686px;'></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div> <a href='http://maps-generator.com/'>maps-generator</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=dd98a226f5a20bd4b388befc42e008b326a2249a'></script><script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng(29.39,48.003056000000015),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(29.39,48.003056000000015)});infowindow = new google.maps.InfoWindow({content:'<strong>kuwait</strong><br>kuwait towers<br> <br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+
+                    </div>
+                    <!-- END CONTENT ITEM -->
+
                 </div>
+            </div>
+
+            <div class="col-lg-6 col-xs-12">
+                <h4>{{trans('general.contactus')}}</h4>
+                <hr/>
+                @include('frontend.partials._form_contactus')
             </div><!--col-lg-8-->
-            <div class="col-lg-4">
-                <h4>ADDRESS<br/>Minsk - Head Office</h4>
-                <br>
-                <p>
-                    Business Center, SomeAve 987,<br/>
-                    Minsk, Belarus.
-                </p>
-                <p>
-                    P: +55 4839-4390<br/>
-                    F: +55 4333-4345<br/>
-                    E: <a href="mailto:#">hello@linkagency.com</a>
-                </p>
-                <p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-            </div><!--col-lg-4-->
+
         </div><!-- row -->
     </div><!-- container -->
 </div><!-- Contact Footer -->

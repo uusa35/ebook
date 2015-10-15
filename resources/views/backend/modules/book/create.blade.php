@@ -22,11 +22,10 @@
             <div class="row">
 
                 <div class="form-group col-md-3 col-lg-3">
-                    {!! Form::hidden('user_id', Auth::id()) !!}
+                    {!! Form::hidden('author_id', Auth::id()) !!}
                     {!! Form::label('cover', trans('general.cover_ar') , ['class' => 'control-label']) !!}*
                     {!! Form::file('cover', null,['class' => 'form-control','placeholder'=>
-                    trans('general.cover')
-                    ]) !!}
+                    trans('general.cover')]) !!}
                 </div>
                 {{--<div class="form-group col-md-3 col-lg-3">
                     {!! Form::label('cover_en', trans('general.cover_en') , ['class' => 'control-label']) !!}*

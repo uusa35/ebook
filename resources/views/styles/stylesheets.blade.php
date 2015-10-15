@@ -11,8 +11,3 @@
 @else
     <link rel="stylesheet" href="/css/custom_en.css"/>
 @endif
-<style type="text/css">
-    html, body, h1, h2, h3, h4, span, p, div, table, a, input {
-        font-family: 'Droid Arabic Kufi', 'Ubuntu';
-    }
-</style>

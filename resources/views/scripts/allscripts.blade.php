@@ -14,6 +14,15 @@
 
             }
         });
+        $(document).scroll(function(e){
+            var scrollTop = $(document).scrollTop();
+            if(scrollTop > 210){
+                /*console.log(scrollTop);*/
+                $('.navbar').addClass('navbar-fixed-top');
+            } else {
+                $('.navbar').removeClass('navbar-fixed-top');
+            }
+        });
     });
 </script>
 

@@ -115,14 +115,26 @@
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <!-- The user image in the navbar-->
-                    <img src="{{ asset('images/uploads/avatar/thumbnail/'.Auth::user()->avatar )}}" class="user-image" alt="User Image">
-                    <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                    <span class="hidden-xs">{{ Auth::user()->name_en }}</span>
+                    @if(count(Auth::user()->avatar) > 1)
+                        <img src="{{ asset('images/uploads/avatar/thumbnail/'.Auth::user()->avatar )}}"
+                             class="user-image" alt="User Image">
+                    @else
+                        <img src="//www.gravatar.com/avatar/{!! md5(Auth::user()->email) !!}?s=64"
+                             alt="{!! Auth::user()->name !!}" class="user-image">
+                        @endif
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                        <span class="hidden-xs">{{ Auth::user()->name_en }}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- The user image in the menu -->
                     <li class="user-header">
-                        <img src="{{ asset('images/uploads/avatar/thumbnail/'.Auth::user()->avatar )}}" class="img-circle" alt="User Image">
+                        @if(count(Auth::user()->avatar) > 1)
+                            <img src="{{ asset('images/uploads/avatar/thumbnail/'.Auth::user()->avatar )}}"
+                                 class="img-circle" alt="User Image">
+                        @else
+                            <img src="//www.gravatar.com/avatar/{!! md5(Auth::user()->email) !!}?s=64"
+                                 alt="{!! Auth::user()->name !!}" class="user-image">
+                        @endif
 
                         <p>
                             {{ Auth::user()->name_en }}
@@ -135,7 +147,7 @@
                             <a href="#">Followers</a>
                         </div>
                         <div class="col-xs-4 text-center">
-                            <a href="#">Sales</a>
+                            <a href="{{ action('Backend\MessagesController@index') }}">{{ trans('general.inbox') }}</a>
                         </div>
                         <div class="col-xs-4 text-center">
                             <a href="#">Friends</a>

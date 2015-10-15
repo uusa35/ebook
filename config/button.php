@@ -19,6 +19,11 @@ return [
     'btn-published' => 'btn btn-fab btn-fab-mini btn-material-green-600 btn-xs tooltip',
     'btn-declined' => 'btn btn-fab btn-fab-mini btn-material-deep-orange-600 btn-xs tooltip',
     'btn-index' => 'btn btn-fab btn-fab-mini btn-material-blue-300 btn-xs tooltip',
+    'btn-default' => 'btn btn-fab btn-fab-mini btn-material-grey-300 btn-xs tooltip',
+    'btn-favorite' => 'btn btn-fab btn-fab-mini btn btn-material-red-A400 btn-xs tooltip',
+    'btn-like' => 'btn btn-fab btn-fab-mini btn btn-material-blue-100 btn-xs tooltip',
+    'btn-report' => 'btn btn-fab btn-fab-mini btn-material-deep-orange-600 btn-xs tooltip',
+    'btn-search' => 'btn btn-fab btn-fab-mini btn-material-green btn-xs tooltip mdi-action-search',
 
 
 
@@ -38,10 +43,10 @@ return [
     'icon-book' =>"<i class='fa fa-xs fa-book'></i>",
     'icon-comment' =>"<i class='fa fa-xs fa-comment'></i>",
     'icon-role' =>"<i class='fa fa-xs fa-list'></i>",
-    'icon-index' =>"<i class='fa fa-xs fa-list'></i>",
-    'icon-index' =>"<i class='fa fa-xs fa-list'></i>",
-    'icon-index' =>"<i class='fa fa-xs fa-list'></i>",
-    'icon-index' =>"<i class='fa fa-xs fa-list'></i>",
+    'icon-favorite' =>"<i class='fa fa-xs fa-heart'></i>",
+    'icon-like' =>"<i class='fa fa-xs fa-thumbs-up'></i>",
+    'icon-report' =>"<i class='fa fa-xs fa-thumbs-down'></i>",
+    'icon-search' =>"<i class='fa fa-xs fa-search'></i>",
     'icon-index' =>"<i class='fa fa-xs fa-list'></i>",
     'icon-index' =>"<i class='fa fa-xs fa-list'></i>",
     'icon-index' =>"<i class='fa fa-xs fa-list'></i>",

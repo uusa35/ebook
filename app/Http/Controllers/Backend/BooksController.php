@@ -77,32 +77,33 @@ class BooksController extends AbstractController
     public function index()
     {
 
-        //dd(\Cache::get('Module.Admin'));
-        //dd(Gate::allows('change'));
-
         $this->getPageTitle('book.index');
 
         if (\Cache::get('Module.Admin') || \Cache::get('Module.Editor')) {
 
-            $books = $this->bookRepository->model->with('meta', 'user', 'chapters')->orderBy('created_at',
+            $books = $this->bookRepository->model->with('meta', 'author', 'chapters')->orderBy('created_at',
                 'desc')->get();
 
             $booksReported = $this->bookRepository->getReportsAbuse();
 
-            //$allCustomizedPreviews = $this->bookRepository->getCustomizedPreviews();
+            $booksFavorited = $this->bookRepository->model->mostFavorites();
 
         } elseif (\Cache::get('Module.Author')) {
 
-            $books = $this->bookRepository->model->where(['user_id' => Auth::id()])->with('meta',
-                'user')->orderBy('created_at', 'desc')->get();
+            $books = $this->bookRepository->model->where(['author_id' => Auth::id()])->with('meta',
+                'author')->orderBy('created_at', 'desc')->get();
+
             $booksReported = [];
+
+            $booksFavorited = $this->bookRepository->model->mostFavorites();
         }
 
         if ($books) {
 
             return view('backend.modules.book.index',
-                compact('books', 'booksReported'));
+                compact('books', 'booksReported', 'booksFavorited'));
         }
+
         return redirect()->back()->with(['error' => trans('messages.info.no_books_found')]);
 
     }
@@ -149,6 +150,7 @@ class BooksController extends AbstractController
     {
 
         // create a book record
+
         $book = $this->bookRepository->model->create($request->except('_token', 'cover'));
 
         if ($book) {
@@ -192,13 +194,13 @@ class BooksController extends AbstractController
 
         $allChapters = $this->chapterRepository->model->where(['book_id' => $id])->get();
 
-        $publishedChapters = $this->chapterRepository->model->where(['book_id' => $id,'status' => 'published'])->get();
+        $publishedChapters = $this->chapterRepository->model->where(['book_id' => $id, 'status' => 'published'])->get();
 
-        $pendingChapters = $this->chapterRepository->model->where(['book_id' => $id,'status' => 'pending'])->get();
+        $pendingChapters = $this->chapterRepository->model->where(['book_id' => $id, 'status' => 'pending'])->get();
 
-        $draftedChapters = $this->chapterRepository->model->where(['book_id' => $id,'status' => 'drafted'])->get();
+        $draftedChapters = $this->chapterRepository->model->where(['book_id' => $id, 'status' => 'drafted'])->get();
 
-        $declinedChapters = $this->chapterRepository->model->where(['book_id' => $id,'status' => 'declined'])->get();
+        $declinedChapters = $this->chapterRepository->model->where(['book_id' => $id, 'status' => 'declined'])->get();
 
         return view('backend.modules.book.show',
             compact('book', 'allChapters', 'publishedChapters', 'draftedChapters', 'pendingChapters',

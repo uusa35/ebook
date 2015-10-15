@@ -17,30 +17,56 @@
  ***************************************************************************************************/
 
 /***************************************************************************************************
- * Authentication
+ * FACEBOOK Authentication
  ***************************************************************************************************/
-Route::get('/auth/facebook', ['uses' => 'Auth\AuthController@redirectToProvider']);
-Route::get('/callback', ['uses' => 'Auth\AuthController@handleProviderCallback']);
+Route::get('/auth/facebook', 'Auth\AuthController@redirectToFacebookProvider');
+Route::get('/callback','Auth\AuthController@handleProviderFacebookCallback');
+/***************************************************************************************************
+ * GITHUB Authentication
+ ***************************************************************************************************/
+Route::get('auth/github', 'Auth\AuthController@redirectToGithubProvider');
+Route::get('auth/github/callback', 'Auth\AuthController@handleProviderGithubCallback');
+/***************************************************************************************************
+ * TWITTER Authentication
+ ***************************************************************************************************/
+Route::get('auth/twitter', 'Auth\AuthController@redirectToTwitterProvider');
+Route::get('auth/twitter/callback', 'Auth\AuthController@handleProviderTwitterCallback');
+/***************************************************************************************************
+ * GOOGLE Authentication
+ ***************************************************************************************************/
+Route::get('auth/google', 'Auth\AuthController@redirectToGoogleProvider');
+Route::get('auth/google/callback', 'Auth\AuthController@handleProviderGoogleCallback');
+
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
-Route::get('/home', ['uses' => 'HomeController@index']);
+Route::get('/', ['as' => 'home', 'uses' => 'BookController@index']);
+Route::get('/home', ['uses' => 'BookController@index']);
 
 /***************************************************************************************************
  * Localization
  ***************************************************************************************************/
 Route::get('/lang/{lang}', ['uses' => 'LanguageController@changeLocale']);
 
+/***************************************************************************************************
+ * Search
+ ***************************************************************************************************/
+Route::post('search',['uses'=>'BookController@getShowSearchResults']);
 
-Route::group(['prefix' => 'frontend', 'middleware' => 'guest'], function () {
 
-    Route::get('/', function () {
+Route::group(['prefix' => 'frontend'], function () {
 
-        return view('frontend.modules.book.index');
-    });
+    Route::get('/', ['uses'=>'BookController@index']);
+    Route::get('books', ['uses'=>'BookController@getAllBooks']);
+    Route::get('contactus', ['uses'=>'HomeController@getContactus']);
+    Route::post('contactus','HomeController@sendContactUs');
+
+    /***************************************************************************************************
+     * Index ( Main Page ) BookController
+     ***************************************************************************************************/
+
 
     /***************************************************************************************************
      * Index ( Main Page ) BookController
@@ -48,15 +74,28 @@ Route::group(['prefix' => 'frontend', 'middleware' => 'guest'], function () {
     Route::resource('book', 'BookController');
 
     /***************************************************************************************************
-     *                                          Report
-     *
-     ***************************************************************************************************/
-    Route::get('/report/{user}/{book}', ['uses' => 'BookController@getCreateNewReportAbuse']);
-    /***************************************************************************************************
      *                                          User
      *
      ***************************************************************************************************/
     Route::get('/conditions', ['uses' => 'HomeController@getConditions']);
+
+
+    Route::group(['middleware' => 'auth'], function () {
+        /***************************************************************************************************
+         *                                          Favorite
+         *
+         ***************************************************************************************************/
+        Route::get('/favorite/{user}/{book}', ['uses' => 'BookController@getCreateNewFavoriteList']);
+        Route::get('/favorite/remove/{user}/{book}', ['uses' => 'BookController@getRemoveBookFromUserFavoriteList']);
+        Route::get('/orders/remove/{user}/{book}', ['uses' => 'BookController@getRemoveBookFromUserOrderList']);
+
+        /***************************************************************************************************
+         *                                          Report
+         *
+         ***************************************************************************************************/
+        Route::get('/report/{user}/{book}', ['uses' => 'BookController@getCreateNewReportAbuse']);
+
+    });
 
 
 });
@@ -88,7 +127,6 @@ Route::group(['prefix' => 'frontend', 'middleware' => 'guest'], function () {
  *
  * */
 Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collectData']], function () {
-
 
     /***************************************************************************************************
      * Dashboard Module
@@ -129,22 +167,27 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
 //        Route::resource('previews','Backend\PreviewsController');
 
         Route::get('/book/chapters/pedf/preview/customized/{chapterId}', [
-            'uses' => 'Backend\PreviewsController@index'
+
+            'uses' => 'Backend\PreviewsController@index',
+            'as' => 'backend.preview.index'
         ]);
 
         Route::get('/book/chapters/pdf/preview/customized/{chapterId}',
             [
-                'uses' => 'Backend\PreviewsController@create'
+                'uses' => 'Backend\PreviewsController@create',
+                'as' => 'backend.preview.create'
             ]);
 
         Route::get('/book/chapters/pdf/preview/customized/{chapterId}/{preview_start}/{preview_end}',
             [
-                'uses' => 'Backend\PreviewsController@show'
+                'uses' => 'Backend\PreviewsController@show',
+                'as' => 'backend.preview.show'
             ]);
 
         Route::post('/book/chapters/pdf/preview/customized',
             [
-                'uses' => 'Backend\PreviewsController@store'
+                'uses' => 'Backend\PreviewsController@store',
+                'as' => 'backend.preview.store'
             ]);
 
 

@@ -48,13 +48,29 @@ class BookController extends Controller
     {
         $paginate = 4;
         // get 4 published books for index
-        $books = $this->bookRepository->model->with('users')->with('meta')->where('status', '=', 'published')->orderBy('created_at',
-            'desc')->paginate($paginate);
+
+        /*$recentBooks = $this->bookRepository->model->with('users','meta')
+            ->where('active', '=', '1')
+            ->join('chapters','chapters.book_id','=','books.id')
+            ->orderBy('books.created_at', 'desc')
+            ->limit(4)
+            ->get();*/
+
+        $recentBooks = $this->bookRepository->getRecentBooks();
 
         // get 4 published and most favorite books for index
-        $mostFavoriteBooks = $this->bookRepository->getMostFavorited($paginate);
+        $mostFavoriteBooks = $this->bookRepository->getMostFavorited(4);
 
-        return view('frontend.modules.book.index', compact('books', 'mostFavoriteBooks'));
+
+        return view('frontend.modules.book.index', compact('recentBooks', 'mostFavoriteBooks'));
+    }
+
+    public function getAllBooks()
+    {
+        // get 4 published books for index
+        $allBooks = $this->bookRepository->model->with('users')->with('meta')->where('active', '=', '1')->orderBy('created_at', 'desc')->paginate(8);
+
+        return view('frontend.modules.book.all', compact('allBooks'));
     }
 
     /**
@@ -66,22 +82,16 @@ class BookController extends Controller
     public function show($id)
     {
         // get all books by book ID
-        $book = $this->bookRepository->model->with(['user', 'meta'])->find($id);
+        $book = $this->bookRepository->model->with(['author', 'meta', 'users'])->find($id);
 
         /*redirec if the book is not published with a not published message*/
 
-        if ($book->status != 'published') {
+        if ($book->active != '1') {
 
-            return redirect('/')->with(['error'=>'word.error-book-not-published']);
+            return redirect('/')->with(['error' => 'word.error-book-not-published']);
         }
 
-        // get the author of the book
-        $author = $book->user;
-
-        // book info
-        $bookMeta = $book->meta;
-
-        return view('frontend.modules.book.show', ['book' => $book, 'author' => $author, 'bookMeta' => $bookMeta]);
+        return view('frontend.modules.book.show', ['book' => $book]);
     }
 
 
@@ -139,7 +149,7 @@ class BookController extends Controller
         if ($this->purchaseRepository->model->where([
             'book_id' => $bookId,
             'user_id' => $userId,
-            'stage'   => 'order'
+            'stage' => 'order'
         ])->delete()
         ) {
             return redirect()->back()->with(['success', trans('word.success-order-remove')]);
@@ -148,18 +158,6 @@ class BookController extends Controller
         return redirect()->back()->with(['error', trans('word.error-order-remove')]);
     }
 
-    /**
-     * @return \Illuminate\View\View
-     */
-    public function getAllBooks()
-    {
-        $books = $this->bookRepository->model->with('meta')->where('status', '=', 'published')->orderBy('created_at',
-            'desc')->paginate(10);
-
-        $render = true;
-
-        return view('frontend.modules.book.index', compact('books', 'render'));
-    }
 
     /**
      * @param Request $request
@@ -172,7 +170,7 @@ class BookController extends Controller
 
         if (count($searchResults) > 0) {
 
-            return view('frontend.modules.book.index', ['books' => $searchResults]);
+            return view('frontend.modules.book.all', ['allBooks' => $searchResults]);
 
         } else {
 
@@ -185,10 +183,10 @@ class BookController extends Controller
      * @param $bookUrl
      * @return full link of the free book
      */
-    public function getFreePdfFile($bookId,$bookUrl)
+    public function getFreePdfFile($bookId, $bookUrl)
     {
 
-        $book = $this->bookRepository->model->where(['url' => $bookUrl,'id'=> $bookId])->first();
+        $book = $this->bookRepository->model->where(['url' => $bookUrl, 'id' => $bookId])->first();
 
         if ($book) {
 
@@ -197,7 +195,7 @@ class BookController extends Controller
 
             //$link = storage_path('app/pdfs/') . $bookUrl;
 
-            $this->dispatchAndShowPreviews($bookUrl,$book->title_en,$book->title_ar,$book->free);
+            $this->dispatchAndShowPreviews($bookUrl, $book->title_en, $book->title_ar, $book->free);
 
         }
 
@@ -209,14 +207,14 @@ class BookController extends Controller
      * @param $bookUrl
      * @return creating on the fly a link with 10 pages of a pdf file of a book
      */
-    public function getFirstTenPagesForPaidBooks($bookId,$bookUrl)
+    public function getFirstTenPagesForPaidBooks($bookId, $bookUrl)
     {
-        $book = $this->bookRepository->model->where(['url' => $bookUrl,'id'=> $bookId])->first();
+        $book = $this->bookRepository->model->where(['url' => $bookUrl, 'id' => $bookId])->first();
 
         // every request on preview .. View will be increaseds
         $this->bookRepository->increaseBookViewByUrl($bookUrl);
 
-        $this->dispatchAndShowPreviews($bookUrl,$book->title_en,$book->title_ar,$book->free);
+        $this->dispatchAndShowPreviews($bookUrl, $book->title_en, $book->title_ar, $book->free);
 
     }
 
@@ -252,15 +250,16 @@ class BookController extends Controller
      * @param $free
      * @return mixed
      */
-    function dispatchAndShowPreviews($bookUrl,$title_en,$title_ar,$free) {
+    function dispatchAndShowPreviews($bookUrl, $title_en, $title_ar, $free)
+    {
 
-        $outPut = $this->dispatch(new CreateChapterPreview($bookUrl,$title_en,$title_ar,$free));
+        $outPut = $this->dispatch(new CreateChapterPreview($bookUrl, $title_en, $title_ar, $free));
 
         $fileOutput = file_get_contents($outPut);
 
         return Response::make($fileOutput, 200, [
 
-            'Content-Type'        => 'application/pdf',
+            'Content-Type' => 'application/pdf',
             'Content-Disposition' => 'inline; ' . $bookUrl,
 
         ]);
@@ -270,7 +269,8 @@ class BookController extends Controller
      * add report abuse within the admin interfrace
      * @return string
      */
-    function getCreateNewReportAbuse ($userId,$bookId) {
+    function getCreateNewReportAbuse($userId, $bookId)
+    {
 
         $checkReportAbuse = DB::table('book_report')->where(['book_id' => $bookId, 'user_id' => $userId])->first();
 

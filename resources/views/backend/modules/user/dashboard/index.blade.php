@@ -10,24 +10,26 @@
 
 
     <div class="row">
+        @if(!is_null(Cache::get('counters')))
+            @foreach(Cache::get('counters') as $counterKey => $counterValue)
 
-        @foreach(Cache::get('counters') as $counterKey => $counterValue)
+                <div class="col-lg-3">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>{{ $counterValue }}</h3>
 
-            <div class="col-lg-3">
-                <!-- small box -->
-                <div class="small-box bg-aqua">
-                    <div class="inner">
-                        <h3>{{ $counterValue }}</h3>
-
-                        <p>{{ $counterValue.' '.$counterKey }} </p>
+                            <p>{{ $counterValue.' '.$counterKey }} </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-fw fa-{{str_singular(strtolower($counterKey))}}"></i>
+                        </div>
+                        <a href="{{ URL::to('backend/'.strtolower($counterKey)) }}" class="small-box-footer">More info
+                            <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
-                    <div class="icon">
-                        <i class="fa fa-fw fa-{{str_singular(strtolower($counterKey))}}"></i>
-                    </div>
-                    <a href="{{ URL::to('backend/'.strtolower($counterKey)) }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        @endif
 
 
     </div>

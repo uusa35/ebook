@@ -9,6 +9,9 @@
 namespace App\Core;
 
 
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
+
 class AbstractPolicy
 {
 
@@ -21,22 +24,32 @@ class AbstractPolicy
      * 5- One Case Example : you can not add chapter unless you have access to edit the book itself.
      * */
     public $userRole;
-    public $userPermissions;
+    public $userAbilities;
     public $moduleRequested;
     public $permName;
 
     public function __construct()
     {
-        $this->userRole = \Cache::get('role');
-        $this->userPermissions = \Cache::get('Permission.' . $this->userRole);
-        $this->moduleRequested = str_singular(strtolower(\Cache::get('module')));
+        $this->userRole = Cache::get('role');
+        $this->userAbilities = Cache::get('Abilities.' . $this->userRole);
+
+    }
+
+    public function getModule()
+    {
+        return $this->moduleRequested = str_singular(strtolower(\Session::get('module')));
     }
 
 
     public function create()
     {
-        //dd($this->userPermissions);
-        if (in_array($this->moduleRequested . '_create', $this->userPermissions, true)) {
+
+        //dd(Cache::get('module'));
+        //dd($this->moduleRequested);
+        //dd($this->userAbilities);
+        //dd($this->userAbilities);
+        //dd($this->getModule());
+        if (in_array($this->getModule() . '_create', $this->userAbilities, true)) {
 
             return true;
         }
@@ -50,7 +63,7 @@ class AbstractPolicy
      */
     public function edit()
     {
-        if (in_array($this->moduleRequested . '_edit', $this->userPermissions, true)) {
+        if (in_array($this->getModule() . '_edit', $this->userAbilities, true)) {
 
             return true;
         }
@@ -66,7 +79,7 @@ class AbstractPolicy
     public function change()
     {
 
-        if (in_array($this->moduleRequested . '_change', $this->userPermissions, true)) {
+        if (in_array($this->getModule() . '_change', $this->userAbilities, true)) {
 
             return true;
 
@@ -80,7 +93,7 @@ class AbstractPolicy
     public function delete()
     {
 
-        if (in_array($this->moduleRequested . '_delete', $this->userPermissions, true)) {
+        if (in_array($this->getModule() . '_delete', $this->userAbilities, true)) {
 
             return true;
 

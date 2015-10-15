@@ -26,15 +26,32 @@ class BookRepository extends AbstractRepository
         $this->model = $book;
     }
 
+
+    /**
+     * get the recentest books for the index
+     * @return mixed
+     */
+    public function getRecentBooks()
+    {
+        return $this->model->with('users', 'meta')
+            ->where('active', '=', '1')
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status','=','published');
+            })
+            ->orderBy('books.created_at', 'desc')
+            ->limit(4)
+            ->get();
+    }
+
     /**
      * One To Many Relation
      * a user has many  books
      * a book belongs to one user
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function getUser()
+    public function getAuthor()
     {
-        return $this->model->user();
+        return $this->model->author();
     }
 
     /**
@@ -72,15 +89,20 @@ class BookRepository extends AbstractRepository
     {
         return $this->model
             // no results for drafts -- only for published
-            ->having('status', '=', 'published')
-            ->orWhere('description_ar', 'like', '%' . $searchItem . '%')
-            ->orWhere('description_en', 'like', '%' . $searchItem . '%')
+            ->orWhere('description', 'like', '%' . $searchItem . '%')
             ->orWhere('serial', 'like', '%' . $searchItem . '%')
-            ->orWhere('title_ar', 'like', '%' . $searchItem . '%')
-            ->orWhere('title_en', 'like', '%' . $searchItem . '%')
-            ->orWhere('body', 'like', '%' . $searchItem . '%')
-            ->with('meta')->get();
+            ->orWhere('title', 'like', '%' . $searchItem . '%')
+            ->with('meta')
+            ->with([
+                'chapters' => function ($query) use ($searchItem) {
+                    $query->orWhere('title', 'like', '%' . $searchItem . '%');
+                    $query->orWhere('body', 'like', '%' . $searchItem . '%');
+                }
+            ])
+            ->where('active', '=', '1')
+            ->paginate(10);
     }
+
 
     /**
      * Admin Zone
@@ -165,6 +187,7 @@ class BookRepository extends AbstractRepository
             ->join('book_report', 'book_report.book_id', '=', 'books.id')
             ->leftjoin('users', 'book_report.user_id', '=', 'users.id')
             ->orderBy('book_report.created_at', 'DESC')
+            ->with('author')
             ->paginate($paginate);
 
     }
@@ -172,7 +195,7 @@ class BookRepository extends AbstractRepository
     public function changeActivationBook($bookId, $userId, $activeStatus)
     {
 
-        $book = $this->model->where(['id' => $bookId, 'user_id' => $userId])->first();
+        $book = $this->model->where(['id' => $bookId, 'author_id' => $userId])->first();
 
         $activeStatus = ($activeStatus === '1') ? 0 : 1;
 

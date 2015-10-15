@@ -2,6 +2,7 @@
 
 use App\Core\AbstractModel;
 use App\Core\LocaleTrait;
+use Illuminate\Support\Facades\DB;
 
 /**
  * App\Src\Book\Book
@@ -29,9 +30,9 @@ class Book extends AbstractModel
      * get the author of the book
      * Table : Book
      */
-    public function user()
+    public function author()
     {
-        return $this->belongsTo('App\Src\User\User', 'user_id');
+        return $this->belongsTo('App\Src\User\User', 'author_id');
     }
 
     /**
@@ -62,6 +63,7 @@ class Book extends AbstractModel
         return $this->hasMany('App\Src\Book\Chapter\Chapter');
     }
 
+
     /**
      * Many To Many Relation - Order Relation
      * a user has many books
@@ -80,16 +82,18 @@ class Book extends AbstractModel
         return $this->hasMany('App\Src\Favorite\Favorite', 'book_id');
     }
 
-    public function mostFavorites($paginate)
+    public function mostFavorites($paginate = '10')
     {
         return $this
             ->selectRaw('books.*, count(*) as book_count')
-            ->with('meta')
+            ->with('meta','author','users')
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status','=','published');
+            })
             ->join('book_user', 'books.id', '=', 'book_user.book_id')
-            ->where('books.status', 'published')
+            ->where('books.active', '1')
             ->groupBy('book_id')// responsible to get the sum of books returned
-            ->orderBy('book_count', 'DESC')
-            ->paginate($paginate);
+            ->orderBy('book_count', 'DESC')->paginate($paginate);
     }
 
 

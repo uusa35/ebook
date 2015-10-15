@@ -3,9 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Cache;
+use \Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Session;
 
 
 class BeforeAccessModule
@@ -27,36 +28,56 @@ class BeforeAccessModule
          * 2- to make sure the Module is stored within the cache and assigned to the current authenticated user
          * */
 
-        $requestedRouteName = explode('.', \Route::currentRouteName(), 3);
+
+        Session::remove('module');
+
+        $requestedRouteName = explode('.', Route::currentRouteName(), 3);
 
         //dd($requestedRouteName);
+        //dd(\Cache::get('Module.Admin'));
 
         if (count($requestedRouteName) > 1 && $requestedRouteName[2] === 'index') {
 
-            $moduleEncrypted = \Crypt::encrypt(ucfirst($requestedRouteName[1]));
+            $this->nextRequest($requestedRouteName);
 
-            $moduleDecrypted = \Crypt::decrypt($moduleEncrypted);
+            return $next($request);
 
-            \Session::put('module', $moduleDecrypted);
-            \Cache::put('module',$moduleDecrypted,120);
 
-            $role = \Cache::get('role');
+        } elseif ($requestedRouteName[0] === 'backend' && count($requestedRouteName[0]) >= 1) {
 
-            $array = (\Cache::get('Module.' . $role));
+            $this->nextRequest($requestedRouteName);
 
-            if (in_array($moduleDecrypted, $array, true)) {
+            return $next($request);
 
-                return $next($request);
-
-            }
-            dd('blocked cookie here');
         }
-
         /*
-         * to the next level which is permission middleware
+         * out of scope
          * */
+
         return $next($request);
 
+    }
 
+    public function nextRequest($requestedRouteName)
+    {
+        $moduleEncrypted = Crypt::encrypt(ucfirst($requestedRouteName[1]));
+
+        $moduleDecrypted = Crypt::decrypt($moduleEncrypted);
+
+        //\Cache::put('module', $moduleDecrypted, 120);
+
+        $role = Cache::get('role');
+
+        $array = \Cache::get('Abilities.'.$role);
+
+        //dd($array);
+        //dd($moduleDecrypted);
+
+        if (in_array($moduleDecrypted, $array, true)) {
+
+            return Session::put('module', $moduleDecrypted);
+        }
+
+        dd('out of scope from inside the nextRequest funciton');
     }
 }

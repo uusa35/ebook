@@ -33,7 +33,7 @@
                                 Form::select('usersList',$usersList,null,['multiple'=>'multiple','name'=>'recipients[]','class'=>'form-control','id'=>'users'])
                                 !!}
                             </div>
-                            @endif
+                        @endif
 
                                     <!-- Submit Form Input -->
                             <div class="form-group">

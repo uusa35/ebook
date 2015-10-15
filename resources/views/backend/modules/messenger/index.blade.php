@@ -22,51 +22,45 @@
     @endcan
 @stop
 <div class="panel-body">
+    <table class="table" id="messages" style="color:#000000;">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ trans('general.subject') }}</th>
+            <th>{{ trans('general.body') }}</th>
+            <th>{{ trans('general.participants') }}</th>
+            <th>{{ trans('word.general.delete') }}</th>
+        </tr>
+        </thead>
+        <tbody>
 
-    @if($threads->count() > 0)
-
-        <table class="table" id="messages" style="color:#000000;">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>{{ trans('general.subject') }}</th>
-                <th>{{ trans('general.body') }}</th>
-                <th>{{ trans('general.participants') }}</th>
-                <th>{{ trans('word.general.delete') }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($threads as $thread)
-                <tr class="{{ ($thread->isUnread($currentUserId) ? 'alert-info' : 'alert-default')}}">
-                    <td>
-                        {!! link_to('backend/messages/' . $thread->id, $thread->id) !!}
-                    </td>
-                    <td class="">
-                        {!! link_to('backend/messages/' . $thread->id, $thread->subject) !!}
-                    </td>
-                    <td>
-                        {!! link_to('backend/messages/' . $thread->id,
-                        \Illuminate\Support\Str::limit($thread->latestMessage->body,30,'..more')) !!}
-                    </td>
-                    <td style="color: #000011;">
+        @foreach($threads as $thread)
+            <tr class="{{ ($thread->isUnread($currentUserId) ? 'btn-material-red-100' : '')}}">
+                <td>
+                    {!! link_to('backend/messages/' . $thread->id, $thread->id) !!}
+                </td>
+                <td class="">
+                    {!! link_to('backend/messages/' . $thread->id, $thread->subject) !!}
+                </td>
+                <td>
+                    {{--{!! link_to('backend/messages/' . $thread->id,
+                    \Illuminate\Support\Str::limit($thread->latestMessage->body,30,'..more')) !!}--}}
+                    {!! link_to_action('Backend\MessagesController@show',\Illuminate\Support\Str::words($thread->messages->first()->body,3),[$thread->id])
+                    !!}
+                </td>
+                <td style="color: #000011;">
+                    @foreach($thread->participants as $participant)
                         <small>
-                            {!! $thread->participantsString(Auth::id(), ['name_'.App::getLocale('lang')])!!}
+                            {{--{!! $thread->participantsString(Auth::id(), ['name'])!!}--}}
+                            {{ $participant->user->name }},
                         </small>
-                    </td>
-                    <td>
+                    @endforeach
+                </td>
+                <td>
 
-                    </td>
-                </tr>
-            @endforeach
-        </table>
-
-
-        {!! $threads->render() !!}
-    @else
-        <p>Sorry, no threads.</p>
-
-    @endif
-
-
+                </td>
+            </tr>
+        @endforeach
+    </table>
 </div>
 @stop

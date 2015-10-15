@@ -22,19 +22,28 @@
                 {!! Form::textarea('message', null, ['class' => 'form-control']) !!}
             </div>
 
-            @if($users->count() > 0)
-                @foreach($users as $user)
-                    <div class="checkbox">
-                        <span>
-                            {{ ($user->name_en) }}
-                        </span>
-                        <label>
-                            <input type="checkbox" name="recipients[]" value="{!! $user->id !!}">
-                        </label>
-                    </div>
-                @endforeach
+
+            @if($usersList->count() > 0)
+                <div class="form-group">
+                    {!! Form::label('usersList',trans('word.users')) !!} :
+                    {!!
+                    Form::select('usersList',$usersList,null,['multiple'=>'multiple','name'=>'recipients[]','class'=>'form-control','id'=>'users'])
+                    !!}
+                </div>
             @endif
-                            <!-- Submit Form Input -->
+            {{--@foreach($users as $user)
+                <div class="checkbox">
+                    <span>
+                        {{ ($user->name) }}
+                    </span>
+                    <label>
+                        <input type="checkbox" name="recipients[]" value="{!! $user->id !!}">
+                    </label>
+
+                </div>
+            @endforeach--}}
+
+            <!-- Submit Form Input -->
             <div class="form-group">
                 {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control']) !!}
             </div>

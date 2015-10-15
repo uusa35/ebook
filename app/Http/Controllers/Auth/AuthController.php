@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Core\AbstractController;
+use App\Core\SocialAuthTrait;
 use App\Src\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -25,7 +26,7 @@ class AuthController extends AbstractController
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins, SocialAuthTrait;
 
     /**
      * Create a new authentication controller instance.
@@ -60,12 +61,23 @@ class AuthController extends AbstractController
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name_en' => $data['name_en'],
+        $user = User::create([
+            'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'active' => 1,
         ]);
+
+        if ($user) {
+
+            $user->roles()->attach(3);
+
+            return true;
+
+        } else {
+
+            dd('error roles not created for a user');
+        }
     }
 
 
@@ -78,39 +90,5 @@ class AuthController extends AbstractController
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
 
-
-    public function redirectToProvider()
-    {
-        return \Socialite::driver('facebook')->redirect();
-    }
-
-    public function handleProviderCallback()
-    {
-
-        $userSocilite = \Socialite::driver('facebook')->user();
-
-        $data = [
-            'name_en' => $userSocilite->name,
-            'email' => $userSocilite->email,
-            'password' => $userSocilite->token
-        ];
-
-        $user = User::where('email', '=', $userSocilite->email)->first();
-
-        if ($user) {
-
-           \ Auth::login($user);
-
-            return redirect('home');
-
-        } else {
-
-            \Auth::login(User::create($data));
-
-        }
-
-        redirect('home');
-
-    }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Src\Category\Field\FieldCategory;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
@@ -13,32 +14,43 @@ class ViewServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
     public function boot()
     {
 
-        if (\Schema::hasTable('contactus') && \Schema::hasTable('fieldsCategories') && \Schema::hasTable('ads') && \Schema::hasTable('conditions')) {
+        if (is_null(\Cache::get('fieldsCategories')) && is_null(\Cache::get('contactusInfo')) && is_null(\Cache::get('conditions'))) {
 
-            $contactusInfo = \DB::table('contactus')->first();
-            $fieldsCategories = \DB::table('fields_categories')->get();
-            $allAds = \DB::table('ads')->limit(2)->get();
-            $conditions = \DB::table('conditions')->first();
+            if (\Schema::hasTable('contactus') && \Schema::hasTable('fields_categories') && \Schema::hasTable('ads') && \Schema::hasTable('conditions')) {
 
-            if (!is_null($contactusInfo) && !is_null($fieldsCategories) && !is_null($allAds) && !is_null($conditions)) {
-                \Cache::put('contactusInfo', $contactusInfo, 20);
-                \Cache::put('fieldsCategories', $fieldsCategories, 20);
-                \Cache::put('allAds', $allAds, 20);
-                \Cache::put('conditions', $conditions, 20);
+                $fieldsCategories = new FieldCategory();
+                $fieldsCategories = $fieldsCategories->all();
+                $contactusInfo = DB::table('contactus')->first();
+                $allAds = DB::table('ads')->limit(2)->get();
+                $conditions = DB::table('conditions')->first();
 
-                view()->share([
-                    'contactusInfo' => \Cache::get('contactUsInfo'),
-                    'allAds' => \Cache::get('allAds'),
-                    'fieldsCategories' => \Cache::get('fieldsCategories'),
-                    'conditions' => \Cache::get('conditions')
-                ]);
+
+                if (!is_null($contactusInfo) && !is_null($fieldsCategories) && !is_null($allAds) && !is_null($conditions)) {
+                    \Cache::put('contactusInfo', $contactusInfo, 20);
+                    \Cache::put('fieldsCategories', $fieldsCategories, 20);
+                    \Cache::put('allAds', $allAds, 20);
+                    \Cache::put('conditions', $conditions, 20);
+
+                    view()->share([
+                        'contactusInfo' => \Cache::get('contactusInfo'),
+                        'allAds' => \Cache::get('allAds'),
+                        'fieldsCategories' => \Cache::get('fieldsCategories'),
+                        'conditions' => \Cache::get('conditions')
+                    ]);
+                }
             }
+        } else {
+            view()->share([
+                'contactusInfo' => \Cache::get('contactusInfo'),
+                'allAds' => \Cache::get('allAds'),
+                'fieldsCategories' => \Cache::get('fieldsCategories'),
+                'conditions' => \Cache::get('conditions')
+            ]);
         }
-
-
     }
 
     /**

@@ -35,5 +35,10 @@ return [
         'create' => 'general.ad_create',
         'edit' => 'general.ad_edit',
     ],
+    'message' => [
+        'index' => 'general.inbox',
+        'create' => 'general.message_create',
+        'show' => 'general.message_show',
+    ],
 
 ];

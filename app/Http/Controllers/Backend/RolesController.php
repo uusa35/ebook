@@ -74,20 +74,15 @@ class RolesController extends AbstractController
     public function update(Request $request, $id)
     {
 
-        if (Gate::allows('edit')) {
+        $this->validate($request, array('name' => 'required', 'display_name' => 'required'));
 
-            $this->validate($request, array('name' => 'required', 'display_name' => 'required'));
+        $role = $this->roleRepository->model->find($id);
 
-            $role = $this->roleRepository->model->find($id);
+        $role->update($request->all());
 
-            $role->update($request->all());
+        $role->savePermissions($request->get('perms'));
 
-            $role->savePermissions($request->get('perms'));
-
-            return redirect()->action('Backend\RolesController@index')->with(['success' => 'messeages.success.role_edit']);
-        }
-
-        return redirect()->action('Backend\RolesController@index')->with(['error' => 'messeages.error.role_edit']);
+        return redirect()->action('Backend\RolesController@index')->with(['success' => 'messeages.success.role_edit']);
 
     }
 

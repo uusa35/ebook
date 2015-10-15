@@ -10,7 +10,7 @@
  min-height: 1000px !important;
 }
 .navbar .nav > li > .dropdown-menu {
- right: -4px;
+ right: -101px;
 }
 
 .main-header .navbar-custom-menu, .main-header .navbar-right {
@@ -20,3 +20,8 @@
 .main-sidebar {
  right: 0px !important;
 }
+
+.tdtitle {
+ width: 50%;
+}
+
