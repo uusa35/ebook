@@ -83,13 +83,18 @@ class BookController extends Controller
     public function show($id)
     {
         // get all books by book ID
-        $book = $this->bookRepository->model->with(['author', 'meta', 'users'])->find($id);
+        $book = $this->bookRepository->model
+            ->with(['author', 'meta', 'users'])
+            ->with(['chapters'=> function($query) {
+                $query->where('chapters.status', '=', 'published');
+            }])
+            ->find($id);
 
         /*redirec if the book is not published with a not published message*/
 
         if ($book->active != '1') {
 
-            return redirect('/')->with(['error' => 'word.error-book-not-published']);
+            return redirect('/')->with(['error' => 'messages.error.book_not_active']);
         }
 
         return view('frontend.modules.book.show', ['book' => $book]);
