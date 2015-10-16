@@ -71,9 +71,9 @@
                         <div class="row">
                             <div class="col-xs-12 paddingTop10">
                                 @if($books->count() > 0)
-                                    <table class="table table-striped table-order" id="booksTable">
+                                    <table class="table table-striped table-condensed table-hover" id="booksTable">
                                         <thead>
-                                        <tr style="background-color:#E0E0E0;">
+                                        <tr class="well-material-blue-grey-100">
                                             <th class="hidden-xs">{{ trans('general.id') }}</th>
                                             <th>{{ trans('general.title') }}</th>
                                             <th>{{ trans('general.chapters') }}</th>
@@ -143,8 +143,8 @@
                                                     </a>
                                                     @endcan
                                                 </td>
+                                                @if(Cache::get('Module.Admin'))
                                                 <td class="text-center">
-                                                    @can('delete')
                                                     <button type="button" class="{{ Config::get('button.btn-delete') }}"
                                                             id="delete-{{$book->id}}"
                                                             title="{{ trans('general.delete') }}"
@@ -152,8 +152,8 @@
                                                             data-target="#myModal">
                                                         {!! Config::get('button.icon-delete') !!}
                                                     </button>
-                                                    @endcan
                                                 </td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                         @include('backend.partials._delete_modal',['action'=> 'Backend\BooksController@destroy'])

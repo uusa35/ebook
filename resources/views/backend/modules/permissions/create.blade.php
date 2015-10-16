@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {!! Breadcrumbs::render('permission_create') !!}
+
     <div class="panel-body">
         {!! Form::open(['action' => 'Backend\PermissionsController@store']) !!}
 
@@ -29,10 +31,10 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-lg-1">
-                    {!! Form::submit(trans('word.general.submit'), ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit(trans('general.submit'), ['class' => 'btn btn-primary']) !!}
                 </div>
                 <div class="col-lg-1 col-lg-offset-1">
-                    <a class="btn btn-danger" href="{{ URL::to('/backend') }}">{{ trans('word.general.cancel') }}</a>
+                    <a class="btn btn-danger" href="{{ URL::to('/backend') }}">{{ trans('general.cancel') }}</a>
                 </div>
             </div>
 

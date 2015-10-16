@@ -17,5 +17,7 @@ return [
     ],
     'info' => [
         'no_books_found' => 'No book Found in.'
-    ]
+    ],
+    'newsletter_message' => 'Subscribe to get all recent books .. ',
+    'please_use' => 'Please use ##-###-###-##'
 ];

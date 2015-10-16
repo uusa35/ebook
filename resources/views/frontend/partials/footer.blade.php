@@ -4,12 +4,12 @@
 
 
         <div class="col-lg-3">
-            <h3>{{ trans('general.contactus') }}</h3>
+            <h3>{{ ucfirst(trans('general.contactus')) }}</h3>
 
             <p><i class="fa fa-fw fa-home"></i> {{ $contactusInfo->address }}<br/>
                 <i class="fa fa-fw fa-phone"></i> {{ $contactusInfo->phone }}<br/>
                 <i class="fa fa-fw fa-mobile"></i>{{ $contactusInfo->mobile }}<br/>
-                <span class="fa ifa-fw fa-letter"></span> <a href="#"> {{ $contactusInfo->email }}</a> <br/>
+                <i class="fa fa-fw fa-envelope"></i><a href="#"> {{ $contactusInfo->email }}</a> <br/>
                 <span class="fa fa-fw fa-twitter"></span> <a href="#"> {{ $contactusInfo->twitter }}</a> <br/>
                 <span class="fa fa-fw fa-instagram"></span> <a href="#"> {{ $contactusInfo->instagram }}</a> <br/>
                 <span class="fa fa-fw fa-youtube"></span> <a href="#"> {{ $contactusInfo->youtube }}</a>
@@ -18,9 +18,9 @@
         <!-- col -->
 
         <div class="col-lg-3">
-            <h3>{{ trans('general.newsletter') }}</h3>
+            <h3>{{ ucfirst(trans('general.newsletter')) }}</h3>
 
-            <p>{{ trans('general.newsletter_message') }}</p>
+            <p>{{ trans('messages.newsletter_message') }}</p>
 
             <p>
 
@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-lg-10">
-                        <button type="submit" class="btn btn-success">Sign in</button>
+                        <button type="submit" class="btn btn-success">{{ trans('general.subscribe') }}</button>
                     </div>
                 </div>
             </form>
@@ -51,14 +51,14 @@
         <!-- col -->
 
         <div class="col-lg-3">
-            <h3>{{ trans('conditions') }}</h3>
+            <h3>{{ ucfirst(trans('conditions')) }}</h3>
             <h4>{{ $conditions->title_en }}</h4>
 
             <p>{{ $conditions->body_en }}.</p>
         </div>
         <!-- col -->
         <div class="col-lg-3">
-            <h3>{{ trans('conditions') }}</h3>
+            <h3>{{ ucfirst(trans('conditions')) }}</h3>
             <h4>{{ $conditions->title_ar }}</h4>
 
             <p>{{ $conditions->body_ar }}.</p>

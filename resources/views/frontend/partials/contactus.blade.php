@@ -17,9 +17,9 @@
                         {{ $contactusInfo->zipcode }}<br>
                         {{ $contactusInfo->country }}<br>
                         <br>
-                        <strong>{{ trans('word.phone') }}</strong>: {{ $contactusInfo->phone }}<br>
-                        <strong>{{ trans('word.mobile') }}</strong>: {{ $contactusInfo->mobile }}<br>
-                        <strong>{{ trans('word.email') }}</strong>: {{ $contactusInfo->email }}<br>
+                        <strong>{{ trans('general.phone') }}</strong>: {{ $contactusInfo->phone }}<br>
+                        <strong>{{ trans('general.mobile') }}</strong>: {{ $contactusInfo->mobile }}<br>
+                        <strong>{{ trans('general.email') }}</strong>: {{ $contactusInfo->email }}<br>
                     </address>
 
                     <div id="mapwrap">

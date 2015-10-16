@@ -11,6 +11,13 @@ Breadcrumbs::register('dashboard', function ($breadcrumbs) {
     $breadcrumbs->push(trans('general.dashboard'), action('Backend\DashboardController@index'));
 });
 
+/*
+ * contactus
+ * */
+Breadcrumbs::register('contactus', function ($breadcrumbs) {
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push(trans('general.contactus'), action('Backend\ContactUsController@edit'));
+});
 
 /*
  *

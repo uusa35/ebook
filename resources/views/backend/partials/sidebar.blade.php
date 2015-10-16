@@ -27,19 +27,19 @@
 
 
             @if(Cache::has('role.Admin'))
-                @foreach(Cache::get('Module.Admin') as $perm)
-                    <li><a href="{{ URL::to('backend/'.strtolower($perm)) }}"><i class="fa fa-folder"></i>
-                            <span>{{ $perm }}</span></a></li>
+                @foreach(Cache::get('Module.Admin') as $module)
+                    <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
+                            <span>{{ trans('general.'.$module) }}</span></a></li>
                 @endforeach
             @elseif(Cache::has('role.Editor'))
-                @foreach(Cache::get('Module.Editor') as $perm)
-                    <li><a href="{{ URL::to('backend/'.strtolower($perm)) }}"><i class="fa fa-folder"></i>
-                            <span>{{ $perm }}</span></a></li>
+                @foreach(Cache::get('Module.Editor') as $module)
+                    <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
+                            <span>{{ trans('general.'.$module) }}</span></a></li>
                 @endforeach
             @elseif(Cache::has('role.Author'))
-                @foreach(Cache::get('Module.Author') as $perm)
-                    <li><a href="{{ URL::to('backend/'.strtolower($perm)) }}"><i class="fa fa-folder"></i>
-                            <span>{{ $perm }}</span></a></li>
+                @foreach(Cache::get('Module.Author') as $module)
+                    <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
+                            <span>{{ trans('general.'.$module) }}</span></a></li>
                 @endforeach
             @endif
 
@@ -47,7 +47,7 @@
             {{--<!-- Optionally, you can add icons to the links -->
             <li><a href="{{ action('Backend\UsersController@index') }}"><i class="fa fa-users"></i>
                     <span>Users</span></a></li>
-            <li><a href="{{ action('Backend\PermissionsController@index') }}"><i class="fa fa-pencil"></i> <span>Permissions</span></a>
+            <li><a href="{{ action('Backend\moduleissionsController@index') }}"><i class="fa fa-pencil"></i> <span>moduleissions</span></a>
             </li>
             <li><a href="{{ action('Backend\RolesController@index') }}"><i class="fa fa-table"></i>
                     <span>Roles</span></a></li>

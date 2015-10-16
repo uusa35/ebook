@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {!! Breadcrumbs::render('permission_edit') !!}
+
     <div class="panel-body">
         {!! Form::model($permission, ['action' => ['Backend\PermissionsController@update', $permission->id], 'method' => 'PATCH']) !!}
 

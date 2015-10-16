@@ -23,7 +23,7 @@ return [
     'btn-favorite' => 'btn btn-fab btn-fab-mini btn btn-material-red-A400 btn-xs tooltip',
     'btn-like' => 'btn btn-fab btn-fab-mini btn btn-material-blue-100 btn-xs tooltip',
     'btn-report' => 'btn btn-fab btn-fab-mini btn-material-deep-orange-600 btn-xs tooltip',
-    'btn-search' => 'btn btn-fab btn-fab-mini btn-material-green btn-xs tooltip mdi-action-search',
+    'btn-search' => 'btn btn-fab btn-fab-mini btn-material-green btn-xs tooltip',
 
 
 

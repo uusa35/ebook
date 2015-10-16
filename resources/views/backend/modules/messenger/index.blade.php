@@ -22,9 +22,9 @@
     @endcan
 @stop
 <div class="panel-body">
-    <table class="table" id="messages" style="color:#000000;">
+    <table class="table table-stripped table-hover" id="messages">
         <thead>
-        <tr>
+        <tr class="well-material-blue-grey-100">
             <th>#</th>
             <th>{{ trans('general.subject') }}</th>
             <th>{{ trans('general.body') }}</th>

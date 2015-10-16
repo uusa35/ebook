@@ -19,9 +19,9 @@
 <div class="panel-body">
     <div class="row">
         <div class="col-xs-12 paddingTop10">
-            <table class="table table-bordered table-order">
+            <table class="table table-bordered table-order table-stripped">
                 <thead>
-                <tr class="text-center" style="background-color:#E0E0E0;">
+                <tr class="well-material-blue-grey-100" >
                     <th>{{ trans('id') }}</th>
                     <th>{{ trans('word.name-ar') }}</th>
                     <th>{{ trans('word.name-en') }}</th>

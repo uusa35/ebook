@@ -43,6 +43,16 @@ class BookRepository extends AbstractRepository
             ->get();
     }
 
+    public function getAllBooks() {
+        return $this->model->with('users')
+            ->with('meta')
+            ->where('active', '=', '1')
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status','=','published');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(8);
+    }
     /**
      * One To Many Relation
      * a user has many  books
@@ -99,6 +109,9 @@ class BookRepository extends AbstractRepository
                     $query->orWhere('body', 'like', '%' . $searchItem . '%');
                 }
             ])
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status','=','published');
+            })
             ->where('active', '=', '1')
             ->paginate(10);
     }

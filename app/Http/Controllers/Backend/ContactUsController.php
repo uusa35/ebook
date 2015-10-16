@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Core\AbstractController;
 use App\Src\Contactus\Contactus;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
-class ContactUsController extends Controller
+class ContactUsController extends AbstractController
 {
     //
     public $contactus;
@@ -29,6 +30,7 @@ class ContactUsController extends Controller
     public function edit()
     {
 
+        $this->getPageTitle('dashboard.contactus');
         //Cache::forget('contactusInfo');
 
         $contactInfo = $this->contactus->first();

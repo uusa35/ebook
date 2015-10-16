@@ -21,15 +21,15 @@
 @stop
 
 <div class="panel-body">
-    <table class="table" id="permissions">
+    <table class="table table-stripped table-hover" id="permissions">
         <thead>
-        <tr>
+        <tr class="well-material-blue-grey-100">
             <th>#</th>
-            <th>{{ trans('word.general.display_name') }}</th>
-            <th>{{ trans('word.general.name') }}</th>
-            <th>{{ trans('word.general.level') }}</th>
-            <th>{{ trans('word.general.edit') }}</th>
-            <th>{{ trans('word.general.delete') }}</th>
+            <th>{{ trans('general.display_name') }}</th>
+            <th>{{ trans('general.name') }}</th>
+            <th>{{ trans('general.level') }}</th>
+            <th>{{ trans('general.edit') }}</th>
+            <th>{{ trans('general.delete') }}</th>
         </tr>
         </thead>
         <tbody>

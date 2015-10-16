@@ -20,9 +20,9 @@
     @endcan
 @stop
 <div class="panel-body">
-    <table class="table" id="roles">
+    <table class="table table-hover table-stripped" id="roles">
         <thead>
-        <tr>
+        <tr class="well-material-blue-grey-100">
             <th>#</th>
             <th>{{ trans('general.display_name') }}</th>
             <th>{{ trans('general.name') }}</th>

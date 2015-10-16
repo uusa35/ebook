@@ -26,7 +26,7 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li><a href="/frontend/books"><i class="fa fa-xs fa-fw fa-book"></i> {{ trans('general.book') }}</a>
+                    <li><a href="/frontend/books"><i class="fa fa-xs fa-fw fa-book"></i> {{ trans('general.books') }}</a>
                     </li>
                     <li><a href="{{ action('HomeController@getContactus') }}"><i
                                     class="fa fa-xs fa-fw fa-info"></i> {{ trans('general.contactus') }}
@@ -65,7 +65,7 @@
                 <form class="navbar-form {{ Session::get('pullClassReverse') }}" style="margin-top: 12px;" method="post" action="{{ action('BookController@getShowSearchResults') }}">
                     {!! Form::token() !!}
                     <input type="text" name="search" class="col-lg-5 form-control " placeholder="{{ trans('general.search') }}" style="float: {{ (App::getLocale() === 'en') ? 'left' : 'right' }}; width: 80%; padding: 0px; margin: 0px;">
-                    <button type="submit" class="{{ Config::get('button.btn-search') }} {{ Session::get('pullClassReverse') }}"></button>
+                    <button type="submit" class="{{ Config::get('button.btn-search') }} {{ Session::get('pullClassReverse') }}">{!! Config::get('button.icon-search') !!}</button>
                 {!! Form::close() !!}
 
 

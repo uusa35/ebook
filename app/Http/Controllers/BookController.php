@@ -68,7 +68,8 @@ class BookController extends Controller
     public function getAllBooks()
     {
         // get 4 published books for index
-        $allBooks = $this->bookRepository->model->with('users')->with('meta')->where('active', '=', '1')->orderBy('created_at', 'desc')->paginate(8);
+        $allBooks = $this->bookRepository->getAllBooks();
+
 
         return view('frontend.modules.book.all', compact('allBooks'));
     }

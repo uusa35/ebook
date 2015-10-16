@@ -29,6 +29,7 @@ return [
     ],
     'dashboard' => [
         'index' => 'general.dashboard',
+        'contactus' => 'general.contactus'
     ],
     'ad' => [
         'index' => 'general.ads',
