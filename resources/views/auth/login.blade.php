@@ -21,39 +21,37 @@
 
                             <input type="checkbox" name="remember" class="input-form">
                             <label>
-                                {{ trans('word.general.remember_me') }}
+                                {{ trans('general.remember_me') }}
                             </label>
                         </div>
 
                         <div class="row  {{ Session::get('pullClass') }}">
                             <div class="col-lg-12">
                                 <button type="submit" name="submit"
-                                        class="btn btn-primary">{{ trans('word.general.login') }}</button>
+                                        class="btn btn-primary">{{ trans('general.login') }}</button>
                                 <a class="btn btn-info"
-                                   href="{{ url('frontend/conditions') }}">{{ trans('word.general.register') }}</a>
+                                   href="{{ url('frontend/conditions') }}">{{ trans('general.register') }}</a>
                                 <a class="btn btn-material-purple-200"
-                                   href="{{ url('/password/email') }}">{{ trans('word.general.forgot_password') }}</a>
-
+                                   href="{{ url('/password/email') }}">{{ trans('general.forgot_password') }}</a>
                             </div>
-                        </div>
-                        <div class="row {{ Session::get('pullClass') }}">
-
                             <div class="col-lg-12">
-                                <a class="btn btn-social btn-twitter btn-material-light-blue" href="{{ action('Auth\AuthController@redirectToTwitterProvider') }}">
+                                <a class="btn btn-social btn-twitter btn-material-light-blue"
+                                   href="{{ action('Auth\AuthController@redirectToTwitterProvider') }}">
                                     <i class="fa fa-fw fa-twitter"></i>  {{ trans('buttons.twitter_login') }}
                                 </a>
-                                <a class="btn btn-social btn-twitter btn-material-blue " href="{{ action('Auth\AuthController@redirectToFacebookProvider') }}">
+                                <a class="btn btn-social btn-twitter btn-material-blue "
+                                   href="{{ action('Auth\AuthController@redirectToFacebookProvider') }}">
                                     <i class="fa fa-facebook"></i> {{ trans('buttons.facebook_login') }}
                                 </a>
-                                <a class="btn btn-social btn-google btn-material-red " href="{{ action('Auth\AuthController@redirectToGoogleProvider') }}">
+                                <a class="btn btn-social btn-google btn-material-red "
+                                   href="{{ action('Auth\AuthController@redirectToGoogleProvider') }}">
                                     <i class="fa fa-google"></i> {{ trans('buttons.google_login') }}
                                 </a>
-
-                                <a class="btn btn-social btn-google btn-material-grey-200 " href="{{ action('Auth\AuthController@redirectToGithubProvider') }}">
+                                <a class="btn btn-social btn-google btn-material-grey-200 "
+                                   href="{{ action('Auth\AuthController@redirectToGithubProvider') }}">
                                     <i class="fa fa-github"></i> {{ trans('buttons.github_login') }}
                                 </a>
                             </div>
-
                         </div>
                         <!-- Change this to a button or input when using this as a form -->
                     </fieldset>

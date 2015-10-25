@@ -4,8 +4,8 @@ use App\Http\Requests;
 use App\Jobs\CreateBookPreview;
 use App\Jobs\CreateChapterPreview;
 use App\Src\Advertisement\Advertisement;
-use App\Src\Book\Book;
 use App\Src\Book\BookRepository;
+use App\Src\Book\Chapter\ChapterRepository;
 use App\Src\Favorite\FavoriteRepository;
 use App\Src\Purchase\PurchaseRepository;
 use App\Src\User\UserRepository;
@@ -22,6 +22,7 @@ class BookController extends Controller
     public $favoriteRepository;
     public $userRepository;
     public $purchaseRepository;
+    public $chapterRepository;
     public $ad;
     public $authUser;
     public $book;
@@ -31,11 +32,13 @@ class BookController extends Controller
         FavoriteRepository $favoriteRepository,
         UserRepository $userRepository,
         PurchaseRepository $purchaseRepository,
-        Advertisement $ad
+        Advertisement $ad,
+        ChapterRepository $chapterRepository
     ) {
         $this->bookRepository = $book;
         $this->favoriteRepository = $favoriteRepository;
         $this->userRepository = $userRepository;
+        $this->chapterRepository = $chapterRepository;
         $this->purchaseRepository = $purchaseRepository;
     }
 
@@ -85,10 +88,14 @@ class BookController extends Controller
         // get all books by book ID
         $book = $this->bookRepository->model
             ->with(['author', 'meta', 'users'])
-            ->with(['chapters'=> function($query) {
-                $query->where('chapters.status', '=', 'published');
-            }])
+            ->with([
+                'chapters' => function ($query) {
+                    $query->where('chapters.status', '=', 'published');
+                }
+            ])
             ->find($id);
+
+        $total_pages = $this->chapterRepository->totalPagesForChapter($book->id);
 
         /*redirec if the book is not published with a not published message*/
 
@@ -97,7 +104,7 @@ class BookController extends Controller
             return redirect('/')->with(['error' => 'messages.error.book_not_active']);
         }
 
-        return view('frontend.modules.book.show', ['book' => $book]);
+        return view('frontend.modules.book.show', compact('book', 'total_pages'));
     }
 
 
@@ -275,7 +282,7 @@ class BookController extends Controller
      * add report abuse within the admin interfrace
      * @return string
      */
-    function getCreateNewReportAbuse($userId, $bookId)
+    public function getCreateNewReportAbuse($userId, $bookId)
     {
 
         $checkReportAbuse = DB::table('book_report')->where(['book_id' => $bookId, 'user_id' => $userId])->first();

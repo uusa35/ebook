@@ -81,8 +81,10 @@ class BooksController extends AbstractController
 
         if (\Cache::get('Module.Admin') || \Cache::get('Module.Editor')) {
 
-            $books = $this->bookRepository->model->with('meta', 'author', 'chapters')->orderBy('created_at',
-                'desc')->get();
+            $books = $this->bookRepository->model
+                ->with('meta', 'author', 'chapters')
+                ->orderBy('created_at', 'desc')
+                ->get();
 
             $booksReported = $this->bookRepository->getReportsAbuse();
 
@@ -90,8 +92,11 @@ class BooksController extends AbstractController
 
         } elseif (\Cache::get('Module.Author')) {
 
-            $books = $this->bookRepository->model->where(['author_id' => Auth::id()])->with('meta',
-                'author')->orderBy('created_at', 'desc')->get();
+            $books = $this->bookRepository->model
+                ->where(['author_id' => Auth::id()])
+                ->with('meta', 'author')
+                ->orderBy('created_at', 'desc')
+                ->get();
 
             $booksReported = [];
 
@@ -228,9 +233,9 @@ class BooksController extends AbstractController
 
         $langsCategories = $langsCategories->lists('name_' . $getLang, 'id');
 
-        if (\Cache::get('role')) {
+        $book = $this->bookRepository->model->where('id', '=', $id)->with('meta')->first();
 
-            $book = $this->bookRepository->model->where('id', '=', $id)->with('meta')->first();
+        if (Gate::check('edit', $book->author_id)) {
 
             return view('backend.modules.book.edit',
                 ['book' => $book, 'fieldsCategories' => $fieldsCategories, 'langsCategories' => $langsCategories]);
@@ -255,9 +260,14 @@ class BooksController extends AbstractController
     {
         $book = $this->bookRepository->getById($id);
 
-        if (\Auth::user()->canDo('update', $book)) {
+        if (Gate::check('edit', $book->author_id)) {
 
-            $this->CreateBookCover($request, $book);
+            if ($request->file('cover')) {
+
+                $this->CreateBookCover($request, $book);
+
+            }
+
 
             if (is_null($request->get('active'))) {
 
@@ -285,16 +295,19 @@ class BooksController extends AbstractController
     {
         $book = $this->bookRepository->model->where(['id' => $id])->first();
 
-        if ($book->delete()) {
+        if (Gate::check('delete', $book->author_id)) {
 
+            if ($book->delete()) {
 
-            $book->meta()->delete();
+                $book->meta()->delete();
 
+                return redirect()->back()->with('success', trans('word.success-delete'));
+            }
 
-            return redirect()->back()->with('success', trans('word.success-delete'));
+            return redirect()->back()->with('error', trans('word.error-delete'));
         }
 
-        return redirect()->back()->with('error', trans('word.error-delete'));
+
     }
 
 

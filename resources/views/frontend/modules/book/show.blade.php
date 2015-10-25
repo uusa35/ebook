@@ -6,6 +6,11 @@
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
 @stop
 
+@section('styles')
+    @parent
+    <link rel="stylesheet" href="/css/lightbox.css"/>
+@stop
+
 @section('content')
 
 
@@ -19,8 +24,20 @@
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="widget-user-header bg-white thumbnail"
-                             style="background: url('{{ asset('images/uploads/cover/large/'.$book->cover) }}') center center; background-size: cover;"></div>
+
+                        <a data-lightbox="example-1" data-title="{{ $book->title }}"
+                           href="{{ asset('images/uploads/cover/large/'.$book->cover) }}">
+
+                            <img id="example-1" class="product-image img-responsive"
+                                 src="{{ asset('images/uploads/cover/thumbnail/'.$book->cover) }}"
+                                 alt="{{ $book->title }}">
+                            {{--<div class="lightbox-caption"><p></p></div>--}}
+                        </a>
+                        {{--<div class="widget-user-header bg-white thumbnail"
+                             style="background: url('{{ asset('images/uploads/cover/large/'.$book->cover) }}') center center; background-size: cover;">
+
+
+                        </div>--}}
                     </div>
                     <div class="col-lg-8">
                         <table class="table-details table-bordered table-striped table-hover">
@@ -47,7 +64,7 @@
                                     {{ trans('general.total_pages') }} :
                                 </td>
                                 <td>
-                                    {{ $book->meta->total_pages }}
+                                    {{ $total_pages }}
                                 </td>
                             </tr>
                             <tr>
@@ -55,7 +72,7 @@
                                     {{ trans('general.total_chapters') }} :
                                 </td>
                                 <td>
-                                    {{ $book->meta->total_chapters }}
+                                    {{ count($book->chapters) }}
                                 </td>
                             </tr>
                             <tr>
@@ -99,7 +116,8 @@
                         <div class="col-lg-8 col-lg-offset-2 text-center {!! Session::get('pullClassReverse') !!}">
                             <div class="col-lg-2 border-right text-center">
                                 <div class="description-block">
-                                    <a class=" {!! Config::get('button.btn-favorite') !!}" href="{{ action('BookController@getCreateNewFavoriteList',[Auth::id(),$book->id]) }}"
+                                    <a class=" {!! Config::get('button.btn-favorite') !!}"
+                                       href="{{ action('BookController@getCreateNewFavoriteList',[Auth::id(),$book->id]) }}"
                                        title="{{ trans('buttons.favorite') }}">
                                         {!! Config::get('button.icon-favorite') !!}
                                     </a>
@@ -145,12 +163,13 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-12">
-                                <span class="description-text text-center text-danger">
-
-                                    {{--this is a test this is a test ...--}}
-
-                            </span>
+                        <div class="col-lg-12 text-center">
+                            <hr/>
+                            @foreach($allAds as $ad)
+                                <div class="col-lg-6">
+                                    <img class="img-responsive" src="{{ asset('images/uploads/ads/large/'.$ad->ads) }}" alt=""/>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -164,4 +183,9 @@
     </div>
 
     </div>
+@stop
+
+@section('scripts')
+    @parent
+    <script src="/js/lightbox.min.js"></script>
 @stop

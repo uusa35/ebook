@@ -47,4 +47,5 @@ class Chapter extends AbstractModel
             ->paginate($paginate);
     }
 
+
 }

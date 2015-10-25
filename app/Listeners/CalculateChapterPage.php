@@ -44,7 +44,6 @@ class CalculateChapterPage implements ShouldQueue
         $event->chapter->update(['total_pages' => $pageCount]);
         $event->chapter->save();
 
-
     }
 
 }

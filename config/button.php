@@ -47,6 +47,8 @@ return [
     'icon-like' =>"<i class='fa fa-xs fa-thumbs-up'></i>",
     'icon-report' =>"<i class='fa fa-xs fa-thumbs-down'></i>",
     'icon-search' =>"<i class='fa fa-xs fa-search'></i>",
+    'icon-category' =>"<i class='fa fa-xs fa-database'></i>",
+    'icon-message' =>"<i class='fa fa-xs fa-inbox'></i>",
     'icon-index' =>"<i class='fa fa-xs fa-list'></i>",
     'icon-index' =>"<i class='fa fa-xs fa-list'></i>",
     'icon-index' =>"<i class='fa fa-xs fa-list'></i>",

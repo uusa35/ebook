@@ -53,7 +53,7 @@ trait BookHelpers
             /*
          * Abstract CreateImages Job (Model , $request, FolderName, FieldsName , Default thumbnail sizes , Default large sizes
          * */
-            $this->dispatch(new CreateImages($book, $request, 'cover', ['cover']));
+            $this->dispatch(new CreateImages($book, $request, 'cover', ['cover'],['300','420'],['500','680']));
 
         }
     }

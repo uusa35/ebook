@@ -61,18 +61,22 @@ class CreateImages extends Job implements SelfHandling
                 // folderName is the Coloumn Table Name :)
                 if ($fileName) {
 
-                    $this->model->update([$this->folderName => strtolower($fileName)]);
+                    $update = $this->model->update([$this->folderName => strtolower($fileName)]);
 
-                    $this->model->save();
+                    if ($update) {
 
-                    return true;
-                }
-                else {
-                    abort(404,'CreateImages error');
+                        return true;
+
+                    }
+
+                    return false;
+
+                } else {
+                    abort(404, 'CreateImages error');
                 }
             }
 
-            abort(404,'CreateImages after if');
+            abort(404, 'CreateImages after if');
         }
 
     }

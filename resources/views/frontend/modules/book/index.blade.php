@@ -21,7 +21,7 @@
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <a class="" href="{{ action('BookController@show',$book->id) }}">
                         <div class="widget-user-header bg-white"
-                             style="background: url('{{ asset('images/uploads/cover/thumbnail/'.$book->cover) }}') center center; background-size: contain;">
+                             style="background: url('{{ asset('images/uploads/cover/thumbnail/'.$book->cover) }}') center center; background-size: cover;">
                         </div>
                     </a>
 
@@ -90,7 +90,7 @@
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <a class="" href="{{ action('BookController@show',$book->id) }}">
                         <div class="widget-user-header bg-white"
-                             style="background: url('{{ asset('images/uploads/cover/thumbnail/'.$book->cover) }}') center center; background-size: contain;">
+                             style="background: url('{{ asset('images/uploads/cover/thumbnail/'.$book->cover) }}') center center; background-size: cover;">
                         </div>
                     </a>
 

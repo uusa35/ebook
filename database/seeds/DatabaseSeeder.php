@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
         'book_metas',
         'purchases',
         'book_user',
-        'messages'
+        'messages',
+        'sliders'
     ];
 
     /**
@@ -43,6 +44,7 @@ class DatabaseSeeder extends Seeder
             $this->call('BookMetasTableSeeder');
             $this->call('ContactusTableSeeder');
             $this->call('AdvertisementTableSeeder');
+            $this->call('SlidersTableSeeder');
             DB::statement('SET FOREIGN_KEY_CHECKS = 1');
         }
 

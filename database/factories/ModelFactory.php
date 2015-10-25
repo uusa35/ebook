@@ -102,6 +102,13 @@ $factory->define('App\Src\Advertisement\Advertisement', function ($faker) {
     ];
 });
 
+$factory->define('App\Src\Slider\Slider', function ($faker) {
+    return [
+        'slide' => 'http://placehold.it/1500*900',
+        'caption' => $faker->paragraph(1)
+    ];
+});
+
 for ($i = 1; $i <= 23; $i++) {
     /*DB::table('user_roles')->insert([
         'user_id' => '1',

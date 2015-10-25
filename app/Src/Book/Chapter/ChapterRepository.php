@@ -19,4 +19,12 @@ class ChapterRepository extends AbstractRepository
         $this->model = $chapter;
     }
 
+
+    public function totalPagesForChapter($bookId) {
+
+        return $this->model->where(['book_id' => $bookId,'status' => 'published'])->sum('total_pages');
+
+    }
+
+
 }

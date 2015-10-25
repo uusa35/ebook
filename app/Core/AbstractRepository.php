@@ -28,7 +28,7 @@ class AbstractRepository extends Model
 
     public function getById($id)
     {
-        return $this->model->where('id', '=', $id);
+        return $this->model->where('id', '=', $id)->first();
     }
 
 

@@ -5,6 +5,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-lg-4 col-lg-offset-4">
+                {{ trans('messages.ads') }}
                 <img class="img-responsive thumbnail" src="{{ asset('images/uploads/ads/large/'.$ad->ads) }}" alt=""/>
             </div>
             <div class="col-lg-6 col-lg-offset-3">

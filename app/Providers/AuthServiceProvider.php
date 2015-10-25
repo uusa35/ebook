@@ -3,8 +3,6 @@
 namespace App\Providers;
 
 use App\Core\AbstractPolicy;
-use App\Http\Controllers\Backend\RolesController;
-use App\Src\Role\Role;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -29,7 +27,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(GateContract $gate)
     {
-        parent::registerPolicies($gate);
+        $this->registerPolicies($gate);
 
 
         $policy = new AbstractPolicy($perm = '');

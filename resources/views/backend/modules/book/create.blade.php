@@ -11,9 +11,9 @@
                     <h3>{{ trans('general.book_create') }}</h3>
                 </div>
                 <div class="col-lg-6">
-                    <p style="color:red;">(*) - {{ trans('general.all_started_required') }}</p>
+                    <p style="color:red;">(*) - {{ trans('messages.fields_required') }}</p>
 
-                    <p style="color:red;">(*) - {{ trans('general.cover_instructions') }}</p>
+                    <p style="color:red;">(*) - {{ trans('messages.cover_instructions') }}</p>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
 
                 <div class="form-group col-md-3 col-lg-3">
                     {!! Form::hidden('author_id', Auth::id()) !!}
-                    {!! Form::label('cover', trans('general.cover_ar') , ['class' => 'control-label']) !!}*
+                    {!! Form::label('cover', trans('general.cover') , ['class' => 'control-label']) !!}*
                     {!! Form::file('cover', null,['class' => 'form-control','placeholder'=>
                     trans('general.cover')]) !!}
                 </div>
@@ -33,7 +33,7 @@
                     trans('general.cover_en')
                     ]) !!}
                 </div>--}}
-                <div class="form-group col-md-3 col-lg-3">
+                <div class="form-group col-md-3 col-lg-3 {{ (Cache::get('Abilities.Admin')) ? '' : 'hidden' }}">
                     <div class="checkbox">
                         {{ trans('general.active') }}
                         <label>
@@ -61,7 +61,7 @@
                 !important;']) !!}
             </div>
             <div class="row">
-                <div class="form-group col-md-6 col-lg-6">
+                <div class="form-group col-md-9 col-lg-9">
                     {!! Form::label('description', trans('general.description') , ['class' => 'control-label']) !!}*
                     {!! Form::textarea('description', null, ['class' => 'form-control','placeholder'=>
                     trans('general.description')]) !!}

@@ -41,5 +41,11 @@ return [
         'create' => 'general.message_create',
         'show' => 'general.message_show',
     ],
+    'slider' => [
+        'index' => 'general.slider',
+        'create' => 'general.slider_create',
+        'show' => 'general.slider_show',
+        'edit' => 'general.slider_edit',
+    ],
 
 ];

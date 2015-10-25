@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Backend;
 
 use App\Core\AbstractController;
 use App\Jobs\CreateImages;
-use App\Src\Advertisement\Advertisement;
 use App\Http\Requests;
+use App\Src\Slider\Slider;
 
-class AdsController extends AbstractController
+class SlidersController extends AbstractController
 {
-    public $ad;
+    public $slider;
 
-    public function __construct(Advertisement $ad)
+    public function __construct(Slider $slider)
     {
-        $this->ad = $ad;
+        $this->slider = $slider;
     }
 
     /**
@@ -23,11 +23,11 @@ class AdsController extends AbstractController
      */
     public function index()
     {
-        $this->getPageTitle('ad.index');
+        $this->getPageTitle('slider.index');
 
-        $allAdsStored = $this->ad->take(2)->get();
+        $allSlides = $this->slider->get();
 
-        return view('backend.modules.ad.index', compact('allAdsStored'));
+        return view('backend.modules.slider.index', compact('allSlides'));
     }
 
     /**
@@ -37,9 +37,9 @@ class AdsController extends AbstractController
      */
     public function create()
     {
-        $this->getPageTitle('ad.create');
+        $this->getPageTitle('slider.create');
 
-        return view('backend.modules.ad.create');
+        return view('backend.modules.slider.create');
     }
 
     /**
@@ -71,11 +71,11 @@ class AdsController extends AbstractController
      */
     public function edit($id)
     {
-        $this->getPageTitle('ad.edit');
+        $this->getPageTitle('slider.edit');
 
-        $ad = $this->ad->where('id', '=', $id)->first();
+        $slide = $this->slider->where('id', '=', $id)->first();
 
-        return view('backend.modules.ad.edit', compact('id', 'ad'));
+        return view('backend.modules.slider.edit', compact('id', 'slide'));
     }
 
     /**
@@ -84,23 +84,27 @@ class AdsController extends AbstractController
      * @param  int $id
      * @return Response
      */
-    public function update(Requests\EditAd $request)
+    public function update(Requests\EditSlide $request)
     {
-        $ad = $this->ad->where('id', '=', $request->get('id'))->first();
+        $slider = $this->slider->where('id', '=', $request->get('id'))->first();
+
+        $slider->update([
+            'caption' => $request->get('caption')
+        ]);
 
         /*
       * Abstract CreateImages Job (Model , $request, FolderName, [FieldsName] , [Default thumbnail sizes] , [Default large sizes]
       * */
 
-        $updateAd = $this->dispatch(new CreateImages($ad, $request, 'ads', ['ads'], ['200', '50'], ['500', '120']));;
+        $updateSlider = $this->dispatch(new CreateImages($slider, $request, 'slide', ['url'], ['',''], ['1500', '500']));;
 
-        if ($updateAd) {
+        if ($updateSlider) {
 
-            return redirect()->action('Backend\AdsController@index')->with(['success' => trans('sucess.ad-updated')]);
+            return redirect()->action('Backend\SlidersController@index')->with(['success' => trans('sucess.update')]);
 
         }
 
-        return redirect()->action('Backend\AdsController@index')->with(['error' => trans('sucess.ad-not-updated')]);
+        return redirect()->action('Backend\SlidersController@index')->with(['error' => trans('error.update')]);
 
     }
 

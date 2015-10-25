@@ -12,9 +12,14 @@ return [
     ],
     'error' => [
         'general_message' => 'خطأ بالنظام ـ لم تتم العملية بنجاح',
-        'edit_user' => 'error occurred'
+        'edit_user' => 'error occurred',
+        'no_access' => 'لا تملك الصلاحية لمشاهدة هذه الصفحة أو الخاصية .',
     ],
     'info' => [
         'no_books_found' => 'لا توجد كتب بهذه القائمة',
-    ]
+    ],
+    'newsletter_message' => 'سجل معنا ليصلك كل جديد .. ',
+    'please_use' => ' ##-###-###-## يرجى استخدام الرقم بالكامل مع كود الدولة',
+    'cover_instructions' => 'يفضل استخدام القياسات التالية لغلاف الكتاب 500 * 680',
+    'fields_required' => 'جميع الحقول المعنونة بـ (*) مطلوبة',
 ];

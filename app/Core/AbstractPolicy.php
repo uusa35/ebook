@@ -28,10 +28,13 @@ class AbstractPolicy
     public $moduleRequested;
     public $permName;
 
+    use UserTrait;
+
     public function __construct()
     {
         $this->userRole = Cache::get('role');
         $this->userAbilities = Cache::get('Abilities.' . $this->userRole);
+
 
     }
 
@@ -41,14 +44,19 @@ class AbstractPolicy
     }
 
 
+    /**
+     * Can Create = Can Store
+     * @return bool
+     */
     public function create()
     {
 
-        //dd(Cache::get('module'));
-        //dd($this->moduleRequested);
-        //dd($this->userAbilities);
-        //dd($this->userAbilities);
-        //dd($this->getModule());
+        if (is_null($this->userAbilities)) {
+
+            return redirect()->to('dashboard');
+
+        }
+
         if (in_array($this->getModule() . '_create', $this->userAbilities, true)) {
 
             return true;
@@ -59,11 +67,29 @@ class AbstractPolicy
 
 
     /**
+     * Can Edit = Can Update
      * @return bool
      */
-    public function edit()
+    public function edit($owner = '')
     {
+
+        if (is_null($this->userAbilities)) {
+
+            return redirect()->to('dashboard');
+
+        }
+
         if (in_array($this->getModule() . '_edit', $this->userAbilities, true)) {
+
+            if ($this->isAuthor()) {
+
+                if (\Auth::id() === $owner) {
+
+                    return true;
+
+                }
+                return false;
+            }
 
             return true;
         }
@@ -76,10 +102,26 @@ class AbstractPolicy
     /**
      * Change Status of an element
      */
-    public function change()
+    public function change($owner = '')
     {
 
+        if (is_null($this->userAbilities)) {
+
+            return redirect()->to('dashboard');
+
+        }
+
         if (in_array($this->getModule() . '_change', $this->userAbilities, true)) {
+
+            if ($this->isAuthor()) {
+
+                if (\Auth::id() === $owner) {
+
+                    return true;
+
+                }
+                return false;
+            }
 
             return true;
 
@@ -93,8 +135,24 @@ class AbstractPolicy
     public function delete()
     {
 
+        if (is_null($this->userAbilities)) {
+
+            return redirect()->to('dashboard');
+
+        }
+
         if (in_array($this->getModule() . '_delete', $this->userAbilities, true)) {
 
+            if ($this->isAuthor()) {
+
+                if (\Auth::id() === $owner) {
+
+                    return true;
+
+                }
+                return false;
+            }
+
             return true;
 
         }
@@ -102,29 +160,4 @@ class AbstractPolicy
         return false;
     }
 
-    public function isAdmin()
-    {
-        if (\Cache::get('Module.Admin')) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function isEditor()
-    {
-
-        if (\Cache::get('Module.Editor')) {
-            return true;
-        }
-        return false;
-    }
-
-    public function isAuthor()
-    {
-        if (\Cache::get('Module.Author')) {
-            return true;
-        }
-        return false;
-    }
 }

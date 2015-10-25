@@ -156,7 +156,6 @@ return [
     'name_en' => 'english name',
     'name_ar' => 'arabic name',
     'confirm_password' => 'password confirmation',
-    'fields_required' => 'all fields with star (*) is required',
     'bank_info_not_shown' => 'bank information will be shown only for admin',
     'cover_ar' => 'english cover',
     'cover_en' => 'arabic cover',
@@ -166,7 +165,6 @@ return [
     'book_create' => 'create new book',
     'title_en' => 'english title',
     'title_ar' => 'arabic title',
-    'cover_instructions' => 'book cover size should be 360 * 510',
     'signin' => 'signin',
     'reset' => 'reset',
     'new_user_register' => 'sign up',
@@ -235,7 +233,10 @@ return [
     'most_liked' => 'Most Liked Books',
     'ebook' => 'E-Book',
     'send' => 'send',
-    'message_show' => 'Message Content'
+    'message_show' => 'Message Content',
+    'cover' => 'cover',
+    'Slider' => 'Slider',
+    'slider' => 'slider'
 
 
 

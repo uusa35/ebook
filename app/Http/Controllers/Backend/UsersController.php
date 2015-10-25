@@ -1,20 +1,15 @@
 <?php namespace App\Http\Controllers\Backend;
 
 use App\Core\AbstractController;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUser;
 use App\Http\Requests\UpdateUser;
 use App\Jobs\CreateImages;
 use App\Jobs\CreateUserAvatar;
-use App\Repositories\Criteria\User\UsersWithRoles;
 use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
-use Illuminate\Contracts\Auth\Access\Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Session;
-use Laracasts\Flash\Flash;
-use Mockery\CountValidator\Exception;
+
 
 class UsersController extends AbstractController
 {
@@ -51,9 +46,17 @@ class UsersController extends AbstractController
     public function create()
     {
 
-        $this->getPageTitle('user.create');
-        $roles = $this->roleRepository->model->all();
-        return view('backend.modules.user.create', compact('roles'));
+        if (Gate::check('create')) {
+
+            $this->getPageTitle('user.create');
+
+            $roles = $this->roleRepository->model->all();
+
+            return view('backend.modules.user.create', compact('roles'));
+        }
+
+        return redirect()->action('Backend\DashboardController@index')->with('error', trans('messages.error.no_access'));
+
     }
 
     /**
@@ -64,16 +67,25 @@ class UsersController extends AbstractController
     public function store(CreateUser $request)
     {
 
-        $request->merge(['active'=> 1, 'level' => 3]);
+        $request->merge(['active' => 1, 'level' => 3]);
 
         $user = $this->userRepository->model->create($request->all());
 
-        if ($request->get('role')) {
-            $user->roles()->sync($request->get('role'));
-        } else {
-            $user->roles()->sync([]);
+        if (Gate::check('create')) {
+
+            if ($request->get('role')) {
+
+                $user->roles()->sync($request->get('role'));
+
+            } else {
+
+                $user->roles()->sync([]);
+
+            }
+            return redirect()->action('Backend\UsersController@index')->with('sucess', 'User successfully created');
         }
-        return redirect()->action('Backend\UsersController@index')->with('sucess', 'User successfully created');
+
+
     }
 
     /**
@@ -87,12 +99,14 @@ class UsersController extends AbstractController
 
         $user = $this->userRepository->model->with('roles')->find($id);
 
+        if (Gate::check('edit', $user->id)) {
 
-        $userListRoleIds = $user->roles->Lists('name');
+            $userListRoleIds = $user->roles->Lists('name');
 
-        $roles = $this->roleRepository->model->get();
+            $roles = $this->roleRepository->model->get();
 
-        return view('backend.modules.user.edit', compact('user', 'roles', 'userListRoleIds'));
+            return view('backend.modules.user.edit', compact('user', 'roles', 'userListRoleIds'));
+        }
     }
 
     /**
@@ -104,9 +118,9 @@ class UsersController extends AbstractController
 
         $user = $this->userRepository->model->find($id);
 
-
         $user->update([
-            'name_en' => $request->get('name_en'),
+
+            'name' => $request->get('name'),
             'phone' => $request->get('phone'),
         ]);
 

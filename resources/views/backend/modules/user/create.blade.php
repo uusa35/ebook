@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {!! Breadcrumbs::render('user_create') !!}
+
     <div class="panel-body">
 
         {!! Form::open(['action' => 'Backend\UsersController@store']) !!}

@@ -31,7 +31,6 @@ return [
     'choose-author' => 'اختر المدرب',
     'price' => 'السعر',
     'free' => 'مجاني',
-    'email' => 'البريد الإلكتروني',
     'submit' => 'إرسال',
     'comment' => 'التعليق',
     'remember' => 'تذكرني',
@@ -41,8 +40,6 @@ return [
     'twitter' => 'تويتر',
     'youtube' => 'يو تيوب',
     'profile' => 'معلوماتي',
-    'username' => 'اسم الدخول',
-    'password' => 'كلمة المرور',
     'mobile' => 'الهاتف النقال',
     'country-code' => 'مفتاح الدولة',
     'password-confirmation' => 'تأكيد كلمة المرور',
@@ -260,7 +257,12 @@ return [
     'ebook' => 'موقع الكتب الإلكترونية',
     'send' => 'إرسال',
     'control_panel' => 'لوحة التحكم',
-    'message_show' => 'محتوى الرسالة'
+    'message_show' => 'محتوى الرسالة',
+    'cover' => 'غلاف',
+    'book_create' => 'إنشاء كتاب جديد',
+    'Slider' => 'سلايدر',
+    'slider' => 'سلايدر',
+
 
 
 ];

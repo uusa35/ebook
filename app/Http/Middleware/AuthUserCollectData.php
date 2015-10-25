@@ -19,8 +19,6 @@ class AuthUserCollectData
     public function handle($request, Closure $next)
     {
 
-        //dd(Cache::get('Permission.Author'));
-
         if (is_null(\Session::get('roles'))) {
 
             $authUserRole = $request->user()->roles()->first();
@@ -85,7 +83,10 @@ class AuthUserCollectData
 
             return $next($request);
         }
+
+        \Session::clear();
         \Auth::logout();
+
         return redirect('/');
         //dd('no cache found');
     }

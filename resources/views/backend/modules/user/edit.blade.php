@@ -4,24 +4,28 @@
 @section('content')
 
 
+    {!! Breadcrumbs::render('user_edit') !!}
+
     <div class="panel-body">
 
         {!! Form::model($user, ['action' => ['Backend\UsersController@update', $user->id], 'method' =>
         'PATCH','files'=>'true','class'=>'form-vertical']) !!}
 
+        @if(Cache::get('Abilities.Author'))
         <div class="form-group">
             {!! Form::label('email', trans('general.email')) !!}
-            {!! Form::text('email', null, ['class' => 'form-control','disabled'=>'disabled']) !!}
+            {!! Form::text('email', null, ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
             {!! Form::label('password', trans('general.password')) !!}
-            {!! Form::password('password', ['class' => 'form-control','disabled'=> 'disabled']) !!}
+            {!! Form::password('password', ['class' => 'form-control']) !!}
         </div>
+        @endif
 
         <div class="form-group">
-            {!! Form::label('name_en', trans('general.name_en')) !!}
-            {!! Form::text('name_en', null, ['class' => 'form-control']) !!}
+            {!! Form::label('name', trans('general.name')) !!}
+            {!! Form::text('name', null, ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
@@ -33,7 +37,7 @@
             {!! Form::label('avatar', trans('general.avatar')) !!}
             {!! Form::file('avatar', null, ['class' => 'form-control']) !!}
         </div>
-
+        @if(Cache::get('Abilities.Admin'))
         <div class="form-group">
             <label for="">Roles</label>
 
@@ -50,8 +54,10 @@
                     </div>
 
                 @endforeach
+
             </div>
         </div>
+        @endif
 
         @include('backend.partials.buttons.form_btn_update')
 

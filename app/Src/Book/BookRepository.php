@@ -9,6 +9,7 @@ namespace App\Src\Book;
 
 
 use App\Core\AbstractRepository;
+use App\Src\Book\Chapter\ChapterRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -19,11 +20,14 @@ use Illuminate\Support\Facades\Session;
  */
 class BookRepository extends AbstractRepository
 {
+    public $chapterRepository;
+
     use BookHelpers;
 
-    public function __construct(Book $book)
+    public function __construct(Book $book, ChapterRepository $chapterRepository)
     {
         $this->model = $book;
+        $this->chapterRepository = $chapterRepository;
     }
 
 
@@ -36,23 +40,39 @@ class BookRepository extends AbstractRepository
         return $this->model->with('users', 'meta')
             ->where('active', '=', '1')
             ->whereExists(function ($query) {
-                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status','=','published');
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
+                    '=', 'published');
             })
             ->orderBy('books.created_at', 'desc')
             ->limit(4)
             ->get();
     }
 
-    public function getAllBooks() {
-        return $this->model->with('users')
-            ->with('meta')
+    public function getAllBooks()
+    {
+        return $this->model->with('users', 'meta')
             ->where('active', '=', '1')
             ->whereExists(function ($query) {
-                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status','=','published');
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
+                    '=', 'published');
             })
             ->orderBy('created_at', 'desc')
             ->paginate(8);
     }
+
+
+    public function getAllBooksForCategory($categoryId)
+    {
+        return $this->model->with('users', 'meta')
+            ->where(['active' => '1', 'field_category_id' => $categoryId])
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
+                    '=', 'published');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(8);
+    }
+
     /**
      * One To Many Relation
      * a user has many  books
@@ -110,7 +130,8 @@ class BookRepository extends AbstractRepository
                 }
             ])
             ->whereExists(function ($query) {
-                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status','=','published');
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
+                    '=', 'published');
             })
             ->where('active', '=', '1')
             ->paginate(10);

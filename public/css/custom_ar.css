@@ -24,4 +24,7 @@
 .tdtitle {
  width: 50%;
 }
+.small-box>.inner {
+ text-align: left;
+}
 

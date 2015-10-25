@@ -11,7 +11,7 @@ abstract class Request extends FormRequest
 
         $role = \Cache::get('role');
 
-        $array = (\Cache::get('Permission.'.$role));
+        $array = (\Cache::get('Abilities.'.$role));
 
         if (in_array($permission, $array, true)) {
 

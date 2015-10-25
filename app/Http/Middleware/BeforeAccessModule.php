@@ -21,29 +21,14 @@ class BeforeAccessModule
     public function handle($request, Closure $next)
     {
 
-        // Cached within the Middleware CollectData for a authenticated user
-        /*
-         *
-         * 1- get the Route Name then make sure it's the Index of the Module
-         * 2- to make sure the Module is stored within the cache and assigned to the current authenticated user
-         * */
-
-
-        Session::remove('module');
-
         $requestedRouteName = explode('.', Route::currentRouteName(), 3);
 
-        //dd($requestedRouteName);
-        //dd(\Cache::get('Module.Admin'));
+        /*
+         * Only cheds if there is index within the route
+         * */
+        if (count($requestedRouteName) > 1 && in_array('index',$requestedRouteName,true)) {
 
-        if (count($requestedRouteName) > 1 && $requestedRouteName[2] === 'index') {
-
-            $this->nextRequest($requestedRouteName);
-
-            return $next($request);
-
-
-        } elseif ($requestedRouteName[0] === 'backend' && count($requestedRouteName[0]) >= 1) {
+            Session::remove('module');
 
             $this->nextRequest($requestedRouteName);
 
@@ -51,9 +36,8 @@ class BeforeAccessModule
 
         }
         /*
-         * out of scope
+         * out of scope for index
          * */
-
         return $next($request);
 
     }

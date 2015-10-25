@@ -22,11 +22,11 @@
 @stop
 
 <div class="panel-body">
-    <table id="example1" class="table table-bordered table-striped">
+    <table id="example1" class="table table-striped table-hover">
         <thead>
-        <tr>
+        <tr class="well-material-blue-grey-100">
             <th>id</th>
-            <th>{{ trans('general.name_en') }}</th>
+            <th>{{ trans('general.name') }}</th>
             <th>{{ trans('general.phone') }}</th>
             <th>{{ trans('general.email') }}</th>
             <th>{{ trans('general.role') }}</th>
@@ -39,7 +39,7 @@
             <tr>
 
                 <td>{{ $user->id }}</td>
-                <td>{{ $user->name_en }}</td>
+                <td>{{ $user->name }}</td>
                 <td>{{ $user->phone }}</td>
                 <td>{{ $user->email }}</td>
                 <td>

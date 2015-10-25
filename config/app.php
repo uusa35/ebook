@@ -222,7 +222,7 @@ return [
         'Flash'     => 'Laracasts\Flash\Flash',
         'PDF'      => 'Barryvdh\Snappy\Facades\SnappyPdf',
         'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
-        'Gate' => Illuminate\Support\Facades\Gate::class,
+        'Gate' => 'Illuminate\Support\Facades\Gate',
 
     ],
 

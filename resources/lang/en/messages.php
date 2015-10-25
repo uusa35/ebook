@@ -13,11 +13,16 @@ return [
     'error' => [
         'general_message' => 'process failure',
         'edit_user' => 'error occurred',
-        'not_active' => 'your account has been deactivated .. please contact the administrator.'
+        'not_active' => 'your account has been deactivated .. please contact the administrator.',
+        'no_access' => 'you do not have access to this page.'
     ],
     'info' => [
         'no_books_found' => 'No book Found in.'
     ],
     'newsletter_message' => 'Subscribe to get all recent books .. ',
-    'please_use' => 'Please use ##-###-###-##'
+    'please_use' => 'Please use ##-###-###-##',
+    'cover_instructions' => 'book cover size should be 500 * 680',
+    'fields_required' => 'all fields with star (*) is required',
+    'slider' => '- best fit is 1500 * 500',
+    'ads' => 'best fit is 500 * 120'
 ];

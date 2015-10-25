@@ -97,7 +97,7 @@
                                                         {{ $book->title }} </a>
                                                 </td>
                                                 <td>
-                                                    <span> {{ ($book->meta) ? $book->meta->total_pages : 'N/A' }} </span>
+                                                    <span> {{ count($book->chapters) }} </span>
 
                                                 </td>
                                                 <td>

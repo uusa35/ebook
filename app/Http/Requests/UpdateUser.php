@@ -22,7 +22,7 @@ class UpdateUser extends Request {
 	public function rules()
 	{
 		return [
-			'name_en' => 'required'
+			'name' => 'required'
 		];
 	}
 

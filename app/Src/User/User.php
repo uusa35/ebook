@@ -35,7 +35,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'avatar', 'active'];
+    protected $fillable = ['name', 'email', 'password', 'avatar', 'active', 'phone'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -47,5 +47,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function previews()
     {
         return $this->hasMany('App\Src\Book\Chapter\Preview');
+    }
+
+    public function books()
+    {
+        return $this->hasMany('App\Src\Book\Book','author_id');
     }
 }

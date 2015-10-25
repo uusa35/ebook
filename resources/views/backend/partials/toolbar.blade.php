@@ -156,10 +156,10 @@
                     <!-- Menu Footer-->
                     <li class="user-footer">
                         <div class="pull-left">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                            <a href="{{ action('UserController@show',Auth::id()) }}" class="btn btn-default btn-flat">{{ trans('general.profile') }}</a>
                         </div>
                         <div class="pull-right">
-                            <a href="{{ URL::to('auth/logout') }}" class="btn btn-default btn-flat">Sign out</a>
+                            <a href="{{ URL::to('auth/logout') }}" class="btn btn-default btn-flat">{{ trans('general.logout') }}</a>
                         </div>
                     </li>
                 </ul>
@@ -175,7 +175,7 @@
                         <a href="{{ URL::to('/') }}">{{ trans('general.back_to_site') }}</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="javascript:void(0)">Separated link</a></li>
+                    <li><a href="{{ action('Backend\UsersController@edit',Auth::id()) }}">{{ trans('general.edit_profile') }}</a></li>
                     <li><a href="/lang/{{ (App::getLocale() === 'ar') ? 'en' : 'ar' }}">
                             {{ (App::getLocale() === 'ar') ? trans('general.english') : trans('general.arabic')  }}
                         </a></li>

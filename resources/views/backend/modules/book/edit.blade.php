@@ -11,9 +11,9 @@
                     <h3>{{ trans('general.book_edit') }}</h3>
                 </div>
                 <div class="col-lg-6">
-                    <p style="color:red;">(*) - {{ trans('general.all_started_required') }}</p>
+                    <p style="color:red;">(*) - {{ trans('messages.fields_required') }}</p>
 
-                    <p style="color:red;">(*) - {{ trans('general.cover_instructions') }}</p>
+                    <p style="color:red;">(*) - {{ trans('messages.cover_instructions') }}</p>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                 <div class="row page-header">
                     <div class="col-lg-2 col-md-2 col-lg-offset-4">
                         <img class="img-thumbnail img-responsive "
-                             src="{{ asset('images/uploads/cover_ar/thumbnail/'.$book->cover ) }}" alt="">
+                             src="{{ asset('images/uploads/cover/thumbnail/'.$book->cover ) }}" alt="">
                     </div>
                     {{--<div class="col-lg-2 col-md-2 ">
                         <img class="img-thumbnail img-responsive "
