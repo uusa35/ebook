@@ -47,7 +47,7 @@ class AuthController extends AbstractController
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name_en' => 'required|max:255',
+            'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
@@ -66,13 +66,14 @@ class AuthController extends AbstractController
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'active' => 1,
+            'level' => 3,
         ]);
 
         if ($user) {
 
             $user->roles()->attach(3);
 
-            return true;
+            return redirect()->action('Backend\DashboardController@index');
 
         } else {
 

@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use \Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Crypt;
@@ -50,9 +51,9 @@ class BeforeAccessModule
 
         //\Cache::put('module', $moduleDecrypted, 120);
 
-        $role = Cache::get('role');
+        $role = Cache::get('role.'.Auth::id());
 
-        $array = \Cache::get('Abilities.'.$role);
+        $array = \Cache::get('Abilities.'.$role.'.'.Auth::id());
 
         //dd($array);
         //dd($moduleDecrypted);

@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class AuthUserCollectData
 {
@@ -19,11 +21,13 @@ class AuthUserCollectData
     public function handle($request, Closure $next)
     {
 
-        if (is_null(\Session::get('roles'))) {
+//        dd(Cache::get('role.Author.'.Auth::id()));
+
+        if (is_null(Session::get('roles'))) {
 
             $authUserRole = $request->user()->roles()->first();
 
-            \Cache::put($authUserRole->name, $authUserRole->name, 120);
+            Cache::put($authUserRole->name, $authUserRole->name, 120);
 
             $modules = $authUserRole->perms()->where('level', '=', '1')->get();
 
@@ -41,13 +45,13 @@ class AuthUserCollectData
             /*
              * 'Module.Admin' => [List of Modules]
              * */
-            \Cache::put('Module.' . $authUserRole->name, array_values($modulesList), 120);
+            Cache::put('Modules.' . $authUserRole->name.'.'.Auth::id(), array_values($modulesList), 120);
 
 
             /*
              * 'Permission.Admin' => [List of Permissions]
              * */
-            \Cache::put('Permission.' . $authUserRole->name, array_values($permissionsList), 120);
+            Cache::put('Permissions.' . $authUserRole->name.'.'.Auth::id(), array_values($permissionsList), 120);
 
 
             /*
@@ -55,37 +59,34 @@ class AuthUserCollectData
              *
              * */
 
-            \Cache::put('Abilities.' . $authUserRole->name, array_values($abilitiesList), 120);
-
+            Cache::put('Abilities.' . $authUserRole->name.'.'.Auth::id(), array_values($abilitiesList), 120);
 
             /*
              * 'Permission.role_edit' => role_edit
              * */
             foreach ($permissions as $perm) {
 
-                \Cache::put('Permission.' . $perm->name, $perm->name, 120);
+                Cache::put('Permission.' . $perm->name.'.'.Auth::id(), $perm->name, 120);
 
             }
 
-
-            \Session::put('roles', \Crypt::encrypt(str_random(16)));
-
-            // roles => 'rand'
-            // role = Admin
-            \Cache::put('role', $authUserRole->name, 120);
-
             // role.Admin = Admin
-            \Cache::put('role.' . $authUserRole->name, $authUserRole->name, 120);
+            Cache::put('role.' . $authUserRole->name.'.'.Auth::id(), $authUserRole->name, 120);
+
+            // role.ID = Admin
+            Cache::put('role.'.Auth::id(), $authUserRole->name, 120);
+
+            Session::put('roles', \Crypt::encrypt(str_random(16)));
 
             return $next($request);
 
-        } elseif (\Cache::get('role') && \Session::get('roles')) {
+        } elseif (Cache::get('role.'.Auth::id()) && Session::get('roles')) {
 
             return $next($request);
         }
 
-        \Session::clear();
-        \Auth::logout();
+        Session::clear();
+        Auth::logout();
 
         return redirect('/');
         //dd('no cache found');

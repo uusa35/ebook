@@ -9,8 +9,8 @@
 namespace App\Core;
 
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
 
 class AbstractPolicy
 {
@@ -33,7 +33,7 @@ class AbstractPolicy
     public function __construct()
     {
         $this->userRole = Cache::get('role');
-        $this->userAbilities = Cache::get('Abilities.' . $this->userRole);
+        $this->userAbilities = Cache::get('Abilities.' . $this->userRole.'.'.Auth::id());
 
 
     }
@@ -50,7 +50,6 @@ class AbstractPolicy
      */
     public function create()
     {
-
         if (is_null($this->userAbilities)) {
 
             return redirect()->to('dashboard');
@@ -72,7 +71,6 @@ class AbstractPolicy
      */
     public function edit($owner = '')
     {
-
         if (is_null($this->userAbilities)) {
 
             return redirect()->to('dashboard');
@@ -81,17 +79,18 @@ class AbstractPolicy
 
         if (in_array($this->getModule() . '_edit', $this->userAbilities, true)) {
 
-            if ($this->isAuthor()) {
+            if ($this->isAdmin() || $this->isEditor()) {
 
-                if (\Auth::id() === $owner) {
-
-                    return true;
-
-                }
-                return false;
+                return true;
             }
 
-            return true;
+            elseif ($this->isAuthor()) {
+
+                return true;
+            }
+
+            return false;
+
         }
 
         return false;

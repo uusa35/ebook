@@ -13,7 +13,7 @@ class CreateMessage extends Request
      */
     public function authorize()
     {
-        return true;
+        return $this->checkAccessForEachPermission('message_create');
     }
 
     /**

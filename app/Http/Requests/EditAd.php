@@ -14,7 +14,7 @@ class EditAd extends Request
      */
     public function authorize()
     {
-        return true;
+        return $this->checkAccessForEachPermission('ad_edit');
     }
 
     /**

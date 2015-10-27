@@ -28,7 +28,7 @@
                         <a data-lightbox="example-1" data-title="{{ $book->title }}"
                            href="{{ asset('images/uploads/cover/large/'.$book->cover) }}">
 
-                            <img id="example-1" class="product-image img-responsive"
+                            <img id="example-1" class="product-image img-responsive" style="padding: 4px; margin:10px;"
                                  src="{{ asset('images/uploads/cover/thumbnail/'.$book->cover) }}"
                                  alt="{{ $book->title }}">
                             {{--<div class="lightbox-caption"><p></p></div>--}}
@@ -116,11 +116,13 @@
                         <div class="col-lg-8 col-lg-offset-2 text-center {!! Session::get('pullClassReverse') !!}">
                             <div class="col-lg-2 border-right text-center">
                                 <div class="description-block">
-                                    <a class=" {!! Config::get('button.btn-favorite') !!}"
-                                       href="{{ action('BookController@getCreateNewFavoriteList',[Auth::id(),$book->id]) }}"
-                                       title="{{ trans('buttons.favorite') }}">
-                                        {!! Config::get('button.icon-favorite') !!}
-                                    </a>
+                                    @if(Auth::user())
+                                        <a class=" {!! Config::get('button.btn-favorite') !!}"
+                                           href="{{ action('BookController@getCreateNewFavoriteList',[Auth::id(),$book->id]) }}"
+                                           title="{{ trans('buttons.favorite') }}">
+                                            {!! Config::get('button.icon-favorite') !!}
+                                        </a>
+                                    @endif
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -167,7 +169,8 @@
                             <hr/>
                             @foreach($allAds as $ad)
                                 <div class="col-lg-6">
-                                    <img class="img-responsive" src="{{ asset('images/uploads/ads/large/'.$ad->ads) }}" alt=""/>
+                                    <img class="img-responsive" src="{{ asset('images/uploads/ads/large/'.$ad->ads) }}"
+                                         alt=""/>
                                 </div>
                             @endforeach
                         </div>

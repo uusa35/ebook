@@ -25,22 +25,23 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
 
-
-            @if(Cache::has('role.Admin'))
-                @foreach(Cache::get('Module.Admin') as $module)
-                    <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
-                            <span>{{ trans('general.'.$module) }}</span></a></li>
-                @endforeach
-            @elseif(Cache::has('role.Editor'))
-                @foreach(Cache::get('Module.Editor') as $module)
-                    <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
-                            <span>{{ trans('general.'.$module) }}</span></a></li>
-                @endforeach
-            @elseif(Cache::has('role.Author'))
-                @foreach(Cache::get('Module.Author') as $module)
-                    <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
-                            <span>{{ trans('general.'.$module) }}</span></a></li>
-                @endforeach
+            @if(Session::has('roles'))
+                @if(Cache::has('role.Admin.'.Auth::id()))
+                    @foreach(Cache::get('Modules.Admin.'.Auth::id()) as $module)
+                        <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
+                                <span>{{ trans('general.'.$module) }}</span></a></li>
+                    @endforeach
+                @elseif(Cache::has('role.Editor.'.Auth::id()))
+                    @foreach(Cache::get('Modules.Editor.'.Auth::id()) as $module)
+                        <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
+                                <span>{{ trans('general.'.$module) }}</span></a></li>
+                    @endforeach
+                @elseif(Cache::has('role.Author.'.Auth::id()))
+                    @foreach(Cache::get('Modules.Author.'.Auth::id()) as $module)
+                        <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
+                                <span>{{ trans('general.'.$module) }}</span></a></li>
+                    @endforeach
+                @endif
             @endif
 
 

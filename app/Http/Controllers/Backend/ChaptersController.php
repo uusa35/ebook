@@ -49,7 +49,6 @@ class ChaptersController extends Controller
      */
     public function create()
     {
-
         $bookId = \Request::get('book_id');
 
         return view('backend.modules.book.chapter.create', compact('bookId'));
@@ -63,7 +62,6 @@ class ChaptersController extends Controller
      */
     public function store(Requests\CreateChapter $request)
     {
-
         $chapter = $this->chapterRepository->model->create([
             'title' => $request->get('title'),
             'body' => $request->get('body'),

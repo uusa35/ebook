@@ -35,7 +35,6 @@
     {!! Breadcrumbs::render('books') !!}
 
     <div class="panel-body">
-
         @section('titlebar')
             @can('create')
 
@@ -56,7 +55,7 @@
                     <li id="tab-2"><a href="#step2" data-toggle="tab"><i
                                     class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.favorite') }}
                         </a></li>
-                    @if(Cache::get('Module.Admin'))
+                    @if(Cache::get('Modules.Admin.'.Auth::id()))
                         <li id="tab-3"><a href="#step3" data-toggle="tab"><i
                                         class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.report') }}
                             </a></li>
@@ -83,7 +82,7 @@
                                             <th>{{ trans('general.add') }}</th>
                                             <th>{{ trans('general.active') }}</th>
                                             <th>{{ trans('general.edit') }}</th>
-                                            @if(Cache::get('Module.Admin'))
+                                            @if(Cache::get('Modules.Admin.'.Auth::id()))
                                                 <th>{{ trans('general.delete') }}</th>
                                             @endif
                                         </tr>
@@ -143,7 +142,7 @@
                                                     </a>
                                                     @endcan
                                                 </td>
-                                                @if(Cache::get('Module.Admin'))
+                                                @if(Cache::get('Modules.Admin.'.Auth::id()))
                                                 <td class="text-center">
                                                     <button type="button" class="{{ Config::get('button.btn-delete') }}"
                                                             id="delete-{{$book->id}}"
@@ -224,7 +223,7 @@
                     </div>
 
                     {{--Abuse Reports --}}
-                    @if(Cache::get('Module.Admin'))
+                    @if(Cache::get('Modules.Admin.'.Auth::id()))
                         <div class="tab-pane" id="step3">
                             <div class="row">
                                 <div class="col-xs-12 paddingTop10">

@@ -13,10 +13,7 @@ class CreateCategory extends Request
      */
     public function authorize()
     {
-        if(\Cache::get('Module.Admin')) {
-            return true;
-        }
-        return false;
+        return $this->checkAccessForEachPermission('category_create');
     }
 
     /**

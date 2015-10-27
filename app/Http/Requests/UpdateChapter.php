@@ -14,7 +14,7 @@ class UpdateChapter extends Request
      */
     public function authorize()
     {
-        return $this->checkAccessForEachPermission('chapter_edit');
+        return $this->checkAccessForEachPermission('chapter_update');
     }
 
     /**

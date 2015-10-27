@@ -3,6 +3,7 @@
 namespace App\Core;
 
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
@@ -24,9 +25,7 @@ trait UserTrait {
 
     public function isAdmin()
     {
-        if (Cache::get('role') === 'Admin') {
-
-            $this->getCountersForAdminAndEditor();
+        if (Cache::get('role.Admin.'.Auth::id()) === 'Admin') {
 
             return true;
         }
@@ -37,9 +36,7 @@ trait UserTrait {
     public function isEditor()
     {
 
-        if (Cache::get('role') === 'Editor') {
-
-            $this->getCountersForAuthor();
+        if (Cache::get('role.Editor.'.Auth::id()) === 'Editor') {
 
             return true;
         }
@@ -50,7 +47,7 @@ trait UserTrait {
     public function isAuthor()
     {
 
-        if (Cache::get('role') === 'Author') {
+        if (Cache::get('role.Author.'.Auth::id()) === 'Author') {
             return true;
         }
 
@@ -60,19 +57,10 @@ trait UserTrait {
     public function getUserRole()
     {
 
-        return Cache::get('role');
+        return Cache::get('role.'.Auth::id());
 
     }
 
-    public function isAdminOrEditor()
-    {
-        if (Cache::get('Admin') || Cache::get('Editor')) {
-
-            return true;
-        }
-
-        return false;
-    }
 
     public function isOwner($userId)
     {

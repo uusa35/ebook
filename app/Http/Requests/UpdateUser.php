@@ -11,7 +11,7 @@ class UpdateUser extends Request {
 	 */
 	public function authorize()
 	{
-		return \Gate::allows('edit');
+		return $this->checkAccessForEachPermission('user_update');
 	}
 
 	/**

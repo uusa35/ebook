@@ -79,7 +79,7 @@ class BooksController extends AbstractController
 
         $this->getPageTitle('book.index');
 
-        if (\Cache::get('Module.Admin') || \Cache::get('Module.Editor')) {
+        if ($this->isAdmin() || $this->isEditor()) {
 
             $books = $this->bookRepository->model
                 ->with('meta', 'author', 'chapters')
@@ -90,7 +90,7 @@ class BooksController extends AbstractController
 
             $booksFavorited = $this->bookRepository->model->mostFavorites();
 
-        } elseif (\Cache::get('Module.Author')) {
+        } elseif ($this->isAuthor()) {
 
             $books = $this->bookRepository->model
                 ->where(['author_id' => Auth::id()])
@@ -260,24 +260,22 @@ class BooksController extends AbstractController
     {
         $book = $this->bookRepository->getById($id);
 
-        if (Gate::check('edit', $book->author_id)) {
+        if ($request->file('cover')) {
 
-            if ($request->file('cover')) {
+            $this->CreateBookCover($request, $book);
 
-                $this->CreateBookCover($request, $book);
+        }
 
-            }
+        if (is_null($request->get('active'))) {
 
+            $request->merge(['active' => 0]);
+        } else {
+            $request->merge(['active' => 1]);
+        }
 
-            if (is_null($request->get('active'))) {
+        $book->update($request->except(['cover']));
 
-                $request->merge(['active' => 0]);
-            } else {
-                $request->merge(['active' => 1]);
-            }
-
-            $book->update($request->except(['cover']));
-
+        if ($book) {
             return redirect()->action('Backend\BooksController@index')->with('success',
                 trans('messages.success.book_edit'));
         }

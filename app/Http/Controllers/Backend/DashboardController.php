@@ -2,7 +2,7 @@
 
 use App\Core\AbstractController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 
 class DashboardController extends AbstractController
 {
@@ -22,15 +22,11 @@ class DashboardController extends AbstractController
 
     public function index()
     {
-        if (Cache::has('role')) {
+        if (Session::has('roles')) {
 
             $this->getPageTitle('dashboard.index');
 
-            if ($this->isAdmin() || $this->isEditor()) {
-
-                return view('backend.modules.user.dashboard.index');
-
-            } elseif ($this->isAuthor()) {
+            if ($this->getUserRole()) {
 
                 return view('backend.modules.user.dashboard.index');
 
@@ -39,7 +35,7 @@ class DashboardController extends AbstractController
 
         Auth::logout();
 
-        return redirect()->back()->with(['error' => 'messeages.error.roles_sessions_not_created']);
+        return redirect()->back()->with(['error' => 'messeages.error.no_auth']);
     }
 
 }
