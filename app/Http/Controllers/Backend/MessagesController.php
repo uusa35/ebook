@@ -2,6 +2,7 @@
 
 use App\Core\AbstractController;
 use App\Http\Requests\CreateMessage;
+use App\Src\User\UserRepository;
 use Carbon\Carbon;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
@@ -21,11 +22,13 @@ class MessagesController extends AbstractController
      */
     protected $pusher;
     protected $thread;
+    protected $userRepository;
 
-    public function __construct(Pusher $pusher, Thread $thread)
+    public function __construct(Pusher $pusher, Thread $thread, UserRepository $userRepository)
     {
         $this->pusher = $pusher;
         $this->thread = $thread;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -41,7 +44,7 @@ class MessagesController extends AbstractController
         $currentUserId = Auth::user()->id;
 
         // All threads that user is participating in
-        $threads = $this->thread->forUser($currentUserId)->with('participants','messages','participants.user')->get();
+        $threads = $this->thread->forUser($currentUserId)->with('participants', 'messages', 'participants.user')->get();
 
         return view('backend.modules.messenger.index', compact('threads', 'currentUserId'));
     }
@@ -87,7 +90,16 @@ class MessagesController extends AbstractController
 
         $this->getPageTitle('message.create');
 
-        $users = User::where('id', '!=', Auth::id())->get();
+        if (Session::get('book_id')) {
+
+            $users = $this->userRepository->allAdminsAndEditors();
+
+        } else {
+
+            $users = $this->userRepository->model->where('id', '!=', Auth::id())->get();
+        }
+
+
 
         $usersList = $users->lists('name', 'id');
 

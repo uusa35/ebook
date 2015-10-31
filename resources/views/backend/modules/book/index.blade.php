@@ -55,7 +55,7 @@
                     <li id="tab-2"><a href="#step2" data-toggle="tab"><i
                                     class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.favorite') }}
                         </a></li>
-                    @if(Cache::get('Modules.Admin.'.Auth::id()))
+                    @if(Cache::get('Abilities.Admin.'.Auth::id()))
                         <li id="tab-3"><a href="#step3" data-toggle="tab"><i
                                         class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.report') }}
                             </a></li>

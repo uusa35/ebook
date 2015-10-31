@@ -17,7 +17,12 @@
                         <!-- Subject Form Input -->
                         <div class="form-group">
                             {!! Form::label('subject', trans('word.subject'), ['class' => 'control-label']) !!}
-                            {!! Form::text('subject', null, ['class' => 'form-control']) !!}
+                            @if(Session::has('book_id'))
+                                {!! Form::text('subject', null, ['class' => 'form-control','placeholder' =>
+                                trans('messages.report_abuse').Session::get('book_id')]) !!}
+                            @else
+                                {!! Form::text('subject', null, ['class' => 'form-control']) !!}
+                            @endif
                         </div>
 
                         <!-- Message Form Input -->
@@ -33,7 +38,7 @@
                                 Form::select('usersList',$usersList,null,['multiple'=>'multiple','name'=>'recipients[]','class'=>'form-control','id'=>'users'])
                                 !!}
                             </div>
-                        @endif
+                            @endif
 
                                     <!-- Submit Form Input -->
                             <div class="form-group">

@@ -100,6 +100,10 @@ class BookController extends AbstractController
             'views' => $book->views + 1
         ]);
 
+        $users = $this->userRepository->model->where('id', '=', '1')->get();
+
+        $usersList = $users->lists('name', 'id');
+
         $total_pages = $this->chapterRepository->totalPagesForChapter($book->id);
 
         /*redirec if the book is not published with a not published message*/
@@ -109,7 +113,7 @@ class BookController extends AbstractController
             return redirect('/')->with(['error' => 'messages.error.book_not_active']);
         }
 
-        return view('frontend.modules.book.show', compact('book', 'total_pages'));
+        return view('frontend.modules.book.show', compact('book', 'total_pages', 'usersList'));
     }
 
     /**
@@ -136,7 +140,7 @@ class BookController extends AbstractController
      * @param $bookUrl
      * @return full link of the free book
      */
-    public function getFreePdfFile($bookId, $bookUrl)
+    /*public function getFreePdfFile($bookId, $bookUrl)
     {
 
         $book = $this->bookRepository->model->where(['url' => $bookUrl, 'id' => $bookId])->first();
@@ -153,14 +157,14 @@ class BookController extends AbstractController
         }
 
         return redirect()->back()->with(['error' => trans('word.no-file')]);
-    }
+    }*/
 
 
     /**
      * @param $bookUrl
      * @return creating on the fly a link with 10 pages of a pdf file of a book
      */
-    public function getFirstTenPagesForPaidBooks($bookId, $bookUrl)
+   /* public function getFirstTenPagesForPaidBooks($bookId, $bookUrl)
     {
         $book = $this->bookRepository->model->where(['url' => $bookUrl, 'id' => $bookId])->first();
 
@@ -169,7 +173,7 @@ class BookController extends AbstractController
 
         $this->dispatchAndShowPreviews($bookUrl, $book->title_en, $book->title_ar, $book->free);
 
-    }
+    }*/
 
 
     /**
@@ -177,7 +181,7 @@ class BookController extends AbstractController
      * @param $authId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function getCreateNewOrder($bookId, $authId)
+   /* public function getCreateNewOrder($bookId, $authId)
     {
 
         if ($this->purchaseRepository->checkOrderExists($bookId, $authId)) {
@@ -193,7 +197,7 @@ class BookController extends AbstractController
 
         return redirect()->back()->with(['error' => trans('word.error-order-created')]);
 
-    }
+    }*/
 
     /**
      * Dispatch Job for createBookPreview + returning the response of the output to create PDF Preview for free and 10 pages of the paid
@@ -203,7 +207,7 @@ class BookController extends AbstractController
      * @param $free
      * @return mixed
      */
-    function dispatchAndShowPreviews($bookUrl, $title_en, $title_ar, $free)
+    /*function dispatchAndShowPreviews($bookUrl, $title_en, $title_ar, $free)
     {
 
         $outPut = $this->dispatch(new CreateChapterPreview($bookUrl, $title_en, $title_ar, $free));
@@ -216,32 +220,7 @@ class BookController extends AbstractController
             'Content-Disposition' => 'inline; ' . $bookUrl,
 
         ]);
-    }
+    }*/
 
-    /**
-     * add report abuse within the admin interfrace
-     * @return string
-     */
-    public function getCreateNewReportAbuse($userId, $bookId)
-    {
-
-        $checkReportAbuse = DB::table('book_report')->where(['book_id' => $bookId, 'user_id' => $userId])->first();
-
-        if (is_null($checkReportAbuse)) {
-
-            $reportAbuse = DB::table('book_report')->insert([
-                'book_id' => $bookId,
-                'user_id' => $userId,
-                'created_at' => Carbon::now(),
-            ]);
-
-            if ($reportAbuse) {
-                return redirect()->back()->with(['success' => trans('word.success-book-report')]);
-            }
-
-        }
-
-        return redirect()->back()->with(['error' => trans('word.error-book-report')]);
-    }
 
 }

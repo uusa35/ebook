@@ -17,6 +17,7 @@ use App\Src\Favorite\FavoriteRepository;
 use App\Src\Purchase\PurchaseRepository;
 use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -397,11 +398,39 @@ class BooksController extends AbstractController
         if ($favoriteDelete) {
 
             return redirect()->back()->with(['success', trans('general.success-favorite-remove')]);
-            
+
         }
 
         return redirect()->back()->with(['error', trans('general.error-favorite-remove')]);
 
+    }
+
+
+    /**
+     * add report abuse within the admin interfrace
+     * @return string
+     */
+    public function getCreateNewReportAbuse($userId, $bookId)
+    {
+
+        $checkReportAbuse = DB::table('book_report')->where(['book_id' => $bookId, 'user_id' => $userId])->first();
+
+        if (is_null($checkReportAbuse)) {
+
+            $reportAbuse = DB::table('book_report')->insert([
+                'book_id' => $bookId,
+                'user_id' => $userId,
+                'created_at' => Carbon::now(),
+            ]);
+
+            if ($reportAbuse) {
+
+                return redirect()->action('Backend\MessagesController@create')->with(['success' => trans('word.success-book-report'),'book_id' => $bookId]);
+            }
+
+        }
+
+        return redirect()->back()->with(['error' => trans('word.error-book-report')]);
     }
 
 

@@ -85,20 +85,6 @@ Route::group(['prefix' => 'frontend'], function () {
     Route::get('/conditions', ['uses' => 'HomeController@getConditions']);
     Route::resource('user','UserController',['only'=>'show']);
 
-
-    Route::group(['middleware' => 'auth'], function () {
-
-        Route::get('/orders/remove/{user}/{book}', ['uses' => 'BookController@getRemoveBookFromUserOrderList']);
-
-        /***************************************************************************************************
-         *                                          Report
-         *
-         ***************************************************************************************************/
-        Route::get('/report/{user}/{book}', ['uses' => 'BookController@getCreateNewReportAbuse']);
-
-    });
-
-
 });
 
 /***************************************************************************************************
@@ -255,6 +241,15 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
      ***************************************************************************************************/
     Route::get('/favorite/{user}/{book}', ['uses' => 'Backend\BooksController@getCreateNewFavoriteList']);
     Route::get('/favorite/remove/{user}/{book}', ['uses' => 'Backend\BooksController@getRemoveBookFromUserFavoriteList']);
+
+    //Route::get('/orders/remove/{user}/{book}', ['uses' => 'BookController@getRemoveBookFromUserOrderList']);
+
+    /***************************************************************************************************
+     *                                          Report
+     *
+     ***************************************************************************************************/
+    Route::get('/report/{user}/{book}', ['uses' => 'Backend\BooksController@getCreateNewReportAbuse']);
+    Route::get('/report/{user}/{book}', ['uses' => 'Backend\BooksController@getCreateNewReportAbuse']);
 
 
 

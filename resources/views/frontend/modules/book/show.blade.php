@@ -118,7 +118,7 @@
                                 <div class="description-block">
                                     @if(Auth::user())
                                         <a class=" {!! Config::get('button.btn-favorite') !!}"
-                                           href="{{ action('BookController@getCreateNewFavoriteList',[Auth::id(),$book->id]) }}"
+                                           href="{{ action('Backend\BooksController@getCreateNewFavoriteList',[Auth::id(),$book->id]) }}"
                                            title="{{ trans('buttons.favorite') }}">
                                             {!! Config::get('button.icon-favorite') !!}
                                         </a>
@@ -152,10 +152,13 @@
                             @if(Auth::user())
                                 <div class="col-lg-2 border-right">
                                     <div class="description-block">
-                                        <a class=" {!! Config::get('button.btn-report') !!}" href=""
+                                        <a class=" {!! Config::get('button.btn-report') !!}" href="{{ action('Backend\BooksController@getCreateNewReportAbuse',[Auth::id(),$book->id]) }}"
+                                           {{--data-toggle="modal"
+                                           data-target="#reportAbuse"--}}
                                            title="{{ trans('buttons.report') }}">
                                             {!! Config::get('button.icon-report') !!}
                                         </a>
+                                        {{--@include('frontend.partials._report_abuse_modal')--}}
                                     </div>
                                     <!-- /.description-block -->
                                 </div>
