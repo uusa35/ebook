@@ -6,6 +6,7 @@ use App\Core\AbstractController;
 use App\Jobs\CreateImages;
 use App\Http\Requests;
 use App\Src\Slider\Slider;
+use Illuminate\Support\Facades\Cache;
 
 class SlidersController extends AbstractController
 {
@@ -96,9 +97,13 @@ class SlidersController extends AbstractController
       * Abstract CreateImages Job (Model , $request, FolderName, [FieldsName] , [Default thumbnail sizes] , [Default large sizes]
       * */
 
-        $updateSlider = $this->dispatch(new CreateImages($slider, $request, 'slide', ['url'], ['',''], ['1500', '500']));;
+        if($request->get('url')) {
 
-        if ($updateSlider) {
+            $updateSlider = $this->dispatch(new CreateImages($slider, $request, 'slide', ['url'], ['',''], ['1500', '500']));;
+
+        }
+
+        if ($slider) {
 
             return redirect()->action('Backend\SlidersController@index')->with(['success' => trans('sucess.update')]);
 

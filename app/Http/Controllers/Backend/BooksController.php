@@ -13,6 +13,7 @@ use App\Src\Book\BookRepository;
 use App\Src\Book\Chapter\ChapterRepository;
 use App\Src\Category\Field\FieldCategory;
 use App\Src\Category\Lang\LangCategory;
+use App\Src\Favorite\FavoriteRepository;
 use App\Src\Purchase\PurchaseRepository;
 use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
@@ -31,11 +32,11 @@ class BooksController extends AbstractController
 
     public $gate;
     public $bookRepository;
-    public $purchaseRepository;
     public $userRepository;
     public $roleRepository;
     public $fieldCategory;
     public $langCategory;
+    public $favoriteRepository;
     public $chapterRepository;
     use BookHelpers;
 
@@ -51,7 +52,7 @@ class BooksController extends AbstractController
         BookRepository $book,
         FieldCategory $fieldCategory,
         LangCategory $langCategory,
-        PurchaseRepository $purchaseRepository,
+        FavoriteRepository $favoriteRepository,
         UserRepository $userRepository,
         RoleRepository $roleRepository,
         ChapterRepository $chapterRepository
@@ -63,7 +64,6 @@ class BooksController extends AbstractController
         $this->bookRepository = $book;
         $this->fieldCategory = $fieldCategory;
         $this->langCategory = $langCategory;
-        $this->purchaseRepository = $purchaseRepository;
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
         $this->chapterRepository = $chapterRepository;
@@ -88,7 +88,7 @@ class BooksController extends AbstractController
 
             $booksReported = $this->bookRepository->getReportsAbuse();
 
-            $booksFavorited = $this->bookRepository->model->mostFavorites();
+            $booksFavorited = $this->bookRepository->getMostFavorited(10);
 
         } elseif ($this->isAuthor()) {
 
@@ -100,7 +100,7 @@ class BooksController extends AbstractController
 
             $booksReported = [];
 
-            $booksFavorited = $this->bookRepository->model->mostFavorites();
+            $booksFavorited = $this->bookRepository->getUserFavorites(Auth::id());
         }
 
         if ($books) {
@@ -309,135 +309,6 @@ class BooksController extends AbstractController
     }
 
 
-    /**
-     * @param $buyerId
-     * @param $bookId
-     * @param $buyerEmail
-     * @param $stage
-     * @return \Illuminate\Http\RedirectResponse
-     * @internal param to $Admin accept order (change status to [order/under_process/purchased£])
-     */
-    public function getAcceptOrder($buyerId, $bookId, $buyerEmail, $stage)
-    {
-
-        if ($order = $this->purchaseRepository->model->where(['user_id' => $buyerId, 'book_id' => $bookId])->update([
-            'stage' => $stage
-        ])
-        ) {
-            // create an email to notify the buyer that his order stage has been changed
-            // from us to buyeremail .. this book with the title bla bla has been accepted by adminstration ..
-            // we will contact u soon on your mobile number plesae get ready for payment and fulfil your order.
-
-            $book = $this->bookRepository->getById($bookId)->with('meta')->first();
-
-            $buyerUserName = Auth::user()->name;
-
-            $buyerMobile = Auth::user()->mobile;
-
-            $this->NotifyChangeStageOrder([
-                'stage' => $stage,
-                'email' => $buyerEmail,
-                'book' => $book,
-                'username' => $buyerUserName,
-                'mobile' => $buyerMobile
-            ]);
-
-            return redirect()->back()->with(['success' => trans('success.order')]);
-        }
-
-        return redirect()->back()->with(['error' => trans('error.order')]);
-    }
-
-    /**
-     * @param $buyerId
-     * @param $bookId
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function getDeleteOrder($buyerId, $bookId)
-    {
-        if ($this->purchaseRepository->deleteOrder($buyerId, $bookId)) {
-
-            return redirect()->back()->with(['success' => trans('success.delete-order')]);
-        }
-    }
-
-    /**
-     * @param $bookId
-     * @param $autherId
-     * @param $total_pages
-     * @return \Illuminate\View\View
-     */
-    public function getCreateNewCustomizedPreview($bookId, $autherId, $total_pages)
-    {
-
-        $isFree = $this->bookRepository->model->where('id', $bookId)->first()->free;
-
-        if ($isFree != 1) {
-
-            $users = $this->userRepository->getAllUsersWithoutAdmins($autherId);
-
-            $usersList = $users->pluck('name_' . App::getlocale(), 'id');
-
-            return view('backend.modules.book._create_preview_form',
-                compact('bookId', 'autherId', 'total_pages', 'usersList'));
-        }
-
-        return redirect()->back()->with(['error' => trans('word.error-preview-not-created')]);
-
-
-    }
-
-    /**
-     * @param Requests\CreateNewCustomizedPreviewRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postCreateNewCustomizedPreview(Requests\CreateNewCustomizedPreviewRequest $request)
-    {
-
-        $users = $request->input('usersList');
-
-        foreach ($users as $userId) {
-
-            $request->merge(['user_id' => $userId]);
-
-            if (!$this->userRepository->CreateNewCustomizedPreview($request->all())) {
-
-                return redirect()->back()->with(['error' => trans('word.error-preview-not-created')]);
-            }
-        }
-
-        return redirect()->back()->with(['success' => 'success-preview-created']);
-    }
-
-    public function getDeleteNewCustomizedPreview($bookId, $authorId)
-    {
-        $previewDeleted = $this->bookRepository->deleteNewCustomizedPreview($bookId, $authorId);
-
-        if ($previewDeleted) {
-
-            return redirect()->back()->with(['success' => 'success-preview-deleted']);
-
-        }
-
-        return redirect()->back()->with(['error' => trans('word.error-preview-not-deleted')]);
-    }
-
-    public function getShowNewCustomizedPreviewForAdmin($bookId, $authorId)
-    {
-
-        $book = $this->bookRepository->ShowNewCustomizedPreviewForAdmin($bookId, $authorId);
-
-        return $this->dispatch(new CreateCustomizedPreview($book));
-    }
-
-    public function getShowNewCustomizedPreviewForUsers($bookId, $authorId)
-    {
-
-        $book = $this->bookRepository->ShowNewCustomizedPreviewForUsers($bookId, $authorId);
-
-        return $this->dispatch(new CreateCustomizedPreview($book));
-    }
-
     public function getUpdateBookStatus($bookId, $status)
     {
         $book = $this->bookRepository->getById($bookId)->update([
@@ -472,7 +343,7 @@ class BooksController extends AbstractController
         /*
          * Admin and Editor can activate/deactivate a book
          * */
-        if ($this->isAdminOrEditor()) {
+        if ($this->isAdmin() || $this->isEditor()) {
 
             $this->bookRepository->changeActivationBook($bookId, $userId, $activeStatus);
 
@@ -485,4 +356,165 @@ class BooksController extends AbstractController
     }
 
 
+    /**
+     * @param $userId
+     * @param $bookId
+     * create new favorite for a book
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getCreateNewFavoriteList($userId, $bookId)
+    {
+
+        $checkFavorite = $this->favoriteRepository->model->where(['book_id' => $bookId, 'user_id' => $userId])->first();
+
+        if (is_null($checkFavorite)) {
+
+            $favorited = $this->favoriteRepository->model->create([
+                'book_id' => $bookId,
+                'user_id' => $userId
+            ]);
+
+            if ($favorited) {
+                return redirect()->back()->with(['success' => trans('word.success-book-favorites')]);
+            }
+
+        }
+
+        return redirect()->back()->with(['error' => trans('word.error-book-favorites')]);
+    }
+
+    /**
+     * @param $userId
+     * @param $bookId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getRemoveBookFromUserFavoriteList($userId, $bookId)
+    {
+
+
+        $favoriteDelete = DB::table('book_user')->where(['user_id' => $userId, 'book_id' => $bookId])->delete();
+
+        if ($favoriteDelete) {
+
+            return redirect()->back()->with(['success', trans('general.success-favorite-remove')]);
+            
+        }
+
+        return redirect()->back()->with(['error', trans('general.error-favorite-remove')]);
+
+    }
+
+
 }
+
+
+/*
+public function getAcceptOrder($buyerId, $bookId, $buyerEmail, $stage)
+{
+
+    if ($order = $this->purchaseRepository->model->where(['user_id' => $buyerId, 'book_id' => $bookId])->update([
+        'stage' => $stage
+    ])
+    ) {
+        // create an email to notify the buyer that his order stage has been changed
+        // from us to buyeremail .. this book with the title bla bla has been accepted by adminstration ..
+        // we will contact u soon on your mobile number plesae get ready for payment and fulfil your order.
+
+        $book = $this->bookRepository->getById($bookId)->with('meta')->first();
+
+        $buyerUserName = Auth::user()->name;
+
+        $buyerMobile = Auth::user()->mobile;
+
+        $this->NotifyChangeStageOrder([
+            'stage' => $stage,
+            'email' => $buyerEmail,
+            'book' => $book,
+            'username' => $buyerUserName,
+            'mobile' => $buyerMobile
+        ]);
+
+        return redirect()->back()->with(['success' => trans('success.order')]);
+    }
+
+    return redirect()->back()->with(['error' => trans('error.order')]);
+}
+
+
+public function getDeleteOrder($buyerId, $bookId)
+{
+    if ($this->purchaseRepository->deleteOrder($buyerId, $bookId)) {
+
+        return redirect()->back()->with(['success' => trans('success.delete-order')]);
+    }
+}
+
+
+public function getCreateNewCustomizedPreview($bookId, $autherId, $total_pages)
+{
+
+    $isFree = $this->bookRepository->model->where('id', $bookId)->first()->free;
+
+    if ($isFree != 1) {
+
+        $users = $this->userRepository->getAllUsersWithoutAdmins($autherId);
+
+        $usersList = $users->pluck('name_' . App::getlocale(), 'id');
+
+        return view('backend.modules.book._create_preview_form',
+            compact('bookId', 'autherId', 'total_pages', 'usersList'));
+    }
+
+    return redirect()->back()->with(['error' => trans('word.error-preview-not-created')]);
+
+
+}
+
+
+public function postCreateNewCustomizedPreview(Requests\CreateNewCustomizedPreviewRequest $request)
+{
+
+    $users = $request->input('usersList');
+
+    foreach ($users as $userId) {
+
+        $request->merge(['user_id' => $userId]);
+
+        if (!$this->userRepository->CreateNewCustomizedPreview($request->all())) {
+
+            return redirect()->back()->with(['error' => trans('word.error-preview-not-created')]);
+        }
+    }
+
+    return redirect()->back()->with(['success' => 'success-preview-created']);
+}
+
+public function getDeleteNewCustomizedPreview($bookId, $authorId)
+{
+    $previewDeleted = $this->bookRepository->deleteNewCustomizedPreview($bookId, $authorId);
+
+    if ($previewDeleted) {
+
+        return redirect()->back()->with(['success' => 'success-preview-deleted']);
+
+    }
+
+    return redirect()->back()->with(['error' => trans('word.error-preview-not-deleted')]);
+}
+
+public function getShowNewCustomizedPreviewForAdmin($bookId, $authorId)
+{
+
+    $book = $this->bookRepository->ShowNewCustomizedPreviewForAdmin($bookId, $authorId);
+
+    return $this->dispatch(new CreateCustomizedPreview($book));
+}
+
+public function getShowNewCustomizedPreviewForUsers($bookId, $authorId)
+{
+
+    $book = $this->bookRepository->ShowNewCustomizedPreviewForUsers($bookId, $authorId);
+
+    return $this->dispatch(new CreateCustomizedPreview($book));
+}*/
+

@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Core\AbstractController;
 use App\Http\Requests;
 use App\Jobs\CreateBookPreview;
 use App\Jobs\CreateChapterPreview;
@@ -14,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 
-class BookController extends Controller
+class BookController extends AbstractController
 {
 
 
@@ -95,6 +96,10 @@ class BookController extends Controller
             ])
             ->find($id);
 
+        $book->update([
+            'views' => $book->views + 1
+        ]);
+
         $total_pages = $this->chapterRepository->totalPagesForChapter($book->id);
 
         /*redirec if the book is not published with a not published message*/
@@ -106,71 +111,6 @@ class BookController extends Controller
 
         return view('frontend.modules.book.show', compact('book', 'total_pages'));
     }
-
-
-    /**
-     * @param $userId
-     * @param $bookId
-     * create new favorite for a book
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function getCreateNewFavoriteList($userId, $bookId)
-    {
-
-        $checkFavorite = $this->favoriteRepository->model->where(['book_id' => $bookId, 'user_id' => $userId])->first();
-
-        if (is_null($checkFavorite)) {
-
-            $favorited = $this->favoriteRepository->model->create([
-                'book_id' => $bookId,
-                'user_id' => $userId
-            ]);
-
-            if ($favorited) {
-                return redirect()->back()->with(['success' => trans('word.success-book-favorites')]);
-            }
-
-        }
-
-        return redirect()->back()->with(['error' => trans('word.error-book-favorites')]);
-    }
-
-    /**
-     * @param $userId
-     * @param $bookId
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function getRemoveBookFromUserFavoriteList($userId, $bookId)
-    {
-
-        if ($this->favoriteRepository->model->where(['book_id' => $bookId, 'user_id' => $userId])->delete()) {
-            return redirect()->back()->with(['success', trans('word.success-favorite-remove')]);
-        }
-
-        return redirect()->back()->with(['error', trans('word.error-favorite-remove')]);
-
-    }
-
-    /**
-     * @param $userId
-     * @param $bookId
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function getRemoveBookFromUserOrderList($userId, $bookId)
-    {
-
-        if ($this->purchaseRepository->model->where([
-            'book_id' => $bookId,
-            'user_id' => $userId,
-            'stage' => 'order'
-        ])->delete()
-        ) {
-            return redirect()->back()->with(['success', trans('word.success-order-remove')]);
-        }
-
-        return redirect()->back()->with(['error', trans('word.error-order-remove')]);
-    }
-
 
     /**
      * @param Request $request

@@ -73,8 +73,9 @@
                                     <table class="table table-striped table-condensed table-hover" id="booksTable">
                                         <thead>
                                         <tr class="well-material-blue-grey-100">
-                                            <th class="hidden-xs">{{ trans('general.id') }}</th>
+                                            <th class="hidden-xs">{{ trans('general.serial') }}</th>
                                             <th>{{ trans('general.title') }}</th>
+                                            <th>{{ trans('general.author') }}</th>
                                             <th>{{ trans('general.chapters') }}</th>
                                             <th>{{ trans('general.free') }}</th>
                                             <th>{{ trans('general.created_at') }}</th>
@@ -90,10 +91,13 @@
                                         <tbody>
                                         @foreach($books as $book)
                                             <tr>
-                                                <td class="hidden-xs">{{ $book->id }}</td>
+                                                <td class="hidden-xs">{{ $book->serial }}</td>
                                                 <td>
                                                     <a href="{{ action('Backend\BooksController@show', $book->id) }}">
                                                         {{ $book->title }} </a>
+                                                </td>
+                                                <td>
+                                                    {{ $book->author->name }}
                                                 </td>
                                                 <td>
                                                     <span> {{ count($book->chapters) }} </span>
@@ -178,7 +182,7 @@
                                         <thead>
                                         <tr>
                                             <th class="hidden-xs">{{ trans('general.serial') }}</th>
-                                            <th>{{ trans('general.subject') }}</th>
+                                            <th>{{ trans('general.title') }}</th>
                                             <th>{{ trans('general.author') }}</th>
                                             <th>{{ trans('general.active') }}</th>
                                             <th>{{ trans('general.remove') }}</th>
@@ -191,7 +195,7 @@
                                             <tr>
                                                 <td class="hidden-xs">{{ $book->serial }}</td>
                                                 <td>
-                                                    <a href="{{ action('BookController@show',[$book->book_id]) }}">
+                                                    <a href="{{ action('BookController@show',$book->id) }}">
                                                         {!! $book->title !!}</a>
                                                 </td>
                                                 <td>
@@ -202,7 +206,7 @@
                                                     <span> {{ $book->active }} </span>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a class="{!! Config::get('button.btn-delete')!!}" href="">
+                                                    <a class="{!! Config::get('button.btn-delete')!!}" href="{{ action('Backend\BooksController@getRemoveBookFromUserFavoriteList',[Auth::id(),$book->id]) }}">
                                                         {!! Config::get('button.icon-delete') !!}
                                                     </a>
                                                 </td>

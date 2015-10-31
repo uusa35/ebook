@@ -96,5 +96,19 @@ class Book extends AbstractModel
             ->orderBy('book_count', 'DESC')->paginate($paginate);
     }
 
+    public function userFavorites($userId)
+    {
+        return $this
+            ->selectRaw('books.*, count(*) as book_count')
+            ->with('meta','author','users')
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status','=','published');
+            })
+            ->join('book_user', 'books.id', '=', 'book_user.book_id')
+            ->where(['books.active'=> '1','book_user.user_id' => $userId])
+            ->groupBy('book_id')// responsible to get the sum of books returned
+            ->orderBy('book_count', 'DESC')->get();
+    }
+
 
 }

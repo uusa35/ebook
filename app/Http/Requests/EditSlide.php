@@ -25,7 +25,6 @@ class EditSlide extends Request
     public function rules()
     {
         return [
-            'url' => 'required',
             'caption' => 'required'
         ];
     }

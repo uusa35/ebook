@@ -69,6 +69,7 @@ class ViewServiceProvider extends ServiceProvider
                 'sliders' => \Cache::get('sliders')
             ]);
         }
+
     }
 
     /**

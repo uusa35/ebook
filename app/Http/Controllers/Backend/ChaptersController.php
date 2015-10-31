@@ -190,7 +190,7 @@ class ChaptersController extends Controller
         ]);
     }
 
-    public function getShowNewCustomizedPreviewForAdmin($bookId, $authorId)
+    /*public function getShowNewCustomizedPreviewForAdmin($bookId, $authorId)
     {
 
         $book = $this->bookRepository->ShowNewCustomizedPreviewForAdmin($bookId, $authorId);
@@ -204,20 +204,20 @@ class ChaptersController extends Controller
         $book = $this->bookRepository->ShowNewCustomizedPreviewForUsers($bookId, $authorId);
 
         return $this->dispatch(new CreateCustomizedPreview($book));
-    }
+    }*/
 
-    public function getUpdateBookStatus($bookId, $status)
+    public function getUpdateChapterStatus($chapterId, $status)
     {
-        $book = $this->bookRepository->getById($bookId)->update([
+        $chapter = $this->chapterRepository->getById($chapterId)->update([
             'status' => $status
         ]);
 
-        if ($book) {
+        if ($chapter) {
 
-            return redirect()->back()->with(['success' => trans('word.success-status-updated')]);
+            return redirect()->back()->with(['success' => trans('word.success.chapter_updated')]);
         }
 
-        return redirect()->back()->with(['error' => 'word.error-status-updated']);
+        return redirect()->back()->with(['error' => 'word.error.chapter_updated']);
     }
 
     public function removeReportAbuse($bookId)

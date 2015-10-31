@@ -5,10 +5,13 @@
     <div class="col-md-7">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('general.books') }}</h3>
+                <h3 class="box-title"><blockquote>{{ trans('general.books') }}</blockquote></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+                @if(is_null($userBooks))
+                    <div class="alert-info"> {{ trans('messages.info.no_books') }}</div>
+                @else
                 @foreach($userBooks as $book)
                     <div class="row">
                         <div class="col-lg-2">
@@ -24,6 +27,7 @@
                     </div>
                 @endforeach
                 {!! $userBooks->render() !!}
+                @endif
             </div>
             <!-- /.box-body -->
         </div>
@@ -34,8 +38,9 @@
         <!-- Profile Image -->
         <div class="box box-primary">
             <div class="box-body box-profile">
+
                 <img class="profile-user-img img-responsive img-circle"
-                     src="{{ asset('images/uploads/avatar/large/'.$user->avatar) }}" alt="User profile picture">
+                     src="{{ (emptyArray($user->avatar)) ? 'http://placehold.it/150x150' : asset('images/uploads/avatar/large/'.$user->avatar) }}" alt="User profile picture">
 
                 <h3 class="profile-username text-center">{{ $user->name }}</h3>
 

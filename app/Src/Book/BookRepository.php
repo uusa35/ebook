@@ -158,6 +158,17 @@ class BookRepository extends AbstractRepository
         return $favorites;
     }
 
+    /**
+     *
+     * @param int $paginate
+     * @return most favorite books from all users
+     */
+    public function getUserFavorites($userId)
+    {
+        $favorites = $this->model->userFavorites($userId);
+        return $favorites;
+    }
+
     public function getCustomizedPreviews($userId = '', $paginate = '10')
     {
 

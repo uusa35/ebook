@@ -14,9 +14,6 @@ class DashboardController extends AbstractController
      */
     public function __construct()
     {
-        //$this->middleware('guest');
-        //$this->middleware('auth', ['only' => 'logged']);
-        //$roles = $this->authUserRoles = Auth::user()->roles()->get();
 
     }
 
@@ -26,11 +23,18 @@ class DashboardController extends AbstractController
 
             $this->getPageTitle('dashboard.index');
 
-            if ($this->getUserRole()) {
+            if ($this->isAuthor()) {
+
+                $this->getCountersForAuthor();
 
                 return view('backend.modules.user.dashboard.index');
 
             }
+
+            $this->getCountersForAdminAndEditor();
+
+            return view('backend.modules.user.dashboard.index');
+
         }
 
         Auth::logout();

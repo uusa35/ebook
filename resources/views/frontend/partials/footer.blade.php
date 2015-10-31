@@ -9,10 +9,10 @@
             <p><i class="fa fa-fw fa-home"></i> {{ $contactusInfo->address }}<br/>
                 <i class="fa fa-fw fa-phone"></i> {{ $contactusInfo->phone }}<br/>
                 <i class="fa fa-fw fa-mobile"></i>{{ $contactusInfo->mobile }}<br/>
-                <i class="fa fa-fw fa-envelope"></i><a href="#"> {{ $contactusInfo->email }}</a> <br/>
-                <span class="fa fa-fw fa-twitter"></span> <a href="#"> {{ $contactusInfo->twitter }}</a> <br/>
-                <span class="fa fa-fw fa-instagram"></span> <a href="#"> {{ $contactusInfo->instagram }}</a> <br/>
-                <span class="fa fa-fw fa-youtube"></span> <a href="#"> {{ $contactusInfo->youtube }}</a>
+                <i class="fa fa-fw fa-envelope"></i><a href="{{ $contactusInfo->email }}"> {{ $contactusInfo->email }}</a> <br/>
+                <span class="fa fa-fw fa-twitter"></span> <a href="http://twitter.com/{{ $contactusInfo->twitter }}"> {{ $contactusInfo->twitter }}</a> <br/>
+                <span class="fa fa-fw fa-instagram"></span> <a href="http://instagram.com/{{ $contactusInfo->instagram }}"> {{ $contactusInfo->instagram }}</a> <br/>
+                <span class="fa fa-fw fa-youtube"></span> <a href="http://youtube.com/{{ $contactusInfo->youtube }}"> {{ $contactusInfo->youtube }}</a>
             </p>
         </div>
         <!-- col -->

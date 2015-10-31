@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Core\AbstractController;
 use App\Core\SocialAuthTrait;
 use App\Src\User\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Session;
 use Validator;
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -85,9 +84,9 @@ class AuthController extends AbstractController
     public function getLogout()
     {
 
-        \Session::flush();
-        \Cache::flush();
-        \Auth::logout();
+        Session::flush();
+        Cache::flush();
+        Auth::logout();
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
 

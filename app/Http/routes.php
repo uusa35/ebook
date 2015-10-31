@@ -20,7 +20,7 @@
  * FACEBOOK Authentication
  ***************************************************************************************************/
 Route::get('/auth/facebook', 'Auth\AuthController@redirectToFacebookProvider');
-Route::get('/callback', 'Auth\AuthController@handleProviderFacebookCallback');
+Route::get('auth/facebook/callback', 'Auth\AuthController@handleProviderFacebookCallback');
 /***************************************************************************************************
  * GITHUB Authentication
  ***************************************************************************************************/
@@ -87,12 +87,7 @@ Route::group(['prefix' => 'frontend'], function () {
 
 
     Route::group(['middleware' => 'auth'], function () {
-        /***************************************************************************************************
-         *                                          Favorite
-         *
-         ***************************************************************************************************/
-        Route::get('/favorite/{user}/{book}', ['uses' => 'BookController@getCreateNewFavoriteList']);
-        Route::get('/favorite/remove/{user}/{book}', ['uses' => 'BookController@getRemoveBookFromUserFavoriteList']);
+
         Route::get('/orders/remove/{user}/{book}', ['uses' => 'BookController@getRemoveBookFromUserOrderList']);
 
         /***************************************************************************************************
@@ -205,8 +200,15 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
 
 
     Route::get('/activation/{bookId}/{userId}/{activeStatus}', 'Backend\BooksController@getChangeActivationBook');
-    Route::get('/books/chapters/pdf/{chapterId}/{chapterUrl}',
-        ['as' => 'backend.books.chapters.pdf.preview', 'uses' => 'Backend\ChaptersController@getPdfFile']);
+    Route::get('/books/chapters/pdf/{chapterId}/{chapterUrl}', [
+        'as' => 'backend.books.chapters.pdf.preview',
+        'uses' => 'Backend\ChaptersController@getPdfFile']);
+
+
+    Route::get('/books/chapters/status/{chapterId}/{status}',[
+        'as' => 'backend.books.chapters.status',
+        'uses' => 'Backend\ChaptersController@getUpdateChapterStatus'
+    ]);
 
 
     /*
@@ -215,7 +217,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
 
 //        Route::resource('previews','Backend\PreviewsController');
 
-    Route::get('/book/chapters/pedf/preview/customized/{chapterId}', [
+    Route::get('/book/chapters/pdf/preview/customized/{chapterId}', [
 
         'uses' => 'Backend\PreviewsController@index',
         'as' => 'backend.preview.index'
@@ -242,8 +244,19 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
 
     Route::get('/book/pdf/preview/delete/customized/{bookId}/{authorId}',
         [
-            'uses' => 'Backend\ChaptersController@getDeleteNewCustomizedPreview'
+            'uses' => 'Backend\ChaptersController@getDeleteNewCustomizedPreview',
+            'as' => 'backend.preview.delete'
         ]);
+
+
+    /***************************************************************************************************
+     *                                          Favorite
+     *
+     ***************************************************************************************************/
+    Route::get('/favorite/{user}/{book}', ['uses' => 'Backend\BooksController@getCreateNewFavoriteList']);
+    Route::get('/favorite/remove/{user}/{book}', ['uses' => 'Backend\BooksController@getRemoveBookFromUserFavoriteList']);
+
+
 
     //Route::group(['prefix' => 'backend'], function () {
     /*Route::get('/', function () {

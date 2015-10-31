@@ -12,7 +12,6 @@
     <div class="row">
         @if(!is_null(Cache::get('counters')))
             @foreach(Cache::get('counters') as $counterKey => $counterValue)
-
                 <div class="col-lg-3">
                     <!-- small box -->
                     <div class="small-box well-material-blue-grey-A200">

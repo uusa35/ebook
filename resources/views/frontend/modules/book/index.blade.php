@@ -38,8 +38,9 @@
                             <!-- /.col -->
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <h5 class="description-header"><i class="fa fa-fw fa-calendar text-success"></i></h5>
-                                    <span class="description-text">{{ $book->updated_at->format('y-m-d')}}</span>
+                                    <h5 class="description-header"><i class="fa fa-fw fa-calendar text-success"></i>
+                                    </h5>
+                                    <span class="description-text">{{ $book->updated_at->format('d-m-y')}}</span>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -47,7 +48,7 @@
                             <div class="col-sm-4">
                                 <div class="description-block">
                                     <h5 class="description-header"><i class="fa fa-fw fa-eye text-info"></i></h5>
-                                    <span class="description-text">{{ $book->meta->total_pages }}</span>
+                                    <span class="description-text">{{ $book->views }}</span>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -59,7 +60,9 @@
                                 <a class="" href="{{ action('BookController@show',$book->id) }}">
                                 <span class="description-text">
                                     <h5>
-                                        {{ \Illuminate\Support\Str::words($book->title,4) }}
+                                        <blockquote>
+                                            {{ \Illuminate\Support\Str::words($book->title,4) }}
+                                        </blockquote>
                                     </h5>
 
                                     {{ \Illuminate\Support\Str::words($book->description,3) }}
@@ -107,8 +110,9 @@
                             <!-- /.col -->
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <h5 class="description-header"><i class="fa fa-fw fa-calendar text-success"></i></h5>
-                                    <span class="description-text">{{ $book->updated_at->format('y-m-d')}}</span>
+                                    <h5 class="description-header"><i class="fa fa-fw fa-calendar text-success"></i>
+                                    </h5>
+                                    <span class="description-text">{{ $book->updated_at->format('d-m-y')}}</span>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -116,7 +120,7 @@
                             <div class="col-sm-4">
                                 <div class="description-block">
                                     <h5 class="description-header"><i class="fa fa-fw fa-eye text-info"></i></h5>
-                                    <span class="description-text">{{ $book->meta->total_pages }}</span>
+                                    <span class="description-text">{{ $book->views }}</span>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -128,7 +132,9 @@
                                 <a class="" href="{{ action('BookController@show',$book->id) }}">
                                 <span class="description-text">
                                     <h5>
-                                        {{ \Illuminate\Support\Str::words($book->title,4) }}
+                                        <blockquote>
+                                            {{ \Illuminate\Support\Str::words($book->title,4) }}
+                                        </blockquote>
                                     </h5>
 
                                     {{ \Illuminate\Support\Str::words($book->description,3) }}

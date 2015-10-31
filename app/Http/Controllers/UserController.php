@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Core\AbstractController;
-use App\Src\Book\BookRepository;
 use App\Src\User\UserRepository;
-use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 
 class UserController extends AbstractController
@@ -14,9 +13,8 @@ class UserController extends AbstractController
 
 
     protected $userRepository;
-    protected $bookRepository;
 
-    public function __construct(UserRepository $userRepository, BookRepository $bookRepository)
+    public function __construct(UserRepository $userRepository)
     {
 
         $this->userRepository = $userRepository;
@@ -27,10 +25,20 @@ class UserController extends AbstractController
     {
         $user = $this->userRepository->getById($id);
 
-        $userBooks = $user->books()->paginate(5);
+        $userBooks = $user->books()
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
+                    '=', 'published');
+            })
+            ->paginate(5);
 
-        return view('frontend.modules.user.profile',compact('user','userBooks'));
+        return view('frontend.modules.user.profile', compact('user', 'userBooks'));
     }
 
+    public function getUserRole() {
+
+        return $this->userRepository->getUserRole();
+
+    }
 
 }
