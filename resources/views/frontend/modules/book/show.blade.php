@@ -99,6 +99,10 @@
                                     {{ $book->views }}
                                 </td>
                             </tr>
+                            <tr>
+                                <td> {{ trans('general.likes_counter') }}</td>
+                                <td> {{ count($book->usersLikes) }}</td>
+                            </tr>
                         </table>
                     </div>
                 </div>

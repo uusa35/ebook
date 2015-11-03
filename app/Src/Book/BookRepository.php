@@ -37,12 +37,13 @@ class BookRepository extends AbstractRepository
      */
     public function getRecentBooks()
     {
-        return $this->model->with('usersFavorites', 'meta')
+        return $this->model
             ->where('active', '=', '1')
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published');
             })
+            ->with('usersFavorites', 'meta')
             ->orderBy('books.created_at', 'desc')
             ->limit(4)
             ->get();
@@ -50,25 +51,40 @@ class BookRepository extends AbstractRepository
 
     public function getAllBooks()
     {
-        return $this->model->with('users', 'meta')
+        return $this->model
             ->where('active', '=', '1')
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published');
             })
+            ->with('usersFavorites', 'meta')
             ->orderBy('created_at', 'desc')
             ->paginate(8);
+    }
+
+    public function getBook($id) {
+
+        return $this->model
+            ->where(['active' =>  '1', 'id' => $id])
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
+                    '=', 'published');
+            })
+            ->with('usersLikes', 'meta')
+            ->orderBy('created_at', 'desc')
+            ->first();
     }
 
 
     public function getAllBooksForCategory($categoryId)
     {
-        return $this->model->with('users', 'meta')
+        return $this->model
             ->where(['active' => '1', 'field_category_id' => $categoryId])
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published');
             })
+            ->with('usersFavorites', 'meta')
             ->orderBy('created_at', 'desc')
             ->paginate(8);
     }
@@ -119,21 +135,16 @@ class BookRepository extends AbstractRepository
     {
         return $this->model
             // no results for drafts -- only for published
-            ->orWhere('description', 'like', '%' . $searchItem . '%')
-            ->orWhere('serial', 'like', '%' . $searchItem . '%')
-            ->orWhere('title', 'like', '%' . $searchItem . '%')
-            ->with('meta')
-            ->with([
-                'chapters' => function ($query) use ($searchItem) {
-                    $query->orWhere('title', 'like', '%' . $searchItem . '%');
-                    $query->orWhere('body', 'like', '%' . $searchItem . '%');
-                }
-            ])
+            ->where('active', '=', '1')
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published');
             })
-            ->where('active', '=', '1')
+            ->with('meta','usersFavorites','chapters')
+            ->orWhere('description', 'like', '%' . $searchItem . '%')
+            ->orWhere('serial', 'like', '%' . $searchItem . '%')
+            ->orWhere('title', 'like', '%' . $searchItem . '%')
+
             ->paginate(10);
     }
 

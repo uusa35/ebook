@@ -70,7 +70,7 @@ class BookController extends AbstractController
         $mostLikedBooks = $this->bookRepository->getMostLiked(4);
 
 
-        return view('frontend.modules.book.index', compact('recentBooks', 'mostFavoriteBooks','mostLikedBooks'));
+        return view('frontend.modules.book.index', compact('recentBooks', 'mostFavoriteBooks', 'mostLikedBooks'));
     }
 
 
@@ -92,53 +92,53 @@ class BookController extends AbstractController
     public function show($id)
     {
         // get all books by book ID
-        $book = $this->bookRepository->model
-            ->with(['author', 'meta', 'users'])
-            ->with([
-                'chapters' => function ($query) {
-                    $query->where('chapters.status', '=', 'published');
-                }
-            ])
-            ->find($id);
 
-        $book->update([
-            'views' => $book->views + 1
-        ]);
+        $book = $this->bookRepository->getBook($id);
 
-        $users = $this->userRepository->model->where('id', '=', '1')->get();
+        if (!is_null($book)) {
 
-        $usersList = $users->lists('name', 'id');
+            $book->update([
+                'views' => $book->views + 1
+            ]);
 
-        $total_pages = $this->chapterRepository->totalPagesForChapter($book->id);
+            $total_pages = $this->chapterRepository->totalPagesForChapter($book->id);
 
-        /*redirec if the book is not published with a not published message*/
+            return view('frontend.modules.book.show', compact('book', 'total_pages'));
 
-        if ($book->active != '1') {
-
-            return redirect('/')->with(['error' => 'messages.error.book_not_active']);
         }
 
-        return view('frontend.modules.book.show', compact('book', 'total_pages', 'usersList'));
+        /*redirec if the book is not published with a not published message*/
+        return redirect('/')->with(['error' => 'messages.error.book_not_active']);
+
     }
 
     /**
      * @param Request $request
      * @return search function responsible to search all books title , descriptions and even content of each book
      */
-    public function getShowSearchResults(Request $request)
+    public function getShowSearchResults(Requests\searchRequest $request)
     {
 
-        $searchResults = $this->bookRepository->SearchBooks($request->input('search'));
+        $searchedItem = trim($request->get('search'));
 
-        if (count($searchResults) > 0) {
+        if($searchedItem) {
 
-            return view('frontend.modules.book.all', ['allBooks' => $searchResults]);
+            $searchResults = $this->bookRepository->SearchBooks($searchedItem);
 
-        } else {
+            if (!is_null($searchResults)) {
 
-            return redirect()->back()->with(['error' => trans('word.no-results')]);
+                return view('frontend.modules.book.all', ['allBooks' => $searchResults]);
 
+            } else {
+
+                return redirect()->back()->with(['error' => trans('word.no-results')]);
+
+            }
         }
+
+        return redirect()->to('/')->with(['error' => trans('word.no-results')]);
+
+
     }
 
     /**
