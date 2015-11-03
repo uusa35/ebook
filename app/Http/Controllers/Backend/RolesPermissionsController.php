@@ -1,12 +1,10 @@
 <?php namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-//use App\Repositories\Criteria\Role\RoleLowerOrEqualToCurrentUser;
 use App\Src\Role\RoleRepository as Role;
 use App\Src\Permission\PermissionRepository as Permission;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
-use Laracasts\Flash\Flash;
 
 class RolesPermissionsController extends Controller {
 

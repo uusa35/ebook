@@ -8,6 +8,7 @@ class DatabaseSeeder extends Seeder
 
     private $tables = [
         'users',
+        'user_followers',
         'roles',
         'role_user',
         'password_resets',
@@ -16,9 +17,8 @@ class DatabaseSeeder extends Seeder
         'books',
         'chapters',
         'chapter_previews',
-        'book_readers',
+        'book_likes',
         'book_metas',
-        'purchases',
         'book_user',
         'messages',
         'sliders'

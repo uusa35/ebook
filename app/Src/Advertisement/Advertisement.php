@@ -2,13 +2,9 @@
 
 namespace App\Src\Advertisement;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\AbstractModel;
 
-/**
- * App\Src\Advertisement\Advertisement
- *
- */
-class Advertisement extends Model
+class Advertisement extends AbstractModel
 {
 
     public $table = 'ads';

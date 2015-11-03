@@ -236,7 +236,10 @@ return [
     'message_show' => 'Message Content',
     'cover' => 'cover',
     'Slider' => 'Slider',
-    'slider' => 'slider'
+    'slider' => 'slider',
+    'general' => 'general',
+    'abuse' => 'abuse',
+    'preview' => 'preview'
 
 
 

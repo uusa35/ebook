@@ -13,10 +13,16 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#booksTable').DataTable({
-                "order": [[0, "desc"]]
+                "order": [[0, "asc"]]
             });
             $('#booksFavorited').DataTable({
-                "order": [[0, "desc"]]
+                "order": [[0, "asc"]]
+            });
+            $('#bookReport').DataTable({
+                "order": [[0, "asc"]]
+            });
+            $('#bookPreviews').DataTable({
+                "order": [[0, "asc"]]
             });
             $("button[id^='delete-']").on('click', function () {
                 var btnId = $(this).attr('id');
@@ -60,6 +66,11 @@
                                         class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.report') }}
                             </a></li>
                     @endif
+                    @if(Cache::get('Abilities.Author.'.Auth::id()))
+                        <li id="tab-4"><a href="#step4" data-toggle="tab"><i
+                                        class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.preview') }}
+                            </a></li>
+                    @endif
                 </ul>
 
                 {{--All Books--}}
@@ -86,6 +97,7 @@
                                             @if(Cache::get('Modules.Admin.'.Auth::id()))
                                                 <th>{{ trans('general.delete') }}</th>
                                             @endif
+                                            <th>{{ trans('general.send_message') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -133,7 +145,12 @@
                                                     <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}"
                                                        title="{{ ($book->active) ? trans('general.active') : trans('general.not_active') }}"
                                                        href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->author_id,$book->active]) }}">
-                                                        {!! ($book->active) ? Config::get('button.icon-not-active') : Config::get('icon-active') !!}
+                                                        @if($book->active == 1)
+                                                            {!! Config::get('button.icon-active') !!}
+                                                        @else
+                                                            {!! Config::get('button.icon-not-active') !!}
+                                                        @endif
+
                                                     </a>
                                                     @endcan
                                                 </td>
@@ -146,17 +163,25 @@
                                                     </a>
                                                     @endcan
                                                 </td>
-                                                @if(Cache::get('Modules.Admin.'.Auth::id()))
-                                                <td class="text-center">
-                                                    <button type="button" class="{{ Config::get('button.btn-delete') }}"
-                                                            id="delete-{{$book->id}}"
-                                                            title="{{ trans('general.delete') }}"
-                                                            data-toggle="modal"
-                                                            data-target="#myModal">
-                                                        {!! Config::get('button.icon-delete') !!}
-                                                    </button>
-                                                </td>
+                                                @if(Cache::get('Abilities.Admin.'.Auth::id()))
+                                                    <td class="text-center">
+                                                        <button type="button"
+                                                                class="{{ Config::get('button.btn-delete') }}"
+                                                                id="delete-{{$book->id}}"
+                                                                title="{{ trans('general.delete') }}"
+                                                                data-toggle="modal"
+                                                                data-target="#myModal">
+                                                            {!! Config::get('button.icon-delete') !!}
+                                                        </button>
+                                                    </td>
                                                 @endif
+                                                <td>
+                                                    <a class="{!! Config::get('button.btn-send') !!}"
+                                                       href="{{ action('Backend\MessagesController@create',['book_id' => $book->id]) }}"
+                                                       title="{{ trans('general.send') }}">
+                                                        {!! Config::get('button.icon-send') !!}
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         @include('backend.partials._delete_modal',['action'=> 'Backend\BooksController@destroy'])
@@ -186,6 +211,7 @@
                                             <th>{{ trans('general.author') }}</th>
                                             <th>{{ trans('general.active') }}</th>
                                             <th>{{ trans('general.remove') }}</th>
+                                            <th>{{ trans('general.send_message') }}</th>
                                             <th>{{ trans('general.created-at') }}</th>
                                         </tr>
                                         </thead>
@@ -206,8 +232,16 @@
                                                     <span> {{ $book->active }} </span>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a class="{!! Config::get('button.btn-delete')!!}" href="{{ action('Backend\BooksController@getRemoveBookFromUserFavoriteList',[Auth::id(),$book->id]) }}">
+                                                    <a class="{!! Config::get('button.btn-delete')!!}"
+                                                       href="{{ action('Backend\BooksController@getRemoveBookFromUserFavoriteList',[Auth::id(),$book->id]) }}">
                                                         {!! Config::get('button.icon-delete') !!}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="{!! Config::get('button.btn-send') !!}"
+                                                       href="{{ action('Backend\MessagesController@create',['book_id' => $book->id]) }}"
+                                                       title="{{ trans('general.send') }}">
+                                                        {!! Config::get('button.icon-send') !!}
                                                     </a>
                                                 </td>
                                                 <td>
@@ -227,19 +261,19 @@
                     </div>
 
                     {{--Abuse Reports --}}
-                    @if(Cache::get('Modules.Admin.'.Auth::id()))
+                    @if(Cache::get('Abilities.Admin.'.Auth::id()))
                         <div class="tab-pane" id="step3">
                             <div class="row">
                                 <div class="col-xs-12 paddingTop10">
                                     @if($booksReported->count() > 0)
-                                        <table class="table table-striped table-order">
+                                        <table class="table table-striped table-order" id="bookReport">
                                             <thead>
                                             <tr>
                                                 <th class="hidden-xs">{{ trans('general.id') }}</th>
                                                 <th>{{ trans('general.subject') }}</th>
                                                 <th>{{ trans('general.author') }}</th>
-                                                <th>{{ trans('general.status') }}</th>
                                                 <th>{{ trans('general.remove') }}</th>
+                                                <th>{{ trans('general.send_message') }}</th>
                                                 <th>{{ trans('general.created-at') }}</th>
                                             </tr>
                                             </thead>
@@ -256,14 +290,84 @@
                                                         <span> {{ $book->author->name }} </span>
 
                                                     </td>
-                                                    <td>
-                                                        <span> {{ $book->status }} </span>
-                                                    </td>
                                                     <td class="text-center">
                                                         remove
                                                     </td>
                                                     <td>
+                                                        <a class="{!! Config::get('button.btn-send') !!}"
+                                                           href="{{ action('Backend\MessagesController@create',['book_id' => $book->id]) }}"
+                                                           title="{{ trans('general.send') }}">
+                                                            {!! Config::get('button.icon-send') !!}
+                                                        </a>
+                                                    </td>
+                                                    <td>
                                                         <span> {{ str_limit($book->created_at,10,'') }} </span>
+                                                    </td>
+                                                </tr>
+
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    @else
+                                        <div class="alert alert-warning"
+                                             role="alert">{{ trans('messages.info.no_books_found') }}</div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    {{-- Previews for Authors  Only --}}
+                    {{--Abuse Reports --}}
+                    @if(Cache::get('Abilities.Author.'.Auth::id()))
+                        <div class="tab-pane" id="step4">
+                            <div class="row">
+                                <div class="col-xs-12 paddingTop10">
+
+                                    @if(!is_null($booksPreviews))
+                                        <table class="table table-striped table-order" id="bookPreviews">
+                                            <thead>
+                                            <tr>
+                                                <th class="hidden-xs">{{ trans('general.id') }}</th>
+                                                <th>{{ trans('general.title') }}</th>
+                                                <th>{{ trans('general.author') }}</th>
+                                                <th>{{ trans('general.status') }}</th>
+                                                <th>{{ trans('general.remove') }}</th>
+                                                <th>{{ trans('general.send_message') }}</th>
+                                                <th>{{ trans('general.created-at') }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            @foreach($booksPreviews as $preview)
+
+                                                <tr>
+                                                    <td class="hidden-xs">{{ $preview->id }}</td>
+                                                    <td>
+                                                        <a href="{{ action('Backend\PreviewsController@show',[$preview->chapter_id,$preview->preview_start,$preview->preview_end]) }}">
+                                                            {!! $preview->title !!}</a>
+                                                    </td>
+                                                    <td>
+                                                        {{ $preview->name }}
+                                                    </td>
+                                                    <td>
+                                                        <span> {{ $preview->status }} </span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="{{ Config::get('button.btn-delete') }}"
+                                                           href="{{ action('Backend\PreviewsController@removePreviewfromAuthorList',$preview->id) }}">
+                                                            {!! Config::get('button.icon-delete') !!}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="{!! Config::get('button.btn-send') !!}"
+                                                           href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id,'chapter_id' => $preview->chapter_id]) }}"
+                                                           title="{{ trans('general.send') }}">
+                                                            {!! Config::get('button.icon-send') !!}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <span> {{ str_limit($preview->created_at,10,'') }} </span>
                                                     </td>
                                                 </tr>
 

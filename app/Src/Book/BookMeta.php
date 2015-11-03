@@ -3,12 +3,7 @@
 namespace App\Src\Book;
 
 use App\Core\AbstractModel;
-use Illuminate\Database\Eloquent\Model;
 
-/**
- * App\Src\Book\BookMeta
- *
- */
 class BookMeta extends AbstractModel
 {
     //

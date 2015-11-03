@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Core\AbstractImageService;
-use App\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;

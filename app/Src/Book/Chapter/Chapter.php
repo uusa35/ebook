@@ -3,7 +3,6 @@
 namespace App\Src\Book\Chapter;
 
 use App\Core\AbstractModel;
-use Illuminate\Database\Eloquent\Model;
 
 class Chapter extends AbstractModel
 {

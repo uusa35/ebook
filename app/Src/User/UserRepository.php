@@ -1,9 +1,6 @@
 <?php namespace App\Src\User;
 
 use App\Core\AbstractRepository;
-use App\Src\Role\Role;
-use App\Src\Role\RoleRepository;
-use App\Src\User\User;
 
 
 /**

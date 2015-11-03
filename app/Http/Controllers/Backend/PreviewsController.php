@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Core\AbstractController;
 use App\Jobs\CreateCustomizedPreview;
 use App\Src\Book\Chapter\ChapterRepository;
 use App\Src\Book\Chapter\Preview;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
-class PreviewsController extends Controller
+class PreviewsController extends AbstractController
 {
 
     public $chapterRepository;
@@ -32,6 +32,8 @@ class PreviewsController extends Controller
      */
     public function index($chapterId)
     {
+        $this->getPageTitle('preview.index');
+
         $previews = $this->preview->where(['chapter_id' => $chapterId])->with('chapter', 'book', 'users',
             'author')->get();
 
@@ -46,6 +48,8 @@ class PreviewsController extends Controller
      */
     public function create($chapterId)
     {
+        $this->getPageTitle('preview.create');
+
         $chapter = $this->chapterRepository->model->where('id', $chapterId)->with('book')->first();
         /*
          * get all users without admin , editors and the author id of the book itself
@@ -152,7 +156,7 @@ class PreviewsController extends Controller
      */
     public function destroy($id)
     {
-        $previewDeleted = $this->bookRepository->deleteNewCustomizedPreview($bookId, $authorId);
+        /*$previewDeleted = $this->preview->deleteNewCustomizedPreview($id);
 
         if ($previewDeleted) {
 
@@ -160,7 +164,22 @@ class PreviewsController extends Controller
 
         }
 
-        return redirect()->back()->with(['error' => trans('word.error-preview-not-deleted')]);
+        return redirect()->back()->with(['error' => trans('word.error-preview-not-deleted')]);*/
+    }
+
+    public function removePreviewfromAuthorList($previewId)
+    {
+
+        $deletePreview = $this->preview->deleteNewCustomizedPreview($previewId);
+
+        if ($deletePreview) {
+
+            return redirect()->back()->with(['success' => 'messages.success.preview_deleted']);
+
+        }
+
+        return redirect()->back()->with(['error' => 'messages.error.preview_deleted']);
+
     }
 
     public function getPdf($chapterId, $preview_start, $preview_end)

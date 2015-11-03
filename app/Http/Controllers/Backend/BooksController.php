@@ -7,18 +7,18 @@ use App\Http\Requests;
 use App\Http\Requests\CreateBook;
 use App\Http\Requests\UpdateBook;
 use App\Jobs\CreateBookCover;
-use App\Jobs\CreateCustomizedPreview;
 use App\Src\Book\BookHelpers;
 use App\Src\Book\BookRepository;
 use App\Src\Book\Chapter\ChapterRepository;
+use App\Src\Book\Chapter\Preview;
 use App\Src\Category\Field\FieldCategory;
 use App\Src\Category\Lang\LangCategory;
 use App\Src\Favorite\FavoriteRepository;
+use App\Src\Like\LikeRepository;
 use App\Src\Purchase\PurchaseRepository;
 use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -31,14 +31,16 @@ use Illuminate\Support\Facades\Gate;
 class BooksController extends AbstractController
 {
 
-    public $gate;
-    public $bookRepository;
-    public $userRepository;
-    public $roleRepository;
-    public $fieldCategory;
-    public $langCategory;
-    public $favoriteRepository;
-    public $chapterRepository;
+    protected $gate;
+    protected $bookRepository;
+    protected $userRepository;
+    protected $roleRepository;
+    protected $fieldCategory;
+    protected $langCategory;
+    protected $favoriteRepository;
+    protected $chapterRepository;
+    protected $likeRepository;
+    protected $preview;
     use BookHelpers;
 
 
@@ -56,7 +58,9 @@ class BooksController extends AbstractController
         FavoriteRepository $favoriteRepository,
         UserRepository $userRepository,
         RoleRepository $roleRepository,
-        ChapterRepository $chapterRepository
+        ChapterRepository $chapterRepository,
+        Preview $preview,
+        LikeRepository $likeRepository
     ) {
 
         //$this->middleware('EditorLimitAccess',['only'=>'edit','update']);
@@ -68,6 +72,9 @@ class BooksController extends AbstractController
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
         $this->chapterRepository = $chapterRepository;
+        $this->preview = $preview;
+        $this->favoriteRepository = $favoriteRepository;
+        $this->likeRepository = $likeRepository;
     }
 
     /**
@@ -84,7 +91,7 @@ class BooksController extends AbstractController
 
             $books = $this->bookRepository->model
                 ->with('meta', 'author', 'chapters')
-                ->orderBy('created_at', 'desc')
+                ->orderBy('created_at', 'ASC')
                 ->get();
 
             $booksReported = $this->bookRepository->getReportsAbuse();
@@ -101,13 +108,16 @@ class BooksController extends AbstractController
 
             $booksReported = [];
 
+            $booksPreviews = $this->preview->allPreviewsForUser();
+
             $booksFavorited = $this->bookRepository->getUserFavorites(Auth::id());
+
         }
 
         if ($books) {
 
             return view('backend.modules.book.index',
-                compact('books', 'booksReported', 'booksFavorited'));
+                compact('books', 'booksReported', 'booksFavorited', 'booksPreviews'));
         }
 
         return redirect()->back()->with(['error' => trans('messages.info.no_books_found')]);
@@ -366,7 +376,7 @@ class BooksController extends AbstractController
     public function getCreateNewFavoriteList($userId, $bookId)
     {
 
-        $checkFavorite = $this->favoriteRepository->model->where(['book_id' => $bookId, 'user_id' => $userId])->first();
+        $checkFavorite = $this->favoriteRepository->model->where(['user_id' => $userId, 'book_id' => $bookId])->first();
 
         if (is_null($checkFavorite)) {
 
@@ -407,6 +417,35 @@ class BooksController extends AbstractController
 
 
     /**
+     * @param $userId
+     * @param $bookId
+     * create new favorite for a book
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getCreateLikeBook($userId, $bookId)
+    {
+
+        $checkLike = $this->likeRepository->model->where(['user_id' => $userId, 'book_id' => $bookId])->first();
+
+        if (is_null($checkLike)) {
+
+            $liked = $this->likeRepository->model->create([
+                'book_id' => $bookId,
+                'user_id' => $userId
+            ]);
+
+            if ($liked) {
+
+                return redirect()->back()->with(['success' => trans('messages.success.book_like')]);
+
+            }
+
+        }
+
+        return redirect()->back()->with(['error' => trans('messages.error.book_like')]);
+    }
+
+    /**
      * add report abuse within the admin interfrace
      * @return string
      */
@@ -425,7 +464,10 @@ class BooksController extends AbstractController
 
             if ($reportAbuse) {
 
-                return redirect()->action('Backend\MessagesController@create')->with(['success' => trans('word.success-book-report'),'book_id' => $bookId]);
+                return redirect()->action('Backend\MessagesController@create')->with([
+                    'success' => trans('word.success-book-report'),
+                    'book_id' => $bookId
+                ]);
             }
 
         }

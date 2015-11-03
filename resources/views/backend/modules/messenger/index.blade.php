@@ -5,7 +5,9 @@
     @parent
     <script type="text/javascript">
         $(function () {
-            $("#messages").DataTable();
+            $("#messages").DataTable({
+                "order": [[0, "asc"]]
+            });
         });
     </script>
 @endsection
@@ -29,7 +31,8 @@
             <th>{{ trans('general.subject') }}</th>
             <th>{{ trans('general.body') }}</th>
             <th>{{ trans('general.participants') }}</th>
-            <th>{{ trans('word.general.delete') }}</th>
+            <th>{{ trans('general.delete') }}</th>
+            <th>{{ trans('general.created_at') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -57,6 +60,12 @@
                     @endforeach
                 </td>
                 <td>
+                    <a class="{{ Config::get('button.btn-delete') }}" href="{{ action('Backend\MessagesController@cancel', $thread->id) }}">
+                        {!! Config::get('button.icon-delete') !!}
+                    </a>
+                </td>
+                <td>
+                    {{ $thread->created_at->format('d-M-Y') }}
 
                 </td>
             </tr>

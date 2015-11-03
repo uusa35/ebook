@@ -37,7 +37,7 @@ class BookRepository extends AbstractRepository
      */
     public function getRecentBooks()
     {
-        return $this->model->with('users', 'meta')
+        return $this->model->with('usersFavorites', 'meta')
             ->where('active', '=', '1')
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
@@ -158,6 +158,18 @@ class BookRepository extends AbstractRepository
         return $favorites;
     }
 
+
+    /**
+     *
+     * @param int $paginate
+     * @return most favorite books from all users
+     */
+    public function getMostLiked($paginate = 4)
+    {
+        $likes = $this->model->mostLiked($paginate);
+        return $likes;
+    }
+
     /**
      *
      * @param int $paginate
@@ -205,12 +217,6 @@ class BookRepository extends AbstractRepository
 
     }
 
-    public function deleteNewCustomizedPreview($bookId, $authorId)
-    {
-
-        return DB::table('book_previews')->where(['book_id' => $bookId, 'author_id' => $authorId])->delete();
-
-    }
 
     public function getReportsAbuse($paginate = 10)
     {

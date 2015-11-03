@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Src\Favorite;
+namespace App\Src\Like;
 
 use App\Core\AbstractModel;
 
@@ -9,13 +9,12 @@ use App\Core\AbstractModel;
  * App\Src\Favorite\Favorite
  *
  */
-class Favorite extends AbstractModel
+class Like extends AbstractModel
 {
     //
-    protected $table = "book_user";
+    protected $table = "book_likes";
 
     protected $fillable = ['book_id', 'user_id'];
 
-    public $timestamps = false;
 
 }

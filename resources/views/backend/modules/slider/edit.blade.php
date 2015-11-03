@@ -16,8 +16,8 @@
                     {!! Form::text('caption',$slide->caption,['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('url',trans('general.slider')) !!}
-                    {!! Form::file('url',null,['class'=>'form-control','placeholder'=>trans('general.slider')]) !!}
+                    {!! Form::label('slide',trans('general.slider')) !!}
+                    {!! Form::file('slide',null,['class'=>'form-control','placeholder'=>trans('general.slider')]) !!}
                 </div>
                 @include('backend.partials.buttons.form_btn_update')
                 {!! Form::close() !!}

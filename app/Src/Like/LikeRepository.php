@@ -6,7 +6,7 @@
  * Time: 10:37 PM
  */
 
-namespace App\Src\Favorite;
+namespace App\Src\Like;
 
 use App\Core\AbstractRepository;
 
@@ -15,12 +15,12 @@ use App\Core\AbstractRepository;
  * App\Src\Favorite\FavoriteRepository
  *
  */
-class FavoriteRepository extends AbstractRepository
+class LikeRepository extends AbstractRepository
 {
 
-    public function __construct(Favorite $favorite)
+    public function __construct(Like $like)
     {
-        $this->model = $favorite;
+        $this->model = $like;
     }
 
 }

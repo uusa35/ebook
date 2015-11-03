@@ -47,5 +47,18 @@ return [
         'show' => 'general.slider_show',
         'edit' => 'general.slider_edit',
     ],
+    'chapter' => [
+        'index' => 'general.chapter',
+        'create' => 'general.chapter_create',
+        'show' => 'general.chapter_show',
+        'edit' => 'general.chapter_edit',
+    ],
+    'preview' => [
+        'index' => 'general.preview',
+        'create' => 'general.preview_create',
+        'show' => 'general.preview_show',
+        'edit' => 'general.preview_edit',
+    ],
+
 
 ];

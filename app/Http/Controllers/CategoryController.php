@@ -3,7 +3,6 @@
 use App\Core\AbstractController;
 use App\Src\Book\BookRepository;
 use App\Http\Requests;
-use App\Src\Category\Field\FieldCategory;
 
 class CategoryController extends AbstractController
 {

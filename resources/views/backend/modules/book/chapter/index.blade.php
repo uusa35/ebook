@@ -2,7 +2,22 @@
     @parent
     <script type="text/javascript">
         $(function () {
-            $('div[id^="chapters"]').DataTable();
+            $('#chapters_all').DataTable({
+                "order": [[0, "asc"]]
+            });
+            $('#chapters_published').DataTable({
+                "order": [[0, "asc"]]
+            });
+            $('#chapters_drafted').DataTable({
+                "order": [[0, "asc"]]
+            });
+            $('#chapters_pending').DataTable({
+                "order": [[0, "asc"]]
+            });
+            $('#chapters_declined').DataTable({
+                "order": [[0, "asc"]]
+            });
+
             $('.nav-tabs > li[id^="tab-"]').on('click', function () {
                 var idVal = $(this).attr('id');
                 var tabLink = idVal.split('-');
@@ -51,14 +66,15 @@
     </script>
 @endsection
 
-@if(count($allChapters) > 0)
+
+@if(!is_null($allChapters))
     <div class="row">
         <div class="col-xs-12">
 
             <!-- START CONTENT ITEM -->
             <ul class="nav nav-tabs btn-material-blue-grey-400">
                 <li id="tab-1" class="" href="#step1"><a href="#step1" data-toggle="tab"><i
-                                class="fa fa-aw fa-book"></i>&nbsp;{{ trans('general.volumes') }} </a></li>
+                                class="fa fa-aw fa-book"></i>&nbsp;{{ trans('general.chapters') }} </a></li>
 
                 <li id="tab-2"><a href="#step2" data-toggle="tab"><i
                                 class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.published') }}
@@ -82,7 +98,7 @@
                 <div class="tab-pane" id="step1">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
-                            <table class="table table-striped table-hover " id="chapters1">
+                            <table class="table table-striped table-hover table-condensed" id="chapters_all">
                                 <thead>
                                 <tr>
                                     <th>{{ trans('general.id') }}</th>
@@ -93,7 +109,7 @@
                                     <th>{{ trans('general.view') }}</th>
                                     <th>{{ trans('general.create_preview') }}</th>
                                     <th>{{ trans('general.all_previews') }}</th>
-                                    <th>{{ trans('general.submit') }}</th>
+                                    <th>{{ trans('general.send_message') }}</th>
                                     <th>{{ trans('general.total_pages') }}</th>
                                 </tr>
                                 </thead>
@@ -162,21 +178,21 @@
                                         <td>
                                             <a class="{!! Config::get('button.btn-create') !!}"
                                                title="{{ trans('general.create_preview') }}"
-                                               href="{{ action('Backend\PreviewsController@create',[$chapter->id]) }}">
+                                               href="{{ action('Backend\PreviewsController@create',$chapter->idz) }}">
                                                 {!! Config::get('button.icon-create') !!}
                                             </a>
                                         </td>
                                         <td>
                                             <a class="{!! Config::get('button.btn-index') !!}"
                                                title="{{ trans('general.all_previews') }}"
-                                               href="{{ action('Backend\PreviewsController@index',[$chapter->id]) }}">
+                                               href="{{ action('Backend\PreviewsController@index',$chapter->id) }}">
                                                 {!! Config::get('button.icon-index') !!}
                                             </a>
                                         </td>
                                         <td>
-                                            <a class="{!! Config::get('button.btn-submit') !!}" href="#"
-                                               title="{{ trans('general.submit') }}">
-                                                {!! Config::get('button.icon-submit') !!}
+                                            <a class="{!! Config::get('button.btn-send') !!}" href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
+                                               title="{{ trans('general.send') }}">
+                                                {!! Config::get('button.icon-send') !!}
                                             </a>
                                         </td>
                                         <td>
@@ -196,17 +212,18 @@
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
                             @if(!is_null($publishedChapters))
-                                <table class="table table-striped table-hover " id="chapters2">
+                                <table class="table table-striped table-hover " id="chapters_published">
                                     <thead>
                                     <tr>
                                         <th>{{ trans('general.id') }}</th>
                                         <th>{{ trans('general.title') }}</th>
                                         <th>{{ trans('general.status') }}</th>
+                                        <th>{{ trans('general.change_status') }}</th>
                                         <th>{{ trans('general.edit') }}</th>
                                         <th>{{ trans('general.view') }}</th>
                                         <th>{{ trans('general.create_preview') }}</th>
                                         <th>{{ trans('general.all_previews') }}</th>
-                                        <th>{{ trans('general.submit') }}</th>
+                                        <th>{{ trans('general.send_message') }}</th>
                                         <th>{{ trans('general.total_pages') }}</th>
                                     </tr>
                                     </thead>
@@ -216,6 +233,7 @@
 
                                             <td>{{ $chapter->id }}</td>
                                             <td>{{ $chapter->title }}</td>
+                                            <td>{{ $chapter->status }}</td>
                                             <td>
                                                 @can('change')
                                                 {{-- If the User just created the book --}}
@@ -268,9 +286,9 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a class="{!! Config::get('button.btn-submit') !!}" href="#"
-                                                   title="{{ trans('general.submit') }}">
-                                                    {!! Config::get('button.icon-submit') !!}
+                                                <a class="{!! Config::get('button.btn-send') !!}" href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
+                                                   title="{{ trans('general.send') }}">
+                                                    {!! Config::get('button.icon-send') !!}
                                                 </a>
                                             </td>
                                             <td>
@@ -299,18 +317,19 @@
                 <div class="tab-pane active" id="step3">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
-                            @if(!is_null($publishedChapters))
-                                <table class="table table-striped table-hover " id="chapters3">
+                            @if(!is_null($pendingChapters))
+                                <table class="table table-striped table-hover " id="chapters_pending">
                                     <thead>
                                     <tr>
                                         <th>{{ trans('general.id') }}</th>
                                         <th>{{ trans('general.title') }}</th>
                                         <th>{{ trans('general.status') }}</th>
+                                        <th>{{ trans('general.change_status') }}</th>
                                         <th>{{ trans('general.edit') }}</th>
                                         <th>{{ trans('general.view') }}</th>
                                         <th>{{ trans('general.create_preview') }}</th>
                                         <th>{{ trans('general.all_previews') }}</th>
-                                        <th>{{ trans('general.submit') }}</th>
+                                        <th>{{ trans('general.send_message') }}</th>
                                         <th>{{ trans('general.total_pages') }}</th>
                                     </tr>
                                     </thead>
@@ -320,6 +339,7 @@
 
                                             <td>{{ $chapter->id }}</td>
                                             <td>{{ $chapter->title }}</td>
+                                            <td> {{ $chapter->status }}</td>
                                             <td>
                                                 @can('change')
                                                 {{-- If the User just created the book --}}
@@ -372,9 +392,9 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a class="{!! Config::get('button.btn-submit') !!}" href="#"
-                                                   title="{{ trans('general.submit') }}">
-                                                    {!! Config::get('button.icon-submit') !!}
+                                                <a class="{!! Config::get('button.btn-send') !!}" href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
+                                                   title="{{ trans('general.send') }}">
+                                                    {!! Config::get('button.icon-send') !!}
                                                 </a>
                                             </td>
                                             <td>
@@ -403,17 +423,18 @@
                         <div class="row">
                             <div class="col-xs-12 paddingTop10">
                                 @if(!is_null($draftedChapters))
-                                    <table class="table table-striped table-hover " id="chapters4">
+                                    <table class="table table-striped table-hover " id="chapters_drafted">
                                         <thead>
                                         <tr>
                                             <th>{{ trans('general.id') }}</th>
                                             <th>{{ trans('general.title') }}</th>
                                             <th>{{ trans('general.status') }}</th>
+                                            <th>{{ trans('general.change_status') }}</th>
                                             <th>{{ trans('general.edit') }}</th>
                                             <th>{{ trans('general.view') }}</th>
                                             <th>{{ trans('general.create_preview') }}</th>
                                             <th>{{ trans('general.all_previews') }}</th>
-                                            <th>{{ trans('general.submit') }}</th>
+                                            <th>{{ trans('general.send_message') }}</th>
                                             <th>{{ trans('general.total_pages') }}</th>
                                         </tr>
                                         </thead>
@@ -423,6 +444,7 @@
 
                                                 <td>{{ $chapter->id }}</td>
                                                 <td>{{ $chapter->title }}</td>
+                                                <td>{{ $chapter->status }}</td>
                                                 <td>
                                                     @can('change')
                                                     {{-- If the User just created the book --}}
@@ -475,9 +497,9 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a class="{!! Config::get('button.btn-submit') !!}" href="#"
-                                                       title="{{ trans('general.submit') }}">
-                                                        {!! Config::get('button.icon-submit') !!}
+                                                    <a class="{!! Config::get('button.btn-send') !!}" href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
+                                                       title="{{ trans('general.send') }}">
+                                                        {!! Config::get('button.icon-send') !!}
                                                     </a>
                                                 </td>
                                                 <td>
@@ -506,17 +528,18 @@
                             <div class="row">
                                 <div class="col-xs-12 paddingTop10">
                                     @if(!is_null($declinedChapters))
-                                        <table class="table table-striped table-hover " id="chapter5s">
+                                        <table class="table table-striped table-hover " id="chapters_declined">
                                             <thead>
                                             <tr>
                                                 <th>{{ trans('general.id') }}</th>
                                                 <th>{{ trans('general.title') }}</th>
                                                 <th>{{ trans('general.status') }}</th>
+                                                <th>{{ trans('general.change_status') }}</th>
                                                 <th>{{ trans('general.edit') }}</th>
                                                 <th>{{ trans('general.view') }}</th>
                                                 <th>{{ trans('general.create_preview') }}</th>
                                                 <th>{{ trans('general.all_previews') }}</th>
-                                                <th>{{ trans('general.submit') }}</th>
+                                                <th>{{ trans('general.send_message') }}</th>
                                                 <th>{{ trans('general.total_pages') }}</th>
                                             </tr>
                                             </thead>
@@ -526,6 +549,7 @@
 
                                                     <td>{{ $chapter->id }}</td>
                                                     <td>{{ $chapter->title }}</td>
+                                                    <td> {{ $chapter->status }}</td>
                                                     <td>
                                                         @can('change')
                                                         {{-- If the User just created the book --}}
@@ -580,9 +604,9 @@
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <a class="{!! Config::get('button.btn-submit') !!}" href="#"
-                                                           title="{{ trans('general.submit') }}">
-                                                            {!! Config::get('button.icon-submit') !!}
+                                                        <a class="{!! Config::get('button.btn-send') !!}" href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
+                                                           title="{{ trans('general.send') }}">
+                                                            {!! Config::get('button.icon-send') !!}
                                                         </a>
                                                     </td>
                                                     <td>

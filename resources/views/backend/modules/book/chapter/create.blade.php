@@ -14,23 +14,25 @@
 
 @section('content')
     {!! Breadcrumbs::render('chapter_create') !!}
-    <div class="panel-body">
 
-        {!! Form::open(['action'=>'Backend\ChaptersController@store','method' => 'post', 'files'=>'true'], ['class'=>'form-horizontal']) !!}
-        {!! Form::hidden('book_id',$bookId) !!}
-        <div class="form-group">
-            {!! Form::label('title',trans('general.title')) !!}
-            {!! Form::text('title', null, ['class' => 'form-control','placeholder'=> trans('general.title')]) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::label('body', trans('general.content'), ['class' => 'control-label']) !!}*
-            {!! Form::textarea('body', null, ['class' => 'form-control editor']) !!}
-        </div>
+<div class="panel-body">
 
-        @include('backend.partials.buttons.form_btn_create')
-        {!! Form::close() !!}
-
+    {!! Form::open(['action'=>'Backend\ChaptersController@store','method' => 'post', 'files'=>'true'],
+    ['class'=>'form-horizontal']) !!}
+    {!! Form::hidden('book_id',$bookId) !!}
+    <div class="form-group">
+        {!! Form::label('title',trans('general.title')) !!}
+        {!! Form::text('title', null, ['class' => 'form-control','placeholder'=> trans('general.title')]) !!}
     </div>
+    <div class="form-group">
+        {!! Form::label('body', trans('general.content'), ['class' => 'control-label']) !!}*
+        {!! Form::textarea('body', null, ['class' => 'form-control editor']) !!}
+    </div>
+
+    @include('backend.partials.buttons.form_btn_create')
+    {!! Form::close() !!}
+
+</div>
 
 @stop
 

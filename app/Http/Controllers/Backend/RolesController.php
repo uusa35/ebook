@@ -5,7 +5,6 @@ use App\Src\Role\RoleRepository;
 use App\Src\Permission\PermissionRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
 class RolesController extends AbstractController
 {

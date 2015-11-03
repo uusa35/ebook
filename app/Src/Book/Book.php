@@ -39,12 +39,17 @@ class Book extends AbstractModel
      * Many To Many Relation - Favorite Relation
      * a user has many  books
      * a book belongs to many users
+     * ALL USERS THAT FAVORITE THIS BOOK
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      * Table : book_user : Favorite Relation
      */
-    public function users()
+    public function usersFavorites()
     {
         return $this->belongsToMany('App\Src\User\User', 'book_user');
+    }
+
+    public function usersLikes() {
+        return $this->belongsToMany('App\Src\User\User', 'book_likes');
     }
 
     public function users_reports()
@@ -82,11 +87,15 @@ class Book extends AbstractModel
         return $this->hasMany('App\Src\Favorite\Favorite', 'book_id');
     }
 
+    public function likes() {
+        return $this->hasMany('App\Src\Like\Like','book_id');
+    }
+
     public function mostFavorites($paginate = '10')
     {
         return $this
             ->selectRaw('books.*, count(*) as book_count')
-            ->with('meta','author','users')
+            ->with('meta','author','usersFavorites')
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status','=','published');
             })
@@ -96,7 +105,7 @@ class Book extends AbstractModel
             ->orderBy('book_count', 'DESC')->paginate($paginate);
     }
 
-    public function userFavorites($userId)
+    /*public function userFavorites($userId)
     {
         return $this
             ->selectRaw('books.*, count(*) as book_count')
@@ -108,6 +117,21 @@ class Book extends AbstractModel
             ->where(['books.active'=> '1','book_user.user_id' => $userId])
             ->groupBy('book_id')// responsible to get the sum of books returned
             ->orderBy('book_count', 'DESC')->get();
+    }*/
+
+
+    public function mostLiked($paginate = '10')
+    {
+        return $this
+            ->selectRaw('books.*, count(*) as book_count')
+            ->with('meta','author','usersFavorites')
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status','=','published');
+            })
+            ->join('book_likes', 'books.id', '=', 'book_likes.book_id')
+            ->where('books.active', '1')
+            ->groupBy('book_id')// responsible to get the sum of books returned
+            ->orderBy('book_count', 'DESC')->paginate($paginate);
     }
 
 

@@ -23,3 +23,6 @@ html, body, h1, h2, h3, h4, h5, span, p, div, table, a, input , .tooltip , tr, t
 .table-details td {
     padding: 8px;
 }
+.btn {
+    z-index: 0 !important;
+}

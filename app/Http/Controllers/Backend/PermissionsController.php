@@ -1,12 +1,10 @@
 <?php namespace App\Http\Controllers\Backend;
 
 use App\Core\AbstractController;
-use App\Http\Controllers\Controller;
 use App\Src\Permission\PermissionRepository;
 use App\Src\Role\RoleRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Gate;
+
 
 class PermissionsController extends AbstractController
 {

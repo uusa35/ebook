@@ -2,45 +2,45 @@
 
 use App\Core\AbstractController;
 use App\Http\Requests;
-use App\Jobs\CreateBookPreview;
-use App\Jobs\CreateChapterPreview;
 use App\Src\Advertisement\Advertisement;
 use App\Src\Book\BookRepository;
 use App\Src\Book\Chapter\ChapterRepository;
 use App\Src\Favorite\FavoriteRepository;
+use App\Src\Like\LikeRepository;
 use App\Src\Purchase\PurchaseRepository;
 use App\Src\User\UserRepository;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class BookController extends AbstractController
 {
 
 
-    public $bookRepository;
-    public $favoriteRepository;
-    public $userRepository;
-    public $purchaseRepository;
-    public $chapterRepository;
-    public $ad;
-    public $authUser;
-    public $book;
+    protected $bookRepository;
+    protected $favoriteRepository;
+    protected $userRepository;
+    protected $purchaseRepository;
+    protected $chapterRepository;
+    protected $likeRepository;
+    protected $ad;
+    protected $authUser;
 
     public function __construct(
-        BookRepository $book,
+        BookRepository $bookRepository,
         FavoriteRepository $favoriteRepository,
         UserRepository $userRepository,
         PurchaseRepository $purchaseRepository,
         Advertisement $ad,
-        ChapterRepository $chapterRepository
+        ChapterRepository $chapterRepository,
+        LikeRepository $likeRepository
     ) {
-        $this->bookRepository = $book;
+        $this->bookRepository = $bookRepository;
         $this->favoriteRepository = $favoriteRepository;
         $this->userRepository = $userRepository;
         $this->chapterRepository = $chapterRepository;
         $this->purchaseRepository = $purchaseRepository;
+        $this->likeRepository = $likeRepository;
     }
 
     /**
@@ -65,9 +65,14 @@ class BookController extends AbstractController
         // get 4 published and most favorite books for index
         $mostFavoriteBooks = $this->bookRepository->getMostFavorited(4);
 
+        //dd($userFavorites);
 
-        return view('frontend.modules.book.index', compact('recentBooks', 'mostFavoriteBooks'));
+        $mostLikedBooks = $this->bookRepository->getMostLiked(4);
+
+
+        return view('frontend.modules.book.index', compact('recentBooks', 'mostFavoriteBooks','mostLikedBooks'));
     }
+
 
     public function getAllBooks()
     {
@@ -164,16 +169,16 @@ class BookController extends AbstractController
      * @param $bookUrl
      * @return creating on the fly a link with 10 pages of a pdf file of a book
      */
-   /* public function getFirstTenPagesForPaidBooks($bookId, $bookUrl)
-    {
-        $book = $this->bookRepository->model->where(['url' => $bookUrl, 'id' => $bookId])->first();
+    /* public function getFirstTenPagesForPaidBooks($bookId, $bookUrl)
+     {
+         $book = $this->bookRepository->model->where(['url' => $bookUrl, 'id' => $bookId])->first();
 
-        // every request on preview .. View will be increaseds
-        $this->bookRepository->increaseBookViewByUrl($bookUrl);
+         // every request on preview .. View will be increaseds
+         $this->bookRepository->increaseBookViewByUrl($bookUrl);
 
-        $this->dispatchAndShowPreviews($bookUrl, $book->title_en, $book->title_ar, $book->free);
+         $this->dispatchAndShowPreviews($bookUrl, $book->title_en, $book->title_ar, $book->free);
 
-    }*/
+     }*/
 
 
     /**
@@ -181,23 +186,23 @@ class BookController extends AbstractController
      * @param $authId
      * @return \Illuminate\Http\RedirectResponse
      */
-   /* public function getCreateNewOrder($bookId, $authId)
-    {
+    /* public function getCreateNewOrder($bookId, $authId)
+     {
 
-        if ($this->purchaseRepository->checkOrderExists($bookId, $authId)) {
+         if ($this->purchaseRepository->checkOrderExists($bookId, $authId)) {
 
-            return redirect()->back()->with(['error' => trans('word.error-order-repeated')]);
-        }
+             return redirect()->back()->with(['error' => trans('word.error-order-repeated')]);
+         }
 
-        if ($this->purchaseRepository->createNewOrder($bookId, $authId)) {
+         if ($this->purchaseRepository->createNewOrder($bookId, $authId)) {
 
-            return redirect()->back()->with(['success' => trans('word.success-order-created')]);
+             return redirect()->back()->with(['success' => trans('word.success-order-created')]);
 
-        }
+         }
 
-        return redirect()->back()->with(['error' => trans('word.error-order-created')]);
+         return redirect()->back()->with(['error' => trans('word.error-order-created')]);
 
-    }*/
+     }*/
 
     /**
      * Dispatch Job for createBookPreview + returning the response of the output to create PDF Preview for free and 10 pages of the paid

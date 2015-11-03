@@ -3,7 +3,6 @@
 namespace App\Src\Category\Lang;
 
 use App\Core\AbstractModel;
-use Illuminate\Database\Eloquent\Model;
 use App\Core\LocaleTrait;
 
 /**

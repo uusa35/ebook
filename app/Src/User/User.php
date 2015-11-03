@@ -2,10 +2,10 @@
 
 namespace App\Src\User;
 
+use App\Core\AbstractModel;
 use Cmgmyr\Messenger\Traits\Messagable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
@@ -17,7 +17,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|\Config::get('entrust.role')[] $roles
  */
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends AbstractModel implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword, EntrustUserTrait, Messagable;
 
@@ -52,6 +52,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function books()
     {
         return $this->hasMany('App\Src\Book\Book','author_id');
+    }
+
+
+    public function followers()
+    {
+        return $this->hasMany('App\Src\User\Follower', 'user_id');
     }
 
 }

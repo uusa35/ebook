@@ -76,14 +76,14 @@ Route::group(['prefix' => 'frontend'], function () {
     /***************************************************************************************************
      * Categories
      ***************************************************************************************************/
-    Route::resource('categories', 'CategoryController',['only' => 'show']);
+    Route::resource('categories', 'CategoryController', ['only' => 'show']);
 
     /***************************************************************************************************
      *                                          User
      *
      ***************************************************************************************************/
     Route::get('/conditions', ['uses' => 'HomeController@getConditions']);
-    Route::resource('user','UserController',['only'=>'show']);
+    Route::resource('user', 'UserController', ['only' => 'show']);
 
 });
 
@@ -107,10 +107,11 @@ Route::group(['prefix' => 'frontend'], function () {
  * ::: Permissions ::: (the module itself)
  * Admin : Books Module + Users Module + Roles Module + Permissions Module ... and so on
  *
- * Editor : still Miss
- *
- * **** still one middleware is missing to check if the user has the right to edit his own books and other staff !!!!!
- *
+ * Remaining parts :
+ * 1- Followers Module
+ * 2- a user can send messages only for his followers ??!!!!! (got to make sure of such point)
+ * 3- only followers can comment on a book for a user.
+ * 4- for a user .. only followers he can control authentication for commenting on his own books.
  *
  * */
 Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collectData']], function () {
@@ -134,10 +135,12 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
          * Role Module
          ***************************************************************************************************/
         Route::resource('roles', 'Backend\RolesController');
+
         /***************************************************************************************************
          * Permission Module
          ***************************************************************************************************/
         Route::resource('permissions', 'Backend\PermissionsController');
+
         /***************************************************************************************************
          * Books Module
          ***************************************************************************************************/
@@ -148,16 +151,19 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
          * Comments Module
          ***************************************************************************************************/
         Route::resource('comments', 'Backend\CommentsController');
+
         /***************************************************************************************************
          *                                          Ads
          *
          ***************************************************************************************************/
         Route::resource('ads', 'Backend\AdsController');
+
         /***************************************************************************************************
          *                                          Sliders
          *
          ***************************************************************************************************/
         Route::resource('slider', 'Backend\SlidersController');
+
         /***************************************************************************************************
          *                                          Categories
          *
@@ -179,29 +185,35 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
          *
          ***************************************************************************************************/
         Route::resource('messages', 'Backend\MessagesController');
+
     });
 
 
     Route::post('users/active/{id}/{status}', 'Backend\UsersController@postChangeActiveStatus');
 
 
+    // change book activation status
     Route::get('/activation/{bookId}/{userId}/{activeStatus}', 'Backend\BooksController@getChangeActivationBook');
-    Route::get('/books/chapters/pdf/{chapterId}/{chapterUrl}', [
-        'as' => 'backend.books.chapters.pdf.preview',
-        'uses' => 'Backend\ChaptersController@getPdfFile']);
 
-
-    Route::get('/books/chapters/status/{chapterId}/{status}',[
+    Route::get('/books/chapters/status/{chapterId}/{status}', [
         'as' => 'backend.books.chapters.status',
         'uses' => 'Backend\ChaptersController@getUpdateChapterStatus'
     ]);
 
 
-    /*
-    * Routes to create / post / delete Preview Book for Editor
-    * */
+    /***************************************************************************************************
+     *                                          Book Previews
+     *
+     ***************************************************************************************************/
 
 //        Route::resource('previews','Backend\PreviewsController');
+
+    // get the pdf of a preview
+    Route::get('/books/chapters/pdf/{chapterId}/{chapterUrl}', [
+        'as' => 'backend.books.chapters.pdf.preview',
+        'uses' => 'Backend\ChaptersController@getPdfFile'
+    ]);
+
 
     Route::get('/book/chapters/pdf/preview/customized/{chapterId}', [
 
@@ -209,7 +221,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
         'as' => 'backend.preview.index'
     ]);
 
-    Route::get('/book/chapters/pdf/preview/customized/{chapterId}',
+    Route::get('/book/chapters/pdf/preview/customized/create/{chapterId}',
         [
             'uses' => 'Backend\PreviewsController@create',
             'as' => 'backend.preview.create'
@@ -228,19 +240,27 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
         ]);
 
 
-    Route::get('/book/pdf/preview/delete/customized/{bookId}/{authorId}',
+    Route::get('/book/pdf/preview/delete/customized/{previewId}',
         [
-            'uses' => 'Backend\ChaptersController@getDeleteNewCustomizedPreview',
+            'uses' => 'Backend\PreviewsController@removePreviewfromAuthorList',
             'as' => 'backend.preview.delete'
         ]);
 
 
+
+
     /***************************************************************************************************
-     *                                          Favorite
+     *                                          Favorite & Likes
      *
      ***************************************************************************************************/
-    Route::get('/favorite/{user}/{book}', ['uses' => 'Backend\BooksController@getCreateNewFavoriteList']);
-    Route::get('/favorite/remove/{user}/{book}', ['uses' => 'Backend\BooksController@getRemoveBookFromUserFavoriteList']);
+    Route::get('/favorite/{userId}/{bookId}', ['uses' => 'Backend\BooksController@getCreateNewFavoriteList']);
+
+    Route::get('/favorite/remove/{userId}/{bookId}',
+        ['uses' => 'Backend\BooksController@getRemoveBookFromUserFavoriteList']);
+
+    // Likes
+    Route::get('/like/{userId}/{bookId}', ['uses' => 'Backend\BooksController@getCreateLikeBook']);
+
 
     //Route::get('/orders/remove/{user}/{book}', ['uses' => 'BookController@getRemoveBookFromUserOrderList']);
 
@@ -248,9 +268,17 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
      *                                          Report
      *
      ***************************************************************************************************/
-    Route::get('/report/{user}/{book}', ['uses' => 'Backend\BooksController@getCreateNewReportAbuse']);
-    Route::get('/report/{user}/{book}', ['uses' => 'Backend\BooksController@getCreateNewReportAbuse']);
+    Route::get('/report/{userId}/{bookId}', ['uses' => 'Backend\BooksController@getCreateNewReportAbuse']);
+    Route::get('/report/{userId}/{bookId}', ['uses' => 'Backend\BooksController@getCreateNewReportAbuse']);
 
+
+    /***************************************************************************************************
+     *                                          Messages
+     *
+     ***************************************************************************************************/
+    Route::get('/messages/cancel/{threadId}/',[
+        'uses' => 'Backend\MessagesController@cancel'
+    ]);
 
 
     //Route::group(['prefix' => 'backend'], function () {

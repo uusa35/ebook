@@ -2,13 +2,16 @@
 
 namespace App\Src\Book\Chapter;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\AbstractModel;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-class Preview extends Model
+
+class Preview extends AbstractModel
 {
     protected $table = 'chapter_previews';
 
-    protected $fillable = ['chapter_id','book_id','author_id','preview_start','preview_end','total_pages'];
+    protected $fillable = ['chapter_id', 'book_id', 'author_id', 'preview_start', 'preview_end', 'total_pages'];
 
 
     public function chapter()
@@ -22,7 +25,29 @@ class Preview extends Model
      * */
     public function users()
     {
-        return $this->belongsToMany('App\Src\User\User','preview_user','preview_id','user_id');
+        return $this->belongsToMany('App\Src\User\User', 'preview_user', 'preview_id', 'user_id');
+    }
+
+    public function allPreviewsForUser()
+    {
+        /*$query = $this->select('chapter_previews.*')
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))->from('preview_user')->whereRaw('chapter_previews.id = preview_user.preview_id')->where('preview_user.user_id','=', Auth::id());
+            })
+            ->join('chapters','chapters.id','=','chapter_previews.chapter_id')
+            ->join('books','books.id','=','chapter_previews.book_id')
+            ->orWhere('preview_user.user_id','=',Auth::id())
+            ->with(['book','author','chapter','users'])
+            ->groupBy('chapter_previews.book_id')// responsible to get the sum of books returned
+            ->orderBy('book_id', 'DESC')->get();*/
+        return DB::table('preview_user')
+            ->where('preview_user.user_id', '=', Auth::id())
+            ->join('users', 'users.id', '=', 'preview_user.user_id')
+            ->join('chapter_previews', 'chapter_previews.id', '=', 'preview_user.preview_id')
+            ->join('chapters', 'chapters.id', '=', 'chapter_previews.chapter_id')
+            ->join('books', 'books.id', '=', 'chapter_previews.book_id')
+            ->get();
+
     }
 
 
@@ -63,6 +88,11 @@ class Preview extends Model
         }
 
         return false;
+    }
+
+    public function deleteNewCustomizedPreview($previewId)
+    {
+        return DB::table('preview_user')->where(['user_id' => Auth::id(), 'preview_id' => $previewId])->delete();
     }
 
 }

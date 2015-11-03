@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBookReadersTable extends Migration {
+class CreateBookLikesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,11 @@ class CreateBookReadersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('book_readers', function(Blueprint $table)
+		Schema::create('book_likes', function(Blueprint $table)
 		{
 			//
             $table->increments('id');
-            $table->integer('booklist_id');
+            $table->integer('book_id');
             $table->integer('user_id');
             $table->timestamps();
             $table->softDeletes();
@@ -30,7 +30,7 @@ class CreateBookReadersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('book_readers', function(Blueprint $table)
+		Schema::table('book_likes', function(Blueprint $table)
 		{
             $table->drop();
 		});

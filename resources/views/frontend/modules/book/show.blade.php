@@ -128,7 +128,7 @@
                             </div>
                             <div class="col-lg-2 border-right">
                                 <div class="description-block">
-                                    <a class=" {!! Config::get('button.btn-like') !!}" href=""
+                                    <a class=" {!! Config::get('button.btn-like') !!}" href="{{ action('Backend\BooksController@getCreateLikeBook',[ Auth::id(),$book->id]) }}"
                                        title="{{ trans('buttons.like') }}">
                                         {!! Config::get('button.icon-like') !!}
                                     </a>

@@ -6,7 +6,7 @@
 
     <div class="panel-body">
 
-        {!! Breadcrumbs::render('chapter_create') !!}
+        {!! Breadcrumbs::render('preview_create') !!}
 
         @can('create')
         {!! Form::open(['action'=>'Backend\PreviewsController@store','method'=>'post'],['class'=>'form-horizontal']) !!}

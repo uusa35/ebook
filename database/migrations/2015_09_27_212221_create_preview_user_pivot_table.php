@@ -15,9 +15,9 @@ class CreatePreviewUserPivotTable extends Migration
     {
         Schema::create('preview_user', function(Blueprint $table) {
             $table->integer('preview_id')->unsigned()->index();
-            $table->foreign('preview_id')->references('id')->on('preview')->onDelete('cascade');
+            //$table->foreign('preview_id')->references('id')->on('preview')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+            //$table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
         });
     }
 

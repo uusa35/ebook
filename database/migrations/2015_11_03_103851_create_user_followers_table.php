@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSlidersTable extends Migration
+class CreateUserFollowersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreateSlidersTable extends Migration
      */
     public function up()
     {
-        Schema::create('sliders', function(Blueprint $table) {
+        Schema::create('user_followers', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('slide');
-            $table->string('caption');
+            $table->integer('user_id');
+            $table->integer('follower_id');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateSlidersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('sliders');
+        Schema::drop('user_followers');
     }
 }

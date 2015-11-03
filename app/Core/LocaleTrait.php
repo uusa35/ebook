@@ -16,6 +16,7 @@ trait LocaleTrait
         if (in_array($name, $this->localeStrings)) {
 
             $locale = App::getLocale();
+
             if ($locale == 'en') {
 
                 if (!is_null($this->{$name . '_en'})) {

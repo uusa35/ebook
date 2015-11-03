@@ -9,6 +9,7 @@ use Cmgmyr\Messenger\Models\Participant;
 use Cmgmyr\Messenger\Models\Thread as Thread;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use App\Services\PusherWrapper as Pusher;
@@ -44,7 +45,8 @@ class MessagesController extends AbstractController
         $currentUserId = Auth::user()->id;
 
         // All threads that user is participating in
-        $threads = $this->thread->forUser($currentUserId)->with('participants', 'messages', 'participants.user')->get();
+        $threads = $this->thread->forUser($currentUserId)->with('participants', 'messages',
+            'participants.user')->get();
 
         return view('backend.modules.messenger.index', compact('threads', 'currentUserId'));
     }
@@ -90,20 +92,31 @@ class MessagesController extends AbstractController
 
         $this->getPageTitle('message.create');
 
-        if (Session::get('book_id')) {
 
-            $users = $this->userRepository->allAdminsAndEditors();
+        $title = '';
 
-        } else {
+        if(Input::get('book_id')) {
 
-            $users = $this->userRepository->model->where('id', '!=', Auth::id())->get();
+            $title .= trans('general.book_number').Input::get('book_id');
+
+        }
+
+        if(Input::get('chapter_id')) {
+            $title .= trans('general.chapter_number').Input::get('chapter_id');
         }
 
 
+        $users = $this->userRepository->model->where('id', '!=', Auth::id())->get();
+
+        $subjectList = [
+            trans('general.general') => trans('general.general'),
+            trans('general.abuse') => trans('general.abuse'),
+            trans('general.preview') => trans('general.preview')
+        ];
 
         $usersList = $users->lists('name', 'id');
 
-        return view('backend.modules.messenger.create', compact('usersList'));
+        return view('backend.modules.messenger.create', compact('usersList', 'subjectList','title'));
     }
 
     /**
@@ -117,7 +130,7 @@ class MessagesController extends AbstractController
 
         $thread = $this->thread->create(
             [
-                'subject' => $input['subject'],
+                'subject' => Input::get('title') . ' : ' . Input::get('subject'),
             ]
         );
 
@@ -145,6 +158,8 @@ class MessagesController extends AbstractController
         }
 
         $this->oooPushIt($message);
+
+        Session::forget('book_id');
 
         return redirect()->action('Backend\MessagesController@index');
     }
@@ -260,4 +275,20 @@ class MessagesController extends AbstractController
 
         return ['msg_count' => $count];
     }
+
+    public function cancel($threadId)
+    {
+
+        $deleted = DB::table('participants')->where(['thread_id' => $threadId, 'user_id' => Auth::id()])->delete();
+
+        if ($deleted) {
+
+            return redirect()->back()->with(['sucesss' => 'messages.success.message_deleted']);
+        }
+
+        return redirect()->back()->with(['error' => 'messages.error.error_occured']);
+
+    }
+
+
 }

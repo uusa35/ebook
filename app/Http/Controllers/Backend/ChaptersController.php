@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class ChaptersController extends Controller
 {
@@ -49,7 +50,7 @@ class ChaptersController extends Controller
      */
     public function create()
     {
-        $bookId = \Request::get('book_id');
+        $bookId = Input::get('book_id');
 
         return view('backend.modules.book.chapter.create', compact('bookId'));
     }
