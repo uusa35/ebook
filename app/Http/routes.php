@@ -71,7 +71,7 @@ Route::group(['prefix' => 'frontend'], function () {
     /***************************************************************************************************
      * Index ( Main Page ) BookController
      ***************************************************************************************************/
-    Route::resource('book', 'BookController');
+    Route::resource('book', 'BookController',['only' => ['index','show']]);
 
     /***************************************************************************************************
      * Categories
@@ -84,6 +84,8 @@ Route::group(['prefix' => 'frontend'], function () {
      ***************************************************************************************************/
     Route::get('/conditions', ['uses' => 'HomeController@getConditions']);
     Route::resource('user', 'UserController', ['only' => 'show']);
+
+    Route::get('/follow/{userId}/{followerId}', ['middleware' => 'auth','uses' => 'UserController@followUser']);
 
 });
 

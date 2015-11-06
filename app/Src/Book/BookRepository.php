@@ -44,7 +44,7 @@ class BookRepository extends AbstractRepository
                     '=', 'published');
             })
             ->with('usersFavorites', 'meta')
-            ->orderBy('books.created_at', 'desc')
+            ->orderBy('books.created_at', 'ASC')
             ->limit(4)
             ->get();
     }
@@ -62,10 +62,11 @@ class BookRepository extends AbstractRepository
             ->paginate(8);
     }
 
-    public function getBook($id) {
+    public function getBook($id)
+    {
 
         return $this->model
-            ->where(['active' =>  '1', 'id' => $id])
+            ->where(['active' => '1', 'id' => $id])
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published');
@@ -135,17 +136,19 @@ class BookRepository extends AbstractRepository
     {
         return $this->model
             // no results for drafts -- only for published
-            ->where('active', '=', '1')
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published');
             })
-            ->with('meta','usersFavorites','chapters')
-            ->orWhere('description', 'like', '%' . $searchItem . '%')
-            ->orWhere('serial', 'like', '%' . $searchItem . '%')
+            ->where('active', '=', '1')
+            // the first where will filter the whole query
+            // the next orWhere will filter according to the last results of the last where
+            ->where('description', 'like', '%' . $searchItem . '%')
             ->orWhere('title', 'like', '%' . $searchItem . '%')
+            ->orWhere('serial', 'like', '%' . $searchItem . '%')
+            ->with('meta', 'usersFavorites', 'chapters')
+            ->paginate(12);
 
-            ->paginate(10);
     }
 
 
@@ -188,7 +191,7 @@ class BookRepository extends AbstractRepository
      */
     public function getUserFavorites($userId)
     {
-        $favorites = $this->model->userFavorites($userId);
+        $favorites = $this->model->usersFavorites($userId);
         return $favorites;
     }
 

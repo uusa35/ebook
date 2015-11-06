@@ -252,6 +252,10 @@ return [
     'general' => 'عام',
     'abuse' => 'إساءة',
     'preview' => 'معاينة',
+    'ideasowners' => 'شركة أصحاب أفكار',
+    'main_page' => 'الصفحة الرئيسية',
+    'read_book' => 'إقرا الكتاب',
+
 
 
 

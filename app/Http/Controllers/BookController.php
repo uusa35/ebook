@@ -93,7 +93,11 @@ class BookController extends AbstractController
     {
         // get all books by book ID
 
-        $book = $this->bookRepository->getBook($id);
+        $book = $this->bookRepository->model->where(['id' => $id])->with('author', 'author.following')->first();
+
+        $followers = $book->author->following;
+
+        $followersList = $followers->Lists('id', 'user_id')->toArray();
 
         if (!is_null($book)) {
 
@@ -103,7 +107,7 @@ class BookController extends AbstractController
 
             $total_pages = $this->chapterRepository->totalPagesForChapter($book->id);
 
-            return view('frontend.modules.book.show', compact('book', 'total_pages'));
+            return view('frontend.modules.book.show', compact('book', 'total_pages','followersList'));
 
         }
 
@@ -121,7 +125,7 @@ class BookController extends AbstractController
 
         $searchedItem = trim($request->get('search'));
 
-        if($searchedItem) {
+        if ($searchedItem) {
 
             $searchResults = $this->bookRepository->SearchBooks($searchedItem);
 

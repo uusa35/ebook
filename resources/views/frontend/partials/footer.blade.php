@@ -51,20 +51,22 @@
         <!-- col -->
 
         <div class="col-lg-3">
-            <h3>{{ ucfirst(trans('conditions')) }}</h3>
-            <h4>{{ $conditions->title_en }}</h4>
+            <h3>Instagram</h3>
 
-            <p>{{ $conditions->body_en }}.</p>
+            <p>Instagram.</p>
         </div>
         <!-- col -->
         <div class="col-lg-3">
-            <h3>{{ ucfirst(trans('conditions')) }}</h3>
-            <h4>{{ $conditions->title_ar }}</h4>
+            <h3>Twitter</h3>
 
-            <p>{{ $conditions->body_ar }}.</p>
+            <p>Twitter.</p>
         </div>
         <!-- col -->
-
     </div>
+    <div class="col-lg-12 text-center text-info">
+        {{ trans('messages.allrights') }} - {{ trans('messages.designed_developed') }} - <a href="http://ideasowneres.net">{{ trans('general.ideasowners') }}</a>
+        <br/>
+    </div>
+
 </div><!-- row -->
 

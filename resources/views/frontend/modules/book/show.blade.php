@@ -80,7 +80,9 @@
                                     {{ trans('general.author') }} :
                                 </td>
                                 <td>
-                                    {{ $book->author->name }}
+                                    <a href="{{ action('UserController@show',$book->author_id) }}">
+                                        {{ $book->author->name }}
+                                    </a>
                                 </td>
                             </tr>
                             <tr>
@@ -88,7 +90,7 @@
                                     {{ trans('general.published_at') }} :
                                 </td>
                                 <td>
-                                    {{ $book->updated_at->format('Y-M-D') }}
+                                    {{ $book->updated_at->toFormattedDateString() }}
                                 </td>
                             </tr>
                             <tr>
@@ -102,6 +104,21 @@
                             <tr>
                                 <td> {{ trans('general.likes_counter') }}</td>
                                 <td> {{ count($book->usersLikes) }}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ trans('general.read_book') }}
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-large"
+                                            id="view-{{$book->id}}"
+                                            title="{{ trans('general.chapters') }}"
+                                            data-toggle="modal"
+                                            data-target="#myModal">
+                                        {!! Config::get('button.icon-view') !!}
+                                        {{ trans('general.read_book') }}
+                                    </button>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -132,7 +149,8 @@
                             </div>
                             <div class="col-lg-2 border-right">
                                 <div class="description-block">
-                                    <a class=" {!! Config::get('button.btn-like') !!}" href="{{ action('Backend\BooksController@getCreateLikeBook',[ Auth::id(),$book->id]) }}"
+                                    <a class=" {!! Config::get('button.btn-like') !!}"
+                                       href="{{ action('Backend\BooksController@getCreateLikeBook',[ Auth::id(),$book->id]) }}"
                                        title="{{ trans('buttons.like') }}">
                                         {!! Config::get('button.icon-like') !!}
                                     </a>
@@ -156,9 +174,10 @@
                             @if(Auth::user())
                                 <div class="col-lg-2 border-right">
                                     <div class="description-block">
-                                        <a class=" {!! Config::get('button.btn-report') !!}" href="{{ action('Backend\BooksController@getCreateNewReportAbuse',[Auth::id(),$book->id]) }}"
-                                           {{--data-toggle="modal"
-                                           data-target="#reportAbuse"--}}
+                                        <a class=" {!! Config::get('button.btn-report') !!}"
+                                           href="{{ action('Backend\BooksController@getCreateNewReportAbuse',[Auth::id(),$book->id]) }}"
+                                                {{--data-toggle="modal"
+                                                data-target="#reportAbuse"--}}
                                            title="{{ trans('buttons.report') }}">
                                             {!! Config::get('button.icon-report') !!}
                                         </a>
@@ -186,13 +205,20 @@
             </div>
             <!-- /.widget-user -->
         </div>
-
-        <div id="disqus_thread"></div>
-
+    </div>
+    <div id="disqus_thread"></div>
+    @if(in_array(Auth::id(),$followersList,true) || $book->author_id === Auth::id())
         @include('frontend.partials.comment')
-    </div>
+    @else
+        <div class="row">
+            <div class="alert alert-dismissable alert-warning">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><i class="fa fa-fw fa-times"></i>Warning!</h4>
+                <p>{{  trans('messages.error.to_access_comments') }}.</p>
+            </div>
+        </div>
+    @endif
 
-    </div>
 @stop
 
 @section('scripts')

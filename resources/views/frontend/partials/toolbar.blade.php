@@ -9,12 +9,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ URL::to('/') }}">
+                <a class="navbar-brand btn-material-yellow-A700" href="{{ URL::to('/') }}">
                     <i class="fa  fa-home fa-xs"></i>
-                    {{ trans('general.ebook') }}</a>
+                    {{ ucfirst(trans('general.main_page')) }}</a>
             </div>
             <div class="navbar-collapse collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
+                    <li><a href="/frontend/books" class=""><i class="fa fa-xs fa-fw fa-book"></i> {{ trans('general.books') }}
+                        </a>
+                    </li>
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle"
                            data-toggle="dropdown">{{ trans('general.categories') }} <b
@@ -28,14 +31,19 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li><a href="/frontend/books"><i class="fa fa-xs fa-fw fa-book"></i> {{ trans('general.books') }}
-                        </a>
-                    </li>
-                    <li><a href="/backend/books/create"><i class="fa fa-xs fa-fw fa-plus"></i> {{ trans('general.book_create') }}
+                    <li><a href="/backend/books/create" class="btn-material-blue-600"><i class="fa fa-xs fa-fw fa-plus"></i> {{ trans('general.book_create') }}
                         </a>
                     </li>
                     <li><a href="{{ action('HomeController@getContactus') }}"><i
                                     class="fa fa-xs fa-fw fa-info"></i> {{ trans('general.contactus') }}
+                        </a>
+                    </li>
+                    <li><a href="{{ url('/lang/en') }}"><i
+                                    class="fa fa-xs fa-fw fa-language"></i> {{ trans('general.english') }}
+                        </a>
+                    </li>
+                    <li><a href="{{ url('/lang/ar') }}"><i
+                                    class="fa fa-xs fa-fw fa-language"></i> {{ trans('general.arabic') }}
                         </a>
                     </li>
                 </ul>
@@ -73,7 +81,6 @@
                                 {{ trans('general.login') }}</a></li>
                     @endif
                     {{--<li class="btn-material-grey"><a href="javascript:void(0)"><i class="fa fa-fw fa-sign-out"></i> Sign Up</a>--}}
-                    </li>
 
                 </ul>
                 <form class="navbar-form {{ Session::get('pullClassReverse') }}" style="margin-top: 12px;" method="post"

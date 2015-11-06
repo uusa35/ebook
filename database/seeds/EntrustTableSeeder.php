@@ -58,7 +58,7 @@ class EntrustTableSeeder extends Seeder {
 
 		$permissions = [
 			// Modules
-			'Users','Roles','Permissions','Books','Chapters','Comments','Messages','Contactus','Categories','Blogs','Galleries','Ads','Slider',
+			'Users','Roles','Permissions','Books','Chapters','Comments','Messages','Contactus','Categories','Blogs','Galleries','Ads','Slider','Conditions',
 			// Modules Permissions
 			'user_create','user_edit','user_change','user_delete',
 			'role_create','role_edit','role_change','role_delete',
@@ -71,7 +71,8 @@ class EntrustTableSeeder extends Seeder {
 			'blog_create','blog_edit','blog_delete', 'blog_change',
 			'gallery_create','gallery_edit','gallery_delete', 'gallery_change',
 			'ad_create','ad_edit','ad_delete', 'ad_change',
-			'slider_create','slider_edit'
+			'slider_create','slider_edit',
+			'condition_edit'
 
 		];
 

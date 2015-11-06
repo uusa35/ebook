@@ -6,7 +6,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4>
-                        {{ trans('word.conditions') }}
+                        {{ trans('general.conditions') }}
                     </h4>
                 </div>
                 <div class="panel-body">
@@ -20,13 +20,13 @@
                             {!!
                             Form::checkbox('conditions',null,false,['id'=>'conditions','class'=>'control-label'])
                             !!}
-                            {!! Form::label('read',trans('word.accept-conditions',['class'=>'form-control'])) !!}
+                            {!! Form::label('read',trans('general.accept_conditions',['class'=>'form-control'])) !!}
                         </div>
 
-                        <div class="form-group  {{ (App::getLocale('lang') === 'ar') ? 'pull-left': 'pull-right' }}"
+                        <div class="form-group  {{ Session::get('pullClassReverse') }}"
                              style="padding:20px;">
                             <a class="btn btn-primary hidden" id="btncon" href="{{ action('Auth\AuthController@getRegister') }}"
-                               disabled>{{ trans('word.register') }}</a>
+                               disabled>{{ trans('general.register') }}</a>
                         </div>
                     </form>
                 </div>

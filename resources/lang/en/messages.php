@@ -14,7 +14,9 @@ return [
         'general_message' => 'process failure',
         'edit_user' => 'error occurred',
         'not_active' => 'your account has been deactivated .. please contact the administrator.',
-        'no_access' => 'you do not have access to this page.'
+        'no_access' => 'you do not have access to this page.',
+        'to_access_comments' => 'in order to comment on this book, please kindly follow the author',
+
     ],
     'info' => [
         'no_books_found' => 'No book Found in.'
@@ -24,5 +26,7 @@ return [
     'cover_instructions' => 'book cover size should be 500 * 680',
     'fields_required' => 'all fields with star (*) is required',
     'slider' => '- best fit is 1500 * 500',
-    'ads' => 'best fit is 500 * 120'
+    'ads' => 'best fit is 500 * 120',
+    'allrights' => 'all rights reserved e-boook.com',
+    'designed_developed' => 'Designed & Developed By'
 ];

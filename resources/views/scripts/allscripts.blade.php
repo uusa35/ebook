@@ -15,7 +15,7 @@
             }
         });
 
-        $('.nav-tabs > li[id^="tab-"]').on('click', function () {
+        /*$('.nav-tabs > li[id^="tab-"]').on('click', function () {
             idVal = $(this).attr('id');
             tabLink = idVal.split('-');
             tabLink = 'step'+tabLink[1];
@@ -32,7 +32,7 @@
             var tabLink = $.cookie('tabLink');
             console.log('From Inside If Statement : ' + idVal);
             $('#'+idVal+'> a').trigger('click');
-        }
+        }*/
     });
 
     $(document).scroll(function (e) {

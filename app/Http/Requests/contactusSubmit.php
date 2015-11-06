@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Request;
 
-class UpdateChapter extends Request
+class contactusSubmit extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -12,7 +13,7 @@ class UpdateChapter extends Request
      */
     public function authorize()
     {
-        return $this->checkAccessForEachPermission('chapter_edit');
+        return true;
     }
 
     /**
@@ -23,10 +24,10 @@ class UpdateChapter extends Request
     public function rules()
     {
         return [
-            'title' => 'required|min:3',
-            'body' => 'required',
-            'id' => 'required',
-            'book_id' => 'required'
+            'name'    => 'required|max:255',
+            'email'   => 'required|email',
+            'subject' => 'required',
+            'content' => 'required'
         ];
     }
 }

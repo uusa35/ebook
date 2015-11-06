@@ -15,7 +15,7 @@
             <hr>
         </div>
         @foreach($recentBooks as $book)
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-md-3 col-xs-10 col-md-offset-0 col-lg-offset-0 col-xs-offset-1">
 
                 <div class=" box box-widget widget-user shadow-z-1">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -27,7 +27,7 @@
 
                     <div class="box-footer">
                         <div class="row">
-                            <div class="col-sm-4 border-right">
+                            <div class="col-lg-4 col-sm-4 col-xs-4 border-right">
                                 <div class="description-block">
 
                                     <h3 class="description-header"><i class="fa fa-fw fa-heart text-danger"></i></h3>
@@ -36,7 +36,7 @@
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
-                            <div class="col-sm-4 border-right">
+                            <div class="col-sm-4 col-xs-4 border-right">
                                 <div class="description-block">
                                     <h5 class="description-header"><i class="fa fa-fw fa-calendar text-success"></i>
                                     </h5>
@@ -45,7 +45,7 @@
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 col-xs-4">
                                 <div class="description-block">
                                     <h5 class="description-header"><i class="fa fa-fw fa-eye text-info"></i></h5>
                                     <span class="description-text">{{ $book->views }}</span>
@@ -87,7 +87,7 @@
             <hr>
         </div>
         @foreach($mostFavoriteBooks as $book)
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-md-3 col-xs-10 col-md-offset-0 col-lg-offset-0 col-xs-offset-1">
 
                 <div class=" box box-widget widget-user shadow-z-1">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -99,7 +99,7 @@
 
                     <div class="box-footer">
                         <div class="row">
-                            <div class="col-sm-4 border-right">
+                            <div class="col-sm-4 col-xs-4 border-right">
                                 <div class="description-block">
 
                                     <h3 class="description-header"><i class="fa fa-fw fa-heart text-danger"></i></h3>
@@ -108,7 +108,7 @@
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
-                            <div class="col-sm-4 border-right">
+                            <div class="col-sm-4 col-xs-4 border-right">
                                 <div class="description-block">
                                     <h5 class="description-header"><i class="fa fa-fw fa-calendar text-success"></i>
                                     </h5>
@@ -117,7 +117,7 @@
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 col-xs-4">
                                 <div class="description-block">
                                     <h5 class="description-header"><i class="fa fa-fw fa-eye text-info"></i></h5>
                                     <span class="description-text">{{ $book->views }}</span>
@@ -155,11 +155,11 @@
 
 
         <div class="col-lg-12 z-shadow-1">
-            <h3>Most Liked Books</h3>
+            <h3>{{ ucfirst(trans('general.most_liked')) }}</h3>
             <hr>
         </div>
         @foreach($mostLikedBooks as $book)
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-md-3 col-xs-10 col-md-offset-0 col-lg-offset-0 col-xs-offset-1">
 
                 <div class=" box box-widget widget-user shadow-z-1">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -171,7 +171,7 @@
 
                     <div class="box-footer">
                         <div class="row">
-                            <div class="col-sm-4 border-right">
+                            <div class="col-sm-4 col-xs-4 border-right">
                                 <div class="description-block">
 
                                     <h3 class="description-header"><i class="fa fa-fw fa-heart text-danger"></i></h3>
@@ -180,7 +180,7 @@
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
-                            <div class="col-sm-4 border-right">
+                            <div class="col-sm-4 col-xs-4 border-right">
                                 <div class="description-block">
                                     <h5 class="description-header"><i class="fa fa-fw fa-calendar text-success"></i>
                                     </h5>
@@ -189,7 +189,7 @@
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 col-xs-4">
                                 <div class="description-block">
                                     <h5 class="description-header"><i class="fa fa-fw fa-eye text-info"></i></h5>
                                     <span class="description-text">{{ $book->views }}</span>

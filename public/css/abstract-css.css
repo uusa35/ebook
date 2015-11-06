@@ -26,6 +26,10 @@ html, body, h1, h2, h3, h4, h5, span, p, div, table, a, input , .tooltip , tr, t
 .btn {
     z-index: 0 !important;
 }
+
+a .active {
+    color : darkred;
+}
 /*!
  *  Font Awesome 4.4.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)

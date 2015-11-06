@@ -182,7 +182,6 @@ return [
     'error_book_report' => 'an error occurred .. you might have reported this book before .. !!!',
     'error_book_favorites' => 'an error occurred .. you might have added this book before .. !!!',
     'remember_me' => 'remember me',
-    'accept_conditions' => 'i accept all conditions and terms.',
     'conditions' => 'terms & conditions',
     'contactus' => 'contact us',
     'body_ar' => 'arabic content',
@@ -239,7 +238,19 @@ return [
     'slider' => 'slider',
     'general' => 'general',
     'abuse' => 'abuse',
-    'preview' => 'preview'
+    'preview' => 'preview',
+    'followers' => 'followers',
+    'following' => 'following',
+    'member_since' => 'member since',
+    'total_chapters' => 'total chapters',
+    'views_counter' => 'number of views',
+    'likes_counter' => 'number of likes',
+    'published_at' => 'date of publish',
+    'accept_conditions' => 'I agree on all conditions and regulations included above.',
+    'ideasowners' => 'ideasowners',
+    'main_page' => 'main page',
+    'read_book' => 'read book',
+
 
 
 

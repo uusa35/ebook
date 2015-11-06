@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Requests\contactusSubmit;
+use Illuminate\Support\Facades\Mail;
+
 class HomeController extends Controller
 {
 
@@ -23,22 +26,25 @@ class HomeController extends Controller
     }
 
 
-    public function sendContactUs(Request $request)
+    public function sendContactUs(contactusSubmit $request)
     {
-        $this->validate($request, [
-            'name'    => 'required|max:255',
-            'email'   => 'required|email',
-            'subject' => 'required',
-            'content' => 'required'
-        ]);
+
         $data = $request->except('_token');
-        Mail::later(2, 'emails.contactus', ['data' => $data], function ($message) {
-            $message->from('test@test.com', 'Contact Us');
-            $message->subject('Contact Us');
+
+        $send =  Mail::send('emails.contactus', ['data' => $data], function ($message) {
+            $message->from('uusa35@gmail.com', 'Contact Us');
+            $message->subject('E-Boook.com | Contact Us ');
             $message->to('uusa35@gmail.com');
             /*->cc();*/
         });
-        return redirect()->back()->with('success', trans('success-contactus'));
+
+
+        if($send) {
+            return redirect()->back()->with('success', trans('messages.success.contactus'));
+        }
+
+
+        return redirect()->back()->with('error', trans('messages.error.contactus'));
     }
 
 }

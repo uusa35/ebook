@@ -16,8 +16,8 @@ class CreateInstructionsTable extends Migration
             $table->increments('id');
             $table->string('title_ar');
             $table->string('title_en');
-            $table->string('body_ar');
-            $table->string('body_en');
+            $table->text('body_ar');
+            $table->text('body_en');
             $table->timestamps();
         });
     }

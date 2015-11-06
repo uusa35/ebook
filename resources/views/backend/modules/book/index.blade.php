@@ -6,6 +6,10 @@
         #myModal {
             z-index: 9999999;
         }
+
+        .nav-tabs > li .active {
+            color: darkmagenta !important;
+        }
     </style>
 @stop
 @section('scripts')

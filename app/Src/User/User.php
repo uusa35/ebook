@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 /**
@@ -35,7 +34,7 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'avatar', 'active', 'phone'];
+    protected $fillable = ['name', 'email', 'password', 'avatar', 'active', 'phone','level'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -51,13 +50,23 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
 
     public function books()
     {
-        return $this->hasMany('App\Src\Book\Book','author_id');
+        return $this->hasMany('App\Src\Book\Book', 'author_id');
     }
 
-
+    /*
+     * all users following this user
+     * */
     public function followers()
     {
-        return $this->hasMany('App\Src\User\Follower', 'user_id');
+        return $this->hasMany('App\Src\User\Follower\Follower', 'user_id');
+    }
+
+    /*
+     * All users followed by this user
+     * */
+    public function following()
+    {
+        return $this->hasMany('App\Src\User\Follower\Follower', 'follower_id');
     }
 
 }

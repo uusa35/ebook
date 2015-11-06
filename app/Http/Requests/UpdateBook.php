@@ -13,7 +13,7 @@ class UpdateBook extends Request
      */
     public function authorize()
     {
-        return $this->checkAccessForEachPermission('book_update');
+        return $this->checkAccessForEachPermission('book_edit');
     }
 
     /**

@@ -13,6 +13,9 @@
 
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+            <a class="navbar-brand btn-material-yellow-A700 {{ Session::get('pullClass') }}" href="{{ URL::to('/') }}">
+                <i class="fa  fa-home fa-xs"></i>
+                {{ trans('general.ebook') }}</a>
             <!-- Messages: style can be found in dropdown.less-->
             {{--<li class="dropdown messages-menu">
                 <!-- Menu toggle button -->

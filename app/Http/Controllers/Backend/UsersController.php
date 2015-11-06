@@ -170,14 +170,14 @@ class UsersController extends AbstractController
 
     public function getEditConditions()
     {
-        $terms = \DB::table('instructions')->first();
+        $terms = \DB::table('conditions')->first();
 
         return view('backend.modules.user.conditions', ['terms' => $terms]);
     }
 
     public function postEditConditions()
     {
-        $instructions = \DB::table('instructions')->update([
+        $instructions = \DB::table('conditions')->update([
             'title_ar' => Input::get('title_ar'),
             'title_en' => Input::get('title_en'),
             'body_ar' => Input::get('body_ar'),

@@ -10,7 +10,7 @@ class UpdateUser extends Request {
 	 */
 	public function authorize()
 	{
-		return $this->checkAccessForEachPermission('user_update');
+		return $this->checkAccessForEachPermission('user_edit');
 	}
 
 	/**

@@ -66,6 +66,7 @@ class AuthController extends AbstractController
             'password' => bcrypt($data['password']),
             'active' => 1,
             'level' => 3,
+            'avatar' => 'avatar.png'
         ]);
 
         if ($user) {
