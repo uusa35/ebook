@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if (App::environment() == 'local') {
+        if (App::environment() == '') {
             Model::unguard();
 
             $this->cleanDatabase();

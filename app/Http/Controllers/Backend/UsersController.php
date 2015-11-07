@@ -2,6 +2,7 @@
 
 use App\Core\AbstractController;
 use App\Http\Requests\CreateUser;
+use App\Http\Requests\EditUser;
 use App\Http\Requests\UpdateUser;
 use App\Jobs\CreateImages;
 use App\Jobs\CreateUserAvatar;
@@ -55,7 +56,8 @@ class UsersController extends AbstractController
             return view('backend.modules.user.create', compact('roles'));
         }
 
-        return redirect()->action('Backend\DashboardController@index')->with('error', trans('messages.error.no_access'));
+        return redirect()->action('Backend\DashboardController@index')->with('error',
+            trans('messages.error.no_access'));
 
     }
 
@@ -93,20 +95,17 @@ class UsersController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit($id,EditUser $request)
     {
         $this->getPageTitle('user.edit');
 
         $user = $this->userRepository->model->with('roles')->find($id);
 
-        if (Gate::check('edit', $user->id)) {
+        $userListRoleIds = $user->roles->Lists('name');
 
-            $userListRoleIds = $user->roles->Lists('name');
+        $roles = $this->roleRepository->model->get();
 
-            $roles = $this->roleRepository->model->get();
-
-            return view('backend.modules.user.edit', compact('user', 'roles', 'userListRoleIds'));
-        }
+        return view('backend.modules.user.edit', compact('user', 'roles', 'userListRoleIds'));
     }
 
     /**

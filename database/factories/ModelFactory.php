@@ -19,6 +19,7 @@ $factory->define('App\Src\User\User', function ($faker) {
             //'name_ar' => $faker->country,
             'email' => "user".$faker->numberBetween(0,50)."@email.com",
             'active' => 1,
+            'level' => 3,
             'password' => Hash::make("admin"),
             'avatar' => 'http://lorempixel.com/150/150/sports'
         ];

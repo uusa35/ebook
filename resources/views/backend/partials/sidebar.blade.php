@@ -26,17 +26,17 @@
         <ul class="sidebar-menu">
 
             @if(Session::has('roles'))
-                @if(Cache::has('role.Admin.'.Auth::id()))
+                @if(Cache::has('Abilities.Admin.'.Auth::id()))
                     @foreach(Cache::get('Modules.Admin.'.Auth::id()) as $module)
                         <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
                                 <span>{{ trans('general.'.$module) }}</span></a></li>
                     @endforeach
-                @elseif(Cache::has('role.Editor.'.Auth::id()))
+                @elseif(Cache::has('Abilities.Editor.'.Auth::id()))
                     @foreach(Cache::get('Modules.Editor.'.Auth::id()) as $module)
                         <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
                                 <span>{{ trans('general.'.$module) }}</span></a></li>
                     @endforeach
-                @elseif(Cache::has('role.Author.'.Auth::id()))
+                @elseif(Cache::has('Abilities.Author.'.Auth::id()))
                     @foreach(Cache::get('Modules.Author.'.Auth::id()) as $module)
                         <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
                                 <span>{{ trans('general.'.$module) }}</span></a></li>
