@@ -21,7 +21,7 @@ class AuthUserCollectData
     public function handle($request, Closure $next)
     {
 
-//        dd(Cache::get('role.Author.'.Auth::id()));
+        //dd(Cache::get('Modules.Admin.'.Auth::id()));
 
         if (is_null(Session::get('roles'))) {
 

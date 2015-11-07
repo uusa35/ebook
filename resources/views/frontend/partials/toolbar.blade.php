@@ -11,7 +11,7 @@
                 </button>
                 <a class="navbar-brand btn-material-yellow-A700" href="{{ URL::to('/') }}">
                     <i class="fa  fa-home fa-xs"></i>
-                    {{ ucfirst(trans('general.main_page')) }}</a>
+                    {{ trans('general.ebook') }}</a>
             </div>
             <div class="navbar-collapse collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
@@ -42,11 +42,24 @@
                                     class="fa fa-xs fa-fw fa-language"></i> {{ trans('general.english') }}
                         </a>
                     </li>
-                    <li><a href="{{ url('/lang/ar') }}"><i
+                    <li><a href="{{ link_to('/lang/ar') }}"><i
                                     class="fa fa-xs fa-fw fa-language"></i> {{ trans('general.arabic') }}
                         </a>
                     </li>
                 </ul>
+                <form class="navbar-form {{ Session::get('pullClass') }}" style="margin-top: 12px; max-width: 250px;" method="post"
+                      action="{{ action('BookController@getShowSearchResults') }}">
+                    {!! Form::token() !!}
+                    <input type="text" name="search" class="col-lg-5 form-control "
+                           placeholder="{{ trans('general.search') }}"
+                           style="float: {{ (App::getLocale() === 'en') ? 'left' : 'right' }}; width: 80%; padding: 0px; margin: 0px;">
+                    <button type="submit"
+                            class="{{ Config::get('button.btn-search') }} {{ Session::get('pullClassReverse') }}">{!!
+                        Config::get('button.icon-search') !!}
+                    </button>
+                    {!! Form::close() !!}
+
+
                 <ul class="nav navbar-nav nav-left {{ Session::get('pullClassReverse') }}">
                     <li class="dropdown btn-material-pink">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
@@ -83,17 +96,6 @@
                     {{--<li class="btn-material-grey"><a href="javascript:void(0)"><i class="fa fa-fw fa-sign-out"></i> Sign Up</a>--}}
 
                 </ul>
-                <form class="navbar-form {{ Session::get('pullClassReverse') }}" style="margin-top: 12px;" method="post"
-                      action="{{ action('BookController@getShowSearchResults') }}">
-                    {!! Form::token() !!}
-                    <input type="text" name="search" class="col-lg-5 form-control "
-                           placeholder="{{ trans('general.search') }}"
-                           style="float: {{ (App::getLocale() === 'en') ? 'left' : 'right' }}; width: 80%; padding: 0px; margin: 0px;">
-                    <button type="submit"
-                            class="{{ Config::get('button.btn-search') }} {{ Session::get('pullClassReverse') }}">{!!
-                        Config::get('button.icon-search') !!}
-                    </button>
-                    {!! Form::close() !!}
 
 
             </div>

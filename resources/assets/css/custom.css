@@ -26,3 +26,6 @@ html, body, h1, h2, h3, h4, h5, span, p, div, table, a, input , .tooltip , tr, t
 .btn {
     z-index: 0 !important;
 }
+.navbar-nav {
+    margin:0px !important;
+}
