@@ -47,7 +47,7 @@ class AuthUserCollectData
              * */
             Cache::put('Modules.' . $authUserRole->name.'.'.Auth::id(), array_values($modulesList), 120);
 
-            dd(Cache::get('Modules.Admin.'.Auth::id()));
+            //dd(Cache::get('Modules.Admin.'.Auth::id()));
 
 
             /*
