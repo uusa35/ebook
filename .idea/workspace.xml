@@ -25,20 +25,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="UsersController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UsersController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4664179" vertical-offset="975" max-vertical-offset="2805">
+            <state vertical-scroll-proportion="-56.25" vertical-offset="0" max-vertical-offset="2805">
               <caret line="99" column="41" selection-start-line="99" selection-start-column="41" selection-end-line="99" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sidebar.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="sidebar.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/backend/partials/sidebar.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.25" vertical-offset="30" max-vertical-offset="1155">
+            <state vertical-scroll-proportion="0.03731343" vertical-offset="30" max-vertical-offset="1155">
               <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
               <folding />
             </state>
@@ -48,8 +48,8 @@
       <file leaf-file-name="AuthUserCollectData.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Middleware/AuthUserCollectData.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.25" vertical-offset="615" max-vertical-offset="1455">
-              <caret line="78" column="67" selection-start-line="78" selection-start-column="67" selection-end-line="78" selection-end-column="67" />
+            <state vertical-scroll-proportion="-23.5" vertical-offset="126" max-vertical-offset="1485">
+              <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -114,7 +114,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/AuthController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/BookController.php" />
         <option value="$PROJECT_DIR$/app/Http/Requests/UpdateBook.php" />
         <option value="$PROJECT_DIR$/app/Http/Requests/UpdateChapter.php" />
@@ -165,6 +164,7 @@
         <option value="$PROJECT_DIR$/resources/views/backend/partials/sidebar.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Requests/EditUser.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Middleware/AuthUserCollectData.php" />
       </list>
     </option>
   </component>
@@ -989,22 +989,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/AuthUserCollectData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.25" vertical-offset="615" max-vertical-offset="1455">
-          <caret line="78" column="67" selection-start-line="78" selection-start-column="67" selection-end-line="78" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/backend/partials/sidebar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.25" vertical-offset="30" max-vertical-offset="1155">
-          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Requests/UpdateUser.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2238806" vertical-offset="0" max-vertical-offset="804">
@@ -1031,8 +1015,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4664179" vertical-offset="975" max-vertical-offset="2805">
+        <state vertical-scroll-proportion="-56.25" vertical-offset="0" max-vertical-offset="2805">
           <caret line="99" column="41" selection-start-line="99" selection-start-column="41" selection-end-line="99" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/AuthUserCollectData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.5" vertical-offset="126" max-vertical-offset="1485">
+          <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/backend/partials/sidebar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03731343" vertical-offset="30" max-vertical-offset="1155">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
           <folding />
         </state>
       </provider>
