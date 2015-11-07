@@ -33,7 +33,7 @@
 								<input type="email" class="form-control" name="email" value="{{ $user->email }}">
 							</div>
 						</div>
-					@if(Session::get('role.admin'))
+					@if(Cache::get('Abilities.Admin.'.Auth::id()))
 						<div class="form-group">
 							<label class="col-md-4 control-label">{{ trans('word.active') }}*</label>
 							<div class="col-md-6">

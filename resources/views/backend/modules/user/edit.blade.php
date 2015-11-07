@@ -37,7 +37,7 @@
             {!! Form::label('avatar', trans('general.avatar')) !!}
             {!! Form::file('avatar', null, ['class' => 'form-control']) !!}
         </div>
-        @if(Cache::get('Abilities.Admin'))
+        @if(Cache::get('Abilities.Admin.'.Auth::id()))
         <div class="form-group">
             <label for="">Roles</label>
 
