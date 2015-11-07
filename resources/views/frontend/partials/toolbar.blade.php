@@ -38,11 +38,11 @@
                                     class="fa fa-xs fa-fw fa-info"></i> {{ trans('general.contactus') }}
                         </a>
                     </li>
-                    <li><a href="{{ url('/lang/en') }}"><i
+                    <li><a href="/lang/en"><i
                                     class="fa fa-xs fa-fw fa-language"></i> {{ trans('general.english') }}
                         </a>
                     </li>
-                    <li><a href="{{ link_to('/lang/ar') }}"><i
+                    <li><a href="/lang/ar"><i
                                     class="fa fa-xs fa-fw fa-language"></i> {{ trans('general.arabic') }}
                         </a>
                     </li>
