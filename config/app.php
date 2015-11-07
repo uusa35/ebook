@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://www.e-boook.com',
+    'url' => 'http://ebook.ideasowners.net',
 
     /*
     |--------------------------------------------------------------------------
@@ -152,19 +152,10 @@ return [
         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
         Cmgmyr\Messenger\MessengerServiceProvider::class,
 
-
-
-
         'Barryvdh\Snappy\ServiceProvider',
         'Barryvdh\HttpCache\ServiceProvider',
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-
-
-
-
-
-
 
     ],
 
