@@ -126,6 +126,9 @@ class MessagesController extends AbstractController
      */
     public function store(CreateMessage $reqest)
     {
+        if(!Input::has('recipients')) {
+            return redirect()->back()->with(['error' => 'messages.error.not_allowed']);
+        }
         $input = Input::all();
 
         $thread = $this->thread->create(

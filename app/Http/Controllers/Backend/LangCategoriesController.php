@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Core\AbstractController;
 use App\Http\Requests\CreateCategory;
 use App\Src\Category\Lang\LangCategory;
 use Illuminate\Http\Request;
 
-class LangCategoriesController extends Controller
+class LangCategoriesController extends AbstractController
 {
     public $langCategory;
 
@@ -23,6 +23,8 @@ class LangCategoriesController extends Controller
      */
     public function index()
     {
+        $this->getPageTitle('category.index');
+
         $categories = $this->langCategory->all();
 
         return view('backend.modules.category.lang.index', ['categories' => $categories]);
@@ -35,6 +37,8 @@ class LangCategoriesController extends Controller
      */
     public function create()
     {
+        $this->getPageTitle('category.create');
+
         return view('backend.modules.category.lang.create');
     }
 
@@ -70,6 +74,8 @@ class LangCategoriesController extends Controller
      */
     public function edit($id)
     {
+        $this->getPageTitle('category.edit');
+
         $category = $this->langCategory->find($id);
 
         return view('backend.modules.category.lang.edit', ['category' => $category]);

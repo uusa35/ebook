@@ -24,6 +24,7 @@ class CreateMessage extends Request
         return [
             'message' => 'required|min:5',
             'subject' => 'required|min:5',
+            'title' => 'required'
         ];
     }
 }

@@ -139,7 +139,7 @@ class BooksController extends AbstractController
 
             $fieldsCategories = $this->fieldCategory->all();
 
-            $langsCategories = $this->langCategory->all();
+            $langsCategories = $this->langCategory->limit(2);
 
             $getLang = App()->getLocale();
 

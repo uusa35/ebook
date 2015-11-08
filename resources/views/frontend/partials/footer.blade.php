@@ -51,15 +51,22 @@
         <!-- col -->
 
         <div class="col-lg-3">
-            <h3>Instagram</h3>
+            <h3>{{ trans('general.instagram') }}</h3>
 
-            <p>Instagram.</p>
+            <p>
+                <!-- SnapWidget -->
+                <script src="http://snapwidget.com/js/snapwidget.js"></script>
+                <iframe src="http://snapwidget.com/in/?u=dXVzYTM1fGlufDMwfDN8M3x8bm98MXxmYWRlSW58b25TdGFydHx5ZXN8eWVz&ve=081115" title="Instagram Widget" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%;"></iframe>
+            </p>
         </div>
         <!-- col -->
         <div class="col-lg-3">
-            <h3>Twitter</h3>
+            <h3>{{ trans('general.twitter') }}</h3>
 
-            <p>Twitter.</p>
+            <p>
+                <a class="twitter-timeline" href="https://twitter.com/UsamaIIAhmed" data-widget-id="352804064125415424">Tweets by @UsamaIIAhmed</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </p>
         </div>
         <!-- col -->
     </div>

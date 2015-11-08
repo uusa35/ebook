@@ -13,7 +13,7 @@
                     </ol>
                     <div class="carousel-inner">
                         @foreach($sliders as $slider)
-                            <div class="item {{ ($slider->id === 1) ? 'active' : '' }}">
+                            <div class="item {{ ($slider->id == 1) ? 'active' : '' }}">
                                 <img src="{{ asset('images/uploads/slide/large/'.$slider->slide) }}" alt="{{ $slider->caption }}">
                                 <div class="carousel-caption">
                                     {{ $slider->caption }}

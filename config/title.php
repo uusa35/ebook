@@ -59,6 +59,12 @@ return [
         'show' => 'general.preview_show',
         'edit' => 'general.preview_edit',
     ],
+    'category' => [
+        'index' => 'general.categories',
+        'create' => 'general.categories_create',
+        'show' => 'general.categories_show',
+        'edit' => 'general.categories_edit',
+    ]
 
 
 ];

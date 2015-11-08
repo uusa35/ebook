@@ -31,10 +31,11 @@ class HomeController extends Controller
 
         $data = $request->except('_token');
 
-        $send =  Mail::send('emails.contactus', ['data' => $data], function ($message) {
+        $send =  Mail::send('emails.contactus', ['data' => $data], function ($message) use ($data){
             $message->from('uusa35@gmail.com', 'Contact Us');
-            $message->subject('E-Boook.com | Contact Us ');
-            $message->to('uusa35@gmail.com');
+            $message->subject('E-Boook.com | Contact Us |'.$data['subject']);
+            $message->to('usama.ahmed@live.com');
+            $message->cc($data['email']);
             /*->cc();*/
         });
 

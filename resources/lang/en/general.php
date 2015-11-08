@@ -250,6 +250,17 @@ return [
     'ideasowners' => 'ideasowners',
     'main_page' => 'main page',
     'read_book' => 'read book',
+    'sign_up' => 'sign up',
+    'category_create' => 'create category',
+    'category_edit' => 'edit category',
+    'categories_preview' => 'categories preview',
+    'categories_create' => 'create category',
+    'categories_edit' => 'edit category',
+    'categories_delete' => 'delete categroy',
+    'category_en' => 'category name in english',
+    'category_ar' => 'category name in arabic',
+
+
 
 
 

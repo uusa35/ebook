@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Core\AbstractController;
 use App\Http\Requests\CreateCategory;
 use App\Src\Category\Field\FieldCategory;
 use Illuminate\Http\Request;
 
-class FieldCategoriesController extends Controller
+class FieldCategoriesController extends AbstractController
 {
     public $fieldCategory;
 
@@ -23,6 +23,8 @@ class FieldCategoriesController extends Controller
      */
     public function index()
     {
+        $this->getPageTitle('category.index');
+
         $categories = $this->fieldCategory->all();
 
         return view('backend.modules.category.field.index', ['categories' => $categories]);
@@ -35,6 +37,8 @@ class FieldCategoriesController extends Controller
      */
     public function create()
     {
+        $this->getPageTitle('category.create');
+
         return view('backend.modules.category.field.create');
     }
 
@@ -48,7 +52,7 @@ class FieldCategoriesController extends Controller
     {
         $this->fieldCategory->create($request->except('_token'));
 
-        return redirect()->back()->with('success', trans('word.create-success-category'));
+        return redirect()->action('Backend\FieldCategoriesController@index')->with('success', trans('word.create-success-category'));
     }
 
     /**
@@ -70,6 +74,8 @@ class FieldCategoriesController extends Controller
      */
     public function edit($id)
     {
+        $this->getPageTitle('category.edit');
+
         $category = $this->fieldCategory->find($id);
 
         return view('backend.modules.category.field.edit', ['category' => $category]);

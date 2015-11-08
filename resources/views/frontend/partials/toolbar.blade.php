@@ -80,7 +80,7 @@
                             <li class="divider"></li>
                             @if(!Auth::user())
                                     <li class="divider"></li>
-                                <li><a href="javascript:void(0)">{{ trans('general.sign_up') }}</a></li>
+                                <li><a href="auth/register">{{ trans('general.sign_up') }}</a></li>
                                     <li class="divider"></li>
                             @endif
                             @if(Auth::user())

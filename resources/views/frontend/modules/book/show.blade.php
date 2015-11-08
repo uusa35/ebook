@@ -110,7 +110,7 @@
                                     {{ trans('general.read_book') }}
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success btn-large"
+                                    <button type="button" class="btn btn-material-light-blue-200"
                                             id="view-{{$book->id}}"
                                             title="{{ trans('general.chapters') }}"
                                             data-toggle="modal"
@@ -124,6 +124,7 @@
                     </div>
                 </div>
 
+                @if(Auth::user()))
                 <div class="box-footer">
 
                     <div class="row ">
@@ -202,6 +203,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
             <!-- /.widget-user -->
         </div>
@@ -214,6 +216,7 @@
             <div class="alert alert-dismissable alert-warning">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <h4><i class="fa fa-fw fa-times"></i>Warning!</h4>
+
                 <p>{{  trans('messages.error.to_access_comments') }}.</p>
             </div>
         </div>
