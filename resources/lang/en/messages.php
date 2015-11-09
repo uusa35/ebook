@@ -15,7 +15,7 @@ return [
         'edit_user' => 'error occurred',
         'not_active' => 'your account has been deactivated .. please contact the administrator.',
         'no_access' => 'you do not have access to this page.',
-        'to_access_comments' => 'in order to comment on this book, please kindly follow the author',
+        'to_access_comments' => 'you are not allowed to comment for this author.',
 
     ],
     'info' => [

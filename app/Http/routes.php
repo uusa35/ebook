@@ -74,7 +74,7 @@ Route::group(['prefix' => 'frontend'], function () {
     /***************************************************************************************************
      * Index ( Main Page ) BookController
      ***************************************************************************************************/
-    Route::resource('book', 'BookController',['only' => ['index','show']]);
+    Route::resource('book', 'BookController', ['only' => ['index', 'show']]);
 
     /***************************************************************************************************
      * Categories
@@ -88,7 +88,25 @@ Route::group(['prefix' => 'frontend'], function () {
     Route::get('/conditions', ['uses' => 'HomeController@getConditions']);
     Route::resource('user', 'UserController', ['only' => 'show']);
 
-    Route::get('/follow/{userId}/{followerId}', ['middleware' => 'auth','uses' => 'UserController@followUser']);
+    /*
+     * follow user
+     * */
+    Route::get('/follow/{userId}/{followerId}', ['middleware' => 'auth', 'uses' => 'UserController@followUser']);
+    /*
+     * unfollow user
+     * */
+    Route::get('/unfollow/{userId}/{followerId}', ['middleware' => 'auth', 'uses' => 'UserController@unFollowUser']);
+
+    /*
+     * Block User
+     * */
+    Route::get('/block/{userId}', ['middleware' => 'auth', 'uses' => 'UserController@blockUser']);
+
+    /*
+     * Unblock User
+     * */
+    Route::get('/unblock/{blockedId}', ['middleware' => 'auth', 'uses' => 'UserController@unBlockUser']);
+
 
 });
 
@@ -252,8 +270,6 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
         ]);
 
 
-
-
     /***************************************************************************************************
      *                                          Favorite & Likes
      *
@@ -281,7 +297,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
      *                                          Messages
      *
      ***************************************************************************************************/
-    Route::get('/messages/cancel/{threadId}/',[
+    Route::get('/messages/cancel/{threadId}/', [
         'uses' => 'Backend\MessagesController@cancel'
     ]);
 

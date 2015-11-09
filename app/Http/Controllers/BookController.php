@@ -95,9 +95,11 @@ class BookController extends AbstractController
 
         $book = $this->bookRepository->model->where(['id' => $id])->with('author', 'author.following')->first();
 
-        $followers = $book->author->following;
+        //$followers = $book->author->following;
 
-        $followersList = $followers->Lists('id', 'user_id')->toArray();
+        //$followersList = $followers->Lists('id', 'user_id')->toArray();
+
+        $blockedUsersofAuthor = $book->author->blocked->Lists('blocked_id','blocked_id')->toArray();
 
         if (!is_null($book)) {
 
@@ -107,7 +109,7 @@ class BookController extends AbstractController
 
             $total_pages = $this->chapterRepository->totalPagesForChapter($book->id);
 
-            return view('frontend.modules.book.show', compact('book', 'total_pages','followersList'));
+            return view('frontend.modules.book.show', compact('book', 'total_pages','blockedUsersofAuthor'));
 
         }
 

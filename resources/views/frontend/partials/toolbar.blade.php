@@ -65,6 +65,8 @@
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
                                     class="fa fa-fw fa-cogs"></i><b class="caret"></b></a>
                         <ul class="dropdown-menu">
+                            <li class="btn btn-material-lime-500 text-small"> {!! Config::get('button.icon-user') !!} |  {{  Auth::user()->name }}</li>
+                            <li class="divider"></li>
                             @if(Auth::user())
                                 <li class="divider"></li>
                                 <li><a href="/backend">{{ trans('general.control_panel') }}</a></li>

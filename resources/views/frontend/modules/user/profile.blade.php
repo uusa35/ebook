@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="col-md-7">
+    <div class="col-md-7 hidden-sm hidden-xs">
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">
@@ -46,8 +46,7 @@
         <!-- Profile Image -->
         <div class="box box-primary">
             <div class="box-body box-profile">
-
-                @if(count($user->avatar) >2 )
+                @if(count($user->avatar >=3))
                     <img class="profile-user-img img-responsive img-circle"
                          src="{{ asset('images/uploads/avatar/large/'.$user->avatar) }}"
                          alt="User profile picture">
@@ -63,37 +62,83 @@
 
                 <p class="text-muted text-center"><i class="fa fa-fw fa-phone"></i> : {{  $user->phone }}</p>
 
-                <p class="text-muted text-center">{{ trans('general.member_scince') }}
+                <p class="text-muted text-center">{{ trans('general.member_since') }}
                     : {{ $user->created_at->format('d-M-Y')}}</p>
 
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-                        <div class="col-lg-8 text-center">
+                        <div class="col-lg-12 text-center">
                             <b>
                                 <a data-toggle="modal"
-                                   data-target="#followers">
-                                    {{ trans('general.followers') }}
+                                   data-target="#followers"
+                                   class="btn btn-material-light-blue-A400">
+                                    {!! Config::get('button.icon-users') !!} |
+                                    {{ trans('general.followers') }} | {{ count($user->followers) }}
                                 </a>
                             </b>
-                            <a data-toggle="modal"
-                               data-target="#followers"
-                               class="pull-right">{{ count($user->followers) }}</a>
                             @include('frontend.partials._followers_modal')
                         </div>
                     </li>
                     <li class="list-group-item">
-                        <div class="col-lg-8 text-center">
-                            <b><a href="#">{{ trans('general.following') }}</a></b>
-                            <a class="pull-right">{{ count($user->following) }}</a>
+                        <div class="col-lg-12 text-center">
+
+                            <b>
+                                <a data-toggle="modal"
+                                   data-target="#followers"
+                                   class="btn btn-material-lime-500">
+                                    {!! Config::get('button.icon-users') !!} |
+                                    {{ trans('general.following') }} | {{ count($user->following) }}
+                                </a>
+                            </b>
+                            @include('frontend.partials._followers_modal')
                         </div>
                     </li>
                 </ul>
 
                 @if($user->id != Auth::id())
-                    <a href="{{ action('UserController@followUser',[$user->id, Auth::id()]) }}"
-                       class="btn btn-material-light-blue-A700 btn-block"><b>Follow</b></a>
-                @endif
+                    <div class="col-lg-12">
+                        {{-- delete all followers_id where user_id = Auth::id --}}
 
+                        @if(!in_array(Auth::id(),$userFollowersList,true))
+                            <a href="{{ action('UserController@followUser',[$user->id, Auth::id()]) }}"
+                               class="btn btn-material-light-blue-A700 btn-block tooltip"
+                               title="{{ trans('general.follow') }}">
+                                {!! Config::get('button.icon-follow') !!} |
+                                <b>
+                                    {{ trans('general.follow') }}
+                                </b>
+                            </a>
+                        @elseif(in_array(Auth::id(),$userFollowersList,true))
+                            <a href="{{ action('UserController@unFollowUser',[$user->id, Auth::id()]) }}"
+                               class="btn btn-material-orange-600 btn-block tooltip"
+                               title="{{ trans('general.follow') }}">
+                                {!! Config::get('button.icon-unfollow') !!} |
+                                <b>
+                                    {{ trans('general.unfollow') }}
+                                </b>
+                            </a>
+                        @endif
+                    </div>
+                    <div class="col-lg-12">
+
+                        @if(!in_array($user->id,$userAuthenticatedBlockedList,true))
+                            <a href="{{ action('UserController@blockUser',$user->id) }}"
+                               class="btn btn-material-red-600 btn-block tooltip"
+                               title="{{trans('messages.info.block')}}">
+                                {!! Config::get('button.icon-block') !!} |
+                                <b>{{ trans('general.block') }}</b>
+                            </a>
+                        @else
+                            <a href="{{ action('UserController@unBlockUser',$user->id) }}"
+                               class="btn btn-material-green-A400 btn-block tooltip"
+                               title="{{trans('messages.info.block')}}">
+                                {!! Config::get('button.icon-unblock') !!} |
+                                <b>{{ trans('general.unblock') }}</b>
+                            </a>
+                        @endif
+                    </div>
+
+                @endif
             </div>
             <!-- /.box-body -->
         </div>

@@ -69,4 +69,15 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
         return $this->hasMany('App\Src\User\Follower\Follower', 'follower_id');
     }
 
+
+    /*
+     * all users following this user
+     * */
+    public function blocked()
+    {
+        return $this->hasMany('App\Src\User\Blocked\Blocked', 'user_id');
+    }
+
+
+
 }

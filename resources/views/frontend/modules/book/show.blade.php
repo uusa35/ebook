@@ -209,7 +209,7 @@
         </div>
     </div>
     <div id="disqus_thread"></div>
-    @if(in_array(Auth::id(),$followersList,true) || $book->author_id === Auth::id())
+    @if(!in_array(Auth::id(),$blockedUsersofAuthor,true))
         @include('frontend.partials.comment')
     @else
         <div class="row">

@@ -259,6 +259,12 @@ return [
     'categories_delete' => 'delete categroy',
     'category_en' => 'category name in english',
     'category_ar' => 'category name in arabic',
+    'logged_on_as' => 'logged as',
+    'member_since' => 'member since',
+    'block' => 'block',
+    'unblock' => 'unblock',
+    'follow' => 'follow',
+    'unfollow' => 'unfollow'
 
 
 
