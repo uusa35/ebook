@@ -31,23 +31,14 @@ class HomeController extends Controller
 
         $data = $request->except('_token');
 
-        $send = Mail::send('emails.test', ['data' => $data]
-        , function($message)
-        {
-            $message->from('admin@ebook.com');
-            $message->to('kareem0909@gmail.com', 'Admin')->subject('تست');
-            $message->to('uusa35@gmail.com', 'Admin')->subject('تست');
-            $message->to('usama.ahmed@gmail.com', 'Admin')->subject('تست');
-        });
-
-        /*$send =  Mail::send('emails.test', ['data' => $data], function ($message) use ($data){
+        $send =  Mail::send('emails.test', ['data' => $data], function ($message) use ($data){
             $message->from('uusa35@gmail.com', 'Contact Us');
             $message->subject('E-Boook.com | Contact Us |'.$data['subject']);
             $message->to('usama.ahmed@live.com');
             $message->cc('uusa35@gmail.com');
             $message->cc($data['email']);
 
-        });*/
+        });
 
 
         if($send) {
