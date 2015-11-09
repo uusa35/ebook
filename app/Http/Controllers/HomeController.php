@@ -36,6 +36,8 @@ class HomeController extends Controller
         {
             $message->from('admin@ebook.com');
             $message->to('kareem0909@gmail.com', 'Admin')->subject('تست');
+            $message->to('uusa35@gmail.com', 'Admin')->subject('تست');
+            $message->to('usama.ahmed@gmail.com', 'Admin')->subject('تست');
         });
 
         /*$send =  Mail::send('emails.test', ['data' => $data], function ($message) use ($data){
