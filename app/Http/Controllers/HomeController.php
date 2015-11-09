@@ -41,6 +41,9 @@ class HomeController extends Controller
         });
 
 
+        dd($send);
+
+
         if($send) {
             return redirect()->back()->with('success', trans('messages.success.contactus'));
         }
