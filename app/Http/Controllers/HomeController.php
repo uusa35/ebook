@@ -31,7 +31,7 @@ class HomeController extends Controller
 
         $data = $request->except('_token');
 
-        $send =  Mail::send('emails.test', ['data' => $data], function ($message) use ($data){
+        $send =  \Mail::later(1,'emails.test', ['data' => $data], function ($message) use ($data){
             $message->from('uusa35@gmail.com', 'Contact Us');
             $message->subject('E-Boook.com | Contact Us |'.$data['subject']);
             $message->to('usama.ahmed@live.com');
@@ -41,7 +41,7 @@ class HomeController extends Controller
         });
 
 
-        dd($send);
+       dd($send);
 
 
         if($send) {
