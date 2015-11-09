@@ -124,7 +124,7 @@
                     </div>
                 </div>
 
-                @if(Auth::user()))
+                @if(Auth::user())
                 <div class="box-footer">
 
                     <div class="row ">
@@ -208,16 +208,27 @@
             <!-- /.widget-user -->
         </div>
     </div>
-    <div id="disqus_thread"></div>
-    @if(!in_array(Auth::id(),$blockedUsersofAuthor,true))
-        @include('frontend.partials.comment')
+    @if(Auth::user())
+        <div id="disqus_thread"></div>
+        @if(!in_array(Auth::id(),$blockedUsersofAuthor,true))
+            @include('frontend.partials.comment')
+        @else
+            <div class="row">
+                <div class="alert alert-dismissable alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h4><i class="fa fa-fw fa-times"></i>{{ trans('general.warning') }}!</h4>
+
+                    <p>{{  trans('messages.error.to_access_comments') }}.</p>
+                </div>
+            </div>
+        @endif
     @else
         <div class="row">
             <div class="alert alert-dismissable alert-warning">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><i class="fa fa-fw fa-times"></i>{{ trans('general.warning') }}!</h4>
+                <h4><i class="fa fa-fw fa-info"></i>{{ trans('general.info') }}!</h4>
 
-                <p>{{  trans('messages.error.to_access_comments') }}.</p>
+                <p>{{  trans('messages.info.register') }}. {!! link_to('auth/register',trans('general.register')) !!}</p>
             </div>
         </div>
     @endif

@@ -333,7 +333,5 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
  ***************************************************************************************************/
 
 Route::group(['prefix' => 'api'], function () {
-    Route::get('/', function () {
-        return 'this is the api route';
-    });
+
 });

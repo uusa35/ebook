@@ -19,7 +19,8 @@ return [
 
     ],
     'info' => [
-        'no_books_found' => 'No book Found in.'
+        'no_books_found' => 'No book Found in.',
+        'register' => 'you need to register in order to see this section',
     ],
     'newsletter_message' => 'Subscribe to get all recent books .. ',
     'please_use' => 'Please use ##-###-###-##',
@@ -28,5 +29,6 @@ return [
     'slider' => '- best fit is 1500 * 500',
     'ads' => 'best fit is 500 * 120',
     'allrights' => 'all rights reserved e-boook.com',
-    'designed_developed' => 'Designed & Developed By'
+    'designed_developed' => 'Designed & Developed By',
+
 ];
