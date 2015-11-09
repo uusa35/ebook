@@ -68,7 +68,7 @@
                         <ul class="dropdown-menu">
 
                             @if(Auth::user())
-                                <li class="btn btn-material-lime-500 text-small"> {!! Config::get('button.icon-user') !!} |  {{  Auth::user()->name }}</li>
+ {{--                               <li class="btn btn-material-lime-500 text-small"> {!! Config::get('button.icon-user') !!} |  {{  Auth::user()->name }}</li>--}}
                                 <li class="divider"></li>
                                 <li><a href="/backend">{{ trans('general.control_panel') }}</a></li>
                                 <li class="divider"></li>

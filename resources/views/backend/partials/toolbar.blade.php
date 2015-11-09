@@ -7,7 +7,7 @@
 </a>--}}
 
 <!-- Header Navbar -->
-<nav class="navbar navbar-static-top" role="navigation">
+<nav class="navbar navbar-static-top" role="navigation" style="padding-left: 100px; padding-right:100px;">
 
     <!-- Navbar Right Menu -->
 

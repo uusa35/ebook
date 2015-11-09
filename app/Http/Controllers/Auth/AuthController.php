@@ -71,9 +71,12 @@ class AuthController extends AbstractController
 
         if ($user) {
 
+
+
             $user->roles()->attach(3);
 
-            return redirect()->action('Backend\DashboardController@index');
+            //return redirect()->action('Backend\DashboardController@index');
+            return $user;
 
         } else {
 
