@@ -53,13 +53,6 @@ class BookController extends AbstractController
         $paginate = 4;
         // get 4 published books for index
 
-        /*$recentBooks = $this->bookRepository->model->with('users','meta')
-            ->where('active', '=', '1')
-            ->join('chapters','chapters.book_id','=','books.id')
-            ->orderBy('books.created_at', 'desc')
-            ->limit(4)
-            ->get();*/
-
         $recentBooks = $this->bookRepository->getRecentBooks();
 
         // get 4 published and most favorite books for index
@@ -68,7 +61,6 @@ class BookController extends AbstractController
         //dd($userFavorites);
 
         $mostLikedBooks = $this->bookRepository->getMostLiked(4);
-
 
         return view('frontend.modules.book.index', compact('recentBooks', 'mostFavoriteBooks', 'mostLikedBooks'));
     }
@@ -126,6 +118,8 @@ class BookController extends AbstractController
     {
 
         $searchedItem = trim($request->get('search'));
+
+
 
         if ($searchedItem) {
 

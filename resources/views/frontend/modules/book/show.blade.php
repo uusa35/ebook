@@ -215,7 +215,7 @@
         <div class="row">
             <div class="alert alert-dismissable alert-warning">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><i class="fa fa-fw fa-times"></i>Warning!</h4>
+                <h4><i class="fa fa-fw fa-times"></i>{{ trans('general.warning') }}!</h4>
 
                 <p>{{  trans('messages.error.to_access_comments') }}.</p>
             </div>

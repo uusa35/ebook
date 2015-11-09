@@ -23,6 +23,7 @@
                            data-toggle="dropdown">{{ trans('general.categories') }} <b
                                     class="caret"></b></a>
                         <ul class="dropdown-menu">
+
                             @foreach($fieldsCategories as $category)
                                 <li>
                                     <a href="{{ action('CategoryController@show',$category->id) }}"> {{ $category->name }}</a>
@@ -65,9 +66,9 @@
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
                                     class="fa fa-fw fa-cogs"></i><b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li class="btn btn-material-lime-500 text-small"> {!! Config::get('button.icon-user') !!} |  {{  Auth::user()->name }}</li>
-                            <li class="divider"></li>
+
                             @if(Auth::user())
+                                <li class="btn btn-material-lime-500 text-small"> {!! Config::get('button.icon-user') !!} |  {{  Auth::user()->name }}</li>
                                 <li class="divider"></li>
                                 <li><a href="/backend">{{ trans('general.control_panel') }}</a></li>
                                 <li class="divider"></li>
