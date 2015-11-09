@@ -56,7 +56,7 @@
             <p>
                 <!-- SnapWidget -->
                 <script src="http://snapwidget.com/js/snapwidget.js"></script>
-                <iframe src="http://snapwidget.com/in/?u=dXVzYTM1fGlufDMwfDN8M3x8bm98MXxmYWRlSW58b25TdGFydHx5ZXN8eWVz&ve=081115" title="Instagram Widget" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%;"></iframe>
+                <iframe src="http://snapwidget.com/in/?u=YWhtZWRjb21lZHl8aW58MjB8MnwyfHxub3wxfGZhZGVJbnxvblN0YXJ0fHllc3x5ZXM=&ve=091115" title="Instagram Widget" class="snapwidget-widget" allowTransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:100%;"></iframe>
             </p>
         </div>
         <!-- col -->
