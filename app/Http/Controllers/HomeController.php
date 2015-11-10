@@ -29,7 +29,9 @@ class HomeController extends Controller
     public function sendContactUs(contactusSubmit $request)
     {
 
-        $data = $request->except('_token');
+        //$data = $request->except('_token');
+
+        $data = $request->all();
 
         $send =  Mail::send('emails.contactus', ['data' => $data], function ($message) use ($data) {
 
