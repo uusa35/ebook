@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
-
-    use Guzzle
+    
     public function index()
     {
         //\Session::flush();
