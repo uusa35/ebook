@@ -29,18 +29,15 @@ class HomeController extends Controller
     public function sendContactUs(contactusSubmit $request)
     {
 
-        //$data = $request->except('_token');
+        $data = $request->except('_token');
 
-        $data = $request->all();
-
-        $send =  Mail::send('emails.test', ['data' => $data], function ($message) use ($data) {
+        $send =  Mail::send('emails.contactus', ['data' => $data], function ($message) use ($data) {
 
             $message->from('uusa35@gmail.com', 'Contact Us');
             $message->subject('E-Boook.com | Contact Us |'.$data['subject']);
             $message->to('usama.ahmed@live.com');
             $message->cc('uusa35@gmail.com');
-            $message->cc($data['email']);
-
+            //$message->cc($data['email']);
         });
 
         if($send) {

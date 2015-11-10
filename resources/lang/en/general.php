@@ -11,7 +11,7 @@ return [
     'main' => 'main',
     'consultancies' => 'consultancies',
     'blog' => 'blog',
-    'contact_us' => 'contact_us',
+    'contact_us' => 'contact us',
     'search' => 'search',
     'username' => 'username',
     'password' => 'password',
@@ -264,11 +264,7 @@ return [
     'block' => 'block',
     'unblock' => 'unblock',
     'follow' => 'follow',
-    'unfollow' => 'unfollow'
-
-
-
-
+    'unfollow' => 'unfollow',
 
 
 
