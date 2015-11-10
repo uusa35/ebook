@@ -3,7 +3,7 @@
 @section('content')
     <div class="col-md-6 col-md-offset-3">
         <div class="login-panel panel panel-default">
-            <div class="panel-heading"><h3>{{ trans('word.login') }}</h3></div>
+            <div class="panel-heading"><h3>{{ trans('general.login') }}</h3></div>
             <div class="panel-body">
                 <form role="form" method="POST" action="{{ url('/auth/login') }}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
