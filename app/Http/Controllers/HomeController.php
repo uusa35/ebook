@@ -29,9 +29,12 @@ class HomeController extends Controller
     public function sendContactUs(contactusSubmit $request)
     {
 
-        $data = $request->except('_token');
+        //$data = $request->except('_token');
 
-        $send =  \Mail::later(1,'emails.test', ['data' => $data], function ($message) use ($data){
+        $data = $request->all();
+
+        $send =  Mail::send('emails.test', ['data' => $data], function ($message) use ($data) {
+
             $message->from('uusa35@gmail.com', 'Contact Us');
             $message->subject('E-Boook.com | Contact Us |'.$data['subject']);
             $message->to('usama.ahmed@live.com');
@@ -39,10 +42,6 @@ class HomeController extends Controller
             $message->cc($data['email']);
 
         });
-
-
-       dd($send);
-
 
         if($send) {
             return redirect()->back()->with('success', trans('messages.success.contactus'));
