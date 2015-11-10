@@ -35,8 +35,8 @@ return [
         'secret' => '',
     ],
     'facebook' => [
-        'client_id' => '413897782151776',
-        'client_secret' => 'b7b2f4c78cccc6fa5a11bc56155e65c0',
+        'client_id' => '1146208565408830',
+        'client_secret' => '4058a5fcc24060792367ca3a9ea3b687',
         'redirect' => 'http://ebook.ideasowners.net/auth/facebook/callback',
     ],
     'github' => [
