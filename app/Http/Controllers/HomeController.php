@@ -1,11 +1,13 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests\contactusSubmit;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
 
+    use Guzzle
     public function index()
     {
         //\Session::flush();
