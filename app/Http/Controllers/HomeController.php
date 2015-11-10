@@ -38,7 +38,7 @@ class HomeController extends Controller
             $message->to('usama.ahmed@live.com');
             $message->cc('uusa35@gmail.com');
             //$message->cc($data['email']);
-        });-
+        });
 
         if($send) {
             return redirect()->back()->with('success', trans('messages.success.contactus'));
