@@ -216,13 +216,13 @@ trait SocialAuthTrait
     {
 
         //return Socialite::driver('google')->redirect();
-        return Socialite::with('Disqus')->redirect();
+        return Socialite::with('disqus')->redirect();
     }
 
     public function handleProviderDisqusCallback()
     {
 
-        $userSocilite = Socialite::with('Disqus')->user();
+        $userSocilite = Socialite::with('disqus')->user();
 
         $data = [
             'name' => $userSocilite->name,
