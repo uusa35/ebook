@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
-    
+
     public function index()
     {
         //\Session::flush();

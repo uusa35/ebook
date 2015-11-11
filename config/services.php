@@ -45,9 +45,9 @@ return [
         'redirect' => 'http://ebook.ideasowners.net/auth/github/callback',
     ],
     'google' => [
-        'client_id' => '1010851310258-qgmh19e2j86438s52p1skg3jdpjsijuq.apps.googleusercontent.com',
-        'client_secret' => 'MIeZsE5c3WP9c-cT-Q3oUsUw',
-        'redirect' => 'http://ebook.ideasowners.net/auth/google/callback',
+        'client_id' => env('GOOGLE_KEY','535985071980-ac56en2hi3duvmonpthpagrqiv19pfkv.apps.googleusercontent.com'),
+        'client_secret' => env('GOOGLE_SECRET','UmlpraKBYl4XazUZRBVz0vtT'),
+        'redirect' => env('GOOGLE_REDIRECT_URI','http://eg-boook.com/auth/google/callback'),
     ],
 
 ];

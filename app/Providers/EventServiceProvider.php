@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\CreateChapter' => [
             'App\Listeners\CreatePdf',
             'App\Listeners\CalculateChapterPage'
+        ],
+        'SocialiteProviders\Manager\SocialiteWasCalled' => [
+            'SocialiteProviders\Google\GoogleExtendSocialite@handle'
         ]
     ];
 

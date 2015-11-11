@@ -163,7 +163,8 @@ trait SocialAuthTrait
     public function redirectToGoogleProvider()
     {
 
-        return Socialite::driver('google')->redirect();
+        //return Socialite::driver('google')->redirect();
+        return Socialite::with('google')->redirect();
     }
 
     public function handleProviderGoogleCallback()
