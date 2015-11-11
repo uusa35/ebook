@@ -34,9 +34,6 @@
             <hr>
         </div>
 
-
-
-
         @include('backend.partials.footer')
 
 
