@@ -47,7 +47,7 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_KEY','535985071980-ac56en2hi3duvmonpthpagrqiv19pfkv.apps.googleusercontent.com'),
         'client_secret' => env('GOOGLE_SECRET','UmlpraKBYl4XazUZRBVz0vtT'),
-        'redirect' => env('GOOGLE_REDIRECT_URI','http://eg-boook.com/auth/google/callback'),
+        'redirect' => env('GOOGLE_REDIRECT_URI','http://ebook.com/auth/google/callback'),
     ],
 
 ];
