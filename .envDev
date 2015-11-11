@@ -32,3 +32,5 @@ DISQUS_REDIRECT_URI=http://ebook.ideasowners.net/auth/disqus/callback
 FACEBOOK_REDIRECT_URL=http://ebook.ideasowners.net/auth/facebook/callback
 GITHUB_REDIRECT_URI=http://ebook.ideasowners.net/auth/github/callback
 
+
+TEMP_LINK=http://ebook.ideasowners.net

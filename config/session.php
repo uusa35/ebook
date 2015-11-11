@@ -135,7 +135,7 @@ return [
     |
     */
 
-    'domain' => env('http://ebook.ideasowners.net','http://e-boook.com'),
+    'domain' => env('TEMP_LINK','http://e-boook.com'),
 
     /*
     |--------------------------------------------------------------------------
