@@ -7,7 +7,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h1>{{ trans('general.create-message') }}</h1>
+                    <h1>{{ trans('general.create_message') }}</h1>
                 </div>
                 <div class="panel-body">
 
@@ -34,11 +34,9 @@
                         </div>
 
                         @if($usersList->count() > 0)
-                            <div class="form-group">
+                            <div class="form-group well-material-grey-300" style="padding: 10px;">
                                 {!! Form::label('usersList',trans('general.users')) !!} :
-                                {!!
-                                Form::select('usersList',$usersList,null,['multiple'=>'multiple','name'=>'recipients[]','class'=>'form-control','id'=>'users'])
-                                !!}
+                                {!! Form::select('usersList',$usersList,null,['multiple'=>'multiple','name'=>'recipients[]','class'=>'form-control','id'=>'users']) !!}
                             </div>
                             @endif
 

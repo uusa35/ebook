@@ -134,6 +134,8 @@ class UsersController extends AbstractController
         if ($request->get('role')) {
 
             $user->roles()->sync($request->get('role'));
+            $user->level = $request->get('role')[0];
+            $user->save();
 
         } else {
 

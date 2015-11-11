@@ -147,34 +147,27 @@
                     <!-- Menu Body -->
                     <li class="user-body">
                         <div class="col-xs-4 text-center">
-                            <a href="#">Followers</a>
+                            <a href="{{ action('UserController@show',Auth::id()) }}" >{{ trans('general.profile') }}</a>
                         </div>
                         <div class="col-xs-4 text-center">
                             <a href="{{ action('Backend\MessagesController@index') }}">{{ trans('general.inbox') }}</a>
                         </div>
                         <div class="col-xs-4 text-center">
-                            <a href="#">Friends</a>
+                            <a href="{{ URL::to('auth/logout') }}" class="">{{ trans('general.logout') }}</a>
                         </div>
                     </li>
-                    <!-- Menu Footer-->
+                    {{--<!-- Menu Footer-->
                     <li class="user-footer">
                         <div class="pull-left">
-                            <a href="{{ action('UserController@show',Auth::id()) }}"
-                               class="btn btn-default btn-flat">{{ trans('general.profile') }}</a>
+                            <a href="{{ action('UserController@show',Auth::id()) }}" class="btn btn-default btn-flat">{{ trans('general.profile') }}</a>
                         </div>
                         <div class="pull-right">
-                            <a href="{{ URL::to('auth/logout') }}"
-                               class="btn btn-default btn-flat">{{ trans('general.logout') }}</a>
+                            <a href="{{ URL::to('auth/logout') }}" class="btn btn-default btn-flat">{{ trans('general.logout') }}</a>
                         </div>
-                    </li>
+                    </li>--}}
                 </ul>
             </li>
 
-
-            <!-- Control Sidebar Toggle Button -->
-            <li class="dropdown btn-material-pink">
-                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="fa fa-fw fa-cogs"></i><b class="caret"></b></a>
             <li><a href="/lang/en"><i
                             class="fa fa-xs fa-fw fa-language"></i> {{ trans('general.english') }}
                 </a>
@@ -183,18 +176,22 @@
                             class="fa fa-xs fa-fw fa-language"></i> {{ trans('general.arabic') }}
                 </a>
             </li>
-            <ul class="dropdown-menu">
-                <li>
-                    <a href="{{ URL::to('/') }}">{{ trans('general.back_to_site') }}</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="{{ action('Backend\UsersController@edit',Auth::id()) }}">{{ trans('general.edit_profile') }}</a>
-                </li>
-                <li><a href="/lang/{{ (App::getLocale() === 'ar') ? 'en' : 'ar' }}">
-                        {{ (App::getLocale() === 'ar') ? trans('general.english') : trans('general.arabic')  }}
-                    </a></li>
-            </ul>
+            <!-- Control Sidebar Toggle Button -->
+            <li class="dropdown btn-material-pink">
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="fa fa-fw fa-cogs"></i><b class="caret"></b></a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="{{ action('Backend\UsersController@edit',Auth::id()) }}">{{ trans('general.edit_profile') }}</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/lang/{{ (App::getLocale() === 'ar') ? 'en' : 'ar' }}">
+                            {{ (App::getLocale() === 'ar') ? trans('general.english') : trans('general.arabic')  }}
+                        </a></li>
+                </ul>
+            </li>
+            <li class="well-material-red-A700"><a href="/auth/logout"><i
+                            class="fa fa-xs fa-fw fa-sign-out"></i> {{ trans('general.logout') }}
+                </a>
             </li>
         </ul>
     </div>

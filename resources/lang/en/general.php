@@ -265,6 +265,8 @@ return [
     'unblock' => 'unblock',
     'follow' => 'follow',
     'unfollow' => 'unfollow',
+    'edit_profile' => 'edit profile',
+    'Conditions' => 'Conditions'
 
 
 
