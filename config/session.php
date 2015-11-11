@@ -135,7 +135,7 @@ return [
     |
     */
 
-    'domain' => env(''),
+    'domain' => env('http://ebook.ideasowners.net','http://e-boook.com'),
 
     /*
     |--------------------------------------------------------------------------
