@@ -148,7 +148,7 @@ return [
         'Zizaco\Entrust\EntrustServiceProvider',
         'Intervention\Image\ImageServiceProvider',
         Collective\Html\HtmlServiceProvider::class,
-        //Laravel\Socialite\SocialiteServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
         'SocialiteProviders\Manager\ServiceProvider',
         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
         Cmgmyr\Messenger\MessengerServiceProvider::class,

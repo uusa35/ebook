@@ -23,7 +23,10 @@
         "barryvdh/laravel-debugbar": "^2.0",
         "guzzlehttp/guzzle": "~5.3|~6.0",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
-        "socialiteproviders/google": "^1.1"
+        "socialiteproviders/google": "^1.1",
+        "socialiteproviders/twitter": "^1.0",
+        "socialiteproviders/disqus": "^1.1",
+        "laravel/socialite": "^2.0"
 
     },
     "require-dev": {

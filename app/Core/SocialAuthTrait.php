@@ -206,4 +206,54 @@ trait SocialAuthTrait
     }
 
 
+
+
+    /*
+   * google
+   *
+   * */
+    public function redirectToDisqusProvider()
+    {
+
+        //return Socialite::driver('google')->redirect();
+        return Socialite::with('Disqus')->redirect();
+    }
+
+    public function handleProviderDisqusCallback()
+    {
+
+        $userSocilite = Socialite::with('Disqus')->user();
+
+        $data = [
+            'name' => $userSocilite->name,
+            'email' => $userSocilite->email,
+            'password' => $userSocilite->token,
+        ];
+
+
+        $user = User::where('email', '=', $userSocilite->email)->first();
+
+        if ($user) {
+
+            Auth::login($user);
+
+            return redirect('home')->with(['success', trans('messages.success.login')]);
+
+        } else {
+
+            if ($this->create($data)) {
+
+                $user = User::where('email', '=', $userSocilite->email)->first();
+
+                Auth::login($user, true);
+
+                return redirect('home')->with(['success', trans('messages.success.login')]);
+            }
+
+            return redirect('home')->with(['error', trans('messages.error.login')]);
+        }
+
+    }
+
+
 }

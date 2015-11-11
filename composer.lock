@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "86f2acfc6ac753ff7def77d2b1562f62",
+    "hash": "c89a89dbd277dfacd4075d4de6fd227e",
+    "content-hash": "40756cb92b8b65aea35e3ebb049bcffa",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -2239,6 +2240,43 @@
             "time": "2015-05-18 11:02:31"
         },
         {
+            "name": "socialiteproviders/disqus",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Disqus.git",
+                "reference": "cf0e2573d8d8b94fbe979b6a5df3399135bfa41c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Disqus/zipball/cf0e2573d8d8b94fbe979b6a5df3399135bfa41c",
+                "reference": "cf0e2573d8d8b94fbe979b6a5df3399135bfa41c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "socialiteproviders/manager": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Disqus\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "DraperStudio",
+                    "email": "hello@draperstud.io"
+                }
+            ],
+            "description": "Disqus OAuth2 Provider for Laravel Socialite",
+            "time": "2015-06-18 14:16:58"
+        },
+        {
             "name": "socialiteproviders/google",
             "version": "v1.1.0",
             "source": {
@@ -2317,6 +2355,43 @@
             ],
             "description": "Easily add new or override built-in providers in Laravel Socialite.",
             "time": "2015-06-27 08:24:58"
+        },
+        {
+            "name": "socialiteproviders/twitter",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Twitter.git",
+                "reference": "2c4cff2c247f9a9628cec20a35e0229ed7f4b767"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Twitter/zipball/2c4cff2c247f9a9628cec20a35e0229ed7f4b767",
+                "reference": "2c4cff2c247f9a9628cec20a35e0229ed7f4b767",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "socialiteproviders/manager": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Twitter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "DraperStudio",
+                    "email": "hello@draperstud.io"
+                }
+            ],
+            "description": "Twitter OAuth1 Provider for Laravel Socialite",
+            "time": "2015-07-08 16:40:28"
         },
         {
             "name": "swiftmailer/swiftmailer",

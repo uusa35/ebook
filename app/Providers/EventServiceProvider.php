@@ -21,7 +21,8 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\CalculateChapterPage'
         ],
         'SocialiteProviders\Manager\SocialiteWasCalled' => [
-            'SocialiteProviders\Google\GoogleExtendSocialite@handle'
+            'SocialiteProviders\Google\GoogleExtendSocialite@handle',
+            'SocialiteProviders\Disqus\DisqusExtendSocialite@handle'
         ]
     ];
 
