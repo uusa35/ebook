@@ -6,8 +6,7 @@
             <div class="panel-heading"><h3>{{ trans('general.login') }}</h3></div>
             <div class="panel-body">
                 <form role="form" method="POST" action="{{ url('/auth/login') }}">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+                    <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                     <fieldset>
                         <div class="form-group">
                             <input type="email" class="form-control" name="email"

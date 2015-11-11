@@ -20,15 +20,7 @@ class AfterUserLoginActiveCheck
     public function handle($request, Closure $next)
     {
 
-        if (Cookie::get('blocked') &&  Cookie::get('blocked') === Crypt::decrypt(Cookie::get('blocked'))) {
-
-            return redirect('home')->with(['error' => 'messages.error.not_active']);
-
-        }
-
-        $user = Auth::user();
-
-        if ($user->active === '1') {
+        if (Auth::user()->active === '1') {
 
             return $next($request);
         }

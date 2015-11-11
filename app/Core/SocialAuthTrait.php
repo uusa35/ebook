@@ -23,7 +23,8 @@ trait SocialAuthTrait
     public function redirectToFacebookProvider()
     {
 
-        return Socialite::driver('facebook')->redirect();
+        //return Socialite::driver('facebook')->redirect();
+        return Socialite::with('facebook')->redirect();
     }
 
     public function handleProviderFacebookCallback()
@@ -70,7 +71,8 @@ trait SocialAuthTrait
     public function redirectToGithubProvider()
     {
 
-        return Socialite::driver('github')->redirect();
+        //return Socialite::driver('github')->redirect();
+        return Socialite::with('github')->redirect();
     }
 
     public function handleProviderGithubCallback()

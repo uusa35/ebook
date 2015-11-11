@@ -159,10 +159,12 @@
                     <!-- Menu Footer-->
                     <li class="user-footer">
                         <div class="pull-left">
-                            <a href="{{ action('UserController@show',Auth::id()) }}" class="btn btn-default btn-flat">{{ trans('general.profile') }}</a>
+                            <a href="{{ action('UserController@show',Auth::id()) }}"
+                               class="btn btn-default btn-flat">{{ trans('general.profile') }}</a>
                         </div>
                         <div class="pull-right">
-                            <a href="{{ URL::to('auth/logout') }}" class="btn btn-default btn-flat">{{ trans('general.logout') }}</a>
+                            <a href="{{ URL::to('auth/logout') }}"
+                               class="btn btn-default btn-flat">{{ trans('general.logout') }}</a>
                         </div>
                     </li>
                 </ul>
@@ -173,16 +175,26 @@
             <li class="dropdown btn-material-pink">
                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
                             class="fa fa-fw fa-cogs"></i><b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="{{ URL::to('/') }}">{{ trans('general.back_to_site') }}</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="{{ action('Backend\UsersController@edit',Auth::id()) }}">{{ trans('general.edit_profile') }}</a></li>
-                    <li><a href="/lang/{{ (App::getLocale() === 'ar') ? 'en' : 'ar' }}">
-                            {{ (App::getLocale() === 'ar') ? trans('general.english') : trans('general.arabic')  }}
-                        </a></li>
-                </ul>
+            <li><a href="/lang/en"><i
+                            class="fa fa-xs fa-fw fa-language"></i> {{ trans('general.english') }}
+                </a>
+            </li>
+            <li><a href="/lang/ar"><i
+                            class="fa fa-xs fa-fw fa-language"></i> {{ trans('general.arabic') }}
+                </a>
+            </li>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{{ URL::to('/') }}">{{ trans('general.back_to_site') }}</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="{{ action('Backend\UsersController@edit',Auth::id()) }}">{{ trans('general.edit_profile') }}</a>
+                </li>
+                <li><a href="/lang/{{ (App::getLocale() === 'ar') ? 'en' : 'ar' }}">
+                        {{ (App::getLocale() === 'ar') ? trans('general.english') : trans('general.arabic')  }}
+                    </a></li>
+            </ul>
             </li>
         </ul>
     </div>
