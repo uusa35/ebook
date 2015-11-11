@@ -42,8 +42,8 @@ Route::get('auth/google/callback', 'Auth\AuthController@handleProviderGoogleCall
 /***************************************************************************************************
  * Disqus Authentication
  ***************************************************************************************************/
-Route::get('auth/google', 'Auth\AuthController@redirectToDisqusProvider');
-Route::get('auth/google/callback', 'Auth\AuthController@handleProviderDisqusCallback');
+Route::get('auth/disqus', 'Auth\AuthController@redirectToDisqusProvider');
+Route::get('auth/disqus/callback', 'Auth\AuthController@handleProviderDisqusCallback');
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
