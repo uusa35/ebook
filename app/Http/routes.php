@@ -59,9 +59,15 @@ Route::get('/home', ['uses' => 'BookController@index']);
 Route::get('/lang/{lang}', ['uses' => 'LanguageController@changeLocale']);
 
 /***************************************************************************************************
+ * newsletter
+ ***************************************************************************************************/
+Route::post('newsletter',['uses' => 'HomeController@postNewsLetter']);
+
+/***************************************************************************************************
  * Search
  ***************************************************************************************************/
 Route::post('search', ['uses' => 'BookController@getShowSearchResults']);
+
 
 
 Route::group(['prefix' => 'frontend'], function () {
@@ -185,6 +191,12 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
          *
          ***************************************************************************************************/
         Route::resource('ads', 'Backend\AdsController');
+
+        /***************************************************************************************************
+         *                                          Ads
+         *
+         ***************************************************************************************************/
+        Route::resource('newsletter', 'Backend\NewsletterController',['only' =>['index','destroy']]);
 
         /***************************************************************************************************
          *                                          Sliders
@@ -328,7 +340,6 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
     Route::post('contactus', 'Backend\ContactUsController@update');
     Route::get('conditions', 'Backend\UsersController@getEditConditions');
     Route::post('conditions', 'Backend\UsersController@postEditConditions');
-
 
 });
 

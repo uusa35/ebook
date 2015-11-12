@@ -19,6 +19,11 @@ Breadcrumbs::register('contactus', function ($breadcrumbs) {
     $breadcrumbs->push(trans('general.contactus'), action('Backend\ContactUsController@edit'));
 });
 
+Breadcrumbs::register('newsletter', function ($breadcrumbs) {
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push(trans('general.newsletter'), action('Backend\NewsletterController@index'));
+});
+
 /*
  *
  * users
