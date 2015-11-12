@@ -22,10 +22,11 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Session;
 
 
 /**
- * Class AdminBookController
+ * Class AdminBookControllerU
  * @package App\Http\Controllers\Admin
  */
 class BooksController extends AbstractController
@@ -87,6 +88,8 @@ class BooksController extends AbstractController
 
         $this->getPageTitle('book.index');
 
+        $this->authorize('index', Session::get('module'));
+
         if ($this->isAdmin() || $this->isEditor()) {
 
             $books = $this->bookRepository->model
@@ -135,6 +138,8 @@ class BooksController extends AbstractController
 
         $this->getPageTitle('book.create');
 
+        $this->authorize('create', 'book_create');
+
         if (Gate::check('create')) {
 
             $fieldsCategories = $this->fieldCategory->all();
@@ -165,6 +170,7 @@ class BooksController extends AbstractController
     public function store(CreateBook $request)
     {
 
+        $this->getPageTitle('book.create');
         // create a book record
 
         $book = $this->bookRepository->model->create($request->except('_token', 'cover'));
@@ -204,19 +210,19 @@ class BooksController extends AbstractController
     {
         $this->getPageTitle('book.show');
 
-        $book = $this->bookRepository->model->where('id', '=', $id)->with('meta')->first();
+        $book = $this->bookRepository->model->where('id', '=', $id)->with(['meta', 'chapters'])->first();
+
+        $this->authorize('change', $book->author_id);
 
         \Session::put('book_id', $id);
 
-        $allChapters = $this->chapterRepository->model->where(['book_id' => $id])->get();
+        $allChapters = $book->chapters;
 
-        $publishedChapters = $this->chapterRepository->model->where(['book_id' => $id, 'status' => 'published'])->get();
+        $publishedChapters = $book->chapters->where('status', 'published');
+        $draftedChapters = $book->chapters->where('status', 'drafted');
+        $pendingChapters = $book->chapters->where('status', 'pending');
+        $declinedChapters = $book->chapters->where('status', 'declined');
 
-        $pendingChapters = $this->chapterRepository->model->where(['book_id' => $id, 'status' => 'pending'])->get();
-
-        $draftedChapters = $this->chapterRepository->model->where(['book_id' => $id, 'status' => 'drafted'])->get();
-
-        $declinedChapters = $this->chapterRepository->model->where(['book_id' => $id, 'status' => 'declined'])->get();
 
         return view('backend.modules.book.show',
             compact('book', 'allChapters', 'publishedChapters', 'draftedChapters', 'pendingChapters',
@@ -232,6 +238,10 @@ class BooksController extends AbstractController
      */
     public function edit($id)
     {
+        $book = $this->bookRepository->model->where('id', '=', $id)->with('meta')->first();
+
+        $this->authorize('edit', $book->author_id);
+
         $this->getPageTitle('book.edit');
 
         $fieldsCategories = $this->fieldCategory->all();
@@ -244,7 +254,6 @@ class BooksController extends AbstractController
 
         $langsCategories = $langsCategories->lists('name_' . $getLang, 'id');
 
-        $book = $this->bookRepository->model->where('id', '=', $id)->with('meta')->first();
 
         if (Gate::check('edit', $book->author_id)) {
 
@@ -270,6 +279,8 @@ class BooksController extends AbstractController
     public function update(UpdateBook $request, $id)
     {
         $book = $this->bookRepository->getById($id);
+
+        $this->authorize('edit', $book->author_id);
 
         if ($request->file('cover')) {
 
@@ -304,6 +315,8 @@ class BooksController extends AbstractController
     {
         $book = $this->bookRepository->model->where(['id' => $id])->first();
 
+        $this->authorize('delete', $book->author_id);
+
         if (Gate::check('delete', $book->author_id)) {
 
             if ($book->delete()) {
@@ -322,9 +335,14 @@ class BooksController extends AbstractController
 
     public function getUpdateBookStatus($bookId, $status)
     {
-        $book = $this->bookRepository->getById($bookId)->update([
+        $book = $this->bookRepository->getById($bookId);
+
+        $this->authorize('change', $book->author_id);
+
+        $book->update([
             'status' => $status
         ]);
+
 
         if ($book) {
 

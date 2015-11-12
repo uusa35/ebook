@@ -46,5 +46,10 @@ class Chapter extends AbstractModel
             ->paginate($paginate);
     }
 
+    public function scopeOfStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
+
 
 }

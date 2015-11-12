@@ -32,7 +32,7 @@
                                     <span> {{ $slide->created_at->format('Y-m-d') }} </span>
                                 </td>
                                 <td>
-                                    @can('edit')
+                                    @can('checkAssignedPermission','slider_edit')
                                     <a class="{{ Config::get('button.btn-edit') }}" href="{{ action('Backend\SlidersController@edit',$slide->id) }}">
                                         {!! Config::get('button.icon-edit') !!}
                                         </a>

@@ -16,7 +16,7 @@
     {!! Breadcrumbs::render('messages') !!}
 
 @section('titlebar')
-    @can('create')
+    @can('create','message_create')
     <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\MessagesController@create') }}"
        title="{{ trans('general.message_create') }}">
         {!! Config::get('button.icon-create')!!}

@@ -47,17 +47,13 @@ class UsersController extends AbstractController
     public function create()
     {
 
-        if (Gate::check('create')) {
+        $this->authorize('create', 'user_create');
 
-            $this->getPageTitle('user.create');
+        $this->getPageTitle('user.create');
 
-            $roles = $this->roleRepository->model->all();
+        $roles = $this->roleRepository->model->all();
 
-            return view('backend.modules.user.create', compact('roles'));
-        }
-
-        return redirect()->action('Backend\DashboardController@index')->with('error',
-            trans('messages.error.no_access'));
+        return view('backend.modules.user.create', compact('roles'));
 
     }
 
@@ -95,9 +91,12 @@ class UsersController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function edit($id,EditUser $request)
+    public function edit($id, EditUser $request)
     {
+
         $this->getPageTitle('user.edit');
+
+        $this->authorize('edit', $id);
 
         $user = $this->userRepository->model->with('roles')->find($id);
 
@@ -116,6 +115,8 @@ class UsersController extends AbstractController
     {
 
         $user = $this->userRepository->model->find($id);
+
+        $this->authorize('update', $user->id);
 
         $user->update([
 
@@ -151,26 +152,34 @@ class UsersController extends AbstractController
      */
     public function destroy($id)
     {
+        $this->authorize('delete', $id);
+
         $this->userRepository->delete($id);
 
-        Flash::success('User successfully deleted');
-
-        return redirect('/users');
+        return redirect('/users')->with(['success','messages.success.user_destroy']);
     }
 
     public function postChangeActiveStatus($id, $status)
     {
+        $this->authorize('change', $id);
+
         ($status === '0') ? $newStatus = 1 : $newStatus = 0;
+
         $user = $this->userRepository->model->find($id);
+
         $user->update([
             'active' => $newStatus
         ]);
+
         $user->save();
+
         return redirect()->action('Backend\UsersController@index')->with(['success' => trans('messages.sucess.change_active_status')]);
     }
 
     public function getEditConditions()
     {
+        $this->authorize('edit', \Auth::id());
+
         $terms = \DB::table('conditions')->first();
 
         return view('backend.modules.user.conditions', ['terms' => $terms]);
@@ -178,15 +187,20 @@ class UsersController extends AbstractController
 
     public function postEditConditions()
     {
+        $this->authorize('edit', \Auth::id());
+
         $instructions = \DB::table('conditions')->update([
             'title_ar' => Input::get('title_ar'),
             'title_en' => Input::get('title_en'),
             'body_ar' => Input::get('body_ar'),
             'body_en' => Input::get('body_en'),
         ]);
+
         if ($instructions) {
+
             return redirect()->back()->with(['success' => trans('word.success-updated')]);
         }
+
         return redirect()->back()->with(['success' => trans('word.error-updated')]);
     }
 

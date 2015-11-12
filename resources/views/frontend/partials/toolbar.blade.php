@@ -53,7 +53,7 @@
                     {!! Form::token() !!}
                     <input type="text" name="search" class="col-lg-5 form-control "
                            placeholder="{{ trans('general.search') }}"
-                           style="float: {{ (App::getLocale() === 'en') ? 'left' : 'right' }}; width: 80%; padding: 0px; margin: 0px;">
+                           style="float: {{ (App::getLocale() == 'en') ? 'left' : 'right' }}; width: 66%; padding: 0px; margin: 0px;">
                     <button type="submit"
                             class="{{ Config::get('button.btn-search') }} {{ Session::get('pullClassReverse') }}">{!!
                         Config::get('button.icon-search') !!}
@@ -77,13 +77,13 @@
                                 </li>
                             @endif
                             <li class="divider"></li>
-                            <li><a href="/lang/{{ (App::getLocale() === 'ar') ? 'en' : 'ar' }}">
-                                    {{ (App::getLocale() === 'ar') ? trans('general.english') : trans('general.arabic')  }}
+                            <li><a href="/lang/{{ (App::getLocale() == 'ar') ? 'en' : 'ar' }}">
+                                    {{ (App::getLocale() == 'ar') ? trans('general.english') : trans('general.arabic')  }}
                                 </a></li>
                             <li class="divider"></li>
                             @if(!Auth::user())
                                     <li class="divider"></li>
-                                <li><a href="auth/register">{{ trans('general.sign_up') }}</a></li>
+                                <li><a href="/auth/register">{{ trans('general.sign_up') }}</a></li>
                                     <li class="divider"></li>
                             @endif
                             @if(Auth::user())

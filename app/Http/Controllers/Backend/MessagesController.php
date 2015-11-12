@@ -42,6 +42,8 @@ class MessagesController extends AbstractController
 
         $this->getPageTitle('message.index');
 
+        $this->authorize('index', Session::get('module'));
+
         $currentUserId = Auth::user()->id;
 
         // All threads that user is participating in
@@ -90,19 +92,21 @@ class MessagesController extends AbstractController
     public function create()
     {
 
+        $this->authorize('create', 'message_create');
+
         $this->getPageTitle('message.create');
 
 
         $title = '';
 
-        if(Input::get('book_id')) {
+        if (Input::get('book_id')) {
 
-            $title .= trans('general.book_number').Input::get('book_id');
+            $title .= trans('general.book_number') . Input::get('book_serial');
 
         }
 
-        if(Input::get('chapter_id')) {
-            $title .= trans('general.chapter_number').Input::get('chapter_id');
+        if (Input::get('chapter_id')) {
+            $title .= trans('general.chapter_number') . Input::get('chapter_id');
         }
 
 
@@ -116,7 +120,7 @@ class MessagesController extends AbstractController
 
         $usersList = $users->lists('name', 'id');
 
-        return view('backend.modules.messenger.create', compact('usersList', 'subjectList','title'));
+        return view('backend.modules.messenger.create', compact('usersList', 'subjectList', 'title'));
     }
 
     /**
@@ -126,7 +130,7 @@ class MessagesController extends AbstractController
      */
     public function store(CreateMessage $reqest)
     {
-        if(!Input::has('recipients')) {
+        if (!Input::has('recipients')) {
             return redirect()->back()->with(['error' => 'messages.error.not_allowed']);
         }
         $input = Input::all();
@@ -175,6 +179,7 @@ class MessagesController extends AbstractController
      */
     public function update($id)
     {
+
         try {
             $thread = $this->thread->findOrFail($id);
 

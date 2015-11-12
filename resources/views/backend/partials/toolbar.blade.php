@@ -184,8 +184,8 @@
                 <ul class="dropdown-menu">
                     <li><a href="{{ action('Backend\UsersController@edit',Auth::id()) }}">{{ trans('general.edit_profile') }}</a></li>
                     <li class="divider"></li>
-                    <li><a href="/lang/{{ (App::getLocale() === 'ar') ? 'en' : 'ar' }}">
-                            {{ (App::getLocale() === 'ar') ? trans('general.english') : trans('general.arabic')  }}
+                    <li><a href="/lang/{{ (App::getLocale() == 'ar') ? 'en' : 'ar' }}">
+                            {{ (App::getLocale() == 'ar') ? trans('general.english') : trans('general.arabic')  }}
                         </a></li>
                 </ul>
             </li>

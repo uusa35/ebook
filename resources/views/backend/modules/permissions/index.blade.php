@@ -13,7 +13,7 @@
 @section('content')
     {!! Breadcrumbs::render('permissions') !!}
 @section('titlebar')
-    @can('create')
+    @can('create','permission_create')
     <a class="{{ Config::get('button.btn-create') }}"
        href="{{ action('Backend\PermissionsController@create') }}"><i
                 class="fa fa-x1 fa-plus icon-material-indigo-200"></i></a>
@@ -43,7 +43,7 @@
                 </td>
 
                 <td width="80">
-                    @can('edit')
+                    @can('checkAssignedPermission','permission_edit')
                     <a class="{{ Config::get('button.btn-edit') }}"
                        href="{{ action('Backend\PermissionsController@edit', $permission->id) }}"
                        title="{{ trans('buttons.permission_edit') }}">
@@ -54,7 +54,7 @@
 
 
                 <td width="80">
-                    @can('delete')
+                    @can('checkAssignedPermission','permission_delete')
                     {!! Form::open(['action' => ['Backend\PermissionsController@update', $permission->id], 'method'
                     => 'DELETE']) !!}
                     <button type="submit" class="{{ Config::get('button.btn-delete') }}"

@@ -46,8 +46,7 @@
 
     <div class="panel-body">
         @section('titlebar')
-            @can('create')
-
+            @can('create','book_create')
             <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\BooksController@create') }}"
                title="{{ trans('general.book_create') }}">
                 {!! Config::get('button.icon-create')!!}
@@ -134,7 +133,7 @@
                                                 </td>
                                                 <td>
                                                     {{-- Notice that you can not create Chapter if you don't have permission to Access the book --}}
-                                                    @can('edit')
+                                                    @can('edit',$book->author_id)
                                                     <a class="{{ Config::get('button.btn-create') }}"
                                                        title="{{ trans('general.add_chapter') }}"
                                                        href="{{ action('Backend\ChaptersController@create',['book_id' => $book->id]) }}">
@@ -144,7 +143,7 @@
                                                 </td>
                                                 <td class="text-center">
 
-                                                    @can('change')
+                                                    @can('change',$book->author_id)
 
                                                     <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}"
                                                        title="{{ ($book->active) ? trans('general.active') : trans('general.not_active') }}"
@@ -159,7 +158,7 @@
                                                     @endcan
                                                 </td>
                                                 <td class="text-center">
-                                                    @can('edit')
+                                                    @can('edit',$book->author_id)
                                                     <a class="{{ Config::get('button.btn-edit') }}"
                                                        title="{{ trans('general.edit') }}"
                                                        href="{{ action('Backend\BooksController@edit',$book->id) }}">
@@ -167,7 +166,7 @@
                                                     </a>
                                                     @endcan
                                                 </td>
-                                                @if(Cache::get('Abilities.Admin.'.Auth::id()))
+                                                @can('delete',$book->author_id)
                                                     <td class="text-center">
                                                         <button type="button"
                                                                 class="{{ Config::get('button.btn-delete') }}"
@@ -178,10 +177,10 @@
                                                             {!! Config::get('button.icon-delete') !!}
                                                         </button>
                                                     </td>
-                                                @endif
+                                                @endcan
                                                 <td>
                                                     <a class="{!! Config::get('button.btn-send') !!}"
-                                                       href="{{ action('Backend\MessagesController@create',['book_id' => $book->id]) }}"
+                                                       href="{{ action('Backend\MessagesController@create',['book_id' => $book->id,'book_serial'=> $book->serial]) }}"
                                                        title="{{ trans('general.send') }}">
                                                         {!! Config::get('button.icon-send') !!}
                                                     </a>

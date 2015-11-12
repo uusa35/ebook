@@ -52,6 +52,8 @@ class ChaptersController extends Controller
     {
         $bookId = Input::get('book_id');
 
+        $this->authorize('create','chapter_create');
+
         return view('backend.modules.book.chapter.create', compact('bookId'));
     }
 
@@ -99,9 +101,12 @@ class ChaptersController extends Controller
      */
     public function edit($id)
     {
+
         $bookId = \Request::get('book_id');
 
-        $chapter = $this->chapterRepository->model->where(['id' => $id])->first();
+        $chapter = $this->chapterRepository->model->with('book')->where(['id' => $id])->first();
+
+        $this->authorize('edit',$chapter->book->author_id);
 
         if ($chapter) {
 
@@ -119,7 +124,9 @@ class ChaptersController extends Controller
     public function update(Requests\UpdateChapter $request, $id)
     {
 
-        $chapter = $this->chapterRepository->model->where(['id' => $request->id])->first();
+        $chapter = $this->chapterRepository->model->with('book')->where(['id' => $request->id])->first();
+
+        $this->authorize('edit',$chapter->book->author_id);
 
         $request->merge([
             'url' => rand(1, 9999) . str_random(10) . '.pdf',

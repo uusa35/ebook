@@ -6,6 +6,7 @@ use App\Core\AbstractController;
 use App\Http\Requests\CreateCategory;
 use App\Src\Category\Field\FieldCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FieldCategoriesController extends AbstractController
 {
@@ -25,6 +26,8 @@ class FieldCategoriesController extends AbstractController
     {
         $this->getPageTitle('category.index');
 
+        $this->authorize('index',Session::get('module'));
+
         $categories = $this->fieldCategory->all();
 
         return view('backend.modules.category.field.index', ['categories' => $categories]);
@@ -39,6 +42,8 @@ class FieldCategoriesController extends AbstractController
     {
         $this->getPageTitle('category.create');
 
+        $this->authorize('create','category_create');
+
         return view('backend.modules.category.field.create');
     }
 
@@ -50,6 +55,8 @@ class FieldCategoriesController extends AbstractController
      */
     public function store(CreateCategory $request)
     {
+        $this->authorize('create','category_create');
+
         $this->fieldCategory->create($request->except('_token'));
 
         return redirect()->action('Backend\FieldCategoriesController@index')->with('success', trans('word.create-success-category'));
@@ -76,6 +83,8 @@ class FieldCategoriesController extends AbstractController
     {
         $this->getPageTitle('category.edit');
 
+        $this->authorize('checkAssignedPermission','category_edit');
+
         $category = $this->fieldCategory->find($id);
 
         return view('backend.modules.category.field.edit', ['category' => $category]);
@@ -90,6 +99,9 @@ class FieldCategoriesController extends AbstractController
      */
     public function update($id, Request $request)
     {
+
+        $this->authorize('checkAssignedPermission','category_edit');
+
         $this->fieldCategory->where('id', '=', $id)->update([
             'name_ar' => $request->input('name_ar'),
             'name_en' => $request->input('name_en')

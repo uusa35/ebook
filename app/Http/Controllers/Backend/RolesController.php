@@ -5,6 +5,7 @@ use App\Src\Role\RoleRepository;
 use App\Src\Permission\PermissionRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class RolesController extends AbstractController
 {
@@ -29,6 +30,9 @@ class RolesController extends AbstractController
     {
         //$roles = $this->role->pushCriteria(new RolesWithPermissions())->paginate(10);
         $this->getPageTitle('role.index');
+
+        $this->authorize('index',Session::get('module'));
+
         $roles = $this->roleRepository->model->with('users', 'perms')->get();
 
         return view('backend.modules.roles.index', compact('roles'));
@@ -38,6 +42,8 @@ class RolesController extends AbstractController
     {
         $this->getPageTitle('role.create');
 
+        $this->authorize('create','role_create');
+
         $permissions = $this->permissionRepository->model->all();
 
         return view('backend.modules.roles.create', compact('permissions'));
@@ -45,6 +51,7 @@ class RolesController extends AbstractController
 
     public function store(Request $request)
     {
+        $this->authorize('create','role_create');
 
         $this->validate($request,
             array('name' => 'required|unique:roles,name', 'display_name' => 'required|unique:roles,display_name'));
@@ -61,6 +68,8 @@ class RolesController extends AbstractController
     {
         $this->getPageTitle('role.edit');
 
+        $this->authorize('checkAssignedPermission','role_edit');
+
         $role = $this->roleRepository->model->find($id);
 
         $permissions = $this->permissionRepository->model->all();
@@ -72,6 +81,8 @@ class RolesController extends AbstractController
 
     public function update(Request $request, $id)
     {
+
+        $this->authorize('checkAssignedPermission','role_edit');
 
         $this->validate($request, array('name' => 'required', 'display_name' => 'required'));
 
@@ -87,6 +98,8 @@ class RolesController extends AbstractController
 
     public function destroy($id)
     {
+
+        $this->authorize('checkAssignedPermission','role_delete');
 
         $role = $this->roleRepository->model->find($id);
 

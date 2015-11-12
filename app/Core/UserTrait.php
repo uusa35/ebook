@@ -7,15 +7,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
+
 /**
  * Created by PhpStorm.
  * User: usamaahmed
  * Date: 10/17/15
  * Time: 6:12 PM
  */
-
-
-trait UserTrait {
+trait UserTrait
+{
     public function getPageTitle($title)
     {
         $title = Config::get('title.' . $title);
@@ -25,7 +25,7 @@ trait UserTrait {
 
     public function isAdmin()
     {
-        if (Cache::get('role.Admin.'.Auth::id()) === 'Admin') {
+        if (Cache::get('role.Admin.' . Auth::id()) === 'Admin') {
 
             return true;
         }
@@ -36,7 +36,7 @@ trait UserTrait {
     public function isEditor()
     {
 
-        if (Cache::get('role.Editor.'.Auth::id()) === 'Editor') {
+        if (Cache::get('role.Editor.' . Auth::id()) === 'Editor') {
 
             return true;
         }
@@ -47,7 +47,7 @@ trait UserTrait {
     public function isAuthor()
     {
 
-        if (Cache::get('role.Author.'.Auth::id()) === 'Author') {
+        if (Cache::get('role.Author.' . Auth::id()) === 'Author') {
             return true;
         }
 
@@ -57,7 +57,7 @@ trait UserTrait {
     public function getUserRole()
     {
 
-        return Cache::get('role.'.Auth::id());
+        return Cache::get('role.' . Auth::id());
 
     }
 
@@ -66,6 +66,16 @@ trait UserTrait {
     {
         if ($userId === Auth::id()) {
             return true;
+        }
+        return false;
+    }
+
+    public function getUserAbilities()
+    {
+        if (Cache::get('Abilities.' . $this->getUserRole() . '.' . Auth::id())) {
+
+            return Cache::get('Abilities.' . $this->getUserRole() . '.' . Auth::id());
+
         }
         return false;
     }

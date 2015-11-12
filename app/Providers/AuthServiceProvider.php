@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use App\Core\AbstractPolicy;
+use App\Core\PoliciesCollection;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Session;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -28,34 +29,40 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies($gate);
 
 
-        $policy = new AbstractPolicy($perm = '');
+        $policy = new PoliciesCollection();
+
+        $gate->define('index', function ($user,$module) use ($policy) {
+
+            return $policy->index($module);
+
+        });
 
         // book_create
-        $gate->define('create', function () use ($policy) {
+        $gate->define('create', function ($user,$permission) use ($policy) {
 
-            return $policy->create();
+            return $policy->create($permission);
 
         });
 
 
         // book_edit
-        $gate->define('edit', function () use ($policy) {
+        $gate->define('edit', function ($user,$element) use ($policy) {
 
-            return $policy->edit();
+            return $policy->edit($element);
 
         });
 
         // book_change
-        $gate->define('change', function () use ($policy) {
+        $gate->define('change', function ($user,$element) use ($policy) {
 
-            return $policy->change();
+            return $policy->change($element);
 
         });
 
         // book_delete
-        $gate->define('delete', function () use ($policy) {
+        $gate->define('delete', function ($user,$element) use ($policy) {
 
-            return $policy->delete();
+            return $policy->delete($user,$element);
 
         });
 
@@ -79,6 +86,13 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('isAuthor', function () use ($policy) {
 
             return $policy->isAuthor();
+
+        });
+
+        // Check for abstracted permission
+        $gate->define('checkAssignedPermission', function ($user,$permission) use ($policy) {
+
+            return $policy->checkAssignedPermission($permission);
 
         });
 

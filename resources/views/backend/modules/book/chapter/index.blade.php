@@ -18,56 +18,57 @@
                 "order": [[0, "asc"]]
             });
 
-            $('.nav-tabs > li[id^="tab-"]').on('click', function () {
-                var idVal = $(this).attr('id');
-                var tabLink = idVal.split('-');
-                var tabLink = 'step' + tabLink[1];
-                $.cookie("tabLastSelected", idVal);
-                $.cookie('TabLastSelected', tabLink);
-            });
+            {{--  $('.nav-tabs > li[id^="tab-"]').on('click', function () {
+                  var idVal = $(this).attr('id');
+                  var tabLink = idVal.split('-');
+                  var tabLink = 'step' + tabLink[1];
+                  $.cookie("tabLastSelected", idVal);
+                  $.cookie('TabLastSelected', tabLink);
+              });
 
-            if ($.cookie('tabLastSelected')) {
-                var idVal = $.cookie('tabLastSelected');
-                var tabLink = $.cookie('TabLastSelected');
-                console.log('From Inside If Statement : ' + idVal);
-                $('#' + idVal + '> a').trigger('click');
-            }
-            else if (!$.cookie('TabLastSelected')) {
-                $.cookie('TabLastSelected', 'tab-1');
-            }
-        });
-        $('.nav-tabs > li[id^="tab-"]').on('click', function () {
-            var idVal = $(this).attr('id');
-            var tabLink = idVal.split('-');
-            var tabLink = 'step' + tabLink[1];
-            $.cookie("tabLastSelected", idVal);
-            $.cookie('TabLastSelected', tabLink);
-        });
+              if ($.cookie('tabLastSelected')) {
+                  var idVal = $.cookie('tabLastSelected');
+                  var tabLink = $.cookie('TabLastSelected');
+                  console.log('From Inside If Statement : ' + idVal);
+                  $('#' + idVal + '> a').trigger('click');
+              }
+              else if (!$.cookie('TabLastSelected')) {
+                  $.cookie('TabLastSelected', 'tab-1');
+              }
+          });
+          $('.nav-tabs > li[id^="tab-"]').on('click', function () {
+              var idVal = $(this).attr('id');
+              var tabLink = idVal.split('-');
+              var tabLink = 'step' + tabLink[1];
+              $.cookie("tabLastSelected", idVal);
+              $.cookie('TabLastSelected', tabLink);
+          });
 
-        if ($.cookie('tabLastSelected')) {
-            var idVal = $.cookie('tabLastSelected');
-            var tabLink = $.cookie('TabLastSelected');
-            console.log('From Inside If Statement : ' + idVal);
-            $('#' + idVal + '> a').trigger('click');
-        }
-        else if (!$.cookie('TabLastSelected')) {
-            $.cookie('TabLastSelected', 'tab-1');
-        }
+          if ($.cookie('tabLastSelected')) {
+              var idVal = $.cookie('tabLastSelected');
+              var tabLink = $.cookie('TabLastSelected');
+              console.log('From Inside If Statement : ' + idVal);
+              $('#' + idVal + '> a').trigger('click');
+          }
+          else if (!$.cookie('TabLastSelected')) {
+              $.cookie('TabLastSelected', 'tab-1');
+          }
 
-        $('#conditions').click(function () {
-            if ($(this).is(":checked")) {
-                $('#btncon').removeAttr('disabled');
-            }
-            else if ($(this).is(":not(:checked)")) {
-                $('#btncon').attr('disabled', 'disabled');
+          $('#conditions').click(function () {
+              if ($(this).is(":checked")) {
+                  $('#btncon').removeAttr('disabled');
+              }
+              else if ($(this).is(":not(:checked)")) {
+                  $('#btncon').attr('disabled', 'disabled');
 
-            }
+              }
+              --}}
         });
     </script>
 @endsection
 
-
 @if(!is_null($allChapters))
+
     <div class="row">
         <div class="col-xs-12">
 
@@ -113,23 +114,24 @@
                                     <th>{{ trans('general.total_pages') }}</th>
                                 </tr>
                                 </thead>
-                                <tbody>
                                 @foreach($allChapters as $chapter)
+                                    <tbody>
+
                                     <tr>
                                         <td>{{ $chapter->id }}</td>
                                         <td>{{ $chapter->title }}</td>
                                         <td>{{ $chapter->status }}</td>
                                         <td>
-                                            @can('change')
+                                            @can('change',$chapter->book->author_id)
                                             {{-- If the User just created the book --}}
-                                            @if($chapter->status === 'pending')
+                                            @if($chapter->status == 'pending')
                                                 <a class="{!! Config::get('button.btn-drafted') !!}"
                                                    href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'drafted']) }}"
                                                    title="{{ trans('general.title.go_drafted') }}">
                                                     {!! Config::get('button.icon-drafted') !!}
                                                 </a>
                                                 {{-- if the user just submitted to admin for approval --}}
-                                            @elseif($chapter->status === 'drafted' && Cache::get('role.Author.'.Auth::id()))
+                                            @elseif($chapter->status == 'drafted' && Cache::get('role.Author.'.Auth::id()))
                                                 <a class="{!! Config::get('button.btn-published') !!}"
                                                    href="#" disabled
                                                    title="{{ trans('general.title.waiting_for_admin') }}">
@@ -138,20 +140,20 @@
                                             @endif
                                             {{-- if the admin approved the book --}}
                                             @if(Cache::get('role.Admin.'.Auth::id()))
-                                                @if($chapter->status === 'drafted')
+                                                @if($chapter->status == 'drafted')
                                                     <a class="{!! Config::get('button.btn-published') !!}"
                                                        href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'published']) }}"
                                                        title="{{ trans('general.title.go_published') }}">
                                                         {!! Config::get('button.icon-published') !!}
                                                     </a>
-                                                @elseif($chapter->status === 'published')
+                                                @elseif($chapter->status == 'published')
                                                     <a class="{!! Config::get('button.btn-declined') !!}"
                                                        href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'declined']) }}"
                                                        title="{{ trans('general.title.go_pending') }}">
                                                         {!! Config::get('button.icon-pending') !!}
                                                     </a>
                                                     {{-- if the admin approved the book --}}
-                                                @elseif($chapter->status === 'declined')
+                                                @elseif($chapter->status == 'declined')
                                                     <a class="{!! Config::get('button.btn-pending') !!}"
                                                        href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'pending']) }}"
                                                        title="{{ trans('general.title.pending') }}">
@@ -190,7 +192,8 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a class="{!! Config::get('button.btn-send') !!}" href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
+                                            <a class="{!! Config::get('button.btn-send') !!}"
+                                               href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book->author_id, 'chapter_id' => $chapter->id]) }}"
                                                title="{{ trans('general.send') }}">
                                                 {!! Config::get('button.icon-send') !!}
                                             </a>
@@ -200,8 +203,9 @@
                                         </td>
 
                                     </tr>
+
+                                    </tbody>
                                 @endforeach
-                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -235,7 +239,7 @@
                                             <td>{{ $chapter->title }}</td>
                                             <td>{{ $chapter->status }}</td>
                                             <td>
-                                                @can('change')
+                                                @can('change',$chapter->book->author_id)
                                                 {{-- If the User just created the book --}}
                                                 @if($chapter->status == 'pending')
                                                     <a class="{!! Config::get('button.btn-drafted') !!}" href=""
@@ -286,7 +290,8 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a class="{!! Config::get('button.btn-send') !!}" href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
+                                                <a class="{!! Config::get('button.btn-send') !!}"
+                                                   href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
                                                    title="{{ trans('general.send') }}">
                                                     {!! Config::get('button.icon-send') !!}
                                                 </a>
@@ -314,7 +319,7 @@
 
 
                 {{-- Pending Chapters --}}
-                <div class="tab-pane active" id="step3">
+                <div class="tab-pane " id="step3">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
                             @if(!is_null($pendingChapters))
@@ -341,7 +346,7 @@
                                             <td>{{ $chapter->title }}</td>
                                             <td> {{ $chapter->status }}</td>
                                             <td>
-                                                @can('change')
+                                                @can('change',$chapter->book->author_id)
                                                 {{-- If the User just created the book --}}
                                                 @if($chapter->status == 'pending')
                                                     <a class="{!! Config::get('button.btn-drafted') !!}" href=""
@@ -392,7 +397,8 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a class="{!! Config::get('button.btn-send') !!}" href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
+                                                <a class="{!! Config::get('button.btn-send') !!}"
+                                                   href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
                                                    title="{{ trans('general.send') }}">
                                                     {!! Config::get('button.icon-send') !!}
                                                 </a>
@@ -419,7 +425,7 @@
 
 
                     {{-- Drafted Chapters --}}
-                    <div class="tab-pane active" id="step4">
+                    <div class="tab-pane " id="step4">
                         <div class="row">
                             <div class="col-xs-12 paddingTop10">
                                 @if(!is_null($draftedChapters))
@@ -446,7 +452,7 @@
                                                 <td>{{ $chapter->title }}</td>
                                                 <td>{{ $chapter->status }}</td>
                                                 <td>
-                                                    @can('change')
+                                                    @can('change',$chapter->book->author_id)
                                                     {{-- If the User just created the book --}}
                                                     @if($chapter->status == 'pending')
                                                         <a class="{!! Config::get('button.btn-drafted') !!}" href=""
@@ -497,7 +503,8 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a class="{!! Config::get('button.btn-send') !!}" href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
+                                                    <a class="{!! Config::get('button.btn-send') !!}"
+                                                       href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
                                                        title="{{ trans('general.send') }}">
                                                         {!! Config::get('button.icon-send') !!}
                                                     </a>
@@ -524,7 +531,7 @@
 
 
                         {{-- Declined Chapters --}}
-                        <div class="tab-pane active" id="step5">
+                        <div class="tab-pane " id="step5">
                             <div class="row">
                                 <div class="col-xs-12 paddingTop10">
                                     @if(!is_null($declinedChapters))
@@ -551,11 +558,12 @@
                                                     <td>{{ $chapter->title }}</td>
                                                     <td> {{ $chapter->status }}</td>
                                                     <td>
-                                                        @can('change')
+                                                        @can('change',$chapter->book->author_id)
                                                         {{-- If the User just created the book --}}
                                                         @if($chapter->status == 'pending')
                                                             <a class="{!! Config::get('button.btn-drafted') !!}" href=""
                                                                title="{{ trans('general.title.go_drafted') }}">
+                                                                {!! Config::get('button.icon-drafted') !!}
                                                                 {!! Config::get('button.icon-drafted') !!}
                                                             </a>
                                                             {{-- if the user just submitted to admin for approval --}}
@@ -604,7 +612,8 @@
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <a class="{!! Config::get('button.btn-send') !!}" href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
+                                                        <a class="{!! Config::get('button.btn-send') !!}"
+                                                           href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
                                                            title="{{ trans('general.send') }}">
                                                             {!! Config::get('button.icon-send') !!}
                                                         </a>

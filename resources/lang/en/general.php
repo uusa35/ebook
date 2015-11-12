@@ -260,13 +260,26 @@ return [
     'category_en' => 'category name in english',
     'category_ar' => 'category name in arabic',
     'logged_on_as' => 'logged as',
-    'member_since' => 'member since',
     'block' => 'block',
     'unblock' => 'unblock',
     'follow' => 'follow',
     'unfollow' => 'unfollow',
     'edit_profile' => 'edit profile',
-    'Conditions' => 'Conditions'
+    'Conditions' => 'Conditions',
+    'drafted' => 'drafted',
+    'declined' => 'declinded',
+    'send_message' => 'send message',
+    'all_previews' => 'previews',
+    'book_show' => 'show book',
+    'change_status' => 'change status',
+    'image' => 'image',
+    'zipcode' => 'zipcode',
+    'message_create' => 'create message',
+    'book_number' => 'book serial : ',
+    'user_edit' => 'edit user',
+
+
+
 
 
 

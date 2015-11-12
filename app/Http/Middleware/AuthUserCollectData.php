@@ -22,6 +22,8 @@ class AuthUserCollectData
     {
 
         //dd(Cache::get('Modules.Admin.'.Auth::id()));
+        //dd(Cache::get('role.'.Auth::id()));
+        //dd(Cache::get('Abilities.Author.'.Auth::id()));
 
         if (is_null(Session::get('roles'))) {
 
@@ -80,6 +82,8 @@ class AuthUserCollectData
 
             Session::put('roles', \Crypt::encrypt(str_random(16)));
 
+
+
             return $next($request);
 
         } elseif (Cache::get('role.'.Auth::id()) && Session::get('roles')) {
@@ -87,10 +91,5 @@ class AuthUserCollectData
             return $next($request);
         }
 
-        Session::clear();
-        Auth::logout();
-
-        return redirect('/');
-        //dd('no cache found');
     }
 }

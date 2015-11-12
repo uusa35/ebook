@@ -6,6 +6,7 @@ use App\Core\AbstractController;
 use App\Jobs\CreateImages;
 use App\Src\Advertisement\Advertisement;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 
 class AdsController extends AbstractController
 {
@@ -24,6 +25,8 @@ class AdsController extends AbstractController
     public function index()
     {
         $this->getPageTitle('ad.index');
+
+        $this->authorize('index',Session::get('module'));
 
         $allAdsStored = $this->ad->take(2)->get();
 
@@ -73,6 +76,8 @@ class AdsController extends AbstractController
     {
         $this->getPageTitle('ad.edit');
 
+        $this->authorize('checkAssignedPermission','ad_edit');
+
         $ad = $this->ad->where('id', '=', $id)->first();
 
         return view('backend.modules.ad.edit', compact('id', 'ad'));
@@ -86,12 +91,13 @@ class AdsController extends AbstractController
      */
     public function update(Requests\EditAd $request)
     {
+        $this->authorize('checkAssignedPermission','ad_edit');
+
         $ad = $this->ad->where('id', '=', $request->get('id'))->first();
 
         /*
       * Abstract CreateImages Job (Model , $request, FolderName, [FieldsName] , [Default thumbnail sizes] , [Default large sizes]
       * */
-
         $updateAd = $this->dispatch(new CreateImages($ad, $request, 'ads', ['ads'], ['200', '50'], ['500', '120']));;
 
         if ($updateAd) {

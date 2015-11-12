@@ -19,6 +19,7 @@ class DashboardController extends AbstractController
 
     public function index()
     {
+
         if (Session::has('roles')) {
 
             $this->getPageTitle('dashboard.index');

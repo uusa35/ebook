@@ -15,7 +15,7 @@
     {!! Breadcrumbs::render('book_show') !!}
 
 @section('titlebar')
-    @can('create')
+    @can('create','book_create')
     <a class="{{ Config::get('button.btn-create') }}"
        href="{{ action('Backend\ChaptersController@create',['book_id'=>$book->id]) }}"
        title="{{ trans('general.add') }}">

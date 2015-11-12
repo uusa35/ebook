@@ -20,7 +20,7 @@ class AfterUserLoginActiveCheck
     public function handle($request, Closure $next)
     {
 
-        if (Auth::user()->active === '1') {
+        if (Auth::user()->active == '1') {
 
             return $next($request);
         }
@@ -29,7 +29,6 @@ class AfterUserLoginActiveCheck
 
         return redirect('home')->with(['error' => 'messages.error.not_active'])
             ->withCookie(Cookie::make('blocked', Crypt::encrypt('blocked'), '12000'));
-
 
     }
 }

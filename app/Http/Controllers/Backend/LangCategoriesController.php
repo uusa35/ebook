@@ -6,6 +6,7 @@ use App\Core\AbstractController;
 use App\Http\Requests\CreateCategory;
 use App\Src\Category\Lang\LangCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class LangCategoriesController extends AbstractController
 {
@@ -23,9 +24,11 @@ class LangCategoriesController extends AbstractController
      */
     public function index()
     {
+        $this->authorize('index',Session::get('module'));
+
         $this->getPageTitle('category.index');
 
-        $categories = $this->langCategory->all();
+        $categories = $this->langCategory->take(2)->get();
 
         return view('backend.modules.category.lang.index', ['categories' => $categories]);
     }
@@ -39,6 +42,8 @@ class LangCategoriesController extends AbstractController
     {
         $this->getPageTitle('category.create');
 
+        $this->authorize('create','category_create');
+
         return view('backend.modules.category.lang.create');
     }
 
@@ -50,6 +55,8 @@ class LangCategoriesController extends AbstractController
      */
     public function store(CreateCategory $request)
     {
+        $this->authorize('create','category_create');
+
         $this->langCategory->create($request->except('_token'));
 
         return redirect()->back()->with('success', trans('word.create-success-category'));
@@ -76,6 +83,8 @@ class LangCategoriesController extends AbstractController
     {
         $this->getPageTitle('category.edit');
 
+        $this->authorize('checkAssignedPermission','category_edit');
+
         $category = $this->langCategory->find($id);
 
         return view('backend.modules.category.lang.edit', ['category' => $category]);
@@ -90,6 +99,8 @@ class LangCategoriesController extends AbstractController
      */
     public function update($id, Request $request)
     {
+        $this->authorize('checkAssignedPermission','category_edit');
+
         $this->langCategory->where('id', '=', $id)->update([
             'name_ar' => $request->input('name_ar'),
             'name_en' => $request->input('name_en')

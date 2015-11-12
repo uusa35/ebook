@@ -7,6 +7,7 @@ use App\Src\Contactus\Contactus;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 
 class ContactUsController extends AbstractController
 {
@@ -20,7 +21,7 @@ class ContactUsController extends AbstractController
 
     public function index() {
 
-        //Cache::forget('contactusInfo');
+        $this->authorize('index',Session::get('module'));
 
         $contactInfo = $this->contactus->first();
 
@@ -29,6 +30,7 @@ class ContactUsController extends AbstractController
 
     public function edit()
     {
+        $this->authorize('index',Session::get('module'));
 
         $this->getPageTitle('dashboard.contactus');
         //Cache::forget('contactusInfo');
@@ -40,6 +42,8 @@ class ContactUsController extends AbstractController
 
     public function update(Request $request)
     {
+
+        $this->authorize('index',Session::get('module'));
 
         $this->contactus->update($request->except('_token'));
 

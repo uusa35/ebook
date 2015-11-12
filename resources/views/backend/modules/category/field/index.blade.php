@@ -23,10 +23,10 @@
                 <thead>
                 <tr class="well-material-blue-grey-100" >
                     <th>{{ trans('id') }}</th>
-                    <th>{{ trans('word.name-ar') }}</th>
-                    <th>{{ trans('word.name-en') }}</th>
-                    <th>{{ trans('word.edit') }}</th>
-                    <th>{{ trans('word.created-at') }}</th>
+                    <th>{{ trans('general.name_ar') }}</th>
+                    <th>{{ trans('general.name_en') }}</th>
+                    <th>{{ trans('general.edit') }}</th>
+                    <th>{{ trans('general.created_at') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,7 +44,7 @@
                         </td>
                         <td class="text-center">
                                 <a href="{{ action('Backend\FieldCategoriesController@edit',$category->id) }}"
-                                   title="{{ trans('word.edit') }}" class="{!! Config::get('button.btn-edit') !!}">
+                                   title="{{ trans('general.edit') }}" class="{!! Config::get('button.btn-edit') !!}">
 
                                     {!! Config::get('button.icon-edit') !!}
 
