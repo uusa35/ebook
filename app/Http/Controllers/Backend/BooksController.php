@@ -140,21 +140,20 @@ class BooksController extends AbstractController
 
         $this->authorize('create', 'book_create');
 
-        if (Gate::check('create')) {
 
-            $fieldsCategories = $this->fieldCategory->all();
+        $fieldsCategories = $this->fieldCategory->all();
 
-            $langsCategories = $this->langCategory->limit(2);
+        $langsCategories = $this->langCategory->limit(2);
 
-            $getLang = App()->getLocale();
+        $getLang = App()->getLocale();
 
-            $fieldsCategories = $fieldsCategories->lists('name_' . $getLang, 'id');
+        $fieldsCategories = $fieldsCategories->lists('name_' . $getLang, 'id');
 
-            $langsCategories = $langsCategories->lists('name_' . $getLang, 'id');
+        $langsCategories = $langsCategories->lists('name_' . $getLang, 'id');
 
-            return view('backend.modules.book.create',
-                ['fieldsCategories' => $fieldsCategories, 'langsCategories' => $langsCategories]);
-        }
+        return view('backend.modules.book.create',
+            ['fieldsCategories' => $fieldsCategories, 'langsCategories' => $langsCategories]);
+
 
         return redirect()->action('Backend\BooksController@index')->with(['error' => 'messages.error.book_create']);
 
@@ -194,10 +193,10 @@ class BooksController extends AbstractController
             // create a cover
             $this->CreateBookCover($request, $book);
 
-            return redirect()->action('Backend\BooksController@index')->with(['success' => trans('word.messages.success.book_created')]);
+            return redirect()->action('Backend\BooksController@index')->with(['success' => trans('messages.success.created')]);
         }
 
-        return redirect()->back()->with(['error' => trans('word.messages.error.book_not_created')]);
+        return redirect()->back()->with(['error' => trans('messages.error.created')]);
     }
 
     /**
@@ -255,13 +254,9 @@ class BooksController extends AbstractController
         $langsCategories = $langsCategories->lists('name_' . $getLang, 'id');
 
 
-        if (Gate::check('edit', $book->author_id)) {
+        return view('backend.modules.book.edit',
+            ['book' => $book, 'fieldsCategories' => $fieldsCategories, 'langsCategories' => $langsCategories]);
 
-            return view('backend.modules.book.edit',
-                ['book' => $book, 'fieldsCategories' => $fieldsCategories, 'langsCategories' => $langsCategories]);
-        }
-
-        return redirect()->to('/')->with(['error' => 'messages.error.not_authenticated']);
 
     }
 
@@ -298,11 +293,10 @@ class BooksController extends AbstractController
         $book->update($request->except(['cover']));
 
         if ($book) {
-            return redirect()->action('Backend\BooksController@index')->with('success',
-                trans('messages.success.book_edit'));
+            return redirect()->action('Backend\BooksController@index')->with('success', trans('messages.success.edited'));
         }
 
-        return redirect()->action('Backend\BooksController@index')->with('error', trans('messages.error.book_edit'));
+        return redirect()->action('Backend\BooksController@index')->with('error', trans('messages.error.edited'));
     }
 
     /**
@@ -317,17 +311,16 @@ class BooksController extends AbstractController
 
         $this->authorize('delete', $book->author_id);
 
-        if (Gate::check('delete', $book->author_id)) {
 
-            if ($book->delete()) {
+        if ($book->delete()) {
 
-                $book->meta()->delete();
+            $book->meta()->delete();
 
-                return redirect()->back()->with('success', trans('word.success-delete'));
-            }
+            return redirect()->back()->with('success', trans('messages.success.deleted'));
 
-            return redirect()->back()->with('error', trans('word.error-delete'));
         }
+
+        return redirect()->back()->with('error', trans('messages.error.deleted'));
 
 
     }
@@ -346,10 +339,10 @@ class BooksController extends AbstractController
 
         if ($book) {
 
-            return redirect()->back()->with(['success' => trans('word.success-status-updated')]);
+            return redirect()->back()->with(['success' => trans('messages.success.updated')]);
         }
 
-        return redirect()->back()->with(['error' => 'word.error-status-updated']);
+        return redirect()->back()->with(['error' => 'messages.error.updated']);
     }
 
     public function removeReportAbuse($bookId)
@@ -359,10 +352,10 @@ class BooksController extends AbstractController
 
         if ($deletedReportAbuse) {
 
-            return redirect()->back()->with(['success' => trans('word.success-report-removed')]);
+            return redirect()->back()->with(['success' => trans('messages.success.deleted')]);
 
         }
-        return redirect()->back()->with(['error' => 'word.error-report-removed']);
+        return redirect()->back()->with(['error' => 'messages.error.deleted']);
     }
 
 
@@ -376,7 +369,7 @@ class BooksController extends AbstractController
 
             $this->bookRepository->changeActivationBook($bookId, $userId, $activeStatus);
 
-            return redirect()->back()->with(['success' => 'messages.success.book_activation']);
+            return redirect()->back()->with(['success' => 'messages.success.activated']);
 
         }
 
@@ -404,12 +397,12 @@ class BooksController extends AbstractController
             ]);
 
             if ($favorited) {
-                return redirect()->back()->with(['success' => trans('word.success-book-favorites')]);
+                return redirect()->back()->with(['success' => trans('messages.success.created')]);
             }
 
         }
 
-        return redirect()->back()->with(['error' => trans('word.error-book-favorites')]);
+        return redirect()->back()->with(['error' => trans('messages.error.created')]);
     }
 
     /**
@@ -425,11 +418,11 @@ class BooksController extends AbstractController
 
         if ($favoriteDelete) {
 
-            return redirect()->back()->with(['success', trans('general.success-favorite-remove')]);
+            return redirect()->back()->with(['success', trans('general.success.deleted')]);
 
         }
 
-        return redirect()->back()->with(['error', trans('general.error-favorite-remove')]);
+        return redirect()->back()->with(['error', trans('general.error.deleted')]);
 
     }
 
@@ -454,13 +447,13 @@ class BooksController extends AbstractController
 
             if ($liked) {
 
-                return redirect()->back()->with(['success' => trans('messages.success.book_like')]);
+                return redirect()->back()->with(['success' => trans('messages.success.edited')]);
 
             }
 
         }
 
-        return redirect()->back()->with(['error' => trans('messages.error.book_like')]);
+        return redirect()->back()->with(['error' => trans('messages.error.edited')]);
     }
 
     /**
@@ -483,14 +476,14 @@ class BooksController extends AbstractController
             if ($reportAbuse) {
 
                 return redirect()->action('Backend\MessagesController@create')->with([
-                    'success' => trans('word.success-book-report'),
+                    'success' => trans('messages.success.edited'),
                     'book_id' => $bookId
                 ]);
             }
 
         }
 
-        return redirect()->back()->with(['error' => trans('word.error-book-report')]);
+        return redirect()->back()->with(['error' => trans('messages.error.edited')]);
     }
 
 
@@ -554,7 +547,7 @@ public function getCreateNewCustomizedPreview($bookId, $autherId, $total_pages)
             compact('bookId', 'autherId', 'total_pages', 'usersList'));
     }
 
-    return redirect()->back()->with(['error' => trans('word.error-preview-not-created')]);
+    return redirect()->back()->with(['error' => trans('messages.error.preview-not-created')]);
 
 
 }
@@ -571,7 +564,7 @@ public function postCreateNewCustomizedPreview(Requests\CreateNewCustomizedPrevi
 
         if (!$this->userRepository->CreateNewCustomizedPreview($request->all())) {
 
-            return redirect()->back()->with(['error' => trans('word.error-preview-not-created')]);
+            return redirect()->back()->with(['error' => trans('messages.error.preview-not-created')]);
         }
     }
 
@@ -588,7 +581,7 @@ public function getDeleteNewCustomizedPreview($bookId, $authorId)
 
     }
 
-    return redirect()->back()->with(['error' => trans('word.error-preview-not-deleted')]);
+    return redirect()->back()->with(['error' => trans('messages.error.preview-not-deleted')]);
 }
 
 public function getShowNewCustomizedPreviewForAdmin($bookId, $authorId)

@@ -8,7 +8,13 @@
 return [
     'success' => [
         'general_message' => 'process successy',
-        'edit_user' => 'user edited successfully'
+        'edit_user' => 'user edited successfully',
+        'created' => 'Item created Successfully',
+        'deleted' => 'Item deleted successfully',
+        'edited' => 'Item edited successfully',
+        'updated' => 'Item updated successfully',
+        'activated' => 'Item activated successfully',
+
     ],
     'error' => [
         'general_message' => 'process failure',
@@ -16,10 +22,16 @@ return [
         'not_active' => 'your account has been deactivated .. please contact the administrator.',
         'no_access' => 'you do not have access to this page.',
         'to_access_comments' => 'you are not allowed to comment for this author.',
+        'created' => 'Item is not created Successfully',
+        'deleted' => 'Item is not deleted successfully',
+        'edited' => 'Item is not edited successfully',
+        'updated' => 'Item is not updated successfully',
+        'activated' => 'Item is not activated successfully',
 
     ],
     'info' => [
         'no_books_found' => 'No book Found in.',
+        'no_access' => 'you do not have access to this page.',
         'register' => 'you need to register in order to see this section',
     ],
     'newsletter_message' => 'Subscribe to get all recent books .. ',
