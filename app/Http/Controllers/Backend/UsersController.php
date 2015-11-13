@@ -10,6 +10,7 @@ use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 
 class UsersController extends AbstractController
@@ -36,7 +37,11 @@ class UsersController extends AbstractController
      */
     public function index()
     {
+
         $this->getPageTitle('user.index');
+
+        $this->authorize('index', Session::get('module'));
+
         $users = $this->userRepository->model->with('roles')->get();
         return view('backend.modules.user.index', compact('users'));
     }
@@ -69,20 +74,18 @@ class UsersController extends AbstractController
 
         $user = $this->userRepository->model->create($request->all());
 
-        if (Gate::check('create')) {
+        $this->authorize('create', 'user_create');
 
-            if ($request->get('role')) {
+        if ($request->get('role')) {
 
-                $user->roles()->sync($request->get('role'));
+            $user->roles()->sync($request->get('role'));
 
-            } else {
+        } else {
 
-                $user->roles()->sync([]);
+            $user->roles()->sync([]);
 
-            }
-            return redirect()->action('Backend\UsersController@index')->with('sucess', 'User successfully created');
         }
-
+        return redirect()->action('Backend\UsersController@index')->with('sucess', 'User successfully created');
 
     }
 
@@ -156,7 +159,7 @@ class UsersController extends AbstractController
 
         $this->userRepository->delete($id);
 
-        return redirect('/users')->with(['success','messages.success.user_destroy']);
+        return redirect('/users')->with(['success', 'messages.success.user_destroy']);
     }
 
     public function postChangeActiveStatus($id, $status)

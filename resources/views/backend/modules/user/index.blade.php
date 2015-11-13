@@ -14,7 +14,7 @@
 @section('content')
     {!! Breadcrumbs::render('users') !!}
 @section('titlebar')
-    @can('create')
+    @can('create','user_create')
     <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\UsersController@create') }}"
        title="{{ trans('general.user_create') }}">
         {!! Config::get('button.icon-create')!!}</a>
@@ -50,7 +50,7 @@
 
 
                 <td width="50">
-                    @can('edit')
+                    @can('checkAssignedPermission','user_edit')
                     <a class="{{ Config::get('button.btn-edit') }}"
                        title="{{ trans('general.edit') }}"
                        href="{{ action('Backend\UsersController@edit', $user->id) }}"><i
@@ -58,7 +58,7 @@
                     @endcan
                 </td>
                 <td width="50">
-                    @can('change')
+                    @can('checkAssignedPermission','user_change')
                     {!! Form::open(['action' => ['Backend\UsersController@postChangeActiveStatus',
                     $user->id,$user->active], 'method' => 'post']) !!}
 

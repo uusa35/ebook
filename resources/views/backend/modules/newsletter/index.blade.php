@@ -12,6 +12,14 @@
 
 @section('content')
     {!! Breadcrumbs::render('newsletter') !!}
+@section('titlebar')
+    @can('create','newsletter_create')
+    <a class="{{ Config::get('button.btn-create') }}"
+       href="{{ action('Backend\NewsletterController@create') }}"><i
+                class="fa fa-x1 fa-plus icon-material-indigo-200"></i></a>
+    @endcan
+@stop
+
 <div class="panel-body">
     <table class="table table-hover table-stripped" id="newsletter">
         <thead>
@@ -39,12 +47,14 @@
                 </td>
 
                 <td width="80">
+                    @can('checkAssignedPermission','newsletter_delete')
                     {!! Form::open(['action' => ['Backend\NewsletterController@destroy', $subscriber->id], 'method'
                     => 'DELETE']) !!}
                     <button type="submit" class="{{ Config::get('button.btn-delete') }}"
                             title="{{ trans('buttons.role_delete') }}">
                         <i class="fa fa=fw fa-times"></i></button>
                     {!! Form::close() !!}
+                    @endcan
                 </td>
             </tr>
         @endforeach

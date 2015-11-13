@@ -28,8 +28,7 @@ class AbstractController extends Controller
         $counters = [
             'users' => DB::table('users')->count('id'),
             'books' => DB::table('books')->count('id'),
-            'reports' => DB::table('book_report')->count('id'),
-            'favorites' => DB::table('book_user')->count('id'),
+            //'favorites' => DB::table('book_user')->count('id'),
             'messages' => DB::table('messages')->count('id'),
             'categories' => DB::table('fields_categories')->count('id')
         ];
