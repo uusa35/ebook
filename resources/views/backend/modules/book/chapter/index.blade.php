@@ -18,51 +18,6 @@
                 "order": [[0, "asc"]]
             });
 
-            {{--  $('.nav-tabs > li[id^="tab-"]').on('click', function () {
-                  var idVal = $(this).attr('id');
-                  var tabLink = idVal.split('-');
-                  var tabLink = 'step' + tabLink[1];
-                  $.cookie("tabLastSelected", idVal);
-                  $.cookie('TabLastSelected', tabLink);
-              });
-
-              if ($.cookie('tabLastSelected')) {
-                  var idVal = $.cookie('tabLastSelected');
-                  var tabLink = $.cookie('TabLastSelected');
-                  console.log('From Inside If Statement : ' + idVal);
-                  $('#' + idVal + '> a').trigger('click');
-              }
-              else if (!$.cookie('TabLastSelected')) {
-                  $.cookie('TabLastSelected', 'tab-1');
-              }
-          });
-          $('.nav-tabs > li[id^="tab-"]').on('click', function () {
-              var idVal = $(this).attr('id');
-              var tabLink = idVal.split('-');
-              var tabLink = 'step' + tabLink[1];
-              $.cookie("tabLastSelected", idVal);
-              $.cookie('TabLastSelected', tabLink);
-          });
-
-          if ($.cookie('tabLastSelected')) {
-              var idVal = $.cookie('tabLastSelected');
-              var tabLink = $.cookie('TabLastSelected');
-              console.log('From Inside If Statement : ' + idVal);
-              $('#' + idVal + '> a').trigger('click');
-          }
-          else if (!$.cookie('TabLastSelected')) {
-              $.cookie('TabLastSelected', 'tab-1');
-          }
-
-          $('#conditions').click(function () {
-              if ($(this).is(":checked")) {
-                  $('#btncon').removeAttr('disabled');
-              }
-              else if ($(this).is(":not(:checked)")) {
-                  $('#btncon').attr('disabled', 'disabled');
-
-              }
-              --}}
         });
     </script>
 @endsection
