@@ -42,7 +42,7 @@ class AbstractController extends Controller
         $counters = [
 
             'books' => DB::table('books')->where(['author_id' => Auth::id()])->count('id'),
-            'reports' => DB::table('book_user')->where(['user_id'=> Auth::id()])->count('id'),
+            //'reports' => DB::table('book_user')->where(['user_id'=> Auth::id()])->count('id'),
             'favorites' => DB::table('book_user')->count('id'),
             'messages' => DB::table('messages')->where(['user_id'=>Auth::id()])->count('id'),
 

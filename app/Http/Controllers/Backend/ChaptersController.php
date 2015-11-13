@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 class ChaptersController extends Controller
 {
@@ -65,6 +66,8 @@ class ChaptersController extends Controller
      */
     public function store(Requests\CreateChapter $request)
     {
+        $this->authorize('create','chapter_create');
+
         $chapter = $this->chapterRepository->model->create([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
@@ -216,6 +219,7 @@ class ChaptersController extends Controller
 
     public function getUpdateChapterStatus($chapterId, $status)
     {
+
         $chapter = $this->chapterRepository->getById($chapterId)->update([
             'status' => $status
         ]);

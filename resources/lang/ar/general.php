@@ -271,7 +271,7 @@ return [
     'unfollow' => 'الغاء المتابعة',
     'edit_profile' => 'تعديل الصفحة الشخصية',
     'Conditions' => 'الشروط',
-    'drafted' => 'مسودة',
+    'drafted' => 'قيد المراجعة',
     'declined' => 'مرفوض',
     'send_message' => 'انشاء رسالة',
     'all_previews' => 'معاينات',

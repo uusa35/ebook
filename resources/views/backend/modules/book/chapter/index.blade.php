@@ -91,9 +91,7 @@
                     </a></li>
             </ul>
 
-
             <div class="tab-content">
-
 
                 {{--All Chapters--}}
                 <div class="tab-pane" id="step1">
@@ -122,25 +120,39 @@
                                         <td>{{ $chapter->title }}</td>
                                         <td>{{ $chapter->status }}</td>
                                         <td>
-                                            @can('change',$chapter->book->author_id)
-                                            {{-- If the User just created the book --}}
-                                            @if($chapter->status == 'pending')
-                                                <a class="{!! Config::get('button.btn-drafted') !!}"
-                                                   href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'drafted']) }}"
-                                                   title="{{ trans('general.title.go_drafted') }}">
-                                                    {!! Config::get('button.icon-drafted') !!}
-                                                </a>
-                                                {{-- if the user just submitted to admin for approval --}}
-                                            @elseif($chapter->status == 'drafted' && Cache::get('role.Author.'.Auth::id()))
-                                                <a class="{!! Config::get('button.btn-published') !!}"
-                                                   href="#" disabled
-                                                   title="{{ trans('general.title.waiting_for_admin') }}">
-                                                    {!! Config::get('button.icon-published') !!}
-                                                </a>
-                                            @endif
-                                            {{-- if the admin approved the book --}}
-                                            @if(Cache::get('role.Admin.'.Auth::id()))
-                                                @if($chapter->status == 'drafted')
+                                            @if(Cache::get('role.Author.'.Auth::id()))
+                                                @can('change',$chapter->book->author_id)
+                                                {{-- If the User just created the book --}}
+                                                @if($chapter->status == 'pending')
+                                                    <a class="{!! Config::get('button.btn-drafted') !!}"
+                                                       href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'drafted']) }}"
+                                                       title="{{ trans('general.title.go_drafted') }}">
+                                                        {!! Config::get('button.icon-drafted') !!}
+                                                    </a>
+                                                    {{-- if the user just submitted to admin for approval --}}
+                                                @elseif($chapter->status == 'drafted' && Cache::get('role.Author.'.Auth::id()))
+                                                    <a class="{!! Config::get('button.btn-published') !!}"
+                                                       href="#" disabled
+                                                       title="{{ trans('general.title.waiting_for_admin') }}">
+                                                        {!! Config::get('button.icon-published') !!}
+                                                    </a>
+                                                @endif
+                                                @endcan
+                                            @elseif(Cache::get('role.Admin.'.Auth::id()) || Cache::get('role.Editor.'.Auth::id()))
+                                                @if($chapter->status == 'pending')
+                                                    <a class="{!! Config::get('button.btn-drafted') !!}"
+                                                       href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'drafted']) }}"
+                                                       title="{{ trans('general.title.go_drafted') }}">
+                                                        {!! Config::get('button.icon-drafted') !!}
+                                                    </a>
+                                                    {{-- if the user just submitted to admin for approval --}}
+                                                @elseif($chapter->status == 'drafted' && Cache::get('role.Author.'.Auth::id()))
+                                                    <a class="{!! Config::get('button.btn-published') !!}"
+                                                       href="#" disabled
+                                                       title="{{ trans('general.title.waiting_for_admin') }}">
+                                                        {!! Config::get('button.icon-published') !!}
+                                                    </a>
+                                                @elseif($chapter->status == 'drafted')
                                                     <a class="{!! Config::get('button.btn-published') !!}"
                                                        href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'published']) }}"
                                                        title="{{ trans('general.title.go_published') }}">
@@ -161,7 +173,6 @@
                                                     </a>
                                                 @endif
                                             @endif
-                                            @endcan
                                         </td>
                                         <td>
                                             <a class="{!! Config::get('button.btn-edit') !!}"
