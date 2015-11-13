@@ -161,8 +161,9 @@
                                                             <td width='60'>
                                                                 <div class='contentEditableContainer contentImageEditable'>
                                                                     <div class='contentEditable'>
+                                                                        <img src="<?php echo  ?>">
                                                                         <a target='_blank' href="[CLIENTS.WEBSITE]"><img
-                                                                                    src="{{ asset('images/logo.png') }}"
+                                                                                    src="{{ $message->embed('images/logo.png') }}"
                                                                                     alt="Logo" width='60' height='60'
                                                                                     data-default="placeholder"
                                                                                     data-max-width="200"></a>
@@ -292,7 +293,7 @@
                                                                 <div class='contentEditableContainer contentFacebookEditable'>
                                                                     <div class='contentEditable'
                                                                          style='text-align: center;color:#AAAAAA;'>
-                                                                        <img src="{{ asset('images/facebook.png') }}"
+                                                                        <img src="{{ $message->embed('images/facebook.png') }}"
                                                                              alt="facebook" width='40' height='40'
                                                                              data-max-width="40" data-customIcon="true">
                                                                     </div>
@@ -303,7 +304,7 @@
                                                                 <div class='contentEditableContainer contentTwitterEditable'>
                                                                     <div class='contentEditable'
                                                                          style='text-align: center;color:#AAAAAA;'>
-                                                                        <img src="{{ asset('images/twitter.png') }}"
+                                                                        <img src="{{ $message->embed('images/twitter.png') }}"
                                                                              alt="twitter" width='40' height='40'
                                                                              data-max-width="40" data-customIcon="true">
                                                                     </div>
@@ -314,7 +315,7 @@
                                                                 <div class='contentEditableContainer contentImageEditable'>
                                                                     <div class='contentEditable'
                                                                          style='text-align: center;color:#AAAAAA;'>
-                                                                        <img src="{{ asset('images/youtube.png') }}"
+                                                                        <img src="{{ $message->embed('images/youtube.png') }}"
                                                                              alt="Pinterest" width='40' height='40'
                                                                              data-max-width="40">
                                                                     </div>
@@ -325,7 +326,7 @@
                                                                 <div class='contentEditableContainer contentImageEditable'>
                                                                     <div class='contentEditable'
                                                                          style='text-align: center;color:#AAAAAA;'>
-                                                                        <img src="images/instagram.png"
+                                                                        <img src="{{ $message->embed('images/instagram.png') }}
                                                                              alt="Social media" width='40' height='40'
                                                                              data-max-width="40">
                                                                     </div>

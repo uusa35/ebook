@@ -196,7 +196,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
          *                                          newspaper
          *
          ***************************************************************************************************/
-        Route::resource('newsletter', 'Backend\NewsletterController',['only' =>['index','destroy']]);
+        Route::resource('newsletter', 'Backend\NewsletterController',['only' =>['index','destroy','create','store']]);
 
         /***************************************************************************************************
          *                                          Sliders

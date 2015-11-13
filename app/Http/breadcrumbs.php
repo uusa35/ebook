@@ -19,9 +19,18 @@ Breadcrumbs::register('contactus', function ($breadcrumbs) {
     $breadcrumbs->push(trans('general.contactus'), action('Backend\ContactUsController@edit'));
 });
 
+
+/*
+ * newsletter
+ * */
 Breadcrumbs::register('newsletter', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
     $breadcrumbs->push(trans('general.newsletter'), action('Backend\NewsletterController@index'));
+});
+
+Breadcrumbs::register('newsletter_create', function ($breadcrumbs) {
+    $breadcrumbs->parent('newsletter');
+    $breadcrumbs->push(trans('general.newsletter_create'), action('Backend\NewsletterController@index'));
 });
 
 /*

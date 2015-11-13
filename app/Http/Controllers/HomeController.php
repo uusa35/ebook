@@ -38,8 +38,9 @@ class HomeController extends Controller
 
             $message->from('uusa35@gmail.com', 'Contact Us');
             $message->subject('E-Boook.com | Contact Us |' . $data['subject']);
+            $message->priority('high');
+            $message->to(\Cache::get('contactusInfo')->email);
             $message->to('usama.ahmed@live.com');
-            $message->cc('uusa35@gmail.com');
 
         });
 

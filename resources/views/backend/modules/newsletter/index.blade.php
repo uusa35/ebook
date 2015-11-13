@@ -12,6 +12,13 @@
 
 @section('content')
     {!! Breadcrumbs::render('newsletter') !!}
+@section('titlebar')
+    @can('create','newsletter_create')
+    <a class="{{ Config::get('button.btn-create') }}"
+       href="{{ action('Backend\NewsletterController@create') }}"><i
+                class="fa fa-x1 fa-plus icon-material-indigo-200"></i></a>
+    @endcan
+@stop
 
 <div class="panel-body">
     <table class="table table-hover table-stripped" id="newsletter">

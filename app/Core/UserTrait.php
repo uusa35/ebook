@@ -19,6 +19,7 @@ trait UserTrait
     public function getPageTitle($title)
     {
         $title = Config::get('title.' . $title);
+
         return Session::put('title', trans($title));
     }
 

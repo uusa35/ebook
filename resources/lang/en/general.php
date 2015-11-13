@@ -278,7 +278,9 @@ return [
     'book_number' => 'book serial : ',
     'user_edit' => 'edit user',
     'save_draft' => 'save draft',
-    'Newsletter' => 'Newsletter'
+    'Newsletter' => 'Newsletter',
+    'newsletter_create' => 'create new email',
+    'newsletter_delete' => 'delete from newsletter',
 
 
 

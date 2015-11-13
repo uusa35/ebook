@@ -64,7 +64,12 @@ return [
         'create' => 'general.categories_create',
         'show' => 'general.categories_show',
         'edit' => 'general.categories_edit',
-    ]
+    ],
+    'newsletter' => [
+        'index' => 'general.newsletter',
+        'create' => 'general.newsletter_create',
+        'delete' => 'general.newsletter_delete',
+    ],
 
 
 ];
