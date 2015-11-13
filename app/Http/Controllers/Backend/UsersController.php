@@ -99,7 +99,7 @@ class UsersController extends AbstractController
 
         $this->getPageTitle('user.edit');
 
-        $this->authorize('edit', $id);
+        $this->authorize('checkAssignedPermission','user_edit');
 
         $user = $this->userRepository->model->with('roles')->find($id);
 
@@ -119,7 +119,7 @@ class UsersController extends AbstractController
 
         $user = $this->userRepository->model->find($id);
 
-        $this->authorize('update', $user->id);
+        $this->authorize('checkAssignedPermission','user_edit');
 
         $user->update([
 
@@ -155,7 +155,7 @@ class UsersController extends AbstractController
      */
     public function destroy($id)
     {
-        $this->authorize('delete', $id);
+        $this->authorize('checkAssignedPermission','user_delete');
 
         $this->userRepository->delete($id);
 
@@ -164,7 +164,7 @@ class UsersController extends AbstractController
 
     public function postChangeActiveStatus($id, $status)
     {
-        $this->authorize('change', $id);
+        $this->authorize('checkAssignedPermission','user_change');
 
         ($status === '0') ? $newStatus = 1 : $newStatus = 0;
 
@@ -181,7 +181,7 @@ class UsersController extends AbstractController
 
     public function getEditConditions()
     {
-        $this->authorize('edit', \Auth::id());
+        $this->authorize('checkAssignedPermission','user_edit');
 
         $terms = \DB::table('conditions')->first();
 
@@ -190,7 +190,7 @@ class UsersController extends AbstractController
 
     public function postEditConditions()
     {
-        $this->authorize('edit', \Auth::id());
+        $this->authorize('checkAssignedPermission','user_edit');
 
         $instructions = \DB::table('conditions')->update([
             'title_ar' => Input::get('title_ar'),
