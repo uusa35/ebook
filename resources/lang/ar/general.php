@@ -283,6 +283,7 @@ return [
     'book_number' => 'الرقم التعريفي :',
     'user_edit' => 'تعديل البيانات',
     'Newsletter' => 'النشرة البريدية',
+    'save_draft' => 'حفظ مؤقت'
 
 
 
