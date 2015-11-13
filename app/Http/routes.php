@@ -193,7 +193,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
         Route::resource('ads', 'Backend\AdsController');
 
         /***************************************************************************************************
-         *                                          Ads
+         *                                          newspaper
          *
          ***************************************************************************************************/
         Route::resource('newsletter', 'Backend\NewsletterController',['only' =>['index','destroy']]);
