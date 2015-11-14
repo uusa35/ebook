@@ -91,7 +91,8 @@ class AuthUserCollectData
             return $next($request);
         }
 
-        return redirect()->home()->with(['error' => 'messages.error.no_session']);
+        dd('out of scope no session created and no cache created');
+        //return redirect()->home()->with(['error' => 'messages.error.no_session']);
 
     }
 }
