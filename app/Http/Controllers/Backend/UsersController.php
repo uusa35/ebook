@@ -85,7 +85,7 @@ class UsersController extends AbstractController
             $user->roles()->sync([]);
 
         }
-        return redirect()->action('Backend\UsersController@index')->with('sucess', 'User successfully created');
+        return redirect()->action('Backend\UsersController@index')->with(['sucess', 'User successfully created']);
 
     }
 
