@@ -105,7 +105,7 @@ return [
     'to' => 'إلى',
     'tags' => 'علامات',
     'arabic' => 'العربية',
-    'english' => 'الإنجليزية',
+    'english' => 'English',
     'create_book' => 'إنشاء كتاب جديد',
     'create_poem' => 'كتابة أشعار / خواطر',
     'account' => 'حسابي',
@@ -285,6 +285,10 @@ return [
     'Newsletter' => 'النشرة البريدية',
     'save_draft' => 'حفظ مؤقت',
     'under_construction' => 'جاري تحديث الموقع',
+    'total_chapters' => 'إجمالي الفصول',
+    'published_at' => 'تاريخ النشر',
+    'views_counter' => 'عدد المشاهدات',
+    'likes_counter' => 'الإعجاب'
 
 
 

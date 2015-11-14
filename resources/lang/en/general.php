@@ -100,7 +100,7 @@ return [
     'price' => 'price',
     'to' => 'to',
     'tags' => 'tags',
-    'arabic' => 'Arabic',
+    'arabic' => 'العربية',
     'english' => 'English',
     'create_book' => 'Create a Book',
     'create_poem' => 'Write a Poem',
@@ -281,7 +281,8 @@ return [
     'Newsletter' => 'Newsletter',
     'newsletter_create' => 'create new email',
     'newsletter_delete' => 'delete from newsletter',
-    'under_construction' => 'E-Boook site is under construction.'
+    'under_construction' => 'E-Boook site is under construction.',
+
 
 
 

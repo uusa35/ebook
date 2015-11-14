@@ -35,3 +35,9 @@ html, body, h1, h2, h3, h4, h5, span, p, div, table, a, input , .tooltip , tr, t
     height: 34px !important;
     padding: 11px !important;
 }
+
+.breadcrumb > li + li:before {
+    color: #ccc;
+    content: "/ ";
+    padding: 0 5px;
+}
