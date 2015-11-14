@@ -65,8 +65,8 @@ class CreatePdf implements ShouldQueue
         //dd($body);
         // http://ebook.app:8000/images/uploads/books/men6.jpg
 
-        $bodyContent = str_replace('../../../images/', 'images/', $body);
-        $bodyContent = str_replace('../../images/', 'images/', $bodyContent);
+        $bodyContent = str_replace('../../../images/', public_path('images'), $body);
+        $bodyContent = str_replace('../../images/', public_path('images'), $bodyContent);
 
       // dd($bodyContent);
         //$bodyContent = str_replace('../../../../#', '#', $body);
