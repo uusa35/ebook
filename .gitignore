@@ -4,5 +4,6 @@
 /public/images/uploads/*
 /public/images/uploads/avatar
 /AdminLTE-2.3.0
+/storage/httpcache/*
 Homestead.yaml
 .env
