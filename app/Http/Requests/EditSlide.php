@@ -12,7 +12,7 @@ class EditSlide extends Request
      */
     public function authorize()
     {
-        return $this->checkAccessForEachPermission('slider_edit');
+        return true;
     }
 
     /**
