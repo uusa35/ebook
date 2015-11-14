@@ -86,7 +86,11 @@ class AuthController extends AbstractController
     public function getLogout()
     {
         Session::forget('roles');
-        Cache::tags('user.'.Auth::id())->flush();
+        Cache::get('Modules.'.$this->getUserRole().'.'.Auth::id())->flush();
+        Cache::get('Permissions.'.$this->getUserRole().'.'.Auth::id())->flush();
+        Cache::get('Abilities.'.$this->getUserRole().'.'.Auth::id())->flush();
+        Cache::get('role.'.$this->getUserRole().'.'.Auth::id())->flush();
+        Cache::get('role.'.Auth::id())->flush();
         Auth::logout();
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }

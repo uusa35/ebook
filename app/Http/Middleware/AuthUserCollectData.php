@@ -29,7 +29,7 @@ class AuthUserCollectData
 
             $authUserRole = $request->user()->roles()->first();
 
-            Cache::tags('user.'.Auth::id())->put($authUserRole->name, $authUserRole->name, 120);
+            Cache::put($authUserRole->name, $authUserRole->name, 120);
 
             $modules = $authUserRole->perms()->where('level', '=', '1')->get();
 
@@ -47,7 +47,7 @@ class AuthUserCollectData
             /*
              * 'Module.Admin' => [List of Modules]
              * */
-            Cache::tags('user.'.Auth::id())->put('Modules.' . $authUserRole->name.'.'.Auth::id(), array_values($modulesList), 120);
+            Cache::put('Modules.' . $authUserRole->name.'.'.Auth::id(), array_values($modulesList), 120);
 
             //dd(Cache::get('Modules.Admin.'.Auth::id()));
 
@@ -55,7 +55,7 @@ class AuthUserCollectData
             /*
              * 'Permission.Admin' => [List of Permissions]
              * */
-            Cache::tags('user.'.Auth::id())->put('Permissions.' . $authUserRole->name.'.'.Auth::id(), array_values($permissionsList), 120);
+            Cache::put('Permissions.' . $authUserRole->name.'.'.Auth::id(), array_values($permissionsList), 120);
 
 
             /*
@@ -63,22 +63,22 @@ class AuthUserCollectData
              *
              * */
 
-            Cache::tags('user.'.Auth::id())->put('Abilities.' . $authUserRole->name.'.'.Auth::id(), array_values($abilitiesList), 120);
+            Cache::put('Abilities.' . $authUserRole->name.'.'.Auth::id(), array_values($abilitiesList), 120);
 
             /*
              * 'Permission.role_edit' => role_edit
              * */
             foreach ($permissions as $perm) {
 
-                Cache::tags('user.'.Auth::id())->put('Permission.' . $perm->name.'.'.Auth::id(), $perm->name, 120);
+                Cache::put('Permission.' . $perm->name.'.'.Auth::id(), $perm->name, 120);
 
             }
 
             // role.Admin = Admin
-            Cache::tags('user.'.Auth::id())->put('role.' . $authUserRole->name.'.'.Auth::id(), $authUserRole->name, 120);
+            Cache::put('role.' . $authUserRole->name.'.'.Auth::id(), $authUserRole->name, 120);
 
             // role.ID = Admin
-            Cache::tags('user.'.Auth::id())->put('role.'.Auth::id(), $authUserRole->name, 120);
+            Cache::put('role.'.Auth::id(), $authUserRole->name, 120);
 
             Session::put('roles', \Crypt::encrypt(str_random(16)));
 

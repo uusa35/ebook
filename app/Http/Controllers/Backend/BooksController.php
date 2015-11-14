@@ -20,6 +20,7 @@ use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
@@ -387,6 +388,7 @@ class BooksController extends AbstractController
     public function getCreateNewFavoriteList($userId, $bookId)
     {
 
+        dd(Cache::get('Abilities.Admin.'.Auth::id()));
         $checkFavorite = $this->favoriteRepository->model->where(['user_id' => $userId, 'book_id' => $bookId])->first();
 
         if (is_null($checkFavorite)) {
