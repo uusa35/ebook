@@ -48,7 +48,7 @@ class MessagesController extends AbstractController
 
         // All threads that user is participating in
         $threads = $this->thread->forUser($currentUserId)->with('participants', 'messages',
-            'participants.user')->get();
+            'participants.user')->orderBy('created_at')->get();
 
         return view('backend.modules.messenger.index', compact('threads', 'currentUserId'));
     }

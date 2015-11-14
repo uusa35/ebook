@@ -281,6 +281,7 @@ return [
     'Newsletter' => 'Newsletter',
     'newsletter_create' => 'create new email',
     'newsletter_delete' => 'delete from newsletter',
+    'under_construction' => 'E-Boook site is under construction.'
 
 
 

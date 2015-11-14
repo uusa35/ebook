@@ -6,6 +6,7 @@
         <div class="row">
             <div class="col-lg-4 col-lg-offset-4">
                 {{ trans('messages.slider') }}
+
                 <img class="img-responsive thumbnail" src="{{ asset('images/uploads/slide/thumbnail/'.$slide->slide) }}" alt=""/>
             </div>
             <div class="col-lg-6 col-lg-offset-3">

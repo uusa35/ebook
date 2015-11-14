@@ -25,6 +25,8 @@ class SlidersController extends AbstractController
     {
         $this->getPageTitle('slider.index');
 
+        $this->authorize('index', 'Slider');
+
         $allSlides = $this->slider->get();
 
         return view('backend.modules.slider.index', compact('allSlides'));
@@ -73,6 +75,8 @@ class SlidersController extends AbstractController
     {
         $this->getPageTitle('slider.edit');
 
+        $this->authorize('checkAssignedPermission', 'slider_edit');
+
         $slide = $this->slider->where('id', '=', $id)->first();
 
         return view('backend.modules.slider.edit', compact('id', 'slide'));
@@ -86,6 +90,7 @@ class SlidersController extends AbstractController
      */
     public function update(Requests\EditSlide $request)
     {
+        $this->authorize('checkAssignedPermission', 'slider_edit');
 
         $slider = $this->slider->where('id', '=', $request->get('id'))->first();
 
@@ -97,19 +102,19 @@ class SlidersController extends AbstractController
       * Abstract CreateImages Job (Model , $request, FolderName, [FieldsName] , [Default thumbnail sizes] , [Default large sizes]
       * */
 
-        if($request->hasFile('slide')) {
+        if ($request->hasFile('slide')) {
 
-            $updateSlider = $this->dispatch(new CreateImages($slider, $request, 'slide', ['slide'], ['',''], ['1500', '500']));
+            $this->dispatch(new CreateImages($slider, $request, 'slide', ['slide'], ['', ''], ['1500', '500']));
 
         }
 
         if ($slider) {
 
-            return redirect()->action('Backend\SlidersController@index')->with(['success' => trans('sucess.update')]);
+            return redirect()->action('Backend\SlidersController@index')->with(['success' => trans('messages.sucess.update')]);
 
         }
 
-        return redirect()->action('Backend\SlidersController@index')->with(['error' => trans('error.update')]);
+        return redirect()->action('Backend\SlidersController@index')->with(['error' => trans('messages.error.update')]);
 
     }
 

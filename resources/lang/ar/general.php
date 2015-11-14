@@ -283,7 +283,9 @@ return [
     'book_number' => 'الرقم التعريفي :',
     'user_edit' => 'تعديل البيانات',
     'Newsletter' => 'النشرة البريدية',
-    'save_draft' => 'حفظ مؤقت'
+    'save_draft' => 'حفظ مؤقت',
+    'under_construction' => 'جاري تحديث الموقع',
+
 
 
 
