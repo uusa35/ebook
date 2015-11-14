@@ -49,7 +49,7 @@
             <div class="tab-content">
 
                 {{--All Chapters--}}
-                <div class="tab-pane" id="step1">
+                <div class="tab-pane active" id="step1">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
                             <table class="table table-striped table-hover table-condensed" id="chapters_all">
@@ -178,7 +178,7 @@
                 </div>
 
                 {{-- Published Chapters --}}
-                <div class="tab-pane active" id="step2">
+                <div class="tab-pane" id="step2">
                     <div class="row">
                         <div class="col-xs-12 paddingTop10">
                             @if(!is_null($publishedChapters))
