@@ -387,8 +387,6 @@ class BooksController extends AbstractController
      */
     public function getCreateNewFavoriteList($userId, $bookId)
     {
-
-        dd(Cache::get('Abilities.Admin.'.Auth::id()));
         $checkFavorite = $this->favoriteRepository->model->where(['user_id' => $userId, 'book_id' => $bookId])->first();
 
         if (is_null($checkFavorite)) {

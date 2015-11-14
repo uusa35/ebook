@@ -25,7 +25,7 @@ class AuthUserCollectData
         //dd(Cache::get('role.'.Auth::id()));
         //dd(Cache::get('Abilities.Author.'.Auth::id()));
 
-        if (is_null(Session::get('roles'))) {
+        if (Session::has('roles')) {
 
             $authUserRole = $request->user()->roles()->first();
 
@@ -90,6 +90,8 @@ class AuthUserCollectData
 
             return $next($request);
         }
+
+        return redirect()->home()->with(['error' => 'messages.error.no_session']);
 
     }
 }
