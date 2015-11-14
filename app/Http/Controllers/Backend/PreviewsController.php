@@ -51,6 +51,8 @@ class PreviewsController extends AbstractController
         $this->getPageTitle('preview.create');
 
         $chapter = $this->chapterRepository->model->where('id', $chapterId)->with('book')->first();
+
+        $this->authorize('edit',$chapter->book->author_id);
         /*
          * get all users without admin , editors and the author id of the book itself
          * */
@@ -78,6 +80,7 @@ class PreviewsController extends AbstractController
      */
     public function store(Requests\CreatePreview $request)
     {
+
         $users = $request->get('usersList');
 
         $requestFiltered = $request->except(['_token', 'method', 'usersList']);
