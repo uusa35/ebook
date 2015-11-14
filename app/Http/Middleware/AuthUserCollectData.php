@@ -25,7 +25,7 @@ class AuthUserCollectData
         //dd(Cache::get('role.'.Auth::id()));
         //dd(Cache::get('Abilities.Author.'.Auth::id()));
 
-        if (Session::has('roles')) {
+        if (!Session::has('roles')) {
 
             $authUserRole = $request->user()->roles()->first();
 
@@ -91,8 +91,7 @@ class AuthUserCollectData
             return $next($request);
         }
 
-        dd('out of scope no session created and no cache created');
-        //return redirect()->home()->with(['error' => 'messages.error.no_session']);
+        return $next($request)->with(['error' => 'messages.error.no_session']);
 
     }
 }

@@ -85,12 +85,16 @@ class AuthController extends AbstractController
 
     public function getLogout()
     {
-        Session::forget('roles');
-        Cache::get('Modules.'.$this->getUserRole().'.'.Auth::id())->flush();
-        Cache::get('Permissions.'.$this->getUserRole().'.'.Auth::id())->flush();
-        Cache::get('Abilities.'.$this->getUserRole().'.'.Auth::id())->flush();
-        Cache::get('role.'.$this->getUserRole().'.'.Auth::id())->flush();
-        Cache::get('role.'.Auth::id())->flush();
+        //dd('test');
+        Session::flush();
+        if (Cache::get('role.' . Auth::id())) {
+            Cache::get('Modules.' . $this->getUserRole() . '.' . Auth::id())->forget();
+            Cache::get('Permissions.' . $this->getUserRole() . '.' . Auth::id())->forget();
+            Cache::get('Abilities.' . $this->getUserRole() . '.' . Auth::id())->forget();
+            Cache::get('role.' . $this->getUserRole() . '.' . Auth::id())->forget();
+            Cache::get('role.' . Auth::id())->forget();
+        }
+
         Auth::logout();
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
