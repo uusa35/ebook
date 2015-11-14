@@ -17,7 +17,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#booksTable').DataTable({
-                "order": [[0, "asc"]]
+                "order": [["0", "asc"]]
             });
             $('#booksFavorited').DataTable({
                 "order": [[0, "asc"]]

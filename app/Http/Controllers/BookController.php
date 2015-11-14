@@ -54,6 +54,7 @@ class BookController extends AbstractController
         // get 4 published books for index
 
         $recentBooks = $this->bookRepository->getRecentBooks();
+        
 
         // get 4 published and most favorite books for index
         $mostFavoriteBooks = $this->bookRepository->getMostFavorited(4);

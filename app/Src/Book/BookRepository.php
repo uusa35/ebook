@@ -44,7 +44,7 @@ class BookRepository extends AbstractRepository
                     '=', 'published');
             })
             ->with('usersFavorites', 'meta')
-            ->orderBy('books.created_at', 'ASC')
+            ->orderBy('books.created_at', 'DESC')
             ->limit(4)
             ->get();
     }
@@ -58,7 +58,7 @@ class BookRepository extends AbstractRepository
                     '=', 'published');
             })
             ->with('usersFavorites', 'meta')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'DESC')
             ->paginate(8);
     }
 
@@ -72,7 +72,7 @@ class BookRepository extends AbstractRepository
                     '=', 'published');
             })
             ->with('usersLikes', 'meta')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'DESC')
             ->first();
     }
 
@@ -86,7 +86,7 @@ class BookRepository extends AbstractRepository
                     '=', 'published');
             })
             ->with('usersFavorites', 'meta')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'DESC')
             ->paginate(8);
     }
 
