@@ -144,7 +144,6 @@ class ChaptersController extends Controller
             return redirect()->action('Backend\BooksController@show',
                 $request->book_id)->with(['success' => 'messages.success.chapter_update']);
         }
-        dd($chapter);
 
     }
 
