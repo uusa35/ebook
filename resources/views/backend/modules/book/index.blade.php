@@ -275,7 +275,6 @@
                                                 <th class="hidden-xs">{{ trans('general.id') }}</th>
                                                 <th>{{ trans('general.subject') }}</th>
                                                 <th>{{ trans('general.author') }}</th>
-                                                <th>{{ trans('general.remove') }}</th>
                                                 <th>{{ trans('general.send_message') }}</th>
                                                 <th>{{ trans('general.created-at') }}</th>
                                             </tr>
@@ -293,9 +292,7 @@
                                                         <span> {{ $book->author->name }} </span>
 
                                                     </td>
-                                                    <td class="text-center">
-                                                        remove
-                                                    </td>
+
                                                     <td>
                                                         <a class="{!! Config::get('button.btn-send') !!}"
                                                            href="{{ action('Backend\MessagesController@create',['book_id' => $book->id]) }}"

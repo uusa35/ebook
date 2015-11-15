@@ -146,7 +146,7 @@
                                         <td>
                                             <a class="{!! Config::get('button.btn-create') !!}"
                                                title="{{ trans('general.create_preview') }}"
-                                               href="{{ action('Backend\PreviewsController@create',$chapter->idz) }}">
+                                               href="{{ action('Backend\PreviewsController@create',$chapter->id) }}">
                                                 {!! Config::get('button.icon-create') !!}
                                             </a>
                                         </td>
