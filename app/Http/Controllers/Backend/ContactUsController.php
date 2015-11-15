@@ -37,6 +37,8 @@ class ContactUsController extends AbstractController
 
         $contactInfo = $this->contactus->first();
 
+        \Cache::put('contactusInfo', $contactInfo, 1440);
+
         return view('backend.modules.contactus.edit', ['contactInfo' => $contactInfo]);
     }
 

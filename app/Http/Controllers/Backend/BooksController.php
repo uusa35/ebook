@@ -20,9 +20,7 @@ use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 
 
@@ -154,11 +152,6 @@ class BooksController extends AbstractController
 
         return view('backend.modules.book.create',
             ['fieldsCategories' => $fieldsCategories, 'langsCategories' => $langsCategories]);
-
-
-        return redirect()->action('Backend\BooksController@index')->with(['error' => 'messages.error.book_create']);
-
-
     }
 
     /**
@@ -214,7 +207,7 @@ class BooksController extends AbstractController
 
         $this->authorize('change', $book->author_id);
 
-        \Session::put('book_id', $id);
+        Session::put('book_id', $id);
 
         $allChapters = $book->chapters;
 

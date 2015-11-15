@@ -106,6 +106,10 @@ class SlidersController extends AbstractController
 
             $this->dispatch(new CreateImages($slider, $request, 'slide', ['slide'], ['', ''], ['1500', '500']));
 
+            $sliders = $this->slider->all();
+
+            \Cache::put('sliders', $sliders, 1440);
+
         }
 
         if ($slider) {

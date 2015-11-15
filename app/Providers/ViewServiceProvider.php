@@ -18,9 +18,9 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        if (is_null(\Cache::get('fieldsCategories'))
-            && is_null(\Cache::get('contactusInfo'))
-            && is_null(\Cache::get('conditions'))
+        if (is_null(Cache::get('fieldsCategories'))
+            && is_null(Cache::get('contactusInfo'))
+            && is_null(Cache::get('conditions'))
             && is_null(Cache::get('sliders'))
         ) {
 
@@ -45,28 +45,28 @@ class ViewServiceProvider extends ServiceProvider
                     && !is_null($conditions)
                     && !is_null($sliders)
                 ) {
-                    \Cache::put('contactusInfo', $contactusInfo, 20);
-                    \Cache::put('fieldsCategories', $fieldsCategories, 20);
-                    \Cache::put('allAds', $allAds, 20);
-                    \Cache::put('conditions', $conditions, 20);
-                    \Cache::put('sliders', $sliders, 20);
+                    Cache::put('contactusInfo', $contactusInfo, 1440);
+                    Cache::put('fieldsCategories', $fieldsCategories, 20);
+                    Cache::put('allAds', $allAds, 20);
+                    Cache::put('conditions', $conditions, 20);
+                    Cache::put('sliders', $sliders, 1440);
 
                     view()->share([
-                        'contactusInfo' => \Cache::get('contactusInfo'),
-                        'allAds' => \Cache::get('allAds'),
-                        'fieldsCategories' => \Cache::get('fieldsCategories'),
-                        'conditions' => \Cache::get('conditions'),
-                        'sliders' => \Cache::get('sliders')
+                        'contactusInfo' => Cache::get('contactusInfo'),
+                        'allAds' => Cache::get('allAds'),
+                        'fieldsCategories' => Cache::get('fieldsCategories'),
+                        'conditions' => Cache::get('conditions'),
+                        'sliders' => Cache::get('sliders')
                     ]);
                 }
             }
         } else {
             view()->share([
-                'contactusInfo' => \Cache::get('contactusInfo'),
-                'allAds' => \Cache::get('allAds'),
-                'fieldsCategories' => \Cache::get('fieldsCategories'),
-                'conditions' => \Cache::get('conditions'),
-                'sliders' => \Cache::get('sliders')
+                'contactusInfo' => Cache::get('contactusInfo'),
+                'allAds' => Cache::get('allAds'),
+                'fieldsCategories' => Cache::get('fieldsCategories'),
+                'conditions' => Cache::get('conditions'),
+                'sliders' => Cache::get('sliders')
             ]);
         }
 

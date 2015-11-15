@@ -20,11 +20,6 @@ class AuthUserCollectData
      */
     public function handle($request, Closure $next)
     {
-
-        //dd(Cache::get('Modules.Admin.'.Auth::id()));
-        //dd(Cache::get('role.'.Auth::id()));
-        //dd(Cache::get('Abilities.Author.'.Auth::id()));
-
         if (!Session::has('roles')) {
 
             $authUserRole = $request->user()->roles()->first();
