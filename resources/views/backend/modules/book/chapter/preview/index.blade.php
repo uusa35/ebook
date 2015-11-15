@@ -17,7 +17,7 @@
     {!! Breadcrumbs::render('chapter_preview') !!}
 
 @section('titlebar')
-    @can('create')
+    @can('create','preview_create')
     <a class="{{ Config::get('button.btn-create') }}"
        href="{{ action('Backend\PreviewsController@create',$chapterId) }}"
        title="{{ trans('general.preview_create') }}">

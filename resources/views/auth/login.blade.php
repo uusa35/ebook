@@ -50,10 +50,6 @@
                                    href="{{ action('Auth\AuthController@redirectToGithubProvider') }}">
                                     <i class="fa fa-github"></i> {{ trans('buttons.github_login') }}
                                 </a>
-                                <a class="btn btn-social btn-google btn-material-light-blue-400 "
-                                   href="{{ action('Auth\AuthController@redirectToDisqusProvider') }}">
-                                    <i class="fa fa-comments"></i> {{ trans('buttons.disqus_login') }}
-                                </a>
                             </div>
                         </div>
                         <!-- Change this to a button or input when using this as a form -->
