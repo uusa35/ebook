@@ -231,7 +231,7 @@
 
                                                                         {!! $data['name'] !!}
 
-                                                                        <p>{!!{ $data['body'] !!}.</p>
+                                                                        <p>{!! $data['body'] !!}.</p>
                                                                         <hr/>
                                                                         <p>
                                                                             <small>{!! $data['name'] !!} |  {!! $data['email'] !!}</small>
