@@ -1,7 +1,7 @@
 <?php
 
 return array (
-  'success' => 
+  'success' =>
   array (
     'general_message' => 'تمت العملية بنجاح',
     'edit_user' => 'تعد تعديل البيانات بتجاح',
@@ -15,8 +15,9 @@ return array (
     'user_edit' => 'تم تعديل بيانات المستخدم بنجاح',
     'contactus' => 'تمت العملية بنجاح',
     'activated' => 'تم التفعيل بنجاح',
+      'email' => 'تم إرسال الرسائل بنجاح'
   ),
-  'error' => 
+  'error' =>
   array (
     'general_message' => 'خطأ بالنظام ـ لم تتم العملية بنجاح',
     'edit_user' => 'لم تتم العملية بنجاح',
@@ -35,8 +36,9 @@ return array (
     'activated' => 'لم تتم العملية بنجاح',
     'not_active' => 'لم تتم العملية بنجاح، يرجى التواصل مع الإدارة',
     'updated' => 'لم تتم العملية بنجاح',
+      'email' => 'تم إرسال الرسائل بنجاح'
   ),
-  'info' => 
+  'info' =>
   array (
     'no_books_found' => 'لا توجد كتب بهذه القائمة',
     'register' => 'يرجى التسجيل',
@@ -51,13 +53,13 @@ return array (
   'allrights' => 'جميع الحقوق محفوظة للموقع',
   'designed_developed' => 'تم التصميم والتطوير بواسطة',
   'ads' => 'إعلانات',
-  'sucess' => 
+  'sucess' =>
   array (
     'update' => 'تم التحديث بنجاح',
     'change_active_status' => 'تم التغير بنجاح',
   ),
   'slider' => 'سلايدر',
-  'check' => 
+  'check' =>
   array (
     'are_u_sure' => 'يرجى التأكيد ؟',
   ),

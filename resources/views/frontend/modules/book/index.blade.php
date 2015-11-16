@@ -91,7 +91,7 @@
 
                 <div class=" box box-widget widget-user shadow-z-1">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <a class="" href="{!! action('BookController@show',$book->id) }}">
+                    <a class="" href="{!! action('BookController@show',$book->id) !!}">
                         <div class="widget-user-header bg-white"
                              style="background: url('{{ asset('images/uploads/cover/thumbnail/'.$book->cover) }}') center center; background-size: cover;">
                         </div>
@@ -129,7 +129,7 @@
                         <!-- /.row -->
                         <div class="row">
                             <div class="col-lg-12">
-                                <a class="" href="{!! action('BookController@show',$book->id) }}">
+                                <a class="" href="{!! action('BookController@show',$book->id) !!}">
                                 <span class="description-text">
                                     <h5>
                                         <blockquote>
@@ -163,7 +163,7 @@
 
                 <div class=" box box-widget widget-user shadow-z-1">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <a class="" href="{!! action('BookController@show',$book->id) }}">
+                    <a class="" href="{!! action('BookController@show',$book->id) !!}">
                         <div class="widget-user-header bg-white"
                              style="background: url('{{ asset('images/uploads/cover/thumbnail/'.$book->cover) }}') center center; background-size: cover;">
                         </div>
@@ -201,7 +201,7 @@
                         <!-- /.row -->
                         <div class="row">
                             <div class="col-lg-12">
-                                <a class="" href="{!! action('BookController@show',$book->id) }}">
+                                <a class="" href="{!! action('BookController@show',$book->id) !!}">
                                 <span class="description-text">
                                     <h5>
                                         <blockquote>
