@@ -104,7 +104,7 @@ class AdsController extends AbstractController
 
             $allAds = $this->ad->all();
 
-            \Cache::rememberForever('allAds',$allAds);
+            \Cache::forever('allAds',$allAds);
 
             return redirect()->action('Backend\AdsController@index')->with(['success' => trans('sucess.ad-updated')]);
 

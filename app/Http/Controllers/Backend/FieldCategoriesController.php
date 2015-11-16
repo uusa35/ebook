@@ -61,7 +61,7 @@ class FieldCategoriesController extends AbstractController
 
         $fieldsCategories = $this->fieldCategory->all();
 
-        Cache::rememberForever('fieldsCategories', $fieldsCategories);
+        Cache::forever('fieldsCategories', $fieldsCategories);
 
         return redirect()->action('Backend\FieldCategoriesController@index')->with('success', trans('word.create-success-category'));
     }
@@ -113,7 +113,7 @@ class FieldCategoriesController extends AbstractController
 
         $fieldsCategories = $this->fieldCategory->all();
 
-        Cache::rememberForever('fieldsCategories', $fieldsCategories);
+        Cache::forever('fieldsCategories', $fieldsCategories);
 
         return redirect()->back()->with('success', trans('word.create-category-success'));
     }

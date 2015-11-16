@@ -108,7 +108,7 @@ class SlidersController extends AbstractController
 
             $sliders = $this->slider->all();
 
-            \Cache::rememberForever('sliders', $sliders);
+            \Cache::forever('sliders', $sliders);
 
         }
 
