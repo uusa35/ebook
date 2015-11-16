@@ -20,7 +20,8 @@ return [
     ],
 
     'mandrill' => [
-        'secret' => 'ET2EpmbghDxbCI79s-dvNw',
+        //'secret' => 'ET2EpmbghDxbCI79s-dvNw',
+        'secret' => env('MAIL_PASSWORD')
     ],
 
     'ses' => [
