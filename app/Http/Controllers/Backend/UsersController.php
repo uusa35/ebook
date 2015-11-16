@@ -181,7 +181,7 @@ class UsersController extends AbstractController
 
     public function getEditConditions()
     {
-        $this->authorize('checkAssignedPermission','user_edit');
+        $this->authorize('checkAssignedPermission','condition_edit');
 
         $terms = \DB::table('conditions')->first();
 
@@ -190,7 +190,7 @@ class UsersController extends AbstractController
 
     public function postEditConditions()
     {
-        $this->authorize('checkAssignedPermission','user_edit');
+        $this->authorize('checkAssignedPermission','condition_edit');
 
         $instructions = \DB::table('conditions')->update([
             'title_ar' => Input::get('title_ar'),

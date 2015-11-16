@@ -7,7 +7,6 @@ use App\Core\SocialAuthTrait;
 use App\Src\User\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
 use Validator;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -85,8 +84,7 @@ class AuthController extends AbstractController
 
     public function getLogout()
     {
-        //dd('test');
-        Session::flush();
+        \Session::flush();
         if (Cache::get('role.' . Auth::id())) {
             Cache::get('Modules.' . $this->getUserRole() . '.' . Auth::id())->forget();
             Cache::get('Permissions.' . $this->getUserRole() . '.' . Auth::id())->forget();

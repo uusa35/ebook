@@ -97,7 +97,7 @@
                                             <th>{{ trans('general.add') }}</th>
                                             <th>{{ trans('general.active') }}</th>
                                             <th>{{ trans('general.edit') }}</th>
-                                            @if(Cache::get('Modules.Admin.'.Auth::id()))
+                                            @if(Cache::get('Abilities.Admin.'.Auth::id()))
                                                 <th>{{ trans('general.delete') }}</th>
                                             @endif
                                             <th>{{ trans('general.send_message') }}</th>
@@ -142,9 +142,7 @@
                                                     @endcan
                                                 </td>
                                                 <td class="text-center">
-
                                                     @can('change',$book->author_id)
-
                                                     <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}"
                                                        title="{{ ($book->active) ? trans('general.active') : trans('general.not_active') }}"
                                                        href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->author_id,$book->active]) }}">
@@ -166,7 +164,8 @@
                                                     </a>
                                                     @endcan
                                                 </td>
-                                                @can('delete',$book->author_id)
+                                                @if(Cache::get('Modules.Admin.'.Auth::id()))
+                                                    @can('delete',$book->author_id)
                                                     <td class="text-center">
                                                         <button type="button"
                                                                 class="{{ Config::get('button.btn-delete') }}"
@@ -177,7 +176,8 @@
                                                             {!! Config::get('button.icon-delete') !!}
                                                         </button>
                                                     </td>
-                                                @endcan
+                                                    @endcan
+                                                @endif
                                                 <td>
                                                     <a class="{!! Config::get('button.btn-send') !!}"
                                                        href="{{ action('Backend\MessagesController@create',['book_id' => $book->id,'book_serial'=> $book->serial]) }}"
