@@ -8,7 +8,7 @@
 
 @section('styles')
     @parent
-    {{--@include('styles.trumbowyg')--}}
+    {{--@include('styles.trumbowyg'--}})
 @stop
 
 

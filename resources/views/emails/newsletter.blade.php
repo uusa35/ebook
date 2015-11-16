@@ -226,15 +226,15 @@
                                                                          style='text-align: center;'>
                                                                         <h2 style="font-size: 20px;">{{ ucfirst(trans('general.newsletter')) }}</h2>
 
-                                                                        <h2 style="font-size: 20px;">{{ ucfirst($data['title']) }}</h2>
+                                                                        <h2 style="font-size: 20px;">{!! ucfirst($data['title']) !!}</h2>
                                                                         <br>
 
-                                                                        {{ $data['name'] }}
+                                                                        {!! $data['name'] !!}
 
-                                                                        <p>{{ $data['body'] }}.</p>
+                                                                        <p>{!!{ $data['body'] !!}.</p>
                                                                         <hr/>
                                                                         <p>
-                                                                            <small>{{ $data['name'] }} |  {{ $data['email'] }}</small>
+                                                                            <small>{!! $data['name'] !!} |  {!! $data['email'] !!}</small>
                                                                         </p>
                                                                     </div>
                                                                 </div>
