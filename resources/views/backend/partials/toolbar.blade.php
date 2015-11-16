@@ -126,7 +126,7 @@
                              alt="{!! Auth::user()->name !!}" class="user-image">
                         @endif
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs">{{ Auth::user()->name_en }}</span>
+                        <span class="hidden-xs">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- The user image in the menu -->
@@ -140,7 +140,7 @@
                         @endif
 
                         <p>
-                            {{ Auth::user()->name_en }}
+                            {{ Auth::user()->name }}
                             <small>Member since {{ Auth::user()->created_at->format('d-M,Y') }}</small>
                         </p>
                     </li>
