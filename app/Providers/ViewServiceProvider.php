@@ -46,7 +46,7 @@ class ViewServiceProvider extends ServiceProvider
                     && !is_null($sliders)
                 ) {
                     Cache::forever('contactusInfo', $contactusInfo);
-                    Cache::forever('fieldsCategories');
+                    Cache::forever('fieldsCategories', $fieldsCategories);
                     Cache::forever('allAds', $allAds);
                     Cache::forever('conditions', $conditions);
                     Cache::forever('sliders', $sliders);
