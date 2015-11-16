@@ -86,7 +86,8 @@ class AuthUserCollectData
             return $next($request);
         }
 
-        return $next($request)->with(['error' => 'messages.error.no_session']);
+        dd('session roles not created');
+        //return $next($request->with(['error' => 'messages.error.no_session']));
 
     }
 }
