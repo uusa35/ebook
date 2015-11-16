@@ -1,8 +1,6 @@
 <?php namespace App\Http\Controllers\Backend;
 
 use App\Core\AbstractController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class DashboardController extends AbstractController
 {
@@ -20,7 +18,7 @@ class DashboardController extends AbstractController
     public function index()
     {
 
-        if (Session::has('roles')) {
+        if (\Session::has('roles')) {
 
             $this->getPageTitle('dashboard.index');
 
@@ -38,7 +36,7 @@ class DashboardController extends AbstractController
 
         }
 
-        Auth::logout();
+        \Auth::logout();
 
         return redirect()->back()->with(['error' => 'messeages.error.no_auth']);
     }

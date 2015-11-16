@@ -59,6 +59,10 @@ class FieldCategoriesController extends AbstractController
 
         $this->fieldCategory->create($request->except('_token'));
 
+        $fieldsCategories = $this->fieldCategory->all();
+
+        Cache::rememberForever('fieldsCategories', $fieldsCategories);
+
         return redirect()->action('Backend\FieldCategoriesController@index')->with('success', trans('word.create-success-category'));
     }
 
@@ -106,6 +110,10 @@ class FieldCategoriesController extends AbstractController
             'name_ar' => $request->input('name_ar'),
             'name_en' => $request->input('name_en')
         ]);
+
+        $fieldsCategories = $this->fieldCategory->all();
+
+        Cache::rememberForever('fieldsCategories', $fieldsCategories);
 
         return redirect()->back()->with('success', trans('word.create-category-success'));
     }

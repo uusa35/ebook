@@ -201,6 +201,8 @@ class UsersController extends AbstractController
 
         if ($instructions) {
 
+            \Cache::rememberForever('conditions', $instructions);
+
             return redirect()->back()->with(['success' => trans('word.success-updated')]);
         }
 

@@ -46,9 +46,9 @@ class ViewServiceProvider extends ServiceProvider
                     && !is_null($sliders)
                 ) {
                     Cache::put('contactusInfo', $contactusInfo, 1440);
-                    Cache::put('fieldsCategories', $fieldsCategories, 20);
-                    Cache::put('allAds', $allAds, 20);
-                    Cache::put('conditions', $conditions, 20);
+                    Cache::put('fieldsCategories', $fieldsCategories, 1440);
+                    Cache::put('allAds', $allAds, 1440);
+                    Cache::put('conditions', $conditions, 1440);
                     Cache::put('sliders', $sliders, 1440);
 
                     view()->share([
