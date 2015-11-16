@@ -157,6 +157,7 @@ return [
         'Barryvdh\HttpCache\ServiceProvider',
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        'Barryvdh\TranslationManager\ManagerServiceProvider',
 
     ],
 

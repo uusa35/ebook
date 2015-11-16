@@ -147,7 +147,7 @@
                     <!-- Menu Body -->
                     <li class="user-body">
                         <div class="col-xs-4 text-center">
-                            <a href="{{ action('UserController@show',Auth::id()) }}" >{{ trans('general.profile') }}</a>
+                            <a href="{{ action('UserController@show',Auth::id()) }}">{{ trans('general.profile') }}</a>
                         </div>
                         <div class="col-xs-4 text-center">
                             <a href="{{ action('Backend\MessagesController@index') }}">{{ trans('general.inbox') }}</a>
@@ -182,11 +182,19 @@
                             class="fa fa-fw fa-cogs"></i><b class="caret"></b></a>
 
                 <ul class="dropdown-menu">
-                    <li><a href="{{ action('Backend\UsersController@edit',Auth::id()) }}">{{ trans('general.edit_profile') }}</a></li>
+                    <li>
+                        <a href="{{ action('Backend\UsersController@edit',Auth::id()) }}">{{ trans('general.edit_profile') }}</a>
+                    </li>
                     <li class="divider"></li>
                     <li><a href="/lang/{{ (App::getLocale() == 'ar') ? 'en' : 'ar' }}">
                             {{ (App::getLocale() == 'ar') ? trans('general.english') : trans('general.arabic')  }}
                         </a></li>
+                    <li class="divider"></li>
+                    @if(Cache::get('Abilities.Admin.'.Auth::id()) | Cache::get('Abilities.Editor.'.Auth::id()))
+
+                        <li><a href="/backend/translations">{{ trans('general.translations') }}</a></li>
+
+                    @endif
                 </ul>
             </li>
             <li class="well-material-red-A700"><a href="/auth/logout"><i

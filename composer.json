@@ -21,6 +21,7 @@
         "barryvdh/laravel-httpcache": "0.2.x@dev",
         "barryvdh/laravel-ide-helper": "^2.1",
         "barryvdh/laravel-debugbar": "^2.0",
+        "barryvdh/laravel-translation-manager": "0.2.x",
         "guzzlehttp/guzzle": "~5.3|~6.0",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
         "socialiteproviders/google": "^1.1",

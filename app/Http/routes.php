@@ -157,6 +157,11 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
     Route::get('/home', ['as' => 'home', 'uses' => 'Backend\DashboardController@index']);
     Route::get('/dashbaord', 'Backend\DashboardController@index');
 
+    /***************************************************************************************************
+     * translation Module
+     ***************************************************************************************************/
+    //Route::get('/translations', 'Backend\DashboardController@index');
+
 
     // Middleware RolePermissionRouteAccess
     Route::group(['middleware' => 'access'], function () {
