@@ -85,8 +85,13 @@ class AuthUserCollectData
 
             return $next($request);
         }
+        else {
+            Session::flush();
+            Auth::logout();
+            return $next($request);
+        }
 
-        dd('session roles not created');
+        //dd('session roles not created');
         //return $next($request->with(['error' => 'messages.error.no_session']));
 
     }
