@@ -1,17 +1,18 @@
-html, body, h1, h2, h3, h4, h5, span, p, div, table, a, input , .tooltip , tr, td, i, ul {
+html, body, h1, h2, h3, h4, h5, span, p, div, table, a, input, .tooltip, tr, td, i, ul {
     font-family: 'Droid Arabic Kufi', 'Ubuntu';
 }
 
 .navbar-nav {
- margin-right: 60px;
+    margin-right: 60px;
     margin-left: 60px;
 }
+
 .radio, .checkbox {
-    margin-top : 0px !important;
+    margin-top: 0px !important;
 }
 
 .smalltd {
-    width:40px;
+    width: 40px;
 }
 
 .table-details {
@@ -23,9 +24,11 @@ html, body, h1, h2, h3, h4, h5, span, p, div, table, a, input , .tooltip , tr, t
 .table-details td {
     padding: 8px;
 }
+
 .btn {
     z-index: 0 !important;
 }
+
 .navbar-nav {
     margin: 0px !important;
 }
@@ -40,4 +43,55 @@ html, body, h1, h2, h3, h4, h5, span, p, div, table, a, input , .tooltip , tr, t
     color: #ccc;
     content: "/ ";
     padding: 0 5px;
+}
+
+@media (min-width: 1400px) {
+    .container {
+        width: 1437px !important;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1297px !important;
+    }
+}
+
+@media (max-width: 1240px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-text {
+        float: none;
+        margin: 15px 0;
+    }
+    /* since 3.1.0 */
+    .navbar-collapse.collapse.in {
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
 }
