@@ -1,5 +1,5 @@
 APP_ENV=production
-APP_DEBUG=true
+APP_DEBUG=false
 APP_KEY=33r6bFTFNic7PLhYGLM7eTbgEPU7SM8D
 DB_HOST=localhost
 DB_DATABASE=ebooktemp
