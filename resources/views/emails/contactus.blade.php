@@ -161,7 +161,6 @@
                                                             <td width='60'>
                                                                 <div class='contentEditableContainer contentImageEditable'>
                                                                     <div class='contentEditable'>
-                                                                        <img src="<?php echo  ?>">
                                                                         <a target='_blank' href="[CLIENTS.WEBSITE]"><img
                                                                                     src="{{ $message->embed('images/logo.png') }}"
                                                                                     alt="Logo" width='60' height='60'
