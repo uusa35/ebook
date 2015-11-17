@@ -318,7 +318,7 @@
                                                                 <div class='contentEditableContainer contentImageEditable'>
                                                                     <div class='contentEditable'
                                                                          style='text-align: center;color:#AAAAAA;'>
-                                                                        <img src="{{ $message->embed('images/youtube.png') }}"
+                                                                        <img src="{!! $message->embed('images/youtube.png') !!}"
                                                                              alt="youtube" width='40' height='40'
                                                                              data-max-width="40">
                                                                     </div>
@@ -329,7 +329,7 @@
                                                                 <div class='contentEditableContainer contentImageEditable'>
                                                                     <div class='contentEditable'
                                                                          style='text-align: center;color:#AAAAAA;'>
-                                                                        <img src="{{ $message->embed('images/instagram.png') }}"
+                                                                        <img src="{!!  $message->embed('images/instagram.png') !!}"
                                                                              alt='Social media' width='40' height='40'
                                                                              data-max-width='40'>
                                                                     </div>
