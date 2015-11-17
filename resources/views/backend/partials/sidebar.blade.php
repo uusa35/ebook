@@ -1,5 +1,5 @@
 <!-- Left side column. contains the logo and sidebar -->
-<aside class="main-sidebar">
+<aside class="main-sidebar hidden-xs">
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -23,23 +23,23 @@
 
         </div>
         <!-- Sidebar Menu -->
-        <ul class="sidebar-menu">
+        <ul class="sidebar-menu {{ Session::get('pullClass') }}">
 
             @if(Session::has('roles'))
                 @if(Cache::has('Abilities.Admin.'.Auth::id()))
                     @foreach(Cache::get('Modules.Admin.'.Auth::id()) as $module)
                         <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
-                                <span>{{ trans('general.'.$module) }}</span></a></li>
+                                <span>{{ ucfirst(trans('general.'.strtolower($module))) }}</span></a></li>
                     @endforeach
                 @elseif(Cache::has('Abilities.Editor.'.Auth::id()))
                     @foreach(Cache::get('Modules.Editor.'.Auth::id()) as $module)
                         <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
-                                <span>{{ trans('general.'.$module) }}</span></a></li>
+                                <span>{{ ucfirst(trans('general.'.strtolower($module))) }}</span></a></li>
                     @endforeach
                 @elseif(Cache::has('Abilities.Author.'.Auth::id()))
                     @foreach(Cache::get('Modules.Author.'.Auth::id()) as $module)
                         <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
-                                <span>{{ trans('general.'.$module) }}</span></a></li>
+                                <span>{{ ucfirst(trans('general.'.strtolower($module))) }}</span></a></li>
                     @endforeach
                 @endif
             @endif

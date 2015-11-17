@@ -3,6 +3,7 @@
 /resources/assets/bower_components/*
 /public/images/uploads/*
 /public/images/uploads/avatar
+/resources/lang/*
 /AdminLTE-2.3.0
 /storage/httpcache/*
 Homestead.yaml

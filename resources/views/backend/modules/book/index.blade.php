@@ -87,12 +87,11 @@
                                     <table class="table table-striped table-condensed table-hover" id="booksTable">
                                         <thead>
                                         <tr class="well-material-blue-grey-100">
-                                            <th class="hidden-xs">{{ trans('general.serial') }}</th>
-                                            <th>{{ trans('general.title') }}</th>
-                                            <th>{{ trans('general.author') }}</th>
-                                            <th>{{ trans('general.chapters') }}</th>
-                                            <th>{{ trans('general.free') }}</th>
-                                            <th>{{ trans('general.created_at') }}</th>
+                                            <th>{{ trans('general.serial') }}</th>
+                                            <th class="hidden-xs">{{ trans('general.title') }}</th>
+                                            <th class="hidden-xs">{{ trans('general.author') }}</th>
+                                            <th class="hidden-xs">{{ trans('general.chapters') }}</th>
+                                            <th class="hidden-xs">{{ trans('general.created_at') }}</th>
                                             <th>{{ trans('general.view') }}</th>
                                             <th>{{ trans('general.add') }}</th>
                                             <th>{{ trans('general.active') }}</th>
@@ -105,23 +104,20 @@
                                         </thead>
                                         <tbody>
                                         @foreach($books as $book)
-                                            <tr>
-                                                <td class="hidden-xs">{{ $book->serial }}</td>
-                                                <td>
+                                            <tr >
+                                                <td >{{ $book->serial }}</td>
+                                                <td class="hidden-xs">
                                                     <a href="{{ action('Backend\BooksController@show', $book->id) }}">
                                                         {{ $book->title }} </a>
                                                 </td>
-                                                <td>
+                                                <td class="hidden-xs">
                                                     {{ $book->author->name }}
                                                 </td>
-                                                <td>
+                                                <td class="hidden-xs">
                                                     <span> {{ count($book->chapters) }} </span>
 
                                                 </td>
-                                                <td>
-                                                    <span> {{ ($book->free) ? 'free' : 'paid' }} </span>
-                                                </td>
-                                                <td>
+                                                <td class="hidden-xs">
                                                     <span> {{ $book->created_at->format('Y-m-d') }} </span>
                                                 </td>
                                                 <td>
