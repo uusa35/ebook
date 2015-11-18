@@ -4,7 +4,10 @@
 /public/images/uploads/*
 /public/images/uploads/avatar
 /resources/lang/*
-/AdminLTE-2.3.0
+/storage/debugbar/*
+/storage/framework/*
 /storage/httpcache/*
-Homestead.yaml
+/AdminLTE-2.3.0
 .env
+.envDev
+Homestead.yaml
