@@ -21,18 +21,18 @@
         {!! Form::hidden('book_id',$bookId) !!}
 
         <div class="form-group col-md-12">
-            {!! Form::label('preview_start',trans('word.preview-start')) !!} :
+            {!! Form::label('preview_start',trans('general.preview_start')) !!} :
             {!! Form::selectRange('preview_start',1,$total_pages) !!}
         </div>
         <div class="form-group col-md-12">
-            {!! Form::label('preview_start',trans('word.preview-start')) !!} :
+            {!! Form::label('preview_start',trans('general.preview_end')) !!} :
             {!! Form::selectRange('preview_end',1,$total_pages) !!}
         </div>
 
         <div class="form-group col-md-12">
-            {!! Form::label('usersList',trans('word.users')) !!} :
+            {!! Form::label('usersList',trans('general.users')) !!} :
             {!!
-            Form::select('usersList',$usersList,null,['multiple'=>'multiple','name'=>'usersList[]','class'=>'form-control','placeholder'=>trans('word.users'),'id'=>'users'])
+            Form::select('usersList[]',$usersList,null,['multiple'=>'multiple','name'=>'usersList[]','class'=>'form-control','id'=>'users'])
             !!}
         </div>
 

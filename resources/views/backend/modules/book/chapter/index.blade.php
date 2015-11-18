@@ -55,8 +55,8 @@
                             <table class="table table-striped table-hover table-condensed" id="chapters_all">
                                 <thead>
                                 <tr>
-                                    <th>{{ trans('general.id') }}</th>
-                                    <th>{{ trans('general.title') }}</th>
+                                    <th class="hidden-xs">{{ trans('general.id') }}</th>
+                                    <th class="hidden-xs">{{ trans('general.title') }}</th>
                                     <th>{{ trans('general.status') }}</th>
                                     <th>{{ trans('general.change_status') }}</th>
                                     <th>{{ trans('general.edit') }}</th>
@@ -64,15 +64,15 @@
                                     <th>{{ trans('general.create_preview') }}</th>
                                     <th>{{ trans('general.all_previews') }}</th>
                                     <th>{{ trans('general.send_message') }}</th>
-                                    <th>{{ trans('general.total_pages') }}</th>
+                                    <th class="hidden-xs">{{ trans('general.total_pages') }}</th>
                                 </tr>
                                 </thead>
                                 @foreach($allChapters as $chapter)
                                     <tbody>
 
                                     <tr>
-                                        <td>{{ $chapter->id }}</td>
-                                        <td>{{ $chapter->title }}</td>
+                                        <td class="hidden-xs">{{ $chapter->id }}</td>
+                                        <td class="hidden-xs">{{ $chapter->title }}</td>
                                         <td>{{ $chapter->status }}</td>
                                         <td>
                                             @if(Cache::get('role.Author.'.Auth::id()))
@@ -164,7 +164,7 @@
                                                 {!! Config::get('button.icon-send') !!}
                                             </a>
                                         </td>
-                                        <td>
+                                        <td class="hidden-xs">
                                             {{ $chapter->total_pages }}
                                         </td>
 
@@ -185,8 +185,8 @@
                                 <table class="table table-striped table-hover " id="chapters_published">
                                     <thead>
                                     <tr>
-                                        <th>{{ trans('general.id') }}</th>
-                                        <th>{{ trans('general.title') }}</th>
+                                        <th class="hidden-xs">{{ trans('general.id') }}</th>
+                                        <th class="hidden-xs">{{ trans('general.title') }}</th>
                                         <th>{{ trans('general.status') }}</th>
                                         <th>{{ trans('general.change_status') }}</th>
                                         <th>{{ trans('general.edit') }}</th>
@@ -194,15 +194,15 @@
                                         <th>{{ trans('general.create_preview') }}</th>
                                         <th>{{ trans('general.all_previews') }}</th>
                                         <th>{{ trans('general.send_message') }}</th>
-                                        <th>{{ trans('general.total_pages') }}</th>
+                                        <th class="hidden-xs">{{ trans('general.total_pages') }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($publishedChapters as $chapter)
                                         <tr>
 
-                                            <td>{{ $chapter->id }}</td>
-                                            <td>{{ $chapter->title }}</td>
+                                            <td class="hidden-xs">{{ $chapter->id }}</td>
+                                            <td class="hidden-xs">{{ $chapter->title }}</td>
                                             <td>{{ $chapter->status }}</td>
                                             <td>
                                                 @can('change',$chapter->book->author_id)
@@ -262,7 +262,7 @@
                                                     {!! Config::get('button.icon-send') !!}
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td class="hidden-xs">
                                                 {{ $chapter->total_pages }}
                                             </td>
 

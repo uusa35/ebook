@@ -66,7 +66,7 @@ class PreviewsController extends AbstractController
 
         $users = $this->userRepository->allUsersWithoutAdminsAndEditors($chapter->book->author_id);
 
-        $usersList = $users->pluck('name', 'id');
+        $usersList = $users->Lists('name', 'id')->toArray();
 
         return view('backend.modules.book.chapter.preview._create_preview_form',
             compact('chapterId', 'authorId', 'total_pages', 'usersList', 'bookId'));
@@ -97,7 +97,7 @@ class PreviewsController extends AbstractController
             $previewCreated->users()->attach($userId);
         }
 
-        return redirect()->back()->with(['success' => 'success-preview-created']);
+        return redirect()->action('Backend\PreviewsController@index')->with(['success' => 'messages.success.preview_created']);
     }
 
     /**
@@ -125,31 +125,9 @@ class PreviewsController extends AbstractController
 
         }
 
-        return redirect()->back()->with(['error' => trans('word.no-file')]);
+        return redirect()->back()->with(['error' => trans('messages.error.no_file')]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -204,6 +182,6 @@ class PreviewsController extends AbstractController
 
         }
 
-        return redirect()->back()->with(['error' => trans('word.no-file')]);
+        return redirect()->back()->with(['error' => trans('messages.error.no_file')]);
     }
 }

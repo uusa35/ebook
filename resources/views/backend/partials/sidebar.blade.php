@@ -1,5 +1,5 @@
 <!-- Left side column. contains the logo and sidebar -->
-<aside class="main-sidebar hidden-xs">
+<aside class="main-sidebar hidden-xs hidden-sm hidden-md">
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
