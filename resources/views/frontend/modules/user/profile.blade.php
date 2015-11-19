@@ -61,6 +61,7 @@
                 <p class="text-muted text-center"> {{ $user->email }}</p>
 
                 <p class="text-muted text-center"><i class="fa fa-fw fa-phone"></i> : {{  $user->phone }}</p>
+                    
 
                 <p class="text-muted text-center">{{ trans('general.member_since') }}
                     : {{ $user->created_at->format('d-M-Y')}}</p>
@@ -84,7 +85,6 @@
 
                             <b>
                                 <a data-toggle="modal"
-                                   data-target="#followers"
                                    class="btn btn-material-lime-500">
                                     {!! Config::get('button.icon-users') !!} |
                                     {{ trans('general.following') }} | {{ count($user->following) }}
