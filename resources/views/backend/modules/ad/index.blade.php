@@ -1,6 +1,8 @@
 @extends('backend.layouts.dashboard')
 
 @section('content')
+    {!! Breadcrumbs::render('ads') !!}
+
     <div class="panel panel-default">
         <div class="panel-heading">
             {{ trans('general.ads') }}

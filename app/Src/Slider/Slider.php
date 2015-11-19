@@ -13,5 +13,5 @@ class Slider extends AbstractModel
 
     public $table = 'sliders';
 
-    public $fillable = ['slide','caption'];
+    public $fillable = ['slide','caption','url'];
 }

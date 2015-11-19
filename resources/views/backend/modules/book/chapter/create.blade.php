@@ -32,6 +32,7 @@
     @include('backend.partials.buttons.form_btn_create')
     {!! Form::close() !!}
 
+
 </div>
 
 @stop

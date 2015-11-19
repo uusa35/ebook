@@ -23,7 +23,8 @@ class EditSlide extends Request
     public function rules()
     {
         return [
-            'caption' => 'required'
+            'caption' => 'required|min:5',
+            'url' => 'required|min:10|url'
         ];
     }
 }

@@ -8,6 +8,13 @@
 
 @section('styles')
     @parent
+    <style type="text/css">
+        #disqus_thread {
+            width: 80%;
+            margin-right: auto;
+            margin-left:auto;
+        }
+    </style>
     <link rel="stylesheet" href="/css/lightbox.css"/>
 @stop
 
@@ -213,7 +220,9 @@
     @if(Auth::user())
         <div id="disqus_thread"></div>
         @if(!in_array(Auth::id(),$blockedUsersofAuthor,true))
-            @include('frontend.partials.comment')
+            <div class="col-lg-8 col-lg-offset-2">
+                @include('frontend.partials.comment')
+            </div>
         @else
             <div class="row">
                 <div class="alert alert-dismissable alert-warning">

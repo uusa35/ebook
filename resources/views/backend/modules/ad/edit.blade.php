@@ -1,6 +1,8 @@
 @extends('backend.layouts.dashboard')
 
 @section('content')
+    {!! Breadcrumbs::render('ad_edit') !!}
+
 
     <div class="panel-body">
         <div class="row">

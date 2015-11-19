@@ -45,6 +45,7 @@ html, body, h1, h2, h3, h4, h5, span, p, div, table, a, input, .tooltip, tr, td,
     padding: 0 5px;
 }
 
+
 @media (min-width: 1400px) {
     .container {
         width: 1437px !important;

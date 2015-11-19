@@ -176,6 +176,19 @@ Breadcrumbs::register('ad_show', function ($breadcrumbs) {
     $breadcrumbs->push(trans('general.ad_show'), action('Backend\AdsController@show'));
 });
 
+/*
+ * sliders
+ * */
+Breadcrumbs::register('sliders', function ($breadcrumbs) {
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push(trans('general.slider'), action('Backend\SlidersController@index'));
+});
+
+Breadcrumbs::register('slider_edit', function ($breadcrumbs) {
+    $breadcrumbs->parent('sliders');
+    $breadcrumbs->push(trans('general.slider_edit'), action('Backend\SlidersController@edit'));
+});
+
 
 /*
  * messages

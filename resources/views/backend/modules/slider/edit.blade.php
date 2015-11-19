@@ -1,6 +1,7 @@
 @extends('backend.layouts.dashboard')
 
 @section('content')
+    {!! Breadcrumbs::render('slider_edit') !!}
 
     <div class="panel-body">
         <div class="row">
@@ -15,6 +16,10 @@
                 <div class="form-group">
                     {!! Form::label('caption',trans('general.caption')) !!}
                     {!! Form::text('caption',$slide->caption,['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('url',trans('general.url')) !!}
+                    {!! Form::text('url',$slide->url,['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('slide',trans('general.slider')) !!}

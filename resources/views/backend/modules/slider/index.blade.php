@@ -1,6 +1,8 @@
 @extends('backend.layouts.dashboard')
 
 @section('content')
+    {!! Breadcrumbs::render('sliders') !!}
+
     <div class="panel panel-default">
         <div class="panel-heading">
             {{ trans('general.slider') }}
@@ -12,7 +14,8 @@
                         <thead>
                         <tr style="background-color:#E0E0E0;">
                             <th class="hidden-xs">&nbsp;</th>
-                            <th>{{ trans('general.slider') }}</th>
+                            <th>{{ trans('general.caption') }}</th>
+                            <th>{{ trans('general.url') }}</th>
                             <th>{{ trans('general.image') }}</th>
                             <th>{{ trans('general.created_at') }}</th>
                             <th>{{ trans('general.edit') }}</th>
@@ -24,6 +27,9 @@
                                 <td class="hidden-xs">{{ $slide->id }}</td>
                                 <td>
                                     <span>{{ $slide->caption }}</span>
+                                </td>
+                                <td>
+                                    <span>{{ $slide->url }}</span>
                                 </td>
                                 <td>
                                     <img  class="img-responsive" src="{{ asset('images/uploads/slide/thumbnail/'.$slide->slide) }}" alt="" style="width:10%; height:auto;"/>

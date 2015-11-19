@@ -25,7 +25,7 @@
                     {!! Form::hidden('author_id', Auth::id()) !!}
                     {!! Form::label('cover', trans('general.cover') , ['class' => 'control-label']) !!}*
                     {!! Form::file('cover', null,['class' => 'form-control','placeholder'=>
-                    trans('general.cover')]) !!}
+                    trans('general.cover'),'required' => 'required']) !!}
                 </div>
                 {{--<div class="form-group col-md-3 col-lg-3">
                     {!! Form::label('cover_en', trans('general.cover_en') , ['class' => 'control-label']) !!}*

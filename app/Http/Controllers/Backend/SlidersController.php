@@ -95,7 +95,8 @@ class SlidersController extends AbstractController
         $slider = $this->slider->where('id', '=', $request->get('id'))->first();
 
         $slider->update([
-            'caption' => $request->get('caption')
+            'caption' => $request->get('caption'),
+            'url' => $request->get('url')
         ]);
 
         /*

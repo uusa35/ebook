@@ -1,7 +1,7 @@
 <div class="form-group">
     {!! Form::label('name_ar',trans('general.category_ar')) !!}
     {!!
-    Form::text('name_ar',null,['class'=>'form-control'])
+    Form::text('name_ar',null,['class'=>'form-control','required' => 'required'])
     !!}
 </div>
 <div class="form-group">
