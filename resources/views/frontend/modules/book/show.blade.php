@@ -110,7 +110,6 @@
                                     {{ trans('general.read_book') }}
                                 </td>
                                 <td>
-                                    @if(Auth::id())
                                     <button type="button" class="btn btn-material-light-blue-200"
                                             id="view-{{$book->id}}"
                                             title="{{ trans('general.chapters') }}"
@@ -119,14 +118,7 @@
                                         {!! Config::get('button.icon-view') !!}
                                         {{ trans('general.read_book') }}
                                     </button>
-                                    @else
-                                        <a type="button" class="btn btn-material-light-blue-200"
-                                                href="/auth/login"
-                                                title="{{ trans('general.chapters') }}">
-                                            {!! Config::get('button.icon-view') !!}
-                                            {{ trans('general.read_book') }}
-                                        </a>
-                                    @endif
+                                    @include('frontend.modules.book.chapter._chapters_modal')
                                 </td>
                             </tr>
                         </table>

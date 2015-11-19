@@ -67,6 +67,13 @@ Route::post('newsletter',['uses' => 'HomeController@postNewsLetter']);
  * Search
  ***************************************************************************************************/
 Route::post('search', ['uses' => 'BookController@getShowSearchResults']);
+/***************************************************************************************************
+ * Chapters to be available without registeration
+ ***************************************************************************************************/
+Route::get('/books/chapters/pdf/{chapterId}/{chapterUrl}', [
+    'as' => 'backend.books.chapters.pdf.preview',
+    'uses' => 'Backend\ChaptersController@getPdfFile'
+]);
 
 
 
@@ -254,10 +261,10 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
 //        Route::resource('previews','Backend\PreviewsController');
 
     // get the pdf of a preview
-    Route::get('/books/chapters/pdf/{chapterId}/{chapterUrl}', [
+    /*Route::get('/books/chapters/pdf/{chapterId}/{chapterUrl}', [
         'as' => 'backend.books.chapters.pdf.preview',
         'uses' => 'Backend\ChaptersController@getPdfFile'
-    ]);
+    ]);*/
 
 
     Route::get('/book/chapters/pdf/preview/customized/{chapterId}', [

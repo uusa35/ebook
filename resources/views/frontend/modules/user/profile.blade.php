@@ -61,7 +61,7 @@
                 <p class="text-muted text-center"> {{ $user->email }}</p>
 
                 <p class="text-muted text-center"><i class="fa fa-fw fa-phone"></i> : {{  $user->phone }}</p>
-                    
+
 
                 <p class="text-muted text-center">{{ trans('general.member_since') }}
                     : {{ $user->created_at->format('d-M-Y')}}</p>
