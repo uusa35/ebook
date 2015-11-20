@@ -63,6 +63,8 @@ class BeforeAccessModule
             return Session::put('module', $moduleDecrypted);
         }
 
+        return Auth::logout();
+
         dd('out of scope from inside the nextRequest funciton');
     }
 }

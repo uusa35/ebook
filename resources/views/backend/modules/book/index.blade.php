@@ -64,12 +64,12 @@
                     <li id="tab-2"><a href="#step2" data-toggle="tab"><i
                                     class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.favorite') }}
                         </a></li>
-                    @if(Cache::get('Abilities.Admin.'.Auth::id()))
+                    @if(Request::user()->isAdmin())
                         <li id="tab-3"><a href="#step3" data-toggle="tab"><i
                                         class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.report') }}
                             </a></li>
                     @endif
-                    @if(Cache::get('Abilities.Author.'.Auth::id()))
+                    @if(Request::user()->isAuthor())
                         <li id="tab-4"><a href="#step4" data-toggle="tab"><i
                                         class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.preview') }}
                             </a></li>
@@ -96,7 +96,7 @@
                                             <th>{{ trans('general.add') }}</th>
                                             <th>{{ trans('general.active') }}</th>
                                             <th>{{ trans('general.edit') }}</th>
-                                            @if(Cache::get('Abilities.Admin.'.Auth::id()))
+                                            @if(Request::user()->isAdmin())
                                                 <th>{{ trans('general.delete') }}</th>
                                             @endif
                                             <th>{{ trans('general.send_message') }}</th>
@@ -160,7 +160,7 @@
                                                     </a>
                                                     @endcan
                                                 </td>
-                                                @if(Cache::get('Modules.Admin.'.Auth::id()))
+                                                @if(Request::user()->isAdmin())
                                                     @can('delete',$book->author_id)
                                                     <td class="text-center">
                                                         <button type="button"
@@ -260,7 +260,7 @@
                     </div>
 
                     {{--Abuse Reports --}}
-                    @if(Cache::get('Abilities.Admin.'.Auth::id()))
+                    @if(Request::user()->isAdmin())
                         <div class="tab-pane" id="step3">
                             <div class="row">
                                 <div class="col-xs-12 paddingTop10">
@@ -315,7 +315,7 @@
 
                     {{-- Previews for Authors  Only --}}
                     {{--Abuse Reports --}}
-                    @if(Cache::get('Abilities.Author.'.Auth::id()))
+                    @if(Request::user()->isAuthor())
                         <div class="tab-pane" id="step4">
                             <div class="row">
                                 <div class="col-xs-12 paddingTop10">
