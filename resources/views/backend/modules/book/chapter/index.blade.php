@@ -75,66 +75,10 @@
                                         <td class="hidden-xs">{{ $chapter->title }}</td>
                                         <td>{{ $chapter->status }}</td>
                                         <td>
-                                            @if(Cache::get('role.Author.'.Auth::id()))
-                                                @can('change',$chapter->book->author_id)
-                                                {{-- If the User just created the book --}}
-                                                @if($chapter->status == 'pending')
-                                                    <a class="{!! Config::get('button.btn-drafted') !!}"
-                                                       href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'drafted']) }}"
-                                                       title="{{ trans('general.title.go_drafted') }}">
-                                                        {!! Config::get('button.icon-drafted') !!}
-                                                    </a>
-                                                    {{-- if the user just submitted to admin for approval --}}
-                                                @elseif($chapter->status == 'drafted' && Cache::get('role.Author.'.Auth::id()))
-                                                    <a class="{!! Config::get('button.btn-published') !!}"
-                                                       href="#" disabled
-                                                       title="{{ trans('general.title.waiting_for_admin') }}">
-                                                        {!! Config::get('button.icon-published') !!}
-                                                    </a>
-                                                @endif
-                                                @endcan
-                                            @elseif(Cache::get('role.Admin.'.Auth::id()) || Cache::get('role.Editor.'.Auth::id()))
-                                                @if($chapter->status == 'pending')
-                                                    <a class="{!! Config::get('button.btn-drafted') !!}"
-                                                       href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'drafted']) }}"
-                                                       title="{{ trans('general.title.go_drafted') }}">
-                                                        {!! Config::get('button.icon-drafted') !!}
-                                                    </a>
-                                                    {{-- if the user just submitted to admin for approval --}}
-                                                @elseif($chapter->status == 'drafted' && Cache::get('role.Author.'.Auth::id()))
-                                                    <a class="{!! Config::get('button.btn-published') !!}"
-                                                       href="#" disabled
-                                                       title="{{ trans('general.title.waiting_for_admin') }}">
-                                                        {!! Config::get('button.icon-published') !!}
-                                                    </a>
-                                                @elseif($chapter->status == 'drafted')
-                                                    <a class="{!! Config::get('button.btn-published') !!}"
-                                                       href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'published']) }}"
-                                                       title="{{ trans('general.title.go_published') }}">
-                                                        {!! Config::get('button.icon-published') !!}
-                                                    </a>
-                                                @elseif($chapter->status == 'published')
-                                                    <a class="{!! Config::get('button.btn-declined') !!}"
-                                                       href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'declined']) }}"
-                                                       title="{{ trans('general.title.go_pending') }}">
-                                                        {!! Config::get('button.icon-pending') !!}
-                                                    </a>
-                                                    {{-- if the admin approved the book --}}
-                                                @elseif($chapter->status == 'declined')
-                                                    <a class="{!! Config::get('button.btn-pending') !!}"
-                                                       href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'pending']) }}"
-                                                       title="{{ trans('general.title.pending') }}">
-                                                        {!! Config::get('button.icon-pending') !!}
-                                                    </a>
-                                                @endif
-                                            @endif
+                                            @include('backend.partials.buttons._chapter_change_status_btn')
                                         </td>
                                         <td>
-                                            <a class="{!! Config::get('button.btn-edit') !!}"
-                                               title="{{ trans('general.edit') }}"
-                                               href="{{ action('Backend\ChaptersController@edit',['chapter_id' => $chapter->id,'book_id'=>$book->id]) }}">
-                                                {!! Config::get('button.icon-edit') !!}
-                                            </a>
+                                            @include('backend.partials.buttons._chapter_edit_btn')
                                         </td>
                                         <td>
                                             <a class="{!! Config::get('button.btn-view') !!}"
@@ -205,34 +149,10 @@
                                             <td class="hidden-xs">{{ $chapter->title }}</td>
                                             <td>{{ $chapter->status }}</td>
                                             <td>
-                                                @can('change',$chapter->book->author_id)
-                                                {{-- If the User just created the book --}}
-                                                @if($chapter->status == 'pending')
-                                                    <a class="{!! Config::get('button.btn-drafted') !!}" href=""
-                                                       title="{{ trans('general.title.go_drafted') }}">
-                                                        {!! Config::get('button.icon-drafted') !!}
-                                                    </a>
-                                                    {{-- if the user just submitted to admin for approval --}}
-                                                @elseif($chapter->status == 'drafted')
-                                                    <a class="{!! Config::get('button.btn-published') !!}" href=""
-                                                       title="{{ trans('general.title.go_published') }}">
-                                                        {!! Config::get('button.icon-published') !!}
-                                                    </a>
-                                                    {{-- if the admin approved the book --}}
-                                                @elseif($chapter->status == 'published')
-                                                    <a class="{!! Config::get('button.btn-declined') !!}" href=""
-                                                       title="{{ trans('general.title.declined') }}">
-                                                        {!! Config::get('button.icon-declined') !!}
-                                                    </a>
-                                                @endif
-                                                @endcan
+                                                @include('backend.partials.buttons._chapter_change_status_btn')
                                             </td>
                                             <td>
-                                                <a class="{!! Config::get('button.btn-edit') !!}"
-                                                   title="{{ trans('general.edit') }}"
-                                                   href="{{ action('Backend\ChaptersController@edit',['chapter_id' => $chapter->id,'book_id'=>$book->id]) }}">
-                                                    {!! Config::get('button.icon-edit') !!}
-                                                </a>
+                                                @include('backend.partials.buttons._chapter_edit_btn')
                                             </td>
                                             <td>
                                                 <a class="{!! Config::get('button.btn-view') !!}"
@@ -249,10 +169,10 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a class="{!! Config::get('button.btn-view') !!}"
+                                                <a class="{!! Config::get('button.btn-index') !!}"
                                                    title="{{ trans('general.all_previews') }}"
                                                    href="{{ action('Backend\PreviewsController@index',[$chapter->id]) }}">
-                                                    {!! Config::get('button.icon-view') !!}
+                                                    {!! Config::get('button.icon-index') !!}
                                                 </a>
                                             </td>
                                             <td>
@@ -307,39 +227,15 @@
                                     <tbody>
                                     @foreach($pendingChapters as $chapter)
                                         <tr>
-
                                             <td>{{ $chapter->id }}</td>
                                             <td>{{ $chapter->title }}</td>
                                             <td> {{ $chapter->status }}</td>
                                             <td>
-                                                @can('change',$chapter->book->author_id)
-                                                {{-- If the User just created the book --}}
-                                                @if($chapter->status == 'pending')
-                                                    <a class="{!! Config::get('button.btn-drafted') !!}" href=""
-                                                       title="{{ trans('general.title.go_drafted') }}">
-                                                        {!! Config::get('button.icon-drafted') !!}
-                                                    </a>
-                                                    {{-- if the user just submitted to admin for approval --}}
-                                                @elseif($chapter->status == 'drafted')
-                                                    <a class="{!! Config::get('button.btn-published') !!}" href=""
-                                                       title="{{ trans('general.title.go_published') }}">
-                                                        {!! Config::get('button.icon-published') !!}
-                                                    </a>
-                                                    {{-- if the admin approved the book --}}
-                                                @elseif($chapter->status == 'published')
-                                                    <a class="{!! Config::get('button.btn-declined') !!}" href=""
-                                                       title="{{ trans('general.title.declined') }}">
-                                                        {!! Config::get('button.icon-declined') !!}
-                                                    </a>
-                                                @endif
-                                                @endcan
+                                                @include('backend.partials.buttons._chapter_change_status_btn')
                                             </td>
                                             <td>
-                                                <a class="{!! Config::get('button.btn-edit') !!}"
-                                                   title="{{ trans('general.edit') }}"
-                                                   href="{{ action('Backend\ChaptersController@edit',['chapter_id' => $chapter->id,'book_id'=>$book->id]) }}">
-                                                    {!! Config::get('button.icon-edit') !!}
-                                                </a>
+                                                @include('backend.partials.buttons._chapter_edit_btn')
+
                                             </td>
                                             <td>
                                                 <a class="{!! Config::get('button.btn-view') !!}"
@@ -375,7 +271,6 @@
 
                                         </tr>
                                     @endforeach
-
                                     </tbody>
                                 </table>
                             @else
@@ -418,34 +313,10 @@
                                                 <td>{{ $chapter->title }}</td>
                                                 <td>{{ $chapter->status }}</td>
                                                 <td>
-                                                    @can('change',$chapter->book->author_id)
-                                                    {{-- If the User just created the book --}}
-                                                    @if($chapter->status == 'pending')
-                                                        <a class="{!! Config::get('button.btn-drafted') !!}" href=""
-                                                           title="{{ trans('general.title.go_drafted') }}">
-                                                            {!! Config::get('button.icon-drafted') !!}
-                                                        </a>
-                                                        {{-- if the user just submitted to admin for approval --}}
-                                                    @elseif($chapter->status == 'drafted')
-                                                        <a class="{!! Config::get('button.btn-published') !!}" href=""
-                                                           title="{{ trans('general.title.go_published') }}">
-                                                            {!! Config::get('button.icon-published') !!}
-                                                        </a>
-                                                        {{-- if the admin approved the book --}}
-                                                    @elseif($chapter->status == 'published')
-                                                        <a class="{!! Config::get('button.btn-declined') !!}" href=""
-                                                           title="{{ trans('general.title.declined') }}">
-                                                            {!! Config::get('button.icon-declined') !!}
-                                                        </a>
-                                                    @endif
-                                                    @endcan
+                                                    @include('backend.partials.buttons._chapter_change_status_btn')
                                                 </td>
                                                 <td>
-                                                    <a class="{!! Config::get('button.btn-edit') !!}"
-                                                       title="{{ trans('general.edit') }}"
-                                                       href="{{ action('Backend\ChaptersController@edit',['chapter_id' => $chapter->id,'book_id'=>$book->id]) }}">
-                                                        {!! Config::get('button.icon-edit') !!}
-                                                    </a>
+                                                    @include('backend.partials.buttons._chapter_edit_btn')
                                                 </td>
                                                 <td>
                                                     <a class="{!! Config::get('button.btn-view') !!}"
@@ -524,37 +395,10 @@
                                                     <td>{{ $chapter->title }}</td>
                                                     <td> {{ $chapter->status }}</td>
                                                     <td>
-                                                        @can('change',$chapter->book->author_id)
-                                                        {{-- If the User just created the book --}}
-                                                        @if($chapter->status == 'pending')
-                                                            <a class="{!! Config::get('button.btn-drafted') !!}" href=""
-                                                               title="{{ trans('general.title.go_drafted') }}">
-                                                                {!! Config::get('button.icon-drafted') !!}
-                                                                {!! Config::get('button.icon-drafted') !!}
-                                                            </a>
-                                                            {{-- if the user just submitted to admin for approval --}}
-                                                        @elseif($chapter->status == 'drafted')
-                                                            <a class="{!! Config::get('button.btn-published') !!}"
-                                                               href=""
-                                                               title="{{ trans('general.title.go_published') }}">
-                                                                {!! Config::get('button.icon-published') !!}
-                                                            </a>
-                                                            {{-- if the admin approved the book --}}
-                                                        @elseif($chapter->status == 'published')
-                                                            <a class="{!! Config::get('button.btn-declined') !!}"
-                                                               href=""
-                                                               title="{{ trans('general.title.declined') }}">
-                                                                {!! Config::get('button.icon-declined') !!}
-                                                            </a>
-                                                        @endif
-                                                        @endcan
+                                                        @include('backend.partials.buttons._chapter_change_status_btn')
                                                     </td>
                                                     <td>
-                                                        <a class="{!! Config::get('button.btn-edit') !!}"
-                                                           title="{{ trans('general.edit') }}"
-                                                           href="{{ action('Backend\ChaptersController@edit',['chapter_id' => $chapter->id,'book_id'=>$book->id]) }}">
-                                                            {!! Config::get('button.icon-edit') !!}
-                                                        </a>
+                                                        @include('backend.partials.buttons._chapter_edit_btn')
                                                     </td>
                                                     <td>
                                                         <a class="{!! Config::get('button.btn-view') !!}"

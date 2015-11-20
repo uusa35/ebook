@@ -3,6 +3,7 @@
 namespace App\Src\User;
 
 use App\Core\AbstractModel;
+use App\Core\UserTrait;
 use Cmgmyr\Messenger\Traits\Messagable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -18,7 +19,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  */
 class User extends AbstractModel implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, EntrustUserTrait, Messagable;
+    use Authenticatable, Authorizable, CanResetPassword, EntrustUserTrait, Messagable, UserTrait;
 
     /**
      * The database table used by the model.
@@ -77,7 +78,6 @@ class User extends AbstractModel implements AuthenticatableContract, CanResetPas
     {
         return $this->hasMany('App\Src\User\Blocked\Blocked', 'user_id');
     }
-
 
 
 }

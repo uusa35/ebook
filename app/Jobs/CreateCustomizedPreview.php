@@ -87,7 +87,7 @@ class CreateCustomizedPreview extends Job implements SelfHandling
         $this->pdfPreview->Cell(10);
         // Title
 
-        $this->pdfPreview->Cell(0, 5, ($this->chapter->title), 0, 1, 'C');
+        //$this->pdfPreview->Cell(0, 5, ($this->chapter->title), 0, 1, 'C');
         // Line break
         //$this->pdfPreview->Ln(10);
 

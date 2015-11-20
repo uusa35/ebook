@@ -45,7 +45,14 @@ class UserController extends AbstractController
 
         // blocked list of the authenticated user
 
-        $userAuthenticatedBlockedList = $this->userRepository->getById(Auth::id())->blocked->Lists('blocked_id', 'blocked_id')->toArray();
+        $userAuthenticatedBlockedList = $this->userRepository->getById(Auth::id())->blocked->Lists('blocked_id', 'blocked_id');
+
+        if ($userAuthenticatedBlockedList) {
+
+            $userAuthenticatedBlockedList = $userAuthenticatedBlockedList->toArray();
+
+        }
+
 
         $followers = $this->follower->where('user_id', '=', $user->id)->with('user')->get();
 
@@ -61,7 +68,7 @@ class UserController extends AbstractController
         //dd($user);
 
         return view('frontend.modules.user.profile',
-            compact('user', 'userBooks', 'followers', 'userFollowersList', 'userBlockedList', 'userFollowingList','userAuthenticatedBlockedList'));
+            compact('user', 'userBooks', 'followers', 'userFollowersList', 'userBlockedList', 'userFollowingList', 'userAuthenticatedBlockedList'));
     }
 
     public function getUserRole()

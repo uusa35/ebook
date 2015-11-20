@@ -16,6 +16,7 @@
             <i class="fa  fa- fa-xs"></i>
             {{ trans('general.dashboard') }}</a>
     </div>
+
     <div class="navbar-collapse collapse navbar-responsive-collapse">
 
         <ul class="nav navbar-nav">
@@ -34,7 +35,7 @@
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <!-- The user image in the navbar-->
-                    @if(count(Auth::user()->avatar) > 1)
+                    @if(count(Auth::user()->avatar) > 0)
                         <img src="{{ asset('images/uploads/avatar/thumbnail/'.Auth::user()->avatar )}}"
                              class="user-image" alt="User Image">
                     @else
@@ -47,7 +48,7 @@
                 <ul class="dropdown-menu">
                     <!-- The user image in the menu -->
                     <li class="user-header">
-                        @if(count(Auth::user()->avatar) > 1)
+                        @if(count(Auth::user()->avatar) > 0))
                             <img src="{{ asset('images/uploads/avatar/thumbnail/'.Auth::user()->avatar )}}"
                                  class="img-circle" alt="User Image">
                         @else

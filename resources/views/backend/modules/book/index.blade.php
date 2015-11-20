@@ -104,8 +104,8 @@
                                         </thead>
                                         <tbody>
                                         @foreach($books as $book)
-                                            <tr >
-                                                <td >{{ $book->serial }}</td>
+                                            <tr>
+                                                <td>{{ $book->serial }}</td>
                                                 <td class="hidden-xs">
                                                     <a href="{{ action('Backend\BooksController@show', $book->id) }}">
                                                         {{ $book->title }} </a>
@@ -336,7 +336,6 @@
                                             <tbody>
 
                                             @foreach($booksPreviews as $preview)
-
                                                 <tr>
                                                     <td class="hidden-xs">{{ $preview->id }}</td>
                                                     <td>
@@ -351,13 +350,13 @@
                                                     </td>
                                                     <td>
                                                         <a class="{{ Config::get('button.btn-delete') }}"
-                                                           href="{{ action('Backend\PreviewsController@removePreviewfromAuthorList',$preview->id) }}">
+                                                           href="{{ action('Backend\PreviewsController@removePreviewfromAuthorList',$preview->preview_id) }}">
                                                             {!! Config::get('button.icon-delete') !!}
                                                         </a>
                                                     </td>
                                                     <td>
                                                         <a class="{!! Config::get('button.btn-send') !!}"
-                                                           href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id,'chapter_id' => $preview->chapter_id]) }}"
+                                                           href="{{ action('Backend\MessagesController@create',['book_id' => $preview->book_id,'chapter_id' => $preview->chapter_id]) }}"
                                                            title="{{ trans('general.send') }}">
                                                             {!! Config::get('button.icon-send') !!}
                                                         </a>
@@ -366,7 +365,6 @@
                                                         <span> {{ str_limit($preview->created_at,10,'') }} </span>
                                                     </td>
                                                 </tr>
-
                                             @endforeach
                                             </tbody>
                                         </table>
