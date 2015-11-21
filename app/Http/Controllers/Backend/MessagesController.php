@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\Backend;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Http\Requests\CreateMessage;
 use App\Src\User\UserRepository;
 use Carbon\Carbon;
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Session;
 use App\Services\PusherWrapper as Pusher;
 use App\Src\User\User;
 
-class MessagesController extends AbstractController
+class MessagesController extends PrimaryController
 {
 
     /**

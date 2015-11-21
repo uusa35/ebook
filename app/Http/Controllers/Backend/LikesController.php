@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Core\PrimaryController;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
-class LikesController extends Controller
+class LikesController extends PrimaryController
 {
     /**
      * Display a listing of the resource.

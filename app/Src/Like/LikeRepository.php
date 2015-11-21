@@ -8,14 +8,14 @@
 
 namespace App\Src\Like;
 
-use App\Core\AbstractRepository;
+use App\Core\PrimaryRepository;
 
 
 /**
  * App\Src\Favorite\FavoriteRepository
  *
  */
-class LikeRepository extends AbstractRepository
+class LikeRepository extends PrimaryRepository
 {
 
     public function __construct(Like $like)

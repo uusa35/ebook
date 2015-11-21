@@ -52,7 +52,7 @@
                                 <td class="tdtitle">
                                     {{ trans('general.serial') }} :
                                 </td>
-                                <td class="tdtitle">
+                                <td>
                                     {{ $book->serial }}
                                 </td>
                             </tr>
@@ -101,7 +101,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td class="tdtitle">
                                     {{ trans('general.views_counter') }}
                                 </td>
                                 <td>
@@ -109,11 +109,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td> {{ trans('general.likes_counter') }}</td>
+                                <td class="tdtitle"> {{ trans('general.likes_counter') }}</td>
                                 <td> {{ count($book->usersLikes) }}</td>
                             </tr>
                             <tr>
-                                <td>
+                                <td class="tdtitle">
                                     {{ trans('general.read_book') }}
                                 </td>
                                 <td>

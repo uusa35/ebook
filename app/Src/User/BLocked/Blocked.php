@@ -2,10 +2,10 @@
 
 namespace App\Src\User\Blocked;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 use App\Core\UserTrait;
 
-class Blocked extends AbstractModel
+class Blocked extends PrimaryModel
 {
     protected $table = 'user_blocks';
     protected $fillable = ['user_id','blocked_id'];

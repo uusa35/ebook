@@ -2,11 +2,11 @@
 
 namespace App\Src\User\Follower;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 use App\Core\UserTrait;
 
 
-class Follower extends AbstractModel
+class Follower extends PrimaryModel
 {
     protected  $table = 'user_followers';
     protected $fillable = ['user_id','follower_id'];

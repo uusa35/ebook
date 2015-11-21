@@ -1,6 +1,6 @@
 <?php namespace App\Src\Role;
 
-use App\Core\AbstractRepository;
+use App\Core\PrimaryRepository;
 
 
 
@@ -8,7 +8,7 @@ use App\Core\AbstractRepository;
  * App\Src\Role\RoleRepository
  *
  */
-class RoleRepository extends AbstractRepository
+class RoleRepository extends PrimaryRepository
 {
 
     public function __construct(Role $role)

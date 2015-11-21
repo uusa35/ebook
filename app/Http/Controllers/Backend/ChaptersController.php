@@ -2,36 +2,43 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Core\PrimaryController;
+use App\Core\PrimaryEmailService;
 use App\Events\CreateChapter;
 use App\Jobs\CreateChapterPreview;
-use App\Jobs\CreateCustomizedPreview;
 use App\Src\Book\BookRepository;
 use App\Src\Book\Chapter\Chapter;
 use App\Src\Book\Chapter\ChapterRepository;
+use App\Src\User\Follower\Follower;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
 
-class ChaptersController extends Controller
+
+class ChaptersController extends PrimaryController
 {
 
     public $bookRepository;
     public $chapterRepository;
     public $userRepository;
+    public $followers;
+
+    use PrimaryEmailService;
 
     public function __construct(
         BookRepository $bookRepository,
         ChapterRepository $chapterRepository,
-        UserRepository $userRepository
-    ) {
+        UserRepository $userRepository,
+        Follower $followers
+    )
+    {
 
         $this->bookRepository = $bookRepository;
         $this->chapterRepository = $chapterRepository;
         $this->userRepository = $userRepository;
+        $this->followers = $followers;
     }
 
     /**
@@ -51,9 +58,11 @@ class ChaptersController extends Controller
      */
     public function create()
     {
+        $this->getPageTitle('chapter.create');
+
         $bookId = Input::get('book_id');
 
-        $this->authorize('create','chapter_create');
+        $this->authorize('create', 'chapter_create');
 
         return view('backend.modules.book.chapter.create', compact('bookId'));
     }
@@ -66,7 +75,7 @@ class ChaptersController extends Controller
      */
     public function store(Requests\CreateChapter $request)
     {
-        $this->authorize('create','chapter_create');
+        $this->authorize('create', 'chapter_create');
 
         $chapter = $this->chapterRepository->model->create([
             'title' => $request->get('title'),
@@ -98,7 +107,7 @@ class ChaptersController extends Controller
 
         $chapter = $this->chapterRepository->model->with('book')->where(['id' => $id])->first();
 
-        $this->authorize('edit',$chapter->book->author_id);
+        $this->authorize('edit', $chapter->book->author_id);
 
         if ($chapter) {
 
@@ -118,7 +127,7 @@ class ChaptersController extends Controller
 
         $chapter = $this->chapterRepository->model->with('book')->where(['id' => $request->id])->first();
 
-        $this->authorize('edit',$chapter->book->author_id);
+        $this->authorize('edit', $chapter->book->author_id);
 
         $request->merge([
             'url' => rand(1, 9999) . str_random(10) . '.pdf',
@@ -178,30 +187,33 @@ class ChaptersController extends Controller
         ]);
     }
 
-    /*public function getShowNewCustomizedPreviewForAdmin($bookId, $authorId)
-    {
-
-        $book = $this->bookRepository->ShowNewCustomizedPreviewForAdmin($bookId, $authorId);
-
-        return $this->dispatch(new CreateCustomizedPreview($book));
-    }
-
-    public function getShowNewCustomizedPreviewForUsers($bookId, $authorId)
-    {
-
-        $book = $this->bookRepository->ShowNewCustomizedPreviewForUsers($bookId, $authorId);
-
-        return $this->dispatch(new CreateCustomizedPreview($book));
-    }*/
-
+    /**
+     * @param $chapterId
+     * @param $status
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function getUpdateChapterStatus($chapterId, $status)
     {
 
-        $chapter = $this->chapterRepository->getById($chapterId)->update([
+        $chapter = $this->chapterRepository->getWhereId($chapterId);
+
+        $chapterUpdated = $chapter->update([
             'status' => $status
         ]);
 
-        if ($chapter) {
+        $chapter = $chapter->with('book')->first();
+
+        if (\Request::user()->isAuthor() && $status == 'drafted') {
+
+            $this->getSendEmailForDraftedChapter($chapter);
+
+        } elseif ((\Request::user()->isAdmin() || \Request::user()->isEditor()) && $status == 'published') {
+
+            $this->getSendEmailForPublishedChapter($chapter);
+
+        }
+
+        if ($chapterUpdated) {
 
             return redirect()->back()->with(['success' => trans('word.success.chapter_updated')]);
         }
@@ -209,6 +221,10 @@ class ChaptersController extends Controller
         return redirect()->back()->with(['error' => 'word.error.chapter_updated']);
     }
 
+    /**
+     * @param $bookId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function removeReportAbuse($bookId)
     {
 
@@ -216,10 +232,57 @@ class ChaptersController extends Controller
 
         if ($deletedReportAbuse) {
 
-            return redirect()->back()->with(['success' => trans('word.success-report-removed')]);
+            return redirect()->back()->with(['success' => trans('messages.success.removed')]);
 
         }
-        return redirect()->back()->with(['error' => 'word.error-report-removed']);
+        return redirect()->back()->with(['error' => 'messages.error.removed']);
+    }
+
+    public function getSendEmailForDraftedChapter($chapter)
+    {
+
+        $book = $chapter->book;
+
+        $data = [
+            'chapter_title' => $chapter->title,
+            'chapter_id' => $chapter->id,
+            'book_title' => $book->title,
+            'book_id' => $book->id
+        ];
+
+        $this->sendEmailForDraftedChapter($data,$book);
+
+    }
+
+    public function getSendEmailForPublishedChapter($chapter)
+    {
+
+        $emailsFollowingList = $this->getEmailsFollowingList();
+
+        $book = $chapter->book;
+
+        $data = [
+            'chapter_title' => $chapter->title,
+            'chapter_id' => $chapter->id,
+            'book_title' => $book->title,
+            'book_id' => $book->id
+        ];
+
+        $this->sendEmailForPublishedChapter($data,$book,$emailsFollowingList);
+
+    }
+
+
+    public function getEmailsFollowingList()
+    {
+        $user = $this->userRepository->getWhereId(Auth::id())->with('following')->first();
+
+        $followingList = $user->following->Lists('user_id')->toArray();
+
+        $usersFollowingList = $this->userRepository->model->whereIn('id', $followingList)->get();
+
+        return $usersFollowingList->Lists('email')->toArray();
+
     }
 
 }

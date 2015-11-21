@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Core\SocialAuthTrait;
 use App\Src\User\User;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +11,7 @@ use Validator;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
-class AuthController extends AbstractController
+class AuthController extends PrimaryController
 {
     /*
     |--------------------------------------------------------------------------

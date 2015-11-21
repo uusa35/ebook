@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Jobs\CreateImages;
 use App\Src\Advertisement\Advertisement;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
-class AdsController extends AbstractController
+class AdsController extends PrimaryController
 {
     public $ad;
 

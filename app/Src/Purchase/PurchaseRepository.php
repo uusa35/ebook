@@ -8,13 +8,13 @@
 
 namespace App\Src\Purchase;
 
-use App\Core\AbstractRepository;
+use App\Core\PrimaryRepository;
 
 /**
  * App\Src\Purchase\PurchaseRepository
  *
  */
-class PurchaseRepository extends AbstractRepository
+class PurchaseRepository extends PrimaryRepository
 {
 
     public function __construct(Purchase $purchase)

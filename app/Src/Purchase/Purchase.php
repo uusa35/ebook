@@ -2,7 +2,7 @@
 
 namespace App\Src\Purchase;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 use App\Core\LocaleTrait;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Src\Book\Book $book
  * @property-read \App\Src\User\User $user
  */
-class Purchase extends AbstractModel
+class Purchase extends PrimaryModel
 {
     protected $table = 'purchases';
     protected $fillable = ['book_id', 'user_id', 'stage'];

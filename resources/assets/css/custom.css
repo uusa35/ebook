@@ -33,6 +33,10 @@ html, body, h1, h2, h3, h4, h5, span, p, div, table, a, input, .tooltip, tr, td,
     margin: 0px !important;
 }
 
+.tdtitle {
+    max-width: 100px !important;
+}
+
 .btn.btn-fab.btn-fab-mini {
     width: 34px !important;;
     height: 34px !important;

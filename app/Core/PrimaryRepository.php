@@ -12,10 +12,10 @@ namespace App\Core;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Core\AbstractRepository
+ * App\Core\PrimaryRepository
  *
  */
-class AbstractRepository extends Model
+class PrimaryRepository extends Model
 {
 
     use UserTrait;
@@ -31,6 +31,12 @@ class AbstractRepository extends Model
     public function getById($id)
     {
         return $this->model->where('id', '=', $id)->first();
+    }
+
+
+    public function getWhereId($id)
+    {
+        return $this->model->where(['id' => $id]);
     }
 
 

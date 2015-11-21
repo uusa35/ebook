@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Core\AbstractImageService;
+use App\Core\PrimaryImageService;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -37,7 +37,7 @@ class CreateImages extends Job implements SelfHandling
         $this->folderName = $folderName;
         $this->thumbSizes = $thumbSizes;
         $this->largeSizes = $largeSizes;
-        $this->imageService = new AbstractImageService();
+        $this->imageService = new PrimaryImageService();
     }
 
     /**

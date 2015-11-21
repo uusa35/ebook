@@ -1,11 +1,15 @@
 <?php namespace App\Http\Controllers;
 
+use App\Core\PrimaryController;
+use App\Core\PrimaryEmailService;
 use App\Http\Requests\contactusSubmit;
 use App\Http\Requests\PostNewsletter;
 use Illuminate\Support\Facades\Mail;
 
-class HomeController extends Controller
+class HomeController extends PrimaryController
 {
+
+    use PrimaryEmailService;
 
     public function index()
     {
@@ -30,19 +34,10 @@ class HomeController extends Controller
     public function sendContactUs(contactusSubmit $request)
     {
 
-        //$data = $request->except('_token');
-
         $data = $request->all();
 
-        $send = Mail::send('emails.contactus', ['data' => $data], function ($message) use ($data) {
+        $send = $this->sendEmailContactus($data);
 
-            $message->from('uusa35@gmail.com', 'Contact Us');
-            $message->subject('E-Boook.com | Contact Us |' . $data['subject']);
-            $message->priority('high');
-            $message->to(\Cache::get('contactusInfo')->email);
-            $message->to('usama.ahmed@live.com');
-
-        });
 
         if ($send) {
 

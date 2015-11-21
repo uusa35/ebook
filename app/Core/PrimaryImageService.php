@@ -11,7 +11,7 @@ namespace App\Core;
 
 use Illuminate\Support\Str;
 
-class AbstractImageService
+class PrimaryImageService
 {
 
     public function CreateImage($currentImage, $folderName, $thumbResize, $largeResize)

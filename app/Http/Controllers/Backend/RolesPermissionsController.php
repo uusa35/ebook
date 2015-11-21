@@ -1,12 +1,12 @@
 <?php namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Core\PrimaryController;
 use App\Src\Role\RoleRepository as Role;
 use App\Src\Permission\PermissionRepository as Permission;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
-class RolesPermissionsController extends Controller {
+class RolesPermissionsController extends PrimaryController {
 
 	/**
 	 * @var Role

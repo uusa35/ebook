@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Src\User\Blocked\Blocked;
 use App\Src\User\Follower\Follower;
 use App\Src\User\UserRepository;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
-class UserController extends AbstractController
+class UserController extends PrimaryController
 {
 
 
@@ -30,7 +30,7 @@ class UserController extends AbstractController
 
     public function show($id)
     {
-        $user = $this->userRepository->model->where(['id' => $id])->with('followers', 'following', 'blocked')->first();
+        $user = $this->userRepository->getWhereId($id)->with('followers', 'following', 'blocked')->first();
 
 
         // all users that are followed by the profile owner
@@ -44,8 +44,7 @@ class UserController extends AbstractController
         //$userBlockedList = $user->blocked->Lists('blocked_id', 'blocked_id')->toArray();
 
         // blocked list of the authenticated user
-
-        $userAuthenticatedBlockedList = $this->userRepository->getById(Auth::id())->blocked->Lists('blocked_id', 'blocked_id');
+        $userAuthenticatedBlockedList = $user->blocked->Lists('blocked_id','blocked_id');
 
         if ($userAuthenticatedBlockedList) {
 
@@ -53,8 +52,7 @@ class UserController extends AbstractController
 
         }
 
-
-        $followers = $this->follower->where('user_id', '=', $user->id)->with('user')->get();
+        $followers = $this->follower->where(['user_id' => $user->id])->with('user')->get();
 
         $userBooks = $user->books()
             ->whereExists(function ($query) {
@@ -62,10 +60,6 @@ class UserController extends AbstractController
                     '=', 'published');
             })
             ->paginate(5);
-
-        //dd($followers);
-
-        //dd($user);
 
         return view('frontend.modules.user.profile',
             compact('user', 'userBooks', 'followers', 'userFollowersList', 'userBlockedList', 'userFollowingList', 'userAuthenticatedBlockedList'));

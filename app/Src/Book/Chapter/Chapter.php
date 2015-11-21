@@ -2,9 +2,9 @@
 
 namespace App\Src\Book\Chapter;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 
-class Chapter extends AbstractModel
+class Chapter extends PrimaryModel
 {
     protected $guarded = ['id'];
 

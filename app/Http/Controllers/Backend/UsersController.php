@@ -1,19 +1,17 @@
 <?php namespace App\Http\Controllers\Backend;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Http\Requests\CreateUser;
 use App\Http\Requests\EditUser;
 use App\Http\Requests\UpdateUser;
 use App\Jobs\CreateImages;
-use App\Jobs\CreateUserAvatar;
 use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
 
-class UsersController extends AbstractController
+class UsersController extends PrimaryController
 {
 
     /**

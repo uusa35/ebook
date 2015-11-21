@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Http\Requests\CreateCategory;
 use App\Src\Category\Lang\LangCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class LangCategoriesController extends AbstractController
+class LangCategoriesController extends PrimaryController
 {
     public $langCategory;
 

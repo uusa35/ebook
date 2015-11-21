@@ -8,7 +8,7 @@
 namespace App\Src\Book;
 
 
-use App\Core\AbstractRepository;
+use App\Core\PrimaryRepository;
 use App\Src\Book\Chapter\ChapterRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Session;
  * App\Src\Book\BookRepository
  *
  */
-class BookRepository extends AbstractRepository
+class BookRepository extends PrimaryRepository
 {
     public $chapterRepository;
 

@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Jobs\CreateCustomizedPreview;
 use App\Src\Book\Chapter\ChapterRepository;
 use App\Src\Book\Chapter\Preview;
 use App\Src\User\UserRepository;
-use Illuminate\Http\Request;
 use App\Http\Requests;
 
-class PreviewsController extends AbstractController
+class PreviewsController extends PrimaryController
 {
 
     public $chapterRepository;

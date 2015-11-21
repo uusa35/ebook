@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Src\Newsletter\Newsletter;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
-class NewsletterController extends AbstractController
+class NewsletterController extends PrimaryController
 {
 
     protected $newsLetter;
@@ -71,7 +71,7 @@ class NewsletterController extends AbstractController
             \Mail::later(5, 'emails.newsletter', ['data' => $data], function ($message) use ($name, $email, $title) {
 
                 $message->from(\Cache::get('contactusInfo')->email, 'Newsletter - E-boook.com');
-                $message->subject('E-Boook.com | Newsletter |' . $title);
+                $message->subject('E-Boook.com | Newsletter | ' . $title);
                 $message->priority('high');
                 $message->to($email);
                 $message->to('uusa35@gmail.com');

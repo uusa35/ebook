@@ -1,8 +1,7 @@
 <?php namespace App\Http\Controllers;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Http\Requests;
-use App\Src\Advertisement\Advertisement;
 use App\Src\Book\BookRepository;
 use App\Src\Book\Chapter\ChapterRepository;
 use App\Src\Favorite\FavoriteRepository;
@@ -10,10 +9,9 @@ use App\Src\Like\LikeRepository;
 use App\Src\Purchase\PurchaseRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
-class BookController extends AbstractController
+class BookController extends PrimaryController
 {
 
 
@@ -23,7 +21,6 @@ class BookController extends AbstractController
     protected $purchaseRepository;
     protected $chapterRepository;
     protected $likeRepository;
-    protected $ad;
     protected $authUser;
 
     public function __construct(
@@ -31,7 +28,7 @@ class BookController extends AbstractController
         FavoriteRepository $favoriteRepository,
         UserRepository $userRepository,
         PurchaseRepository $purchaseRepository,
-        Advertisement $ad,
+
         ChapterRepository $chapterRepository,
         LikeRepository $likeRepository
     ) {

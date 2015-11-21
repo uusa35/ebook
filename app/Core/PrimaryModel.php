@@ -12,10 +12,10 @@ namespace App\Core;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Core\AbstractModel
+ * App\Core\PrimaryModel
  *
  */
-class AbstractModel extends  Model {
+class PrimaryModel extends  Model {
 
 
 }

@@ -2,13 +2,13 @@
 
 namespace App\Src\Slider;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 
 /**
  * App\Src\Advertisement\Advertisement
  *
  */
-class Slider extends AbstractModel
+class Slider extends PrimaryModel
 {
 
     public $table = 'sliders';

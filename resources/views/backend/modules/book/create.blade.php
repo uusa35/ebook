@@ -33,7 +33,7 @@
                     trans('general.cover_en')
                     ]) !!}
                 </div>--}}
-                <div class="form-group col-md-3 col-lg-3 {{ (Cache::get('Abilities.Admin')) ? '' : 'hidden' }}">
+                <div class="form-group col-md-3 col-lg-3 {{ (Request::user()->isAdmin()) ? '' : 'hidden' }}">
                     <div class="checkbox">
                         {{ trans('general.active') }}
                         <label>

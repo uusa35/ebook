@@ -2,7 +2,7 @@
 
 namespace App\Src\User;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 use App\Core\UserTrait;
 use Cmgmyr\Messenger\Traits\Messagable;
 use Illuminate\Auth\Authenticatable;
@@ -17,7 +17,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|\Config::get('entrust.role')[] $roles
  */
-class User extends AbstractModel implements AuthenticatableContract, CanResetPasswordContract
+class User extends PrimaryModel implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword, EntrustUserTrait, Messagable, UserTrait;
 

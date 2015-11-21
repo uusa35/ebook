@@ -11,7 +11,7 @@
         {!! Form::model($user, ['action' => ['Backend\UsersController@update', $user->id], 'method' =>
         'PATCH','files'=>'true','class'=>'form-vertical']) !!}
 
-        @if(Cache::get('Abilities.Author'))
+        @if(Request::user()->isAuthor())
         <div class="form-group">
             {!! Form::label('email', trans('general.email')) !!}
             {!! Form::text('email', null, ['class' => 'form-control']) !!}
@@ -37,7 +37,7 @@
             {!! Form::label('avatar', trans('general.avatar')) !!}
             {!! Form::file('avatar', null, ['class' => 'form-control']) !!}
         </div>
-        @if(Cache::get('Abilities.Admin.'.Auth::id()))
+        @if(Request::user()->isAdmin())
         <div class="form-group">
             <label for="">Roles</label>
 

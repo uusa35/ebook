@@ -8,13 +8,14 @@
             {!! Config::get('button.icon-drafted') !!}
         </a>
         {{-- if the user just submitted to admin for approval --}}
-    @elseif($chapter->status == 'drafted')
+   {{-- @elseif($chapter->status == 'drafted')
         <a class="{!! Config::get('button.btn-published') !!}"
            href="#" disabled
            title="{{ trans('general.title.waiting_for_admin') }}">
             {!! Config::get('button.icon-published') !!}
         </a>
-    @endif
+    @endif--}}
+        @endif
     @endcan
 @elseif(Request::user()->isAdmin() || Request::user()->isEditor())
     @if($chapter->status == 'pending')
@@ -24,12 +25,6 @@
             {!! Config::get('button.icon-drafted') !!}
         </a>
         {{-- if the user just submitted to admin for approval --}}
-    @elseif($chapter->status == 'drafted' && Request::user()->isAuthor())
-        <a class="{!! Config::get('button.btn-published') !!}"
-           href="#" disabled
-           title="{{ trans('general.title.waiting_for_admin') }}">
-            {!! Config::get('button.icon-published') !!}
-        </a>
     @elseif($chapter->status == 'drafted')
         <a class="{!! Config::get('button.btn-published') !!}"
            href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'published']) }}"

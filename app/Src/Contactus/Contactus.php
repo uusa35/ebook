@@ -2,7 +2,7 @@
 
 namespace App\Src\Contactus;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 use Illuminate\Support\Facades\Cache;
 
 
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
  * App\Src\Contactus\Contactus
  *
  */
-class Contactus extends AbstractModel
+class Contactus extends PrimaryModel
 {
     //
     protected $table = 'contactus';

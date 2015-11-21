@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 
-class AbstractController extends Controller
+class PrimaryController extends Controller
 {
 
     public $requestedRoute;

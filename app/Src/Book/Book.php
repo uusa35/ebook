@@ -1,6 +1,6 @@
 <?php namespace App\Src\Book;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 use App\Core\LocaleTrait;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Src\User\User[] $users_orders
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Src\Favorite\Favorite[] $favorites
  */
-class Book extends AbstractModel
+class Book extends PrimaryModel
 {
     //
     use LocaleTrait;

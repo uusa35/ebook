@@ -2,12 +2,12 @@
 
 namespace App\Src\Book\Chapter;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
-class Preview extends AbstractModel
+class Preview extends PrimaryModel
 {
     protected $table = 'chapter_previews';
 

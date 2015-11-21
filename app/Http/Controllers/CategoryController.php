@@ -1,10 +1,10 @@
 <?php namespace App\Http\Controllers;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Src\Book\BookRepository;
 use App\Http\Requests;
 
-class CategoryController extends AbstractController
+class CategoryController extends PrimaryController
 {
     public $bookRepository;
 

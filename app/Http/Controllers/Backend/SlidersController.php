@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Jobs\CreateImages;
 use App\Http\Requests;
 use App\Src\Slider\Slider;
 
-class SlidersController extends AbstractController
+class SlidersController extends PrimaryController
 {
     public $slider;
 

@@ -2,10 +2,10 @@
 
 namespace App\Src\Newsletter;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 
 
-class Newsletter extends AbstractModel
+class Newsletter extends PrimaryModel
 {
 
     protected $table = 'newsletter';

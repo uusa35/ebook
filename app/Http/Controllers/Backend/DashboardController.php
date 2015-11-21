@@ -1,8 +1,8 @@
 <?php namespace App\Http\Controllers\Backend;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 
-class DashboardController extends AbstractController
+class DashboardController extends PrimaryController
 {
 
     /**

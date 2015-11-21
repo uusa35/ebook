@@ -1,13 +1,13 @@
 <?php namespace App\Http\Controllers\Backend;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Src\Permission\PermissionRepository;
 use App\Src\Role\RoleRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 
-class PermissionsController extends AbstractController
+class PermissionsController extends PrimaryController
 {
 
     private $roleRepository;

@@ -8,14 +8,14 @@
 
 namespace App\Src\Favorite;
 
-use App\Core\AbstractRepository;
+use App\Core\PrimaryRepository;
 
 
 /**
  * App\Src\Favorite\FavoriteRepository
  *
  */
-class FavoriteRepository extends AbstractRepository
+class FavoriteRepository extends PrimaryRepository
 {
 
     public function __construct(Favorite $favorite)

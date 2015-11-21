@@ -29,6 +29,9 @@
                             class="fa fa-xs fa-fw fa-language"></i> {{ trans('general.arabic') }}
                 </a>
             </li>
+            <li class="visible-xs well-material-red-A700">
+                <a href="{{ URL::to('auth/logout') }}" class="">{{ trans('general.logout') }}</a>
+            </li>
 
             {{----}}
             <li class="dropdown user user-menu hidden-xs">
@@ -58,7 +61,7 @@
 
                         <p>
                             {{ Auth::user()->name }}
-                            <small>Member since {{ Auth::user()->created_at->format('d-M,Y') }}</small>
+                            <small>Member since {{  Auth::user()->created_at->format('d-M,Y') }}</small>
                         </p>
                     </li>
                     <!-- Menu Body -->

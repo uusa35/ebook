@@ -9,9 +9,9 @@
 namespace App\Src\Book\Chapter;
 
 
-use App\Core\AbstractRepository;
+use App\Core\PrimaryRepository;
 
-class ChapterRepository extends AbstractRepository
+class ChapterRepository extends PrimaryRepository
 {
 
     public function __construct(Chapter $chapter)

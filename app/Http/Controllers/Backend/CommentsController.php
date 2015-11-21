@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Core\PrimaryController;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
-class CommentsController extends Controller
+class CommentsController extends PrimaryController
 {
     /**
      * Display a listing of the resource.

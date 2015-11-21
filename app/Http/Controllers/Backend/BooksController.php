@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Http\Requests;
 use App\Http\Requests\CreateBook;
 use App\Http\Requests\UpdateBook;
@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Session;
  * Class AdminBookControllerU
  * @package App\Http\Controllers\Admin
  */
-class BooksController extends AbstractController
+class BooksController extends PrimaryController
 {
 
     protected $gate;
@@ -187,7 +187,7 @@ class BooksController extends AbstractController
             // create a cover
             $this->CreateBookCover($request, $book);
 
-            return redirect()->action('Backend\BooksController@index')->with(['success' => trans('messages.success.created')]);
+            return redirect()->action('Backend\ChaptersController@create',['book_id' => $book->id])->with(['success' => trans('messages.success.created')]);
         }
 
         return redirect()->back()->with(['error' => trans('messages.error.created')]);

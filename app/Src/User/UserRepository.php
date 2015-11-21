@@ -1,13 +1,13 @@
 <?php namespace App\Src\User;
 
-use App\Core\AbstractRepository;
+use App\Core\PrimaryRepository;
 
 
 /**
  * App\Src\User\UserRepository
  *
  */
-class UserRepository extends AbstractRepository
+class UserRepository extends PrimaryRepository
 {
 
 

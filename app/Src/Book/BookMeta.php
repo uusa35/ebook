@@ -2,9 +2,9 @@
 
 namespace App\Src\Book;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 
-class BookMeta extends AbstractModel
+class BookMeta extends PrimaryModel
 {
     //
     protected $table = 'book_metas';

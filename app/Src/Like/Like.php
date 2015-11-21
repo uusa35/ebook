@@ -2,14 +2,14 @@
 
 namespace App\Src\Like;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 
 
 /**
  * App\Src\Favorite\Favorite
  *
  */
-class Like extends AbstractModel
+class Like extends PrimaryModel
 {
     //
     protected $table = "book_likes";

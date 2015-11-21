@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Core\AbstractController;
+use App\Core\PrimaryController;
 use App\Http\Requests\CreateCategory;
 use App\Src\Category\Field\FieldCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class FieldCategoriesController extends AbstractController
+class FieldCategoriesController extends PrimaryController
 {
     public $fieldCategory;
 

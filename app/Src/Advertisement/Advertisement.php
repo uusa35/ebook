@@ -2,9 +2,9 @@
 
 namespace App\Src\Advertisement;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 
-class Advertisement extends AbstractModel
+class Advertisement extends PrimaryModel
 {
 
     public $table = 'ads';

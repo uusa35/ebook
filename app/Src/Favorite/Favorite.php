@@ -2,14 +2,14 @@
 
 namespace App\Src\Favorite;
 
-use App\Core\AbstractModel;
+use App\Core\PrimaryModel;
 
 
 /**
  * App\Src\Favorite\Favorite
  *
  */
-class Favorite extends AbstractModel
+class Favorite extends PrimaryModel
 {
     //
     protected $table = "book_user";
