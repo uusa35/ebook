@@ -150,9 +150,11 @@ class UsersController extends PrimaryController
 
         if($this->isAuthor()) {
 
+            Session::forget('module');
+
             return redirect()->action('Backend\DashboardController@index')->with(['success' => trans('messages.success.edited')]);
         }
-        
+
         return redirect()->action('Backend\UsersController@index')->with(['success' => trans('messages.success.edited')]);
 
     }
