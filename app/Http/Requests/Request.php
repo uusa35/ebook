@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 
 abstract class Request extends FormRequest
 {
-
+/*
     public function checkAccessForEachPermission($permission) {
 
         $role = Cache::get('role.'.Auth::id());
@@ -21,5 +21,5 @@ abstract class Request extends FormRequest
         }
 
         return false;
-    }
+    }*/
 }

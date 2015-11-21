@@ -92,12 +92,12 @@ class UsersController extends PrimaryController
      *
      * @return \Illuminate\View\View
      */
-    public function edit($id, EditUser $request)
+    public function edit($id)
     {
 
         $this->getPageTitle('user.edit');
 
-        $this->authorize('checkAssignedPermission','user_edit');
+        $this->authorize('edit', Auth::id());
 
         $user = $this->userRepository->model->with('roles')->find($id);
 
@@ -117,7 +117,7 @@ class UsersController extends PrimaryController
 
         $user = $this->userRepository->model->find($id);
 
-        $this->authorize('checkAssignedPermission','user_edit');
+        $this->authorize('edit', Auth::id());
 
         $user->update([
 
@@ -153,7 +153,7 @@ class UsersController extends PrimaryController
      */
     public function destroy($id)
     {
-        $this->authorize('checkAssignedPermission','user_delete');
+        $this->authorize('checkAssignedPermission', 'user_delete');
 
         $this->userRepository->delete($id);
 
@@ -162,7 +162,7 @@ class UsersController extends PrimaryController
 
     public function postChangeActiveStatus($id, $status)
     {
-        $this->authorize('checkAssignedPermission','user_change');
+        $this->authorize('checkAssignedPermission', 'user_change');
 
         ($status === '0') ? $newStatus = 1 : $newStatus = 0;
 
@@ -179,7 +179,7 @@ class UsersController extends PrimaryController
 
     public function getEditConditions()
     {
-        $this->authorize('checkAssignedPermission','condition_edit');
+        $this->authorize('checkAssignedPermission', 'condition_edit');
 
         $terms = \DB::table('conditions')->first();
 
@@ -188,7 +188,7 @@ class UsersController extends PrimaryController
 
     public function postEditConditions()
     {
-        $this->authorize('checkAssignedPermission','condition_edit');
+        $this->authorize('checkAssignedPermission', 'condition_edit');
 
         $instructions = \DB::table('conditions')->update([
             'title_ar' => Input::get('title_ar'),
