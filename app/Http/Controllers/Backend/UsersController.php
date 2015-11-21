@@ -148,7 +148,12 @@ class UsersController extends PrimaryController
             $user->roles()->sync([]);
         }
 
-        return redirect()->action('Backend\UsersController@index')->with(['success' => trans('messages.success.user_edit')]);
+        if($this->isAuthor()) {
+
+            return redirect()->action('Backend\DashboardController@index')->with(['success' => trans('messages.success.edited')]);
+        }
+        
+        return redirect()->action('Backend\UsersController@index')->with(['success' => trans('messages.success.edited')]);
 
     }
 
