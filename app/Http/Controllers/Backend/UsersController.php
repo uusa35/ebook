@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUser;
 use App\Jobs\CreateImages;
 use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
