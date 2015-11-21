@@ -31,7 +31,6 @@ trait PrimaryEmailService
 
     public function sendEmailForDraftedChapter($data, $book)
     {
-        dd('test');
         Mail::later(1, 'emails._new_drafted_chapter', ['data' => $data], function ($message) use ($book) {
             $message->from(\Cache::get('contactusInfo')->email, 'E-boook.com');
             $message->subject('E-Boook.com | New Drafted Book | ' . $book->title);
