@@ -7,7 +7,6 @@ use App\Http\Requests\UpdateUser;
 use App\Jobs\CreateImages;
 use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
@@ -98,7 +97,9 @@ class UsersController extends PrimaryController
 
         $this->getPageTitle('user.edit');
 
-        $this->authorize('edit', Auth::id());
+        Session::put('module','Users');
+
+        $this->authorize('edit',$id);
 
         $user = $this->userRepository->model->with('roles')->find($id);
 
@@ -118,7 +119,9 @@ class UsersController extends PrimaryController
 
         $user = $this->userRepository->model->find($id);
 
-        $this->authorize('edit', Auth::id());
+        Session::put('module','Users');
+
+        $this->authorize('edit',$id);
 
         $user->update([
 
