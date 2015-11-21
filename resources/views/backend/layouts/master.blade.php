@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>E-Boook.com</title>
     @section('styles')
         @include('styles.stylesheets')
     @show

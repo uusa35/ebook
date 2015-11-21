@@ -232,7 +232,7 @@
                                                                         <br>
                                                                         <hr/>
                                                                         <p>
-                                                                            <a href="{{ app_path('frontend/book/'.$data['book_id']) }}">View Book</a>
+                                                                            <a href="http://ebook.ideasowners.net/frontend/book/{{ $data['book_id'] }}">View Book</a>
                                                                         </p>
                                                                     </div>
                                                                 </div>
