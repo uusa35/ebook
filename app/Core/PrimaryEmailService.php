@@ -23,7 +23,7 @@ trait PrimaryEmailService
             $message->subject('E-Boook.com | Contact Us | ' . $data['subject']);
             $message->priority('high');
             $message->to(\Cache::get('contactusInfo')->email);
-            $message->to('usama.ahmed@live.com');
+            $message->to('uusa35@gmail.com');
 
         });
 
@@ -36,6 +36,7 @@ trait PrimaryEmailService
             $message->subject('E-Boook.com | New Drafted Book | ' . $book->title);
             $message->priority('high');
             $message->to(\Cache::get('contactusInfo')->email);
+            $message->cc('uusa35@gmail.com');
         });
     }
 
@@ -48,6 +49,7 @@ trait PrimaryEmailService
             $message->subject('E-Boook.com | New Published Book | ' . $book->title);
             $message->priority('high');
             $message->to($emailsFollowingList, \Cache::get('contactusInfo')->email);
+            $message->to('uusa35@gmail.com');
         });
 
     }
