@@ -31,7 +31,7 @@ trait PrimaryEmailService
 
     public function sendEmailForDraftedChapter($data, $book)
     {
-        Mail::later(1, 'emails._new_drafted_chapter', ['data' => $data], function ($message) use ($book) {
+        Mail::later(100, 'emails._new_drafted_chapter', ['data' => $data], function ($message) use ($book) {
             $message->from(\Cache::get('contactusInfo')->email, 'E-boook.com');
             $message->subject('E-Boook.com | New Drafted Book | ' . $book->title);
             $message->priority('high');
@@ -43,7 +43,7 @@ trait PrimaryEmailService
     public function sendEmailForPublishedChapter($data, $book, $emailsFollowingList)
     {
 
-        Mail::later(1, 'emails._new_published_chapter', ['data' => $data], function ($message) use ($book, $emailsFollowingList) {
+        Mail::later(100, 'emails._new_published_chapter', ['data' => $data], function ($message) use ($book, $emailsFollowingList) {
             $message->from(\Cache::get('contactusInfo')->email, 'E-boook.com');
             $message->subject('E-Boook.com | New Published Book | ' . $book->title);
             $message->priority('high');

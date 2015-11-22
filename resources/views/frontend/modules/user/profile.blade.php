@@ -120,21 +120,22 @@
                         @endif
                     </div>
                     <div class="col-lg-12">
-
-                        @if(!in_array($user->id,$userAuthenticatedBlockedList,true))
-                            <a href="{{ action('UserController@blockUser',$user->id) }}"
-                               class="btn btn-material-red-600 btn-block tooltip"
-                               title="{{trans('messages.info.block')}}">
-                                {!! Config::get('button.icon-block') !!} |
-                                <b>{{ trans('general.block') }}</b>
-                            </a>
-                        @else
-                            <a href="{{ action('UserController@unBlockUser',$user->id) }}"
-                               class="btn btn-material-green-A400 btn-block tooltip"
-                               title="{{trans('messages.info.block')}}">
-                                {!! Config::get('button.icon-unblock') !!} |
-                                <b>{{ trans('general.unblock') }}</b>
-                            </a>
+                        @if(Auth::user())
+                            @if(!in_array($user->id,$userAuthenticatedBlockedList,true))
+                                <a href="{{ action('UserController@blockUser',$user->id) }}"
+                                   class="btn btn-material-red-600 btn-block tooltip"
+                                   title="{{trans('messages.info.block')}}">
+                                    {!! Config::get('button.icon-block') !!} |
+                                    <b>{{ trans('general.block') }}</b>
+                                </a>
+                            @else
+                                <a href="{{ action('UserController@unBlockUser',$user->id) }}"
+                                   class="btn btn-material-green-A400 btn-block tooltip"
+                                   title="{{trans('messages.info.block')}}">
+                                    {!! Config::get('button.icon-unblock') !!} |
+                                    <b>{{ trans('general.unblock') }}</b>
+                                </a>
+                            @endif
                         @endif
                     </div>
 
