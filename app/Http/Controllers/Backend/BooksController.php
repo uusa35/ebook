@@ -61,7 +61,8 @@ class BooksController extends PrimaryController
         ChapterRepository $chapterRepository,
         Preview $preview,
         LikeRepository $likeRepository
-    ) {
+    )
+    {
 
         //$this->middleware('EditorLimitAccess',['only'=>'edit','update']);
         //$this->middleware('AuthorLimitAccess',['except'=>'getActivationChangeStatus']);
@@ -187,7 +188,7 @@ class BooksController extends PrimaryController
             // create a cover
             $this->CreateBookCover($request, $book);
 
-            return redirect()->action('Backend\ChaptersController@create',['book_id' => $book->id])->with(['success' => trans('messages.success.created')]);
+            return redirect()->action('Backend\ChaptersController@create', ['book_id' => $book->id])->with(['success' => trans('messages.success.created')]);
         }
 
         return redirect()->back()->with(['error' => trans('messages.error.created')]);
@@ -301,14 +302,17 @@ class BooksController extends PrimaryController
      */
     public function destroy($id)
     {
-        $book = $this->bookRepository->model->where(['id' => $id])->first();
+        $book = $this->bookRepository->model->findOrFail(['id' => $id]);
 
         $this->authorize('delete', $book->author_id);
 
-
         if ($book->delete()) {
 
-            $book->meta()->delete();
+            if ($book->meta()) {
+
+                $book->meta()->delete();
+
+            }
 
             return redirect()->back()->with('success', trans('messages.success.deleted'));
 

@@ -129,6 +129,7 @@ class PoliciesCollection
      */
     public function delete($ownerId)
     {
+        dd($this->getModule());
         if (in_array($this->getModule() . '_delete', $this->getUserAbilities(), true)) {
 
             if ($this->isAuthor()) {
