@@ -302,7 +302,7 @@ class BooksController extends PrimaryController
      */
     public function destroy($id)
     {
-        $book = $this->bookRepository->model->findOrFail(['id' => $id]);
+        $book = $this->bookRepository->model->findOrFail(['id' => $id])->first();
 
         $this->authorize('delete', $book->author_id);
 

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9681848a-2c07-43d6-bc7a-61ca3dae0de9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Core/PoliciesCollection.php" afterPath="$PROJECT_DIR$/app/Core/PoliciesCollection.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php" />
     </list>
     <ignored path="ebook.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -94,21 +94,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BooksController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BooksController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.0784316">
-              <caret line="456" column="9" selection-start-line="456" selection-start-column="8" selection-end-line="456" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.5842986">
+              <caret line="304" column="81" selection-start-line="304" selection-start-column="81" selection-end-line="304" selection-end-column="81" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PoliciesCollection.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PoliciesCollection.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Core/PoliciesCollection.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5708955">
-              <caret line="130" column="5" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
+            <state vertical-scroll-proportion="-1.625">
+              <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -181,8 +181,8 @@
         <option value="$PROJECT_DIR$/app/Http/Requests/UpdateChapter.php" />
         <option value="$PROJECT_DIR$/app/Http/Requests/UpdateUser.php" />
         <option value="$PROJECT_DIR$/app/Http/Requests/EditSlide.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php" />
         <option value="$PROJECT_DIR$/app/Core/PoliciesCollection.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php" />
       </list>
     </option>
   </component>
@@ -1040,18 +1040,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php">
+    <entry file="file://$PROJECT_DIR$/app/Core/PoliciesCollection.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.0784316">
-          <caret line="456" column="9" selection-start-line="456" selection-start-column="8" selection-end-line="456" selection-end-column="9" />
+        <state vertical-scroll-proportion="-1.625">
+          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Core/PoliciesCollection.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5708955">
-          <caret line="130" column="5" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.5842986">
+          <caret line="304" column="81" selection-start-line="304" selection-start-column="81" selection-end-line="304" selection-end-column="81" />
           <folding />
         </state>
       </provider>
