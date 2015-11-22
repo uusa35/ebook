@@ -12,7 +12,7 @@ class CreateChapter extends Request
     public function authorize()
     {
 
-        return $this->checkAccessForEachPermission('chapter_create');
+        return $this->user()->can('checkAssignedPermission','chapter_create');
 
     }
 

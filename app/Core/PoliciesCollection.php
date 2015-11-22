@@ -47,7 +47,8 @@ class PoliciesCollection
     }
 
 
-    public function index($module) {
+    public function index($module)
+    {
 
         if (in_array($module, $this->getUserAbilities(), true)) {
 
@@ -64,9 +65,7 @@ class PoliciesCollection
      */
     public function create($permission)
     {
-        //dd($this->getUserAbilities());
-
-        if (in_array($permission , $this->getUserAbilities(), true)) {
+        if (in_array($permission, $this->getUserAbilities(), true)) {
 
             return true;
         }
@@ -152,8 +151,7 @@ class PoliciesCollection
 
     public function checkAssignedPermission($permission)
     {
-
-        if (in_array($permission , $this->getUserAbilities(), true)) {
+        if (in_array($permission, $this->getUserAbilities(), true)) {
 
             return true;
         }

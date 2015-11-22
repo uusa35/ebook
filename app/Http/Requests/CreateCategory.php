@@ -13,7 +13,7 @@ class CreateCategory extends Request
      */
     public function authorize()
     {
-        return $this->checkAccessForEachPermission('category_create');
+        return $this->user()->can('checkAssignedPermission','category_create');
     }
 
     /**

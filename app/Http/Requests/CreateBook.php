@@ -16,7 +16,7 @@ class CreateBook extends Request
     public function authorize()
     {
 
-        return $this->checkAccessForEachPermission('book_create');
+        return $this->user()->can('checkAssignedPermission','book_create');
 
     }
 

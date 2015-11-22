@@ -11,7 +11,7 @@ class CreatePreview extends Request
      */
     public function authorize()
     {
-        return $this->checkAccessForEachPermission('preview_create');
+        return $this->user()->can('checkAssignedPermission','preview_create');
     }
 
     /**
