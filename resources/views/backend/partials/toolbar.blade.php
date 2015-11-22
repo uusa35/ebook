@@ -51,12 +51,13 @@
                 <ul class="dropdown-menu">
                     <!-- The user image in the menu -->
                     <li class="user-header">
-                        @if(count(Auth::user()->avatar) > 0))
+                        @if(count(Auth::user()->avatar) > 0)
                             <img src="{{ asset('images/uploads/avatar/thumbnail/'.Auth::user()->avatar )}}"
                                  class="img-circle" alt="User Image">
                         @else
-                            <img src="//www.gravatar.com/avatar/{!! md5(Auth::user()->email) !!}?s=64"
-                                 alt="{!! Auth::user()->name !!}" class="user-image">
+                            <img src="{{ public_path('images/uploads/avatar/thumbnail/avatar.png') }}" alt="" class="img-circle">
+                            {{--<img src="//www.gravatar.com/avatar/{!! md5(Auth::user()->email) !!}?s=64"
+                                 alt="{!! Auth::user()->name !!}" class="user-image">--}}
                         @endif
 
                         <p>
@@ -108,6 +109,10 @@
                         <li><a href="/backend/translations">{{ trans('general.translations') }}</a></li>
 
                     @endif
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{{ URL::to('auth/logout') }}" class="">{{ trans('general.logout') }}</a>
+                    </li>
                 </ul>
             </li>
             @if(!Auth::user())

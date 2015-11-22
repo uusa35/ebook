@@ -103,5 +103,5 @@ class AdsController extends PrimaryController
         return redirect()->action('Backend\AdsController@index')->with(['error' => trans('sucess.ad-not-updated')]);
 
     }
-    
+
 }
