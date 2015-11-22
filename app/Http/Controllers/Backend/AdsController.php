@@ -55,16 +55,6 @@ class AdsController extends PrimaryController
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -113,15 +103,5 @@ class AdsController extends PrimaryController
         return redirect()->action('Backend\AdsController@index')->with(['error' => trans('sucess.ad-not-updated')]);
 
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }
