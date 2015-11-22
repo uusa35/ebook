@@ -94,7 +94,8 @@ class BooksController extends PrimaryController
 
             $books = $this->bookRepository->model
                 ->with('meta', 'author', 'chapters')
-                ->orderBy('created_at', 'ASC')
+                ->orderBy('created_at', 'DESC')
+                ->orderBy('id', 'DESC')
                 ->get();
 
             $booksReported = $this->bookRepository->getReportsAbuse();
