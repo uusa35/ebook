@@ -40,9 +40,8 @@ trait PrimaryEmailService
         });
     }
 
-    public function sendEmailForPublishedChapter($book, $emailsFollowingList)
+    public function sendEmailForPublishedChapter($data, $book, $emailsFollowingList)
     {
-
 
         Mail::later(1, 'emails._new_published_chapter', ['data' => $data], function ($message) use ($book, $emailsFollowingList) {
             $message->from(\Cache::get('contactusInfo')->email, 'E-boook.com');
