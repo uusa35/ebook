@@ -55,7 +55,7 @@
                             <img src="{{ asset('images/uploads/avatar/thumbnail/'.Auth::user()->avatar )}}"
                                  class="img-circle" alt="User Image">
                         @else
-                            <img src="{{ public_path('images/uploads/avatar/thumbnail/avatar.png') }}" alt="" class="img-circle">
+                            <img src="{{ public_path('images/uploads/avatar/thumbnail/5646avatar.png') }}" alt="" class="img-circle">
                             {{--<img src="//www.gravatar.com/avatar/{!! md5(Auth::user()->email) !!}?s=64"
                                  alt="{!! Auth::user()->name !!}" class="user-image">--}}
                         @endif
