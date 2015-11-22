@@ -21,7 +21,9 @@ class UpdateUser extends Request {
 	public function rules()
 	{
 		return [
-			'name' => 'required'
+			'name' => 'required',
+			'phone' => 'numeric|min:5',
+			'avatar' => 'image'
 		];
 	}
 

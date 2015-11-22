@@ -17,10 +17,10 @@
             {!! Form::text('email', null, ['class' => 'form-control']) !!}
         </div>
 
-        <div class="form-group">
+        {{--<div class="form-group">
             {!! Form::label('password', trans('general.password')) !!}
             {!! Form::password('password', ['class' => 'form-control']) !!}
-        </div>
+        </div>--}}
         @endif
 
         <div class="form-group">

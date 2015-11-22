@@ -97,9 +97,9 @@ class UsersController extends PrimaryController
 
         $this->getPageTitle('user.edit');
 
-        Session::put('module','Users');
+        Session::put('module', 'Users');
 
-        $this->authorize('edit',$id);
+        $this->authorize('edit', $id);
 
         $user = $this->userRepository->model->with('roles')->find($id);
 
@@ -119,15 +119,16 @@ class UsersController extends PrimaryController
 
         $user = $this->userRepository->model->find($id);
 
-        Session::put('module','Users');
+        $user->update($request->all());
 
-        $this->authorize('edit',$id);
+        $user->save();
 
-        $user->update([
+        Session::put('module', 'Users');
 
-            'name' => $request->get('name'),
-            'phone' => $request->get('phone'),
-        ]);
+        $this->authorize('edit', $id);
+
+
+        $user->fill($request->all());
 
         if ($request->hasFile('avatar')) {
             /*
@@ -143,12 +144,9 @@ class UsersController extends PrimaryController
             $user->level = $request->get('role')[0];
             $user->save();
 
-        } else {
-
-            $user->roles()->sync([]);
         }
 
-        if($this->isAuthor()) {
+        if ($this->isAuthor()) {
 
             Session::forget('module');
 
