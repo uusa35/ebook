@@ -6,7 +6,7 @@
     <script type="text/javascript">
         $(function () {
             $("#messages").DataTable({
-                "order": [[0, "asc"]]
+                "order": [[0, "DESC"]]
             });
         });
     </script>

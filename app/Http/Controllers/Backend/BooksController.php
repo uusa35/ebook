@@ -106,7 +106,7 @@ class BooksController extends PrimaryController
             $books = $this->bookRepository->model
                 ->where(['author_id' => Auth::id()])
                 ->with('meta', 'author')
-                ->orderBy('created_at', 'desc')
+                ->orderBy('created_at', 'ASC')
                 ->get();
 
             $booksReported = [];

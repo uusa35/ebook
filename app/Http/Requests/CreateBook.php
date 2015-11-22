@@ -33,7 +33,7 @@ class CreateBook extends Request
             'title' => 'min:5|required|max:250',
             //'price'       => 'numeric|max:500',
             'cover' => 'image|required',
-            'description' => 'required|min:5|max:400',
+            'description' => 'required|min:5|max:1000',
             //'cover_ar'    => 'min:5',
             //'cover_en'    => 'min:5',
             //'type'        => 'required'
