@@ -95,7 +95,7 @@
                     </li>
                 </ul>
 
-                @if($user->id != Auth::id())
+                @if($user->id != Auth::id() && Auth::id())
                     <div class="col-lg-12">
                         {{-- delete all followers_id where user_id = Auth::id --}}
 
@@ -120,7 +120,6 @@
                         @endif
                     </div>
                     <div class="col-lg-12">
-                        @if(Auth::user())
                             @if(!in_array($user->id,$userAuthenticatedBlockedList,true))
                                 <a href="{{ action('UserController@blockUser',$user->id) }}"
                                    class="btn btn-material-red-600 btn-block tooltip"
@@ -136,7 +135,6 @@
                                     <b>{{ trans('general.unblock') }}</b>
                                 </a>
                             @endif
-                        @endif
                     </div>
 
                 @endif
