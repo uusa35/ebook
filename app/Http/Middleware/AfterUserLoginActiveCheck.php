@@ -27,8 +27,7 @@ class AfterUserLoginActiveCheck
 
         Auth::logout();
 
-        return redirect('home')->with(['error' => 'messages.error.not_active'])
-            ->withCookie(Cookie::make('blocked', Crypt::encrypt('blocked'), '12000'));
+        return redirect('home')->with(['error' => 'messages.error.not_active']);
 
     }
 }

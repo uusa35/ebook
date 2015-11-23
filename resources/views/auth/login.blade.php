@@ -24,7 +24,7 @@
                             </label>
                         </div>
 
-                        <div class="row  {{ Session::get('pullClass') }}">
+                        <div class="row  {{ session('pullClass') }}">
                             <div class="col-lg-12">
                                 <button type="submit" name="submit"
                                         class="btn btn-primary">{{ trans('general.login') }}</button>

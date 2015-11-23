@@ -44,7 +44,6 @@ class Authenticate
             } else {
 
                 \Cache::flush();
-                \Session::flush();
                 return redirect()->guest('auth/login');
             }
         }

@@ -82,7 +82,8 @@
                                     </li>
                                 @endif
                                 <li class="divider"></li>
-                                <li><a href="/lang/{{ (App::getLocale() == 'ar') ? 'en' : 'ar' }}">
+                                <li><a href="/lang/{{ App::getLocale() }}">
+                                <li><a href="/lang/{{ App::getLocale() }}">
                                         {{ (App::getLocale() == 'ar') ? trans('general.english') : trans('general.arabic')  }}
                                     </a></li>
                                 <li class="divider"></li>

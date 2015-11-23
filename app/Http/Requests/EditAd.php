@@ -22,7 +22,8 @@ class EditAd extends Request
     public function rules()
     {
         return [
-            'ads' => 'required|image'
+            'ads' => 'required|image',
+            'url' => 'required|url'
         ];
     }
 }

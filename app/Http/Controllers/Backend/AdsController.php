@@ -26,7 +26,7 @@ class AdsController extends PrimaryController
     {
         $this->getPageTitle('ad.index');
 
-        $this->authorize('index',Session::get('module'));
+        $this->authorize('index', Session::get('module'));
 
         $allAdsStored = $this->ad->take(2)->get();
 
@@ -66,9 +66,9 @@ class AdsController extends PrimaryController
     {
         $this->getPageTitle('ad.edit');
 
-        $this->authorize('checkAssignedPermission','ad_edit');
+        $this->authorize('checkAssignedPermission', 'ad_edit');
 
-        $ad = $this->ad->where('id', '=', $id)->first();
+        $ad = $this->ad->find($id)->first();
 
         return view('backend.modules.ad.edit', compact('id', 'ad'));
     }
@@ -81,26 +81,32 @@ class AdsController extends PrimaryController
      */
     public function update(Requests\EditAd $request)
     {
-        $this->authorize('checkAssignedPermission','ad_edit');
+        $this->authorize('checkAssignedPermission', 'ad_edit');
 
-        $ad = $this->ad->where('id', '=', $request->get('id'))->first();
+        $ad = $this->ad->find($request->get('id'))->first();
 
         /*
       * Abstract CreateImages Job (Model , $request, FolderName, [FieldsName] , [Default thumbnail sizes] , [Default large sizes]
       * */
-        $updateAd = $this->dispatch(new CreateImages($ad, $request, 'ads', ['ads'], ['200', '50'], ['500', '120']));;
+        $updateAdImages = $this->dispatch(new CreateImages($ad, $request, 'ads', ['ads'], ['200', '50'], ['500', '120']));;
 
-        if ($updateAd) {
+        if ($updateAdImages) {
+
+            $ad->update([
+                'url' => $request->url
+            ]);
+
+            $ad->save();
 
             $allAds = $this->ad->all();
 
-            \Cache::forever('allAds',$allAds);
+            \Cache::forever('allAds', $allAds);
 
-            return redirect()->action('Backend\AdsController@index')->with(['success' => trans('sucess.ad-updated')]);
+            return redirect()->action('Backend\AdsController@index')->with(['success' => trans('sucess.updated')]);
 
         }
 
-        return redirect()->action('Backend\AdsController@index')->with(['error' => trans('sucess.ad-not-updated')]);
+        return redirect()->action('Backend\AdsController@index')->with(['error' => trans('error.updated')]);
 
     }
 

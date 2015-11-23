@@ -17,6 +17,10 @@
                     {!! Form::label('ads',trans('general.ad')) !!}
                     {!! Form::file('ads',null,['class'=>'form-control','placeholder'=>trans('general.ad')]) !!}
                 </div>
+                <div class="form-group">
+                    {!! Form::label('url',trans('general.url')) !!}
+                    {!! Form::text('url',$ad->url,['class'=> 'form-control']) !!}
+                </div>
                 @include('backend.partials.buttons.form_btn_update')
                 {!! Form::close() !!}
             </div>
