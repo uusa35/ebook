@@ -2,8 +2,8 @@
 
 
 @section('slider')
-    {{--@include('frontend.partials.slider')--}}
-    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+{{--@include('frontend.partials.slider')--}}
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
 @stop
 
 @section('styles')
@@ -12,7 +12,7 @@
         #disqus_thread {
             width: 80%;
             margin-right: auto;
-            margin-left:auto;
+            margin-left: auto;
         }
     </style>
     <link rel="stylesheet" href="/css/lightbox.css"/>
@@ -204,9 +204,11 @@
                                 <hr/>
                                 @foreach($allAds as $ad)
                                     <div class="col-lg-6 col-xs-12" style="padding:3px;">
-                                        <img class="img-responsive text-center"
-                                             src="{{ asset('images/uploads/ads/large/'.$ad->ads) }}"
-                                             alt=""/>
+                                        <a href="{{ $ad->url }}" class="">
+                                            <img class="img-responsive text-center"
+                                                 src="{{ asset('images/uploads/ads/large/'.$ad->ads) }}"
+                                                 alt=""/>
+                                        </a>
                                     </div>
                                 @endforeach
                             </div>
