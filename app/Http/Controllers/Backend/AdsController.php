@@ -68,7 +68,7 @@ class AdsController extends PrimaryController
 
         $this->authorize('checkAssignedPermission', 'ad_edit');
 
-        $ad = $this->ad->find($id)->first();
+        $ad = $this->ad->where(['id' => $id])->first();
 
         return view('backend.modules.ad.edit', compact('id', 'ad'));
     }
@@ -83,7 +83,7 @@ class AdsController extends PrimaryController
     {
         $this->authorize('checkAssignedPermission', 'ad_edit');
 
-        $ad = $this->ad->find($request->get('id'))->first();
+        $ad = $this->ad->where(['id' => $request->get('id')])->first();
 
         /*
       * Abstract CreateImages Job (Model , $request, FolderName, [FieldsName] , [Default thumbnail sizes] , [Default large sizes]
