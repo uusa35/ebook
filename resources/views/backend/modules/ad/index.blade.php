@@ -16,6 +16,7 @@
                             <th class="hidden-xs">&nbsp;</th>
                             <th>{{ trans('general.id') }}</th>
                             <th>{{ trans('general.image') }}</th>
+                            <th>{{ trans('general.url') }}</th>
                             <th>{{ trans('general.created_at') }}</th>
                             <th>{{ trans('general.edit') }}</th>
                         </tr>
@@ -29,6 +30,9 @@
                                 </td>
                                 <td>
                                     <img  class="img-responsive" src="{{ asset('images/uploads/ads/large/'.$ad->ads) }}" alt="" style="width:50%; height:auto;"/>
+                                </td>
+                                <td>
+                                    {{ $ad->url }}
                                 </td>
                                 <td>
                                     <span> {{ $ad->created_at->format('Y-m-d') }} </span>
