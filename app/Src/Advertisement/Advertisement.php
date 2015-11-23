@@ -9,5 +9,5 @@ class Advertisement extends PrimaryModel
 
     public $table = 'ads';
 
-    public $fillable = ['ads'];
+    public $fillable = ['ads','url'];
 }
