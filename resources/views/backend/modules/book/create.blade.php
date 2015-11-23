@@ -50,12 +50,12 @@
 
             <div class="form-group col-md-3 col-lg-3">
 
-                {!! Form::label('field_category_id', trans('categories'), ['class' => 'control-label']) !!}*
+                {!! Form::label('field_category_id', trans('general.fields_categories'), ['class' => 'control-label']) !!}*
                 {!! Form::select('field_category_id', $fieldsCategories ,null, ['class' =>'form-control','style'=>'text-align:left!important;']) !!}
             </div>
             <div class="form-group col-md-3 col-lg-3">
 
-                {!! Form::label('lang_category_id', trans('categories'), ['class' => 'control-label']) !!}*
+                {!! Form::label('lang_category_id', trans('general.langs_categories'), ['class' => 'control-label']) !!}*
                 {!! Form::select('lang_category_id', $langsCategories ,null, ['class' =>
                 'form-control','style'=>'text-align:left
                 !important;']) !!}
