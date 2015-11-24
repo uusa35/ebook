@@ -22,7 +22,8 @@ class EventServiceProvider extends ServiceProvider
         ],
         'SocialiteProviders\Manager\SocialiteWasCalled' => [
             'SocialiteProviders\Google\GoogleExtendSocialite@handle',
-            'SocialiteProviders\Disqus\DisqusExtendSocialite@handle'
+            'SocialiteProviders\Twitter\TwitterExtendSocialite@handle'
+
         ]
     ];
 

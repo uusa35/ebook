@@ -39,12 +39,10 @@ Route::get('auth/twitter/callback', 'Auth\AuthController@handleProviderTwitterCa
  ***************************************************************************************************/
 Route::get('auth/google', 'Auth\AuthController@redirectToGoogleProvider');
 Route::get('auth/google/callback', 'Auth\AuthController@handleProviderGoogleCallback');
-/***************************************************************************************************
- * Disqus Authentication
- ***************************************************************************************************/
-/*Route::get('auth/disqus', 'Auth\AuthController@redirectToDisqusProvider');
-Route::get('auth/disqus/callback', 'Auth\AuthController@handleProviderDisqusCallback');*/
 
+/***************************************************************************************************
+ * Default Authentication
+ ***************************************************************************************************/
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
