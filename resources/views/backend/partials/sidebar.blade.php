@@ -4,16 +4,6 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
 
-        <!-- search form (Optional) -->
-        {{--<form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-              </span>
-            </div>
-        </form>--}}
-        <!-- /.search form -->
 
         <div class="row">
             <div class="col-lg-6 col-lg-offset-3">
@@ -23,7 +13,7 @@
 
         </div>
         <!-- Sidebar Menu -->
-        <ul class="sidebar-menu {{ Session::get('pullClass') }}">
+        <ul class="sidebar-menu {{ session('pullClass') }}">
 
             @if(Session::has('roles'))
                 @if(Cache::has('Abilities.Admin.'.Auth::id()))
@@ -44,26 +34,6 @@
                 @endif
             @endif
 
-
-            {{--<!-- Optionally, you can add icons to the links -->
-            <li><a href="{{ action('Backend\UsersController@index') }}"><i class="fa fa-users"></i>
-                    <span>Users</span></a></li>
-            <li><a href="{{ action('Backend\moduleissionsController@index') }}"><i class="fa fa-pencil"></i> <span>moduleissions</span></a>
-            </li>
-            <li><a href="{{ action('Backend\RolesController@index') }}"><i class="fa fa-table"></i>
-                    <span>Roles</span></a></li>
-            <li><a href="{{ action('Backend\RolesController@index') }}"><i class="fa fa-book"></i>
-                    <span>Books</span></a></li>
-            <li><a href="{{ action('Backend\RolesController@index') }}"><i class="fa fa-files-o"></i>
-                    <span>Categories</span></a></li>
-            <li><a href="{{ action('Backend\RolesController@index') }}"><i class="fa fa-inbox"></i>
-                    <span>Inbox</span></a></li>
-            <li><a href="{{ action('Backend\RolesController@index') }}"><i class="fa fa-comments"></i>
-                    <span>Comments</span></a></li>
-            <li><a href="{{ action('Backend\RolesController@index') }}"><i class="fa fa-map-signs"></i> <span>Ads</span></a>
-            </li>
-            <li><a href="{{ action('Backend\RolesController@index') }}"><i class="fa fa-graduation-cap"></i> <span>Conditions</span></a>
-            </li>--}}
 
         </ul>
         <!-- /.sidebar-menu -->

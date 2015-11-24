@@ -29,8 +29,8 @@
 
             <p>
 
-                {!! Form::open(['action' => ['HomeController@postNewsLetter'], 'method' =>
-                'post'],['class'=>'form-horizontal','role'=>'form']) !!}
+            {!! Form::open(['action' => ['HomeController@postNewsLetter'], 'method' =>
+            'post'],['class'=>'form-horizontal','role'=>'form']) !!}
             <div class="form-group">
                 <label for="inputEmail1" class="col-lg-4 control-label"></label>
 
@@ -54,7 +54,7 @@
                 </div>
             </div>
             {!! Form::close() !!}
-            <!-- form -->
+                    <!-- form -->
             </p>
         </div>
         <!-- col -->
@@ -65,9 +65,10 @@
             <p>
                 <!-- SnapWidget -->
                 <script src="http://snapwidget.com/js/snapwidget.js"></script>
-                <iframe src="http://snapwidget.com/in/?u=YWhtZWRjb21lZHl8aW58MjB8MnwyfHxub3wxfGZhZGVJbnxvblN0YXJ0fHllc3x5ZXM=&ve=091115"
+                <iframe src="http://snapwidget.com/in/?u=N29yb2ZfY29tfGlufDcwfDJ8Mnx8bm98MnxmYWRlSW58b25TdGFydHx5ZXN8eWVz&ve=241115"
                         title="Instagram Widget" class="snapwidget-widget" allowTransparency="true" frameborder="0"
-                        scrolling="no" style="border:none; overflow:hidden; width:100%;"></iframe>
+                        scrolling="no" style="border:none; overflow:hidden; width:100%;">
+                </iframe>
             </p>
         </div>
         <!-- col -->
