@@ -26,8 +26,8 @@ class contactusSubmit extends Request
         return [
             'name'    => 'required|max:255',
             'email'   => 'required|email',
-            'subject' => 'required',
-            'content' => 'required'
+            'subject' => 'required|min:3',
+            'content' => 'required|max:1000'
         ];
     }
 }

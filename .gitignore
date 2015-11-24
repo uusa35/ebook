@@ -9,4 +9,3 @@
 /storage/httpcache/*
 /AdminLTE-2.3.0
 .env
-.envDev

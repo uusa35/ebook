@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-lg-9" style="float: left; text-align: left;">
                     <h1>{{ trans('general.ebook') }}
-                        <small>| e-boook.com</small>
+                        <small>| 7orof </small>
                     </h1>
                 </div>
 

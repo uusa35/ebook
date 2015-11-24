@@ -76,24 +76,15 @@
             <h3>{{ trans('general.twitter') }}</h3>
 
             <p>
-                <a class="twitter-timeline" href="https://twitter.com/UsamaIIAhmed" data-widget-id="352804064125415424">Tweets
-                    by @UsamaIIAhmed</a>
-                <script>!function (d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-                        if (!d.getElementById(id)) {
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = p + "://platform.twitter.com/widgets.js";
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }
-                    }(document, "script", "twitter-wjs");</script>
+                <a class="twitter-timeline" href="https://twitter.com/7orof_com" data-widget-id="669172461506863104">Tweets by @7orof_com</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </p>
         </div>
         <!-- col -->
     </div>
     <div class="col-lg-12 text-center text-info">
         {{ trans('messages.allrights') }} - {{ trans('messages.designed_developed') }} - <a
-                href="http://ideasowneres.net">{{ trans('general.ideasowners') }}</a>
+                href="http://ideasowners.net">{{ trans('general.ideasowners') }}</a>
         <br/>
     </div>
 
