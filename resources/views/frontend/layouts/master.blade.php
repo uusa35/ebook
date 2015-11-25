@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    <link href="{{ asset('icons/logo.ico') }}" rel="shortcut icon" type="image/x-icon">
     <meta charset="UTF-8">
     <title>7orof.com</title>
     @section('styles')
@@ -18,7 +19,6 @@
         ga('send', 'pageview');
 
     </script>
-    <link href="//7orof.com/public/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 </head>
 <body>
 

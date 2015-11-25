@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-2" style="float:right; text-align: right;">
                     <img class=" img-responsive img-circle"
-                         src="{!! asset('images/logo.png') !!}" alt="" style="max-width:100px;"/>
+                         src="{!! asset('images/logo.jpg') !!}" alt="" style="max-width:100px;"/>
                 </div>
                 <div class="col-lg-9" style="float: left; text-align: left;">
                     <h1>{{ trans('general.ebook') }}

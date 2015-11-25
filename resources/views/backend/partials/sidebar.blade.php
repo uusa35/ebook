@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-lg-6 col-lg-offset-3">
                 <a class="" href="{{ action('Backend\DashboardController@index') }}"><img
-                            class="center-block img-responsive img-circle" src="{{ asset('images/logo.png') }}" alt=""/></a>
+                            class="center-block img-responsive img-circle" src="{{ asset('images/logo.jpg') }}" alt=""/></a>
             </div>
 
         </div>
