@@ -32,8 +32,8 @@ Route::get('auth/github/callback', 'Auth\AuthController@handleProviderGithubCall
 /***************************************************************************************************
  * TWITTER Authentication
  ***************************************************************************************************/
-Route::get('auth/twitter', 'Auth\AuthController@redirectToTwitterProvider');
-Route::get('auth/twitter/callback', 'Auth\AuthController@handleProviderTwitterCallback');
+/*Route::get('auth/twitter', 'Auth\AuthController@redirectToTwitterProvider');
+Route::get('auth/twitter/callback', 'Auth\AuthController@handleProviderTwitterCallback');*/
 /***************************************************************************************************
  * GOOGLE Authentication
  ***************************************************************************************************/

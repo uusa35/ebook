@@ -53,6 +53,8 @@ trait SocialAuthTrait
 
                 $user = User::where('email', '=', $userSocilite->email)->first();
 
+                $user->role()->attach(3);
+
                 Auth::login($user, true);
 
                 return redirect('home')->with(['success', trans('messages.success.login')]);
@@ -101,6 +103,8 @@ trait SocialAuthTrait
 
                 $user = User::where('email', '=', $userSocilite->email)->first();
 
+                $user->role()->attach(3);
+
                 Auth::login($user, true);
 
                 return redirect('home')->with(['success', trans('messages.success.login')]);
@@ -126,6 +130,7 @@ trait SocialAuthTrait
 
         $userSocilite = Socialite::with('twitter')->user();
 
+        /*working but there is an email address problem with the twitter auth , they do not support email in the incomming array*/
         var_dump($userSocilite);
 
         $data = [
@@ -150,6 +155,8 @@ trait SocialAuthTrait
             if ($this->create($data)) {
 
                 $user = User::where('email', '=', $userSocilite->email)->first();
+
+                $user->role()->attach(3);
 
                 Auth::login($user, true);
 
@@ -198,6 +205,8 @@ trait SocialAuthTrait
             if ($this->create($data)) {
 
                 $user = User::where('email', '=', $userSocilite->email)->first();
+
+                $user->role()->attach(3);
 
                 Auth::login($user, true);
 

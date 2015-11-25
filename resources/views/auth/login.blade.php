@@ -34,10 +34,10 @@
                                    href="{{ url('/password/email') }}">{{ trans('general.forgot_password') }}</a>
                             </div>
                             <div class="col-lg-12">
-                                <a class="btn btn-social btn-twitter btn-material-light-blue"
+                                {{--<a class="btn btn-social btn-twitter btn-material-light-blue"
                                    href="{{ action('Auth\AuthController@redirectToTwitterProvider') }}">
                                     <i class="fa fa-fw fa-twitter"></i>  {{ trans('buttons.twitter_login') }}
-                                </a>
+                                </a>--}}
                                 <a class="btn btn-social btn-twitter btn-material-blue "
                                    href="{{ action('Auth\AuthController@redirectToFacebookProvider') }}">
                                     <i class="fa fa-facebook"></i> {{ trans('buttons.facebook_login') }}
