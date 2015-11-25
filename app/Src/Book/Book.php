@@ -91,7 +91,7 @@ class Book extends PrimaryModel
         return $this->hasMany('App\Src\Like\Like','book_id');
     }
 
-    public function mostFavorites($paginate = '10')
+    public function mostFavorites($paginate = 8)
     {
         return $this
             ->selectRaw('books.*, count(*) as book_count')
@@ -102,7 +102,8 @@ class Book extends PrimaryModel
             ->join('book_user', 'books.id', '=', 'book_user.book_id')
             ->where('books.active', '1')
             ->groupBy('book_id')// responsible to get the sum of books returned
-            ->orderBy('book_count', 'DESC')->paginate($paginate);
+            ->orderBy('book_count', 'DESC')
+            ->paginate($paginate);
     }
 
     /*public function userFavorites($userId)
@@ -120,7 +121,7 @@ class Book extends PrimaryModel
     }*/
 
 
-    public function mostLiked($paginate = '10')
+    public function mostLiked($paginate = 8)
     {
         return $this
             ->selectRaw('books.*, count(*) as book_count')
@@ -131,7 +132,8 @@ class Book extends PrimaryModel
             ->join('book_likes', 'books.id', '=', 'book_likes.book_id')
             ->where('books.active', '1')
             ->groupBy('book_id')// responsible to get the sum of books returned
-            ->orderBy('book_count', 'DESC')->paginate($paginate);
+            ->orderBy('book_count', 'DESC')
+            ->paginate($paginate);
     }
 
 

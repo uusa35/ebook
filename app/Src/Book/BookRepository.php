@@ -35,7 +35,7 @@ class BookRepository extends PrimaryRepository
      * get the recentest books for the index
      * @return mixed
      */
-    public function getRecentBooks()
+    public function getRecentBooks($paginate = 8)
     {
         return $this->model
             ->where('active', '=', '1')
@@ -45,8 +45,7 @@ class BookRepository extends PrimaryRepository
             })
             ->with('usersFavorites', 'meta')
             ->orderBy('books.created_at', 'DESC')
-            ->limit(4)
-            ->get();
+            ->paginate($paginate);
     }
 
     public function getAllBooks()
@@ -166,7 +165,7 @@ class BookRepository extends PrimaryRepository
      * @param int $paginate
      * @return most favorite books from all users
      */
-    public function getMostFavorited($paginate = 4)
+    public function getMostFavorited($paginate = 8)
     {
         $favorites = $this->model->mostFavorites($paginate);
         return $favorites;
@@ -178,7 +177,7 @@ class BookRepository extends PrimaryRepository
      * @param int $paginate
      * @return most favorite books from all users
      */
-    public function getMostLiked($paginate = 4)
+    public function getMostLiked($paginate = 8)
     {
         $likes = $this->model->mostLiked($paginate);
         return $likes;

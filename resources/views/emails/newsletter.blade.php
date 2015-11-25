@@ -162,7 +162,7 @@
                                                                 <div class='contentEditableContainer contentImageEditable'>
                                                                     <div class='contentEditable'>
                                                                         <a target='_blank' href="[CLIENTS.WEBSITE]"><img
-                                                                                    src="{{ $message->embed('images/logo.jpg') }}"
+                                                                                    src="{{ $message->embed('images/logo-150.png') }}"
                                                                                     alt="Logo" width='60' height='60'
                                                                                     data-default="placeholder"
                                                                                     data-max-width="200"></a>

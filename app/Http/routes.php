@@ -91,6 +91,11 @@ Route::group(['prefix' => 'frontend'], function () {
      * Index ( Main Page ) BookController
      ***************************************************************************************************/
     Route::resource('book', 'BookController', ['only' => ['index', 'show']]);
+    Route::get('books/recentest',['uses' => 'BookController@getRecentestBooksPage']);
+    Route::get('books/mostfavorited',['uses' => 'BookController@getMostFavoritedBooksPage']);
+    Route::get('books/mostliked',['uses' => 'BookController@getMostLikedBooksPage']);
+
+
 
     /***************************************************************************************************
      * Categories

@@ -31,7 +31,8 @@ class BookController extends PrimaryController
 
         ChapterRepository $chapterRepository,
         LikeRepository $likeRepository
-    ) {
+    )
+    {
         $this->bookRepository = $bookRepository;
         $this->favoriteRepository = $favoriteRepository;
         $this->userRepository = $userRepository;
@@ -47,17 +48,13 @@ class BookController extends PrimaryController
      */
     public function index()
     {
-        $paginate = 4;
         // get 4 published books for index
-
-        $recentBooks = $this->bookRepository->getRecentBooks();
-
+        $recentBooks = $this->bookRepository->getRecentBooks(4);
 
         // get 4 published and most favorite books for index
         $mostFavoriteBooks = $this->bookRepository->getMostFavorited(4);
 
-        //dd($userFavorites);
-
+        // get mostliked
         $mostLikedBooks = $this->bookRepository->getMostLiked(4);
 
         return view('frontend.modules.book.index', compact('recentBooks', 'mostFavoriteBooks', 'mostLikedBooks'));
@@ -69,6 +66,31 @@ class BookController extends PrimaryController
         // get 4 published books for index
         $allBooks = $this->bookRepository->getAllBooks();
 
+        return view('frontend.modules.book.all', compact('allBooks'));
+    }
+
+
+    public function getRecentestBooksPage()
+    {
+
+        $allBooks = $this->bookRepository->getRecentBooks(8);
+
+//        dd($allBooks);
+
+        return view('frontend.modules.book.all', compact('allBooks'));
+
+    }
+
+    public function getMostFavoritedBooksPage()
+    {
+        $allBooks = $this->bookRepository->getMostFavorited(8);
+
+        return view('frontend.modules.book.all', compact('allBooks'));
+    }
+
+    public function getMostLikedBooksPage()
+    {
+        $allBooks = $this->bookRepository->getMostLiked(8);
 
         return view('frontend.modules.book.all', compact('allBooks'));
     }
@@ -89,7 +111,7 @@ class BookController extends PrimaryController
 
         //$followersList = $followers->Lists('id', 'user_id')->toArray();
 
-        $blockedUsersofAuthor = $book->author->blocked->Lists('blocked_id','blocked_id')->toArray();
+        $blockedUsersofAuthor = $book->author->blocked->Lists('blocked_id', 'blocked_id')->toArray();
 
         if (!is_null($book)) {
 
@@ -99,7 +121,7 @@ class BookController extends PrimaryController
 
             $total_pages = $this->chapterRepository->totalPagesForChapter($book->id);
 
-            return view('frontend.modules.book.show', compact('book', 'total_pages','blockedUsersofAuthor'));
+            return view('frontend.modules.book.show', compact('book', 'total_pages', 'blockedUsersofAuthor'));
 
         }
 
@@ -116,7 +138,6 @@ class BookController extends PrimaryController
     {
 
         $searchedItem = trim($request->get('search'));
-
 
 
         if ($searchedItem) {

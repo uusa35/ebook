@@ -77,6 +77,12 @@
             </div>
         @endforeach
 
+        <div class="row">
+            <div class="col-lg-2 col-lg-offset-10">
+                <a href="{{ action('BookController@getRecentestBooksPage') }}" class="btn btn-material-green-A700">{{ trans('general.more') }}</a>
+            </div>
+        </div>
+
 
 
 
@@ -149,6 +155,11 @@
             </div>
         @endforeach
 
+        <div class="row">
+            <div class="col-lg-2 col-lg-offset-10">
+                <a href="{{ action('BookController@getMostFavoritedBooksPage') }}" class="btn btn-material-red-400">{{ trans('general.more') }}</a>
+            </div>
+        </div>
 
 
 
@@ -220,6 +231,12 @@
                 <!-- /.widget-user -->
             </div>
         @endforeach
+
+        <div class="row">
+            <div class="col-lg-2 col-lg-offset-10">
+                <a href="{{ action('BookController@getMostLikedBooksPage') }}" class="btn btn-material-blue-300">{{ trans('general.more') }}</a>
+            </div>
+        </div>
 
     </div>
 

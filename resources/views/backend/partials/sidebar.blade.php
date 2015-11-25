@@ -6,11 +6,10 @@
 
 
         <div class="row">
-            <div class="col-lg-6 col-lg-offset-3">
+            <div class="col-lg-6 col-lg-offset-3" style="margin-bottom: 6px;">
                 <a class="" href="{{ action('Backend\DashboardController@index') }}"><img
-                            class="center-block img-responsive img-circle" src="{{ asset('images/logo.jpg') }}" alt=""/></a>
+                            class="center-block img-responsive img-thumbnail" src="{{ asset('images/logo-150.png') }}" alt=""/></a>
             </div>
-
         </div>
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu {{ session('pullClass') }}">
