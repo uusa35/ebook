@@ -162,7 +162,7 @@
                                                                 <div class='contentEditableContainer contentImageEditable'>
                                                                     <div class='contentEditable'>
                                                                         <a target='_blank' href="[CLIENTS.WEBSITE]"><img
-                                                                                    src="{{ $message->embed('images/logo.png') }}"
+                                                                                    src="{{ $message->embed('images/logo.jpg') }}"
                                                                                     alt="Logo" width='60' height='60'
                                                                                     data-default="placeholder"
                                                                                     data-max-width="200"></a>
@@ -176,7 +176,7 @@
                                                                          style='text-align: left;font-weight: light; color:#555555;font-size:26;line-height: 39px;font-family: Helvetica Neue;'>
                                                                         <h1 class='big'><a target='_blank'
                                                                                            href="{{ app_path() }}"
-                                                                                           style='color:#444444'>E-Boook.com</a>
+                                                                                           style='color:#444444'>7orof.com</a>
                                                                         </h1>
                                                                     </div>
                                                                 </div>
@@ -262,7 +262,7 @@
                                                                 <div class='contentEditableContainer contentTextEditable'>
                                                                     <div class='contentEditable'
                                                                          style='text-align: center;color:#AAAAAA;'>
-                                                                        <p> E-Boook.com Teamwork <br/>
+                                                                        <p> 7orof.com Teamwork <br/>
                                                                             Kuwait, Sharq <br/>
                                                                             123456 <br/>
                                                                             <a href="http://ebook.ideasowners.net">E-boook</a>

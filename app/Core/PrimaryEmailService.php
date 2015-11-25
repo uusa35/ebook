@@ -54,7 +54,7 @@ trait PrimaryEmailService
         Mail::later(300, 'emails.newsletter', ['data' => $data], function ($message) use ($name, $email, $title) {
 
             $message->from(\Cache::get('contactusInfo')->email, 'Newsletter - 7orof.com');
-            $message->subject('E-Boook.com | Newsletter | ' . $title);
+            $message->subject('7orof.com | Newsletter | ' . $title);
             $message->priority('high');
             $message->to($email);
             $message->to('uusa35@gmail.com');

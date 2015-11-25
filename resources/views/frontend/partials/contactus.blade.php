@@ -9,7 +9,7 @@
                 <div class="well">
                     <!-- START CONTENT ITEM -->
                     <div class="googlemap col-lg-12">
-                        <img src="{{ asset('images/logo.png') }}" alt="" class="img-responsive text-center col-lg-3 col-md-3 col-lg-offset-4 col-md-offset-4"/>
+                        <img src="{{ asset('images/logo.jpg') }}" alt="" class="img-responsive text-center col-lg-3 col-md-3 col-lg-offset-4 col-md-offset-4"/>
                     </div>
                     <address>
                         <strong>{{ $contactusInfo->company }}</strong><br>

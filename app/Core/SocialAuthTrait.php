@@ -51,9 +51,9 @@ trait SocialAuthTrait
 
             if ($this->create($data)) {
 
-                $user = User::where('email', '=', $userSocilite->email)->first();
+                $user->roles()->attach(3);
 
-                $user->role()->attach(3);
+                $user = User::where('email', '=', $userSocilite->email)->first();
 
                 Auth::login($user, true);
 
@@ -101,9 +101,9 @@ trait SocialAuthTrait
 
             if ($this->create($data)) {
 
-                $user = User::where('email', '=', $userSocilite->email)->first();
+                $user->roles()->attach(3);
 
-                $user->role()->attach(3);
+                $user = User::where('email', '=', $userSocilite->email)->first();
 
                 Auth::login($user, true);
 
@@ -114,60 +114,6 @@ trait SocialAuthTrait
         }
 
     }
-
-    /*
-    * twitter
-    *
-    * */
-    public function redirectToTwitterProvider()
-    {
-
-        return Socialite::driver('twitter')->redirect();
-    }
-
-    public function handleProviderTwitterCallback()
-    {
-
-        $userSocilite = Socialite::with('twitter')->user();
-
-        /*working but there is an email address problem with the twitter auth , they do not support email in the incomming array*/
-        var_dump($userSocilite);
-
-        $data = [
-            'name' => $userSocilite->name,
-            'email' => $userSocilite->email,
-            'password' => $userSocilite->token,
-        ];
-
-
-        $user = User::where('email', '=', $userSocilite->email)->first();
-
-        dd($user);
-
-        if ($user) {
-
-            Auth::login($user);
-
-            return redirect('home')->with(['success', trans('messages.success.login')]);
-
-        } else {
-
-            if ($this->create($data)) {
-
-                $user = User::where('email', '=', $userSocilite->email)->first();
-
-                $user->role()->attach(3);
-
-                Auth::login($user, true);
-
-                return redirect('home')->with(['success', trans('messages.success.login')]);
-            }
-
-            return redirect('home')->with(['error', trans('messages.error.login')]);
-        }
-
-    }
-
 
     /*
     * google
@@ -204,9 +150,9 @@ trait SocialAuthTrait
 
             if ($this->create($data)) {
 
-                $user = User::where('email', '=', $userSocilite->email)->first();
+                $user->roles()->attach(3);
 
-                $user->role()->attach(3);
+                $user = User::where('email', '=', $userSocilite->email)->first();
 
                 Auth::login($user, true);
 
@@ -220,22 +166,23 @@ trait SocialAuthTrait
 
 
 
-
     /*
-   * google
-   *
-   * */
-    public function redirectToDisqusProvider()
+    * twitter
+    *
+    * */
+   /* public function redirectToTwitterProvider()
     {
 
-        //return Socialite::driver('google')->redirect();
-        return Socialite::with('disqus')->redirect();
+        return Socialite::driver('twitter')->redirect();
     }
 
-    public function handleProviderDisqusCallback()
+    public function handleProviderTwitterCallback()
     {
 
-        $userSocilite = Socialite::with('disqus')->user();
+        $userSocilite = Socialite::with('twitter')->user();
+
+        //working but there is an email address problem with the twitter auth , they do not support email in the incomming array
+        var_dump($userSocilite);
 
         $data = [
             'name' => $userSocilite->name,
@@ -245,6 +192,8 @@ trait SocialAuthTrait
 
 
         $user = User::where('email', '=', $userSocilite->email)->first();
+
+        dd($user);
 
         if ($user) {
 
@@ -258,6 +207,8 @@ trait SocialAuthTrait
 
                 $user = User::where('email', '=', $userSocilite->email)->first();
 
+                $user->roles()->attach(3);
+
                 Auth::login($user, true);
 
                 return redirect('home')->with(['success', trans('messages.success.login')]);
@@ -266,7 +217,8 @@ trait SocialAuthTrait
             return redirect('home')->with(['error', trans('messages.error.login')]);
         }
 
-    }
+    }*/
+
 
 
 }

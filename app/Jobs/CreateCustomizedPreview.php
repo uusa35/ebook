@@ -79,7 +79,7 @@ class CreateCustomizedPreview extends Job implements SelfHandling
     public function makeHeader()
     {
         //logo
-        $this->pdfPreview->Image(public_path('images/logo.png'), 5, 8, 35);
+        $this->pdfPreview->Image(public_path('images/logo.jpg'), 5, 8, 35);
         // Arial bold 15
         $this->pdfPreview->SetFont('Arial', 'B', 12);
         // Move to the right

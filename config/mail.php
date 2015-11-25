@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'admin@eboook.com', 'name' => 'E-Boook.com Teamwork'],
+    'from' => ['address' => '7orof.com@gmail.com', 'name' => '7orof.com Teamwork'],
 
     /*
     |--------------------------------------------------------------------------
