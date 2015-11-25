@@ -111,7 +111,9 @@
                                                         {{ $book->title }} </a>
                                                 </td>
                                                 <td class="hidden-xs">
-                                                    {{ $book->author->name }}
+                                                    @if(!is_null($book->author->name))
+                                                        {{ $book->author->name }}
+                                                    @endif
                                                 </td>
                                                 <td class="hidden-xs">
                                                     <span> {{ count($book->chapters) }} </span>
