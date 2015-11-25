@@ -10,7 +10,7 @@ class UpdateUser extends Request {
 	 */
 	public function authorize()
 	{
-		return $this->user()->can('checkAssignedPermission','user_change');
+		return $this->user()->can('checkAssignedPermission','user_edit');
 	}
 
 	/**
