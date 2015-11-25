@@ -126,10 +126,12 @@ trait SocialAuthTrait
 
         $userSocilite = Socialite::with('twitter')->user();
 
+        dd($userSocilite);
+
         $data = [
             'name' => $userSocilite->name,
             'email' => $userSocilite->email,
-            'password' => $userSocilite->token,
+            'password' => $userSocilite->oauth_token,
         ];
 
 

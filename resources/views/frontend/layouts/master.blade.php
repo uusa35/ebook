@@ -18,6 +18,7 @@
         ga('send', 'pageview');
 
     </script>
+    <link href="//7orof.com/public/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 </head>
 <body>
 
