@@ -33,7 +33,7 @@ GOOGLE_KEY=535985071980-ac56en2hi3duvmonpthpagrqiv19pfkv.apps.googleusercontent.
 GOOGLE_SECRET=UmlpraKBYl4XazUZRBVz0vtT
 GOOGLE_REDIRECT_URI=http://7orof.com/auth/google/callback
 
-TWITTER_KEY=361335737
+TWITTER_KEY=isYXmZ1LXLXEs6lLfKSFZtFTt
 TWITTER_SECRET=ZVnLH1eWGYu5zSzrgOoGQZ4i7yq2fEnDUwAKDzw5E7t1KurMVX
 TWITTER_REDIRECT_URI=http://7orof.com/auth/twitter/callback
 

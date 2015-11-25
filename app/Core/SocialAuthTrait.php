@@ -126,7 +126,7 @@ trait SocialAuthTrait
 
         $userSocilite = Socialite::with('twitter')->user();
 
-        dd($userSocilite);
+        var_dump($userSocilite);
 
         $data = [
             'name' => $userSocilite->name,
@@ -136,6 +136,8 @@ trait SocialAuthTrait
 
 
         $user = User::where('email', '=', $userSocilite->email)->first();
+
+        dd($user);
 
         if ($user) {
 
