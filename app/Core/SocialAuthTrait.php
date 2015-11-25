@@ -131,7 +131,7 @@ trait SocialAuthTrait
         $data = [
             'name' => $userSocilite->name,
             'email' => $userSocilite->email,
-            'password' => $userSocilite->oauth_token,
+            'password' => $userSocilite->token,
         ];
 
 
