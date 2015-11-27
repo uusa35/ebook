@@ -313,6 +313,12 @@ class BooksController extends PrimaryController
 
                 $book->meta()->delete();
 
+                $book->chapters()->delete();
+
+                $book->favorites()->delete();
+
+                $book->likes()->delete();
+
             }
 
             return redirect()->back()->with('success', trans('messages.success.deleted'));

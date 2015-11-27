@@ -23,7 +23,9 @@ class EventServiceProvider extends ServiceProvider
         'SocialiteProviders\Manager\SocialiteWasCalled' => [
             'SocialiteProviders\Google\GoogleExtendSocialite@handle',
             'SocialiteProviders\Twitter\TwitterExtendSocialite@handle'
-
+        ],
+        'App\Events\ChapterStatusChanged' => [
+            'App\Listeners\SendEmailForChapterStatusChanged'
         ]
     ];
 

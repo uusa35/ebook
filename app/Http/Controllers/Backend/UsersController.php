@@ -166,7 +166,7 @@ class UsersController extends PrimaryController
 
         $this->userRepository->delete($id);
 
-        return redirect('/users')->with(['success', 'messages.success.user_destroy']);
+        return redirect('/users')->with(['success', 'messages.success.deleted']);
     }
 
     public function postChangeActiveStatus($id, $status)
@@ -183,7 +183,7 @@ class UsersController extends PrimaryController
 
         $user->save();
 
-        return redirect()->action('Backend\UsersController@index')->with(['success' => trans('messages.sucess.change_active_status')]);
+        return redirect()->action('Backend\UsersController@index')->with(['success' => trans('messages.sucess.updated')]);
     }
 
     public function getEditConditions()
@@ -210,10 +210,10 @@ class UsersController extends PrimaryController
 
             \Cache::forever('conditions', $instructions);
 
-            return redirect()->back()->with(['success' => trans('word.success-updated')]);
+            return redirect()->back()->with(['success' => trans('general.success.updated')]);
         }
 
-        return redirect()->back()->with(['success' => trans('word.error-updated')]);
+        return redirect()->back()->with(['success' => trans('general.error.updated')]);
     }
 
 }

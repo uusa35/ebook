@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Core\PrimaryController;
 use App\Core\PrimaryEmailService;
+use App\Events\ChapterStatusChanged;
 use App\Events\CreateChapter;
 use App\Jobs\CreateChapterPreview;
 use App\Src\Book\BookRepository;
@@ -89,7 +90,7 @@ class ChaptersController extends PrimaryController
             event(new CreateChapter($chapter));
 
             return redirect()->action('Backend\BooksController@show',
-                $request->get('book_id'))->with(['success' => 'messages.success.chapter_create']);
+                $request->get('book_id'))->with(['success' => 'messages.success.created']);
         }
 
     }
@@ -140,7 +141,7 @@ class ChaptersController extends PrimaryController
             event(new CreateChapter($chapter));
 
             return redirect()->action('Backend\BooksController@show',
-                $request->book_id)->with(['success' => 'messages.success.chapter_update']);
+                $request->book_id)->with(['success' => 'messages.success.updated']);
         }
 
     }
@@ -161,7 +162,7 @@ class ChaptersController extends PrimaryController
 
         }
 
-        return redirect()->back()->with(['error' => trans('word.no-file')]);
+        return redirect()->back()->with(['error' => trans('messages.error.error')]);
     }
 
     /**
@@ -194,7 +195,6 @@ class ChaptersController extends PrimaryController
      */
     public function getUpdateChapterStatus($chapterId, $status)
     {
-
         $chapter = $this->chapterRepository->getWhereId($chapterId);
 
         $chapterUpdated = $chapter->update([
@@ -203,22 +203,14 @@ class ChaptersController extends PrimaryController
 
         $chapter = $chapter->with('book')->first();
 
-        if (\Request::user()->isAuthor() && $status == 'drafted') {
-
-            $this->getSendEmailForDraftedChapter($chapter);
-
-        } elseif ((\Request::user()->isAdmin() || \Request::user()->isEditor()) && $status == 'published') {
-
-            $this->getSendEmailForPublishedChapter($chapter);
-
-        }
-
         if ($chapterUpdated) {
 
-            return redirect()->back()->with(['success' => trans('word.success.chapter_updated')]);
+            event(new ChapterStatusChanged($chapter, $status));
+
+            return redirect()->back()->with(['success' => trans('messages.success.updated')]);
         }
 
-        return redirect()->back()->with(['error' => 'word.error.chapter_updated']);
+        return redirect()->back()->with(['error' => 'messages.error.updated']);
     }
 
     /**
@@ -227,62 +219,16 @@ class ChaptersController extends PrimaryController
      */
     public function removeReportAbuse($bookId)
     {
-
         $deletedReportAbuse = DB::table('book_report')->where(['book_id' => $bookId])->delete();
 
         if ($deletedReportAbuse) {
 
-            return redirect()->back()->with(['success' => trans('messages.success.removed')]);
+            return redirect()->back()->with(['success' => trans('messages.success.deleted')]);
 
         }
-        return redirect()->back()->with(['error' => 'messages.error.removed']);
-    }
 
-    public function getSendEmailForDraftedChapter($chapter)
-    {
+        return redirect()->back()->with(['error' => 'messages.error.error']);
 
-        $book = $chapter->book;
-
-        $data = [
-            'chapter_title' => $chapter->title,
-            'chapter_id' => $chapter->id,
-            'book_title' => $book->title,
-            'book_id' => $book->id
-        ];
-
-        $this->sendEmailForDraftedChapter($data,$book);
 
     }
-
-    public function getSendEmailForPublishedChapter($chapter)
-    {
-
-        $emailsFollowingList = $this->getEmailsFollowingList();
-
-        $book = $chapter->book;
-
-        $data = [
-            'chapter_title' => $chapter->title,
-            'chapter_id' => $chapter->id,
-            'book_title' => $book->title,
-            'book_id' => $book->id
-        ];
-
-        $this->sendEmailForPublishedChapter($data,$book,$emailsFollowingList);
-
-    }
-
-
-    public function getEmailsFollowingList()
-    {
-        $user = $this->userRepository->getWhereId(Auth::id())->with('following')->first();
-
-        $followingList = $user->following->Lists('user_id')->toArray();
-
-        $usersFollowingList = $this->userRepository->model->whereIn('id', $followingList)->get();
-
-        return $usersFollowingList->Lists('email')->toArray();
-
-    }
-
 }

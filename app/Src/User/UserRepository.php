@@ -40,4 +40,14 @@ class UserRepository extends PrimaryRepository
             ->get();
     }
 
+    public function allFollowersForUser($id) {
+
+        $user = $this->getWhereId($id)->with('followers')->first();
+
+        $followingListIds = $user->followers->pluck('follower_id');
+
+        return $usersFollowersList = $this->model->whereIn('id', $followingListIds)->get();
+
+    }
+
 }
