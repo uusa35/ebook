@@ -4,10 +4,9 @@ namespace App\Events;
 
 use App\Events\Event;
 use App\Src\Book\Chapter\Chapter;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
 
-class ChapterStatusChanged extends Event implements ShouldQueue
+class ChapterStatusChanged extends Event
 {
 
     public $chapter;

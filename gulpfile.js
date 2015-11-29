@@ -98,5 +98,7 @@ elixir(function (mix) {
         'public/css/abstract-css.css',
         'public/js/app.js'
     ]);
+    mix.phpUnit();
+
 
 });

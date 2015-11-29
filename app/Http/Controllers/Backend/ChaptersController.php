@@ -14,7 +14,6 @@ use App\Src\User\Follower\Follower;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
 

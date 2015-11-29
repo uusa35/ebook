@@ -4,9 +4,7 @@ namespace App\Listeners;
 
 use App\Core\PrimaryEmailService;
 use App\Events\ChapterStatusChanged;
-use App\Src\User\User;
 use App\Src\User\UserRepository;
-use Illuminate\Support\Facades\Auth;
 use \Illuminate\Support\Facades\Request;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
