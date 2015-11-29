@@ -1,8 +1,7 @@
 /vendor
 /node_modules
 /resources/assets/bower_components/*
-/public/images/uploads/*
-/public/images/uploads/avatar
+/public/images/uploads/
 /resources/lang/*
 /storage/debugbar/*
 /storage/framework/*
