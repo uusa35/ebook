@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9681848a-2c07-43d6-bc7a-61ca3dae0de9" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.envDev" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="9681848a-2c07-43d6-bc7a-61ca3dae0de9" name="Default" comment="" />
     <ignored path="ebook.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -102,21 +98,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.05421687">
+            <state vertical-scroll-proportion="0.0">
               <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="composer.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/composer.json">
+      <file leaf-file-name="cache.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/cache.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-23.125">
-              <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.31637716">
+              <caret line="23" column="48" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -405,122 +401,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Providers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Listeners" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Jobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Middleware" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ebook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="Events" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -552,7 +432,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../lts" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="SearchEverywhereHistoryKey" value="show.blade.p&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/modules/book/show.blade.php&#10;gulpfile&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/gulpfile.js&#10;Auth&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Auth/AuthController.php&#10;AuthC&#9;null&#9;null&#10;ChaptersC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;jo&#9;null&#9;null&#10;queue.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/config/queue.php&#10;Pri&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Core/PrimaryEmailService.php&#10;BookC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/BookController.php&#10;Book&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/BookController.php&#10;ind&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/modules/book/index.blade.php&#10;index&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/modules/book/index.blade.php&#10;index.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/backend/modules/user/index.blade.php&#10;UsersC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/UsersController.php&#10;Chapter&#9;null&#9;null&#10;Chapters&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;UserRe&#9;null&#9;null&#10;Chap&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;User.&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Src/User/User.php&#10;BooksC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/BooksController.php&#10;News&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/NewsletterController.php&#10;Prima&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Core/PrimaryEmailService.php&#10;users&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/UsersController.php&#10;AuthSer&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Providers/AuthServiceProvider.php&#10;Policies&#9;null&#9;null&#10;app.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/config/app.php&#10;BookCo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/BookController.php&#10;UsersCo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/UsersController.php&#10;EditUser&#9;null&#9;null&#10;index.b&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/modules/book/index.blade.php&#10;sideb&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/backend/partials/sidebar.blade.php&#10;header.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/partials/header.blade.php&#10;routes&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/routes.php&#10;index.blade.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/modules/book/index.blade.php&#10;BooksCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/BooksController.php&#10;footer&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/partials/footer.blade.php&#10;mail.&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/config/mail.php&#10;newsletter&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/emails/newsletter.blade.php&#10;news&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/NewsletterController.php&#10;Soc&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Core/SocialAuthTrait.php&#10;login&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/auth/login.blade.php&#10;User.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Src/User/User.php&#10;.env&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/.envDev&#10;sidebar&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/backend/partials/sidebar.blade.php&#10;header&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/partials/header.blade.php&#10;Soci&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Core/SocialAuthTrait.php&#10;route&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/routes.php&#10;master&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/layouts/master.blade.php&#10;toolbar&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/partials/toolbar.blade.php&#10;Social&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Core/SocialAuthTrait.php" />
+    <property name="SearchEverywhereHistoryKey" value="cache.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/config/cache.php&#10;show.blade.p&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/modules/book/show.blade.php&#10;gulpfile&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/gulpfile.js&#10;Auth&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Auth/AuthController.php&#10;AuthC&#9;null&#9;null&#10;ChaptersC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;jo&#9;null&#9;null&#10;queue.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/config/queue.php&#10;Pri&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Core/PrimaryEmailService.php&#10;BookC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/BookController.php&#10;Book&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/BookController.php&#10;ind&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/modules/book/index.blade.php&#10;index&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/modules/book/index.blade.php&#10;index.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/backend/modules/user/index.blade.php&#10;UsersC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/UsersController.php&#10;Chapter&#9;null&#9;null&#10;Chapters&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;UserRe&#9;null&#9;null&#10;Chap&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;User.&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Src/User/User.php&#10;BooksC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/BooksController.php&#10;News&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/NewsletterController.php&#10;Prima&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Core/PrimaryEmailService.php&#10;users&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/UsersController.php&#10;AuthSer&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Providers/AuthServiceProvider.php&#10;Policies&#9;null&#9;null&#10;app.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/config/app.php&#10;BookCo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/BookController.php&#10;UsersCo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/UsersController.php&#10;EditUser&#9;null&#9;null&#10;index.b&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/modules/book/index.blade.php&#10;sideb&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/backend/partials/sidebar.blade.php&#10;header.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/partials/header.blade.php&#10;routes&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/routes.php&#10;index.blade.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/modules/book/index.blade.php&#10;BooksCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/BooksController.php&#10;footer&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/partials/footer.blade.php&#10;mail.&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/config/mail.php&#10;newsletter&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/emails/newsletter.blade.php&#10;news&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/Controllers/Backend/NewsletterController.php&#10;Soc&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Core/SocialAuthTrait.php&#10;login&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/auth/login.blade.php&#10;User.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Src/User/User.php&#10;.env&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/.envDev&#10;sidebar&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/backend/partials/sidebar.blade.php&#10;header&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/partials/header.blade.php&#10;Soci&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Core/SocialAuthTrait.php&#10;route&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Http/routes.php&#10;master&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/layouts/master.blade.php&#10;toolbar&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/resources/views/frontend/partials/toolbar.blade.php" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
     <property name="LayoutCode.rearrangeEntriesBlade" value="false" />
     <property name="recentsLimit" value="5" />
@@ -709,10 +589,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32260373" sideWeight="0.5035047" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24892704" sideWeight="0.49649534" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24892704" sideWeight="0.49649534" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -773,14 +653,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth/Access/AuthorizesRequests.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.291667">
-          <caret line="60" column="12" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_ide_helper.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19354838">
@@ -1199,8 +1071,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05421687">
+        <state vertical-scroll-proportion="0.0">
           <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/cache.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31637716">
+          <caret line="23" column="48" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
           <folding />
         </state>
       </provider>
