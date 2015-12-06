@@ -54,6 +54,12 @@
             !!}
         </div>
 
+        <div class="form-group col-md-12 col-lg-12">
+            {!! Form::label('aboutus', trans('general.aboutus'), ['class' => 'control-label']) !!}
+            {!! Form::textarea('aboutus', null, ['class' => 'form-control editor','placeholder'=>trans('general.aboutus')])
+            !!}
+        </div>
+
         @include('backend.partials.buttons.form_btn_update')
 
         {!! Form::close() !!}

@@ -13,7 +13,7 @@ return [
     'btn-view' => 'btn btn-fab btn-fab-mini btn-material-lime-600 btn-xs tooltip',
     'btn-send' => 'btn btn-fab btn-fab-mini btn-material-purple-300 btn-xs tooltip',
     'btn-active' => 'btn btn-fab btn-fab-mini btn-material-green btn-xs tooltip',
-    'btn-not-active' => 'btn btn-fab btn-fab-mini btn-material-deep-orange-600 btn-xs tooltip',
+    'btn-not-active' => 'btn btn-fab btn-fab-mini btn-material-red-600 btn-xs tooltip',
     'btn-pending' => 'btn btn-fab btn-fab-mini btn-material-yellow-100 btn-xs tooltip',
     'btn-drafted' => 'btn btn-fab btn-fab-mini btn-material-yellow-A400 btn-xs tooltip',
     'btn-published' => 'btn btn-fab btn-fab-mini btn-material-green-600 btn-xs tooltip',
@@ -31,9 +31,9 @@ return [
     'icon-create' => "<i class='fa fa-xs fa-plus'></i>",
     'icon-edit' => "<i class='fa fa-xs fa-edit'></i>",
     'icon-view' => "<i class='fa fa-xs fa-eye'></i>",
-    'icon-active' => "<i class='fa fa-xs fa-times'></i>",
+    'icon-active' => "<i class='fa fa-xs fa-check'></i>",
     'icon-send' => "<i class='fa fa-xs fa-send'></i>",
-    'icon-not-active' => "<i class='fa fa-xs fa-check'></i>",
+    'icon-not-active' => "<i class='fa fa-xs fa-times'></i>",
     'icon-pending' =>"<i class='fa fa-xs fa-file-word-o'></i>",
     'icon-drafted' =>"<i class='fa fa-xs fa-server'></i>",
     'icon-published' =>"<i class='fa fa-xs fa-thumbs-up'></i>",
@@ -54,10 +54,5 @@ return [
     'icon-block' =>"<i class='fa fa-xs fa-ban'></i>",
     'icon-follow' =>"<i class='fa fa-xs fa-user-plus'></i>",
     'icon-unfollow' =>"<i class='fa fa-xs fa-user-times'></i>",
-    'icon-unblock' =>"<i class='fa fa-xs fa-male'></i>",
-    'icon-index' =>"<i class='fa fa-xs fa-list'></i>",
-    'icon-index' =>"<i class='fa fa-xs fa-list'></i>",
-
-
-
+    'icon-unblock' =>"<i class='fa fa-xs fa-male'></i>"
 ];

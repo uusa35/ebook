@@ -19,7 +19,10 @@
     <a class="{{ Config::get('button.btn-create') }}"
        href="{{ action('Backend\ChaptersController@create',['book_id'=>$book->id]) }}"
        title="{{ trans('general.add') }}">
-        {!! Config::get('button.icon-create') !!}</a>
+        {!! Config::get('button.icon-create') !!}
+    </a>
+    <span class="small-text"> {{ trans('general.chapter_create') }}</span>
+
     @endcan
 @endsection
 

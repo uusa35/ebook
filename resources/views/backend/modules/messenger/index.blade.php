@@ -21,6 +21,7 @@
        title="{{ trans('general.message_create') }}">
         {!! Config::get('button.icon-create')!!}
     </a>
+    <span class="small-text"> {{ trans('general.message_create') }}</span>
     @endcan
 @stop
 <div class="panel-body">

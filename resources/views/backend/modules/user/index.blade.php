@@ -65,7 +65,8 @@
                     <button type="submit"
                             title="{{ ($user->active) ? trans('general.not_active') : trans('general.active') }}"
                             class=" {{ ($user->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active') }}">
-                        <i class="fa fa-xs fa-check"></i></button>
+                        {!! ($user->active) ? Config::get('button.icon-active')  : Config::get('button.icon-not-active') !!}
+                        </button>
                     {!! Form::close() !!}
                     @endcan
                 </td>

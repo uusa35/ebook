@@ -6,6 +6,7 @@ use App\Core\PrimaryController;
 use App\Http\Requests\CreateCategory;
 use App\Src\Category\Field\FieldCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class FieldCategoriesController extends PrimaryController
@@ -63,20 +64,9 @@ class FieldCategoriesController extends PrimaryController
 
         Cache::forever('fieldsCategories', $fieldsCategories);
 
-        return redirect()->action('Backend\FieldCategoriesController@index')->with('success', trans('word.create-success-category'));
+        return redirect()->action('Backend\FieldCategoriesController@index')->with('success', trans('messages.success.created'));
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -115,17 +105,7 @@ class FieldCategoriesController extends PrimaryController
 
         Cache::forever('fieldsCategories', $fieldsCategories);
 
-        return redirect()->back()->with('success', trans('word.create-category-success'));
+        return redirect()->back()->with('success', trans('messages.success.updated'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -6,18 +6,33 @@
         <div class="col-lg-3">
             <h3>{{ ucfirst(trans('general.contactus')) }}</h3>
 
-            <p><i class="fa fa-fw fa-home"></i> {{ $contactusInfo->address }}<br/>
-                <i class="fa fa-fw fa-phone"></i> {{ $contactusInfo->phone }}<br/>
-                <i class="fa fa-fw fa-mobile"></i>{{ $contactusInfo->mobile }}<br/>
-                <i class="fa fa-fw fa-envelope"></i><a
-                        href="{{ $contactusInfo->email }}"> {{ $contactusInfo->email }}</a> <br/>
-                <span class="fa fa-fw fa-twitter"></span> <a
-                        href="http://twitter.com/{{ $contactusInfo->twitter }}"> {{ $contactusInfo->twitter }}</a> <br/>
-                <span class="fa fa-fw fa-instagram"></span> <a
-                        href="http://instagram.com/{{ $contactusInfo->instagram }}"> {{ $contactusInfo->instagram }}</a>
-                <br/>
-                <span class="fa fa-fw fa-youtube"></span> <a
-                        href="http://youtube.com/{{ $contactusInfo->youtube }}"> {{ $contactusInfo->youtube }}</a>
+            <p>
+                @if(!is_null(trim($contactusInfo->address)))
+                    <i class="fa fa-fw fa-home"></i> {{ $contactusInfo->address }}<br/>
+                @endif
+                @if(trim($contactusInfo->phone))
+                    <i class="fa fa-fw fa-phone"></i> {{ $contactusInfo->phone }}<br/>
+                @endif
+                @if(trim($contactusInfo->mobile))
+                    <i class="fa fa-fw fa-mobile"></i>{{ $contactusInfo->mobile }}<br/>
+                @endif
+                @if($contactusInfo->email)
+                    <i class="fa fa-fw fa-envelope"></i><a
+                            href="{{ $contactusInfo->email }}"> {{ $contactusInfo->email }}</a> <br/>
+                @endif
+                @if(trim($contactusInfo->twitter))
+                    <span class="fa fa-fw fa-twitter"></span> <a
+                            href="http://twitter.com/{{ $contactusInfo->twitter }}"> {{ $contactusInfo->twitter }}</a>
+                    <br/>
+                @endif
+                @if(trim($contactusInfo->instagram))
+                    <span class="fa fa-fw fa-instagram"></span> <a
+                            href="http://instagram.com/{{ $contactusInfo->instagram }}"> {{ $contactusInfo->instagram }}</a>
+                    <br/>
+                @endif
+                @if(trim($contactusInfo->youtube))
+                    <span><span class="fa fa-fw fa-comment"></span> {{ $contactusInfo->youtube }}</span>
+                @endif
             </p>
         </div>
         <!-- col -->
@@ -76,8 +91,17 @@
             <h3>{{ trans('general.twitter') }}</h3>
 
             <p>
-                <a class="twitter-timeline" href="https://twitter.com/7orof_com" data-widget-id="669172461506863104">Tweets by @7orof_com</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <a class="twitter-timeline" href="https://twitter.com/7orof_com" data-widget-id="669172461506863104">Tweets
+                    by @7orof_com</a>
+                <script>!function (d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                        if (!d.getElementById(id)) {
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = p + "://platform.twitter.com/widgets.js";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }
+                    }(document, "script", "twitter-wjs");</script>
             </p>
         </div>
         <!-- col -->

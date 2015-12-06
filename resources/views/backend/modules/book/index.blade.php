@@ -50,6 +50,7 @@
             <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\BooksController@create') }}"
                title="{{ trans('general.book_create') }}">
                 {!! Config::get('button.icon-create')!!}
+                <span class="small-text"> {{ trans('general.book_create') }}</span>
             </a>
             @endcan
         @stop

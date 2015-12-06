@@ -59,19 +59,9 @@ class LangCategoriesController extends PrimaryController
 
         $this->langCategory->create($request->except('_token'));
 
-        return redirect()->back()->with('success', trans('word.create-success-category'));
+        return redirect()->back()->with('success', trans('messages.success.created'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -106,17 +96,7 @@ class LangCategoriesController extends PrimaryController
             'name_en' => $request->input('name_en')
         ]);
 
-        return redirect()->back()->with('success', trans('word.create-category-success'));
+        return redirect()->back()->with('success', trans('messages.success.updated'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
