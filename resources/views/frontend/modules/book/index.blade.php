@@ -145,9 +145,9 @@
                                         <a class="" href="{!! action('BookController@show',$book->id) !!}">
                                 <span class="description-text">
                                     <h5>
-                                        <blockquote>
-                                            {{ \Illuminate\Support\Str::words($book->title,4) }}
-                                        </blockquote>
+
+                                        {{ \Illuminate\Support\Str::words($book->title,4) }}
+
                                     </h5>
 
                                     {{ \Illuminate\Support\Str::words($book->description,3) }}
@@ -226,9 +226,9 @@
                                     <a class="" href="{!! action('BookController@show',$book->id) !!}">
                                 <span class="description-text">
                                     <h5>
-                                        <blockquote>
-                                            {{ \Illuminate\Support\Str::words($book->title,4) }}
-                                        </blockquote>
+
+                                        {{ \Illuminate\Support\Str::words($book->title,4) }}
+
                                     </h5>
 
                                     {{ \Illuminate\Support\Str::words($book->description,3) }}

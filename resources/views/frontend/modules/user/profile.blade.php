@@ -48,7 +48,7 @@
             <div class="box-body box-profile">
                 @if(count($user->avatar > 1))
                     <img class="profile-user-img img-responsive img-circle"
-                         src="{{ asset('images/uploads/avatar/large/'.$user->avatar) }}"
+                         src="{{ asset('images/uploads/avatar/large/'.$user->avatar }}"
                          alt="User profile picture">
 
                 @else

@@ -66,7 +66,7 @@ class FieldCategoriesController extends PrimaryController
 
         return redirect()->action('Backend\FieldCategoriesController@index')->with('success', trans('messages.success.created'));
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *

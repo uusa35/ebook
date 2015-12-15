@@ -60,7 +60,7 @@ class CreateImages extends Job implements SelfHandling
                 // folderName is the Coloumn Table Name :)
                 if ($fileName) {
 
-                    $update = $this->model->update([$this->folderName => strtolower($fileName)]);
+                    $update = $this->model->update([$this->folderName => $fileName]);
 
                     if ($update) {
 
