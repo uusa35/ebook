@@ -39,31 +39,49 @@ class CreatePdf implements ShouldQueue
         // create PDF
         //dd($this->uploadPath . $event->book->url);
 
-        $body = $this->cleanBody($event->chapter->body);
+        $bodyForPdf = $this->cleanBody($event->chapter->body);
 
-        $body = '<div style="border: 1px dotted #d7d7d7 !important;">' . $body . '</div>';
+        $bodyForPdf = '<div style="border: 1px dotted #d7d7d7 !important;">' . $bodyForPdf . '</div>';
 
         $this->pdf->setOption('encoding', 'UTF-8');
 
-        //dd($event->chapter->body);
+        $this->pdf->generateFromHtml($bodyForPdf, $this->uploadPath . $event->chapter->url, ['encoding' => 'UTF-8', 'images' => true, 'enable-external-links' => true], true);
 
-        //$updated = $event->chapter->update(['body' => $body]);
+        /*
+         * save the body content in the DB
+         * */
 
-        //$updated = $event->chapter->save();
+        $event->chapter->update(['body' => $this->cleanBodyForEditing($event->chapter->body)]);
 
-        //dd($updated);
+        $event->chapter->save();
 
-        $this->pdf->generateFromHtml($body, $this->uploadPath . $event->chapter->url, ['encoding' => 'UTF-8', 'images' => true, 'enable-external-links' => true], true);
-
-        return true;
     }
 
-
+    /**
+     * @param $body
+     * @return mixed
+     * it removes all images dots with public folder of the server in order to create the PDF
+     */
     public function cleanBody($body)
     {
 
-        $bodyContent = str_replace('../../../imagesc/', public_path('images/'), $body);
+        $bodyContent = str_replace('../../../images/', public_path('images/'), $body);
         $bodyContent = str_replace('../../images/', public_path('images/'), $bodyContent);
+
+        return $bodyContent;
+    }
+
+
+    /**
+     * @param $body
+     * @return mixed
+     * * it removes all images dots with public folder of the server in order to show images within the edit form and store it in the DB
+     */
+    public function cleanBodyForEditing($body)
+    {
+
+        $bodyContent = str_replace('../../../images/', '/images/', $body);
+        $bodyContent = str_replace('../../images/', '/images/', $bodyContent);
 
         return $bodyContent;
     }
