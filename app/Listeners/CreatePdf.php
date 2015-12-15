@@ -12,7 +12,6 @@ class CreatePdf implements ShouldQueue
     private $pdf;
 
 
-
     private $uploadPath;
 
     /**
@@ -42,34 +41,29 @@ class CreatePdf implements ShouldQueue
 
         $body = $this->cleanBody($event->chapter->body);
 
-        $body = '<div style="border: 1px dotted #d7d7d7 !important;">'. $body .'</div>';
+        $body = '<div style="border: 1px dotted #d7d7d7 !important;">' . $body . '</div>';
 
         $this->pdf->setOption('encoding', 'UTF-8');
 
         //dd($event->chapter->body);
 
-        $updated = $event->chapter->update(['body' => $body]);
+        //$updated = $event->chapter->update(['body' => $body]);
 
-        $updated = $event->chapter->save();
+        //$updated = $event->chapter->save();
 
         //dd($updated);
 
-        $this->pdf->generateFromHtml($body, $this->uploadPath . $event->chapter->url,['encoding'=>'UTF-8','images'=> true,'enable-external-links' => true],true);
+        $this->pdf->generateFromHtml($body, $this->uploadPath . $event->chapter->url, ['encoding' => 'UTF-8', 'images' => true, 'enable-external-links' => true], true);
 
         return true;
     }
 
 
-    public function cleanBody ($body) {
+    public function cleanBody($body)
+    {
 
-        //dd($body);
-        // http://ebook.app:8000/images/uploads/books/men6.jpg
-
-        $bodyContent = str_replace('../../../images/', public_path('images/'), $body);
+        $bodyContent = str_replace('../../../imagesc/', public_path('images/'), $body);
         $bodyContent = str_replace('../../images/', public_path('images/'), $bodyContent);
-
-      // dd($bodyContent);
-        //$bodyContent = str_replace('../../../../#', '#', $body);
 
         return $bodyContent;
     }

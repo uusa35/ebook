@@ -50,12 +50,10 @@
                     <img class="profile-user-img img-responsive img-circle"
                          src="{{ asset('images/uploads/avatar/large/'.$user->avatar) }}"
                          alt="User profile picture">
-
                 @else
                     <img src="//www.gravatar.com/avatar/{!! md5(Auth::user()->email) !!}?s=64"
                          alt="{!! Auth::user()->name !!}" class="profile-user-img img-responsive img-circle">
                 @endif
-
                 <h3 class="profile-username text-center">{{ $user->name }}</h3>
 
                 <p class="text-muted text-center"> {{ $user->email }}</p>

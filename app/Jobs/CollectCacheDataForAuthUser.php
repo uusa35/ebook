@@ -30,56 +30,59 @@ class CollectCacheDataForAuthUser extends Job implements SelfHandling
     {
         $authUserRole = $this->request->user()->roles()->first();
 
-        Cache::put($authUserRole->name, $authUserRole->name, 120);
+        if(is_null(Cache::get('Permissions.' . $authUserRole->name.'.'.Auth::id()))) {
 
-        $modules = $authUserRole->perms()->where('level', '=', '1')->get();
+            Cache::put($authUserRole->name, $authUserRole->name, 120);
 
-        $modulesList = $modules->lists('name', 'id')->toArray();
+            $modules = $authUserRole->perms()->where('level', '=', '1')->get();
 
-        $permissions = $authUserRole->perms()->where('level', '=', '2')->get();
+            $modulesList = $modules->lists('name', 'id')->toArray();
 
-        $permissionsList = $permissions->lists('name', 'id')->toArray();
+            $permissions = $authUserRole->perms()->where('level', '=', '2')->get();
 
-        $abilities = $authUserRole->perms()->get();;
+            $permissionsList = $permissions->lists('name', 'id')->toArray();
 
-        $abilitiesList = $abilities->Lists('name', 'id')->toArray();
+            $abilities = $authUserRole->perms()->get();;
 
-
-        /*
-         * 'Module.Admin' => [List of Modules]
-         * */
-        Cache::put('Modules.' . $authUserRole->name.'.'.Auth::id(), array_values($modulesList), 120);
-
-        //dd(Cache::get('Modules.Admin.'.Auth::id()));
+            $abilitiesList = $abilities->Lists('name', 'id')->toArray();
 
 
-        /*
-         * 'Permission.Admin' => [List of Permissions]
-         * */
-        Cache::put('Permissions.' . $authUserRole->name.'.'.Auth::id(), array_values($permissionsList), 120);
+            /*
+             * 'Module.Admin' => [List of Modules]
+             * */
+            Cache::put('Modules.' . $authUserRole->name . '.' . Auth::id(), array_values($modulesList), 120);
+
+            //dd(Cache::get('Modules.Admin.'.Auth::id()));
 
 
-        /*
-         * All Permissions and Roles in one array
-         *
-         * */
+            /*
+             * 'Permission.Admin' => [List of Permissions]
+             * */
+            Cache::put('Permissions.' . $authUserRole->name . '.' . Auth::id(), array_values($permissionsList), 120);
 
-        Cache::put('Abilities.' . $authUserRole->name.'.'.Auth::id(), array_values($abilitiesList), 120);
 
-        /*
-         * 'Permission.role_edit' => role_edit
-         * */
-        foreach ($permissions as $perm) {
+            /*
+             * All Permissions and Roles in one array
+             *
+             * */
 
-            Cache::put('Permission.' . $perm->name.'.'.Auth::id(), $perm->name, 120);
+            Cache::put('Abilities.' . $authUserRole->name . '.' . Auth::id(), array_values($abilitiesList), 120);
 
+            /*
+             * 'Permission.role_edit' => role_edit
+             * */
+            foreach ($permissions as $perm) {
+
+                Cache::put('Permission.' . $perm->name . '.' . Auth::id(), $perm->name, 120);
+
+            }
+
+            // role.Admin = Admin
+            Cache::put('role.' . $authUserRole->name . '.' . Auth::id(), $authUserRole->name, 120);
+
+            // role.ID = Admin
+            Cache::put('role.' . Auth::id(), $authUserRole->name, 120);
         }
-
-        // role.Admin = Admin
-        Cache::put('role.' . $authUserRole->name.'.'.Auth::id(), $authUserRole->name, 120);
-
-        // role.ID = Admin
-        Cache::put('role.'.Auth::id(), $authUserRole->name, 120);
 
     }
 }
