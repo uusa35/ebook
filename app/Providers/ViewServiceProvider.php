@@ -19,9 +19,9 @@ class ViewServiceProvider extends ServiceProvider
     {
 
         if (is_null(Cache::get('fieldsCategories'))
-            && is_null(Cache::get('contactusInfo'))
-            && is_null(Cache::get('conditions'))
-            && is_null(Cache::get('sliders'))
+            || is_null(Cache::get('contactusInfo'))
+            || is_null(Cache::get('conditions'))
+            || is_null(Cache::get('sliders'))
         ) {
 
             if (\Schema::hasTable('contactus')
@@ -37,7 +37,6 @@ class ViewServiceProvider extends ServiceProvider
                 $allAds = DB::table('ads')->limit(2)->get();
                 $conditions = DB::table('conditions')->first();
                 $sliders = DB::table('sliders')->get();
-
 
                 if (!is_null($contactusInfo)
                     && !is_null($fieldsCategories)

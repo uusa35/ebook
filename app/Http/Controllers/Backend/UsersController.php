@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateUser;
 use App\Jobs\CreateImages;
 use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
@@ -173,7 +175,7 @@ class UsersController extends PrimaryController
     {
         $this->authorize('checkAssignedPermission', 'user_change');
 
-        ($status === '0') ? $newStatus = 1 : $newStatus = 0;
+        ($status == '0') ? $newStatus = 1 : $newStatus = 0;
 
         $user = $this->userRepository->model->find($id);
 
@@ -190,7 +192,7 @@ class UsersController extends PrimaryController
     {
         $this->authorize('checkAssignedPermission', 'condition_edit');
 
-        $terms = \DB::table('conditions')->first();
+        $terms = DB::table('conditions')->first();
 
         return view('backend.modules.user.conditions', ['terms' => $terms]);
     }
@@ -199,7 +201,7 @@ class UsersController extends PrimaryController
     {
         $this->authorize('checkAssignedPermission', 'condition_edit');
 
-        $instructions = \DB::table('conditions')->update([
+        $instructions = DB::table('conditions')->update([
             'title_ar' => Input::get('title_ar'),
             'title_en' => Input::get('title_en'),
             'body_ar' => Input::get('body_ar'),
@@ -208,7 +210,9 @@ class UsersController extends PrimaryController
 
         if ($instructions) {
 
-            \Cache::forever('conditions', $instructions);
+            $instructions = DB::table('conditions')->first();
+
+            Cache::forever('conditions', $instructions);
 
             return redirect()->back()->with(['success' => trans('general.success.updated')]);
         }
