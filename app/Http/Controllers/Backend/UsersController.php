@@ -190,6 +190,8 @@ class UsersController extends PrimaryController
 
     public function getEditConditions()
     {
+        $this->getPageTitle('user.edit');
+
         $this->authorize('checkAssignedPermission', 'condition_edit');
 
         $terms = DB::table('conditions')->first();

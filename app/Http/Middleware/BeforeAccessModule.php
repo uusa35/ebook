@@ -53,7 +53,7 @@ class BeforeAccessModule
 
         $role = Cache::get('role.'.Auth::id());
 
-        $array = \Cache::get('Abilities.'.$role.'.'.Auth::id());
+        $array = Cache::get('Abilities.'.$role.'.'.Auth::id());
 
         //dd($array);
         //dd($moduleDecrypted);

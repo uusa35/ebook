@@ -43,8 +43,8 @@ class Authenticate
 
             } else {
 
-                \Cache::flush();
                 return redirect()->guest('auth/login');
+
             }
         }
 

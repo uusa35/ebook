@@ -31,7 +31,6 @@ class ContactUsController extends PrimaryController
         $this->authorize('index',Session::get('module'));
 
         $this->getPageTitle('dashboard.contactus');
-        //Cache::forget('contactusInfo');
 
         $contactInfo = $this->contactus->first();
 

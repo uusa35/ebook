@@ -35,9 +35,13 @@ class AfterUserLoginCollectData
         } elseif (Cache::get('role.' . Auth::id()) && Session::get('roles')) {
 
             return $next($request);
+
         } else {
+
             Session::flush();
+
             Auth::logout();
+
             return $next($request);
         }
 
