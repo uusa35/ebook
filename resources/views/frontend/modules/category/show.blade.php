@@ -31,7 +31,7 @@
                                 <div class="description-block">
 
                                     <h3 class="description-header"><i class="fa fa-fw fa-heart text-danger"></i></h3>
-                                    <span class="description-text">{{ count($book->users) }}</span>
+                                    <span class="description-text">{{ count($book->usersFavorites) }}</span>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -49,7 +49,7 @@
                                 <div class="description-block">
                                     <h5 class="description-header"><i class="fa fa-fw fa-paper-plane text-info"></i>
                                     </h5>
-                                    <span class="description-text">{{ $book->meta->total_pages }}</span>
+                                    <span class="description-text">{{ $book->views }}</span>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
