@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-lg-6 col-lg-offset-3" style="margin-bottom: 6px;">
                 <a class="" href="{{ action('Backend\DashboardController@index') }}"><img
-                            class="center-block img-responsive img-thumbnail" src="{{ asset('images/logo-150.png') }}" alt=""/></a>
+                            class="center-block img-responsive img-thumbnail" src="{{ asset('images/logo-main.png') }}" alt=""/></a>
             </div>
         </div>
         <!-- Sidebar Menu -->
