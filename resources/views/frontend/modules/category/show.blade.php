@@ -47,7 +47,7 @@
                             <!-- /.col -->
                             <div class="col-sm-4">
                                 <div class="description-block">
-                                    <h5 class="description-header"><i class="fa fa-fw fa-paper-plane text-info"></i>
+                                    <h5 class="description-header"><i class="fa fa-fw fa-eye text-info"></i>
                                     </h5>
                                     <span class="description-text">{{ $book->views }}</span>
                                 </div>
