@@ -8,4 +8,4 @@
 /storage/httpcache/*
 /AdminLTE-2.3.0
 /packages
-.envg
+.env
