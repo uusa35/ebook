@@ -10,5 +10,4 @@
 /packages
 .env
 .env.example
-.envDev
 
