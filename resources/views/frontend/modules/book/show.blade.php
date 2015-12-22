@@ -209,8 +209,8 @@
         <div id="disqus_thread"></div>
         @if(!in_array(Auth::id(),$blockedUsersofAuthor,true))
             <div class="col-lg-10 col-lg-offset-1">
-                @include('CommentPack::index')
-                {{--@include('frontend.partials.comment')--}}
+                {{--@include('CommentPack::index')--}}
+                @include('frontend.partials.comment')
             </div>
         @else
             <div class="row">
