@@ -28,7 +28,6 @@
         "socialiteproviders/twitter": "^1.0",
         "socialiteproviders/disqus": "^1.1",
         "laravel/socialite": "^2.0"
-
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

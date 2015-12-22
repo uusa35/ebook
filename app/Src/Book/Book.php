@@ -48,7 +48,8 @@ class Book extends PrimaryModel
         return $this->belongsToMany('App\Src\User\User', 'book_user');
     }
 
-    public function usersLikes() {
+    public function usersLikes()
+    {
         return $this->belongsToMany('App\Src\User\User', 'book_likes');
     }
 
@@ -87,17 +88,18 @@ class Book extends PrimaryModel
         return $this->hasMany('App\Src\Favorite\Favorite', 'book_id');
     }
 
-    public function likes() {
-        return $this->hasMany('App\Src\Like\Like','book_id');
+    public function likes()
+    {
+        return $this->hasMany('App\Src\Like\Like', 'book_id');
     }
 
     public function mostFavorites($paginate = 8)
     {
         return $this
             ->selectRaw('books.*, count(*) as book_count')
-            ->with('meta','author','usersFavorites')
+            ->with('meta', 'author', 'usersFavorites')
             ->whereExists(function ($query) {
-                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status','=','published');
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status', '=', 'published');
             })
             ->join('book_user', 'books.id', '=', 'book_user.book_id')
             ->where('books.active', '1')
@@ -125,9 +127,9 @@ class Book extends PrimaryModel
     {
         return $this
             ->selectRaw('books.*, count(*) as book_count')
-            ->with('meta','author','usersFavorites')
+            ->with('meta', 'author', 'usersFavorites')
             ->whereExists(function ($query) {
-                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status','=','published');
+                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status', '=', 'published');
             })
             ->join('book_likes', 'books.id', '=', 'book_likes.book_id')
             ->where('books.active', '1')

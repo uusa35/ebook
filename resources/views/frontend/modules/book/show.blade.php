@@ -97,7 +97,7 @@
                                     {{ trans('general.published_at') }} :
                                 </td>
                                 <td>
-                                    {{ $book->updated_at->toFormattedDateString() }}
+                                    {{ $book->created_at->toFormattedDateString() }}
                                 </td>
                             </tr>
                             <tr>
@@ -208,8 +208,9 @@
     @if(Auth::user())
         <div id="disqus_thread"></div>
         @if(!in_array(Auth::id(),$blockedUsersofAuthor,true))
-            <div class="col-lg-8 col-lg-offset-2">
-                @include('frontend.partials.comment')
+            <div class="col-lg-10 col-lg-offset-1">
+                @include('CommentPack::index')
+                {{--@include('frontend.partials.comment')--}}
             </div>
         @else
             <div class="row">

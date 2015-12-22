@@ -2,6 +2,7 @@
 
 use App\Core\PrimaryController;
 use App\Http\Requests;
+use App\Src\Book\Book;
 use App\Src\Book\BookRepository;
 use App\Src\Book\Chapter\ChapterRepository;
 use App\Src\Favorite\FavoriteRepository;
@@ -10,6 +11,10 @@ use App\Src\Purchase\PurchaseRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Laravolt\Mural\Comment;
+use Laravolt\Mural\Http\Controllers\MuralController;
+use Laravolt\Mural\Facade as Mural;
+
 
 class BookController extends PrimaryController
 {
@@ -107,10 +112,6 @@ class BookController extends PrimaryController
         // get all books by book ID
 
         $book = $this->bookRepository->model->where(['id' => $id])->with('author', 'author.following')->first();
-
-        //$followers = $book->author->following;
-
-        //$followersList = $followers->Lists('id', 'user_id')->toArray();
 
         $blockedUsersofAuthor = $book->author->blocked->Lists('blocked_id', 'blocked_id')->toArray();
 
