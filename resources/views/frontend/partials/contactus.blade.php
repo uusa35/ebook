@@ -38,7 +38,7 @@
                         @if(trim($contactusInfo->aboutus))
                             <hr>
                             <h3 class="text-center"> {{ trans('general.aboutus') }}</h3>
-                            <p> {{ $contactusInfo->aboutus }}</p>
+                            <p class="text-justify"> {{ $contactusInfo->aboutus }}</p>
                             <hr>
                         @endif
                     </address>

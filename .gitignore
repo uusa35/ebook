@@ -9,3 +9,5 @@
 /AdminLTE-2.3.0
 /packages
 .env
+.env.example
+
