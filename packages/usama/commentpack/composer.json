@@ -1,0 +1,14 @@
+{
+    "name": "usama/commentpack",
+    "description": "laravel package for comment system",
+    "type": "laravel 5.1",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "usama ahmed",
+            "email": "uusa35@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
