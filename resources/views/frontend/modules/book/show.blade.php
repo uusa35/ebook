@@ -208,10 +208,12 @@
     @if(Auth::user())
         <div id="disqus_thread"></div>
         @if(!in_array(Auth::id(),$blockedUsersofAuthor,true))
-            <div class="col-lg-10 col-lg-offset-1">
-                {{--@include('CommentPack::index')--}}
-                @include('frontend.partials.comment')
+            <div class="row">
+                <div class="col-lg-12 ">
+                    @include('CommentPack::Frontend.index')
+                </div>
             </div>
+                {{--@include('frontend.partials.comment')--}}
         @else
             <div class="row">
                 <div class="alert alert-dismissable alert-warning">

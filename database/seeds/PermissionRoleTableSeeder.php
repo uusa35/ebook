@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ChaptersTableSeeder extends Seeder
+class PermissionRoleTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,9 @@ class ChaptersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\Src\Book\Chapter\Chapter',15)->create();
+        DB::table('permission_role')->insert([
+            'permission_id' => App\Src\Permission\Permission::all()->random()->id,
+            'role_id' => App\Src\Role\Role::all()->random()->id
+        ]);
     }
 }

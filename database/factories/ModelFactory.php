@@ -14,20 +14,20 @@
 use Illuminate\Support\Facades\DB;
 
 $factory->define('App\Src\User\User', function ($faker) {
-        return [
-            'name' => $faker->name,
-            //'name_ar' => $faker->country,
-            'email' => "user".$faker->numberBetween(0,50)."@email.com",
-            'active' => 1,
-            'level' => 3,
-            'password' => Hash::make("admin"),
-            'avatar' => 'http://lorempixel.com/150/150/sports'
-        ];
+    return [
+        'name' => $faker->name,
+        //'name_ar' => $faker->country,
+        'email' => "admin" . $faker->numberBetween(0, 50) . "@email.com",
+        'active' => 1,
+        'level' => 3,
+        'password' => Hash::make("admin"),
+        'avatar' => 'avatar.png'
+    ];
 });
 
 $factory->define('App\Src\Book\Book', function ($faker) {
     return [
-        'author_id' => 1,
+        'author_id' => App\Src\User\User::all()->random()->id,
         'serial' => $faker->numberBetween(10000000, 9999999999),
         'cover' => 'cover.png',
         //'cover_en' => '',
@@ -35,7 +35,7 @@ $factory->define('App\Src\Book\Book', function ($faker) {
         'views' => '',
         'field_category_id' => $faker->numberBetween(1, 10),
         'lang_category_id' => 1,
-        'title'=> $faker->word,
+        'title' => $faker->word,
         //'title_en' => $faker->word,
         //'title_ar' => $faker->word,
         'description' => $faker->paragraph(2),
@@ -49,8 +49,8 @@ $factory->define('App\Src\Book\Book', function ($faker) {
 $factory->define('App\Src\Book\Chapter\Chapter', function ($faker) {
     return [
         'title' => $faker->word(5),
-        'book_id' => $faker->numberBetween(1,10),
-        'status' => $faker->array_rand(['pending','published','drafted','rejected']),
+        'book_id' => App\Src\Book\Book::all()->random()->id,
+        'status' => $faker->randomElement(['pending', 'published', 'drafted', 'rejected']),
         'body' => $faker->paragraph(10)
     ];
 });
@@ -85,7 +85,7 @@ $factory->define('App\Src\Category\Lang\LangCategory', function ($faker) {
 
 $factory->define('App\Src\Book\BookMeta', function ($faker) {
     return [
-        'book_id' => $faker->numberBetween(1, 10),
+        'book_id' => App\Src\Book\Book::all()->random()->id,
         'total_pages' => $faker->randomDigit,
         'price' => $faker->randomDigit
     ];
@@ -121,11 +121,6 @@ for ($i = 1; $i <= 23; $i++) {
         'book_id' => rand(1, 3)
     ]);
 
-    DB::table('permission_role')->insert([
-        'permission_id' => $i+1,
-        'role_id' => 1
-    ]);
-
 }
 
 DB::table('conditions')->insert([
@@ -134,3 +129,21 @@ DB::table('conditions')->insert([
     'body_ar' => 'this is the content in arabic',
     'body_en' => 'this is the content in english'
 ]);
+
+$factory->define(Config::get('CommentPack.model'), function ($faker) {
+
+    return [
+        'body' => $faker->paragraph(2),
+        'user_id' => App\Src\User\User::all()->random()->id,
+        'book_id' => App\Src\Book\Book::all()->random()->id,
+    ];
+});
+
+$factory->define(Config::get('CommentPack.childModel'), function ($faker) {
+    return [
+        'body' => $faker->paragraph(2),
+        'user_id' => App\Src\User\User::all()->random()->id,
+        'comment_id' => Usama\CommentPack\Model\Comment::all()->random()->id,
+        'level' => rand(1,10)
+    ];
+});

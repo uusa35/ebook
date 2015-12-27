@@ -29,7 +29,6 @@
 
     <div class="row">
 
-
         @section('layout')
         @show
 
@@ -40,10 +39,10 @@
 
 
 @section('scripts')
-    @include('scripts.allscripts')
-    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-55ec96e5477030d8"
-            async="async"></script>
+@include('scripts.allscripts')
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-55ec96e5477030d8"
+        async="async"></script>
 @show
 </body>
 </html>

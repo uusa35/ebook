@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
         'book_metas',
         'book_user',
         'messages',
-        'sliders'
+        'sliders',
+        'comments',
+        //'comments_children'
     ];
 
     /**
@@ -31,20 +33,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if (App::environment() == '') {
+        if (App::environment() == 'local') {
             Model::unguard();
 
             $this->cleanDatabase();
             DB::statement('SET FOREIGN_KEY_CHECKS = 0');
             $this->call('UsersTableSeeder');
             $this->call('EntrustTableSeeder');
+            $this->call('PermissionRoleTableSeeder');
             $this->call('BooksTableSeeder');
+            $this->call('ChaptersTableSeeder');
             $this->call('fieldsCategoriesTableSeeder');
             $this->call('langsCategoriesTableSeeder');
             $this->call('BookMetasTableSeeder');
             $this->call('ContactusTableSeeder');
             $this->call('AdvertisementTableSeeder');
             $this->call('SlidersTableSeeder');
+            $this->call('CommentsTableSeeder');
+            $this->call('CommentsChildrenTableSeeder');
             DB::statement('SET FOREIGN_KEY_CHECKS = 1');
         }
 

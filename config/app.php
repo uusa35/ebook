@@ -154,16 +154,18 @@ return [
         Cmgmyr\Messenger\MessengerServiceProvider::class,
 
 
-        'Barryvdh\Snappy\ServiceProvider',
-        'Barryvdh\HttpCache\ServiceProvider',
+        Barryvdh\Snappy\ServiceProvider::class,
+        Barryvdh\HttpCache\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        'Barryvdh\TranslationManager\ManagerServiceProvider',
+        Barryvdh\TranslationManager\ManagerServiceProvider::class,
         /*
          * my package development
          * */
         /*Usama\ModulePack\ModulePackServiceProvider::class*/
-/*        Usama\CommentPack\CommentPackServiceProvider::class*/
+        /*Usama\CommentPack\CommentPackServiceProvider::class*/
+        /*Usama\CommentPack\CommentPackServiceProvider::class*/
+        Usama\CommentPack\CommentPackServiceProvider::class
 
     ],
 
@@ -223,9 +225,7 @@ return [
         'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
         'Gate' => 'Illuminate\Support\Facades\Gate',
         /*'ModulePack' => Usama\ModulePack\Facade\ModulePack::class*/
-        /*'CommentPack' => Usama\CommentPack\Facade\CommentPack::class*/
-
-
+        'CommentPack' => Usama\CommentPack\Facade\CommentPack::class
 
     ],
 

@@ -35,7 +35,7 @@ class User extends PrimaryModel implements AuthenticatableContract, CanResetPass
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'avatar', 'active', 'phone','level'];
+    protected $fillable = ['name', 'email', 'password', 'avatar', 'active', 'phone', 'level'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -77,6 +77,15 @@ class User extends PrimaryModel implements AuthenticatableContract, CanResetPass
     public function blocked()
     {
         return $this->hasMany('App\Src\User\Blocked\Blocked', 'user_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(\Config::get('CommentPack.model'));
+    }
+
+    public function commentsChildren() {
+        return $this->hasMany(\Config::get('CommentPack.childModel'));
     }
 
 

@@ -69,6 +69,10 @@ class Book extends PrimaryModel
         return $this->hasMany('App\Src\Book\Chapter\Chapter');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(\Config::get('CommentPack.model'));
+    }
 
     /**
      * Many To Many Relation - Order Relation

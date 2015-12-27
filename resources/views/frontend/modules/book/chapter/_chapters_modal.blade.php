@@ -19,7 +19,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($book->chapters as $chapter)
+                    @foreach($chaptersPublishedOnly as $chapter)
                         <tr>
                             <td>
                                 <a class=""

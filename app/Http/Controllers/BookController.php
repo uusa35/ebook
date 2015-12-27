@@ -2,7 +2,6 @@
 
 use App\Core\PrimaryController;
 use App\Http\Requests;
-use App\Src\Book\Book;
 use App\Src\Book\BookRepository;
 use App\Src\Book\Chapter\ChapterRepository;
 use App\Src\Favorite\FavoriteRepository;
@@ -11,9 +10,6 @@ use App\Src\Purchase\PurchaseRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use Laravolt\Mural\Comment;
-use Laravolt\Mural\Http\Controllers\MuralController;
-use Laravolt\Mural\Facade as Mural;
 
 
 class BookController extends PrimaryController
@@ -27,13 +23,13 @@ class BookController extends PrimaryController
     protected $chapterRepository;
     protected $likeRepository;
     protected $authUser;
+    protected $comments;
 
     public function __construct(
         BookRepository $bookRepository,
         FavoriteRepository $favoriteRepository,
         UserRepository $userRepository,
         PurchaseRepository $purchaseRepository,
-
         ChapterRepository $chapterRepository,
         LikeRepository $likeRepository
     )
@@ -110,8 +106,13 @@ class BookController extends PrimaryController
     public function show($id)
     {
         // get all books by book ID
-
-        $book = $this->bookRepository->model->where(['id' => $id])->with('author', 'author.following')->first();
+        $book = $this->bookRepository->model->where(['id' => $id])
+            ->with(['chapters','author', 'author.following',
+                'comments', 'comments.children', 'comments.user'])
+            ->first();
+        $comments = $book->comments()->orderBy('created_at', 'desc')->paginate(3);
+        $commentsRender = $comments->render();
+        $chaptersPublishedOnly = $book->chapters->where('status','published');
 
         $blockedUsersofAuthor = $book->author->blocked->Lists('blocked_id', 'blocked_id')->toArray();
 
@@ -123,7 +124,7 @@ class BookController extends PrimaryController
 
             $total_pages = $this->chapterRepository->totalPagesForChapter($book->id);
 
-            return view('frontend.modules.book.show', compact('book', 'total_pages', 'blockedUsersofAuthor'));
+            return view('frontend.modules.book.show', compact('book', 'total_pages', 'blockedUsersofAuthor', 'chaptersPublishedOnly','comments', 'commentsRender'));
 
         }
 
