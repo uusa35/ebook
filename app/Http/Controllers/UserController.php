@@ -90,11 +90,11 @@ class UserController extends PrimaryController
                 'follower_id' => $followerId
             ]);
 
-            return redirect()->back()->with(['success' => 'messages.success.follow_success']);
+            return redirect()->back()->with(['success' => 'messages.success.created']);
 
         }
 
-        return redirect()->back()->with(['error' => 'messages.error.follow_error']);
+        return redirect()->back()->with(['error' => 'messages.error.created']);
     }
 
 
@@ -111,11 +111,11 @@ class UserController extends PrimaryController
 
         if ($query) {
 
-            return redirect()->back()->with(['success' => 'messages.success.follow_success']);
+            return redirect()->back()->with(['success' => 'messages.success.created']);
 
         }
 
-        return redirect()->back()->with(['error' => 'messages.error.follow_error']);
+        return redirect()->back()->with(['error' => 'messages.error.created']);
 
 
     }
@@ -134,11 +134,11 @@ class UserController extends PrimaryController
                 'blocked_id' => $blockedId
             ]);
 
-            return redirect()->back()->with(['success' => 'messages.success.block_success']);
+            return redirect()->back()->with(['success' => 'messages.success.created']);
 
         }
 
-        return redirect()->back()->with(['error' => 'messages.error.block_error']);
+        return redirect()->back()->with(['error' => 'messages.error.created']);
 
     }
 
@@ -152,11 +152,11 @@ class UserController extends PrimaryController
 
         if ($query) {
 
-            return redirect()->back()->with(['success' => 'messages.success.block_success']);
+            return redirect()->back()->with(['success' => 'messages.success.created']);
 
         }
 
-        return redirect()->back()->with(['error' => 'messages.error.block_error']);
+        return redirect()->back()->with(['error' => 'messages.error.created']);
 
     }
 

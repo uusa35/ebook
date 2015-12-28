@@ -62,7 +62,7 @@
 
 
                 <p class="text-muted text-center">{{ trans('general.member_since') }}
-                    : {{ $user->created_at->format('d-M-Y')}}</p>
+                    : {{ $user->created_at->diffForHumans()}}</p>
 
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
@@ -94,7 +94,7 @@
                 </ul>
 
                 @if($user->id != Auth::id() && Auth::id())
-                    <div class="col-lg-12">
+                    <div class="col-lg-8 col-lg-offset-2">
                         {{-- delete all followers_id where user_id = Auth::id --}}
 
                         @if(!in_array(Auth::id(),$userFollowersList,true))
@@ -117,7 +117,7 @@
                             </a>
                         @endif
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-8 col-lg-offset-2">
                             @if(!in_array($user->id,$userAuthenticatedBlockedList,true))
                                 <a href="{{ action('UserController@blockUser',$user->id) }}"
                                    class="btn btn-material-red-600 btn-block tooltip"

@@ -24,6 +24,7 @@ class BookController extends PrimaryController
     protected $likeRepository;
     protected $authUser;
     protected $comments;
+    public $commentRender;
 
     public function __construct(
         BookRepository $bookRepository,
@@ -107,12 +108,21 @@ class BookController extends PrimaryController
     {
         // get all books by book ID
         $book = $this->bookRepository->model->where(['id' => $id])
-            ->with(['chapters','author', 'author.following',
-                'comments', 'comments.children', 'comments.user'])
+            ->with(['chapters', 'author', 'author.following',
+                'comments' => function ($q) {
+                    //$q->paginate(3);
+                    $this->commentRender = $q->latest()->paginate(3)->render();
+                }
+                , 'comments.user', 'comments.children.user'])
             ->first();
-        $comments = $book->comments()->orderBy('created_at', 'desc')->paginate(3);
-        $commentsRender = $comments->render();
-        $chaptersPublishedOnly = $book->chapters->where('status','published');
+
+        $commentsRender = $this->commentRender;
+
+        /*$commentsRender = $book->load(['comments' => function ($q){
+            return $q->paginate(3)->render();
+            }]);*/
+        //$commentsRender = $book->comments->orderBy('created_at', 'desc')->paginate(3)->render();
+        $chaptersPublishedOnly = $book->chapters->where('status', 'published');
 
         $blockedUsersofAuthor = $book->author->blocked->Lists('blocked_id', 'blocked_id')->toArray();
 
@@ -124,7 +134,7 @@ class BookController extends PrimaryController
 
             $total_pages = $this->chapterRepository->totalPagesForChapter($book->id);
 
-            return view('frontend.modules.book.show', compact('book', 'total_pages', 'blockedUsersofAuthor', 'chaptersPublishedOnly','comments', 'commentsRender'));
+            return view('frontend.modules.book.show', compact('book', 'total_pages', 'blockedUsersofAuthor', 'chaptersPublishedOnly', 'commentsRender'));
 
         }
 

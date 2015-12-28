@@ -11,9 +11,12 @@ class PermissionRoleTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('permission_role')->insert([
-            'permission_id' => App\Src\Permission\Permission::all()->random()->id,
-            'role_id' => App\Src\Role\Role::all()->random()->id
-        ]);
+        for ($i = 1; $i <= 40; $i++) {
+            DB::table('permission_role')->insert([
+                'permission_id' => $i,
+                'role_id' => '1'
+            ]);
+        }
+
     }
 }

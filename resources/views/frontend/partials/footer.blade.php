@@ -18,7 +18,7 @@
                 @endif
                 @if($contactusInfo->email)
                     <i class="fa fa-fw fa-envelope"></i><a
-                            href="{{ $contactusInfo->email }}"> {{ $contactusInfo->email }}</a> <br/>
+                            href="mailto:{{ $contactusInfo->email }}"> {{ $contactusInfo->email }}</a> <br/>
                 @endif
                 @if(trim($contactusInfo->twitter))
                     <span class="fa fa-fw fa-twitter"></span> <a

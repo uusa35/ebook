@@ -1,5 +1,11 @@
 @extends('backend.layouts.dashboard')
 
+@section('scripts')
+    @parent
+    @include('scripts.tinymce')
+    {{--@include('scripts.trumbowyg')--}}
+@stop
+
 @section('content')
     {!! Breadcrumbs::render('condition_edit') !!}
 
@@ -19,7 +25,7 @@
         <div class="form-group">
             {!! Form::label('body_ar',trans('general.body_ar')) !!}
             {!!
-            Form::textarea('body_ar',$terms->body_ar,['class'=>'form-control','placeholder'=>trans('general.body_ar')])
+            Form::textarea('body_ar',$terms->body_ar,['class'=>'form-control editor','placeholder'=>trans('general.body_ar')])
             !!}
         </div>
         <div class="form-group">

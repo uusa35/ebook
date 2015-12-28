@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Core\PrimaryEmailService;
 use App\Events\ChapterStatusChanged;
 use App\Src\User\UserRepository;
+use Carbon\Carbon;
 use \Illuminate\Support\Facades\Request;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -34,7 +35,7 @@ class SendEmailForChapterStatusChanged implements ShouldQueue
     {
         $book = $event->chapter->book;
 
-        if (Request::user()->isAuthor() && $event->status == 'drafted') {
+        if (Request::user()->isAuthor() && $event->chapter->status == 'drafted') {
 
             $data = [
                 'chapter_title' => $event->chapter->title,
@@ -45,7 +46,11 @@ class SendEmailForChapterStatusChanged implements ShouldQueue
 
             $this->sendEmailForDraftedChapter($data, $book);
 
-        } elseif ((Request::user()->isAdmin() || Request::user()->isEditor()) && $event->status == 'published') {
+        } elseif ((Request::user()->isAdmin() || Request::user()->isEditor()) && $event->chapter->status == 'published') {
+
+            $event->chapter->update ([
+                'published_at' => Carbon::now()
+            ]);
 
             $emailsFollowersList = $this->userRepository->allFollowersForUser($book->author_id)->pluck('email')->toArray();
 

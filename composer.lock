@@ -3392,12 +3392,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uusa35/CommentPack.git",
-                "reference": "b20014890aa90a56bdb0f4a4951ea669588fc7c7"
+                "reference": "b10ce23129885b41528caac8f964b620d71b4cd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uusa35/CommentPack/zipball/b20014890aa90a56bdb0f4a4951ea669588fc7c7",
-                "reference": "b20014890aa90a56bdb0f4a4951ea669588fc7c7",
+                "url": "https://api.github.com/repos/uusa35/CommentPack/zipball/b10ce23129885b41528caac8f964b620d71b4cd7",
+                "reference": "b10ce23129885b41528caac8f964b620d71b4cd7",
                 "shasum": ""
             },
             "require": {
@@ -3406,6 +3406,10 @@
             },
             "type": "laravel",
             "autoload": {
+                "classmap": [
+                    "database/migrations",
+                    "database/seeds"
+                ],
                 "psr-4": {
                     "Usama\\CommentPack\\": "src/"
                 }
@@ -3421,7 +3425,7 @@
                 }
             ],
             "description": "laravel package for comment system",
-            "time": "2015-12-26 16:50:41"
+            "time": "2015-12-27 16:40:25"
         },
         {
             "name": "vlucas/phpdotenv",

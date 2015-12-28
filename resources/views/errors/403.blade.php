@@ -46,7 +46,7 @@
                     العودة إلى الصفحة الرئيسية
                 </div>
                 <div class="">
-                    <a href="{{ url('/') }}" class="">
+                    <a href="{{ url('/auth/logout') }}" class="">
                         عودة
                     </a>
                 </div>

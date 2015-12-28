@@ -20,6 +20,7 @@ class CreateChaptersTable extends Migration
             $table->text('url');
             $table->integer('total_pages');
             $table->enum('status',['pending','drafted','published','declined']);
+            $table->date('published_at');
             $table->timestamps();
         });
     }

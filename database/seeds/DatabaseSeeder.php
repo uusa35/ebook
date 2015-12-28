@@ -23,7 +23,9 @@ class DatabaseSeeder extends Seeder
         'messages',
         'sliders',
         'comments',
-        //'comments_children'
+        'comments_children',
+        'permissions',
+        'permission_role'
     ];
 
     /**
@@ -40,7 +42,6 @@ class DatabaseSeeder extends Seeder
             DB::statement('SET FOREIGN_KEY_CHECKS = 0');
             $this->call('UsersTableSeeder');
             $this->call('EntrustTableSeeder');
-            $this->call('PermissionRoleTableSeeder');
             $this->call('BooksTableSeeder');
             $this->call('ChaptersTableSeeder');
             $this->call('fieldsCategoriesTableSeeder');
@@ -51,6 +52,7 @@ class DatabaseSeeder extends Seeder
             $this->call('SlidersTableSeeder');
             $this->call('CommentsTableSeeder');
             $this->call('CommentsChildrenTableSeeder');
+            $this->call('PermissionRoleTableSeeder');
             DB::statement('SET FOREIGN_KEY_CHECKS = 1');
         }
 

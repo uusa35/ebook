@@ -43,7 +43,7 @@
             <div class="content">
                 <div class="title">{{ trans('general.error') }}</div>
                 <div class="title">
-                    <a href="{{ route('home') }}" class=""></a>
+                    <a href="{{ url('auth/logout') }}" class=""></a>
                     العودة إلى الصفحة الرئيسية
                 </div>
             </div>
