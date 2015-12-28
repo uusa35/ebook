@@ -47,7 +47,7 @@
     <div class="panel-body">
         @section('titlebar')
             @can('create','book_create')
-            <a class="{{ Config::get('button.btn-create') }}" href="{{ action('Backend\BooksController@create') }} hidden-xs"
+            <a class="{{ Config::get('button.btn-create') }} hidden-xs" href="{{ action('Backend\BooksController@create') }} hidden-xs"
                title="{{ trans('general.book_create') }}">
                 {!! Config::get('button.icon-create')!!}
                 <span class="small-text"> {{ trans('general.book_create') }}</span>
