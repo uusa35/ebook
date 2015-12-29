@@ -79,7 +79,7 @@
                                             @include('backend.partials.buttons._chapter_change_status_btn')
                                         </td>
                                         <td>
-                                            {{ $chapter->published_at }}
+                                            {{ $chapter->published_at->format('Y-m-d') }}
                                         </td>
                                         <td>
                                             @include('backend.partials.buttons._chapter_edit_btn')
