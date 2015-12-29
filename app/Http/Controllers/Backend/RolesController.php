@@ -22,7 +22,8 @@ class RolesController extends PrimaryController
         RoleRepository $roleRepository,
         PermissionRepository $permissionRepository,
         UserRepository $userRepository
-    ) {
+    )
+    {
         $this->roleRepository = $roleRepository;
         $this->permissionRepository = $permissionRepository;
         $this->userRepository = $userRepository;
@@ -34,7 +35,7 @@ class RolesController extends PrimaryController
         //$roles = $this->role->pushCriteria(new RolesWithPermissions())->paginate(10);
         $this->getPageTitle('role.index');
 
-        $this->authorize('index',Session::get('module'));
+        $this->authorize('index', Session::get('module'));
 
         $roles = $this->roleRepository->model->with('users', 'perms')->get();
 
@@ -45,7 +46,7 @@ class RolesController extends PrimaryController
     {
         $this->getPageTitle('role.create');
 
-        $this->authorize('create','role_create');
+        $this->authorize('create', 'role_create');
 
         $permissions = $this->permissionRepository->model->all();
 
@@ -54,7 +55,7 @@ class RolesController extends PrimaryController
 
     public function store(Request $request)
     {
-        $this->authorize('create','role_create');
+        $this->authorize('create', 'role_create');
 
         $this->validate($request,
             array('name' => 'required|unique:roles,name', 'display_name' => 'required|unique:roles,display_name'));
@@ -64,14 +65,14 @@ class RolesController extends PrimaryController
 
         $role->savePermissions($request->get('perms'));
 
-        return redirect()->action('Backend\RolesController@index')->with(['success' => trans('messages.success.role_create')]);
+        return redirect()->action('Backend\RolesController@index')->with('success', trans('messages.success.created'));
     }
 
     public function edit($id)
     {
         $this->getPageTitle('role.edit');
 
-        $this->authorize('checkAssignedPermission','role_edit');
+        $this->authorize('checkAssignedPermission', 'role_edit');
 
         $role = $this->roleRepository->model->find($id);
 
@@ -85,7 +86,7 @@ class RolesController extends PrimaryController
     public function update(Request $request, $id)
     {
 
-        $this->authorize('checkAssignedPermission','role_edit');
+        $this->authorize('checkAssignedPermission', 'role_edit');
 
         $this->validate($request, array('name' => 'required', 'display_name' => 'required'));
 
@@ -97,23 +98,25 @@ class RolesController extends PrimaryController
 
         $this->dispatch(new UpdateUserAbilities($request));
 
-        return redirect()->action('Backend\RolesController@index')->with(['success' => 'messeages.success.role_edit']);
+        return redirect()->action('Backend\RolesController@index')->with('success', trans('messages.success.updated'));
 
     }
 
     public function destroy($id)
     {
 
-        $this->authorize('checkAssignedPermission','role_delete');
+        $this->authorize('checkAssignedPermission', 'role_delete');
 
         $role = $this->roleRepository->model->find($id);
 
         $role->delete();
+
         $role->users()->sync([]); // Delete relationship data
+
         $role->perms()->sync([]);
 
 
-        return redirect()->action('Backend\RolesController@index')->with(['success' => trans('messages.success.role_delete')]);
+        return redirect()->action('Backend\RolesController@index')->with('success', trans('messages.success.deleted'));
     }
 
 }

@@ -126,7 +126,7 @@ class BooksController extends PrimaryController
                 compact('books', 'booksReported', 'booksFavorited', 'booksPreviews'));
         }
 
-        return redirect()->back()->with(['error' => trans('messages.info.no_books_found')]);
+        return redirect()->back()->with('error', trans('messages.info.no_books_found'));
 
     }
 
@@ -193,7 +193,7 @@ class BooksController extends PrimaryController
             return redirect()->action('Backend\ChaptersController@create', ['book_id' => $book->id])->with(['success' => trans('messages.success.created')]);
         }
 
-        return redirect()->back()->with(['error' => trans('messages.error.created')]);
+        return redirect()->back()->with('error' , trans('messages.error.created'));
     }
 
     /**
@@ -358,10 +358,10 @@ class BooksController extends PrimaryController
 
         if ($deletedReportAbuse) {
 
-            return redirect()->back()->with(['success' => trans('messages.success.deleted')]);
+            return redirect()->back()->with('success', trans('messages.success.deleted'));
 
         }
-        return redirect()->back()->with(['error' => 'messages.error.deleted']);
+        return redirect()->back()->with('error' , 'messages.error.deleted');
     }
 
 
@@ -379,7 +379,7 @@ class BooksController extends PrimaryController
 
         }
 
-        return redirect()->back()->with(['error' => 'messages.error.not_authorized']);
+        return redirect()->back()->with('error', 'messages.error.not_authorized');
 
     }
 
@@ -402,12 +402,12 @@ class BooksController extends PrimaryController
             ]);
 
             if ($favorited) {
-                return redirect()->back()->with(['success' => trans('messages.success.created')]);
+                return redirect()->back()->with('success' ,trans('messages.success.created'));
             }
 
         }
 
-        return redirect()->back()->with(['error' => trans('messages.error.created')]);
+        return redirect()->back()->with('error',trans('messages.error.created'));
     }
 
     /**
@@ -427,7 +427,7 @@ class BooksController extends PrimaryController
 
         }
 
-        return redirect()->back()->with(['error', trans('general.error.deleted')]);
+        return redirect()->back()->with('error', trans('general.error.deleted'));
 
     }
 
@@ -452,7 +452,7 @@ class BooksController extends PrimaryController
 
             if ($liked) {
 
-                return redirect()->back()->with(['success' => trans('messages.success.edited')]);
+                return redirect()->back()->with('success', trans('messages.success.edited'));
 
             }
 
@@ -488,7 +488,7 @@ class BooksController extends PrimaryController
 
         }
 
-        return redirect()->back()->with(['error' => trans('messages.error.edited')]);
+        return redirect()->back()->with('error', trans('messages.error.edited'));
     }
 
 

@@ -90,7 +90,7 @@ class UsersController extends PrimaryController
             $user->roles()->sync([]);
 
         }
-        return redirect()->action('Backend\UsersController@index')->with(['sucess', 'User successfully created']);
+        return redirect()->action('Backend\UsersController@index')->with('success', trans('messages.success.created'));
 
     }
 
@@ -160,10 +160,10 @@ class UsersController extends PrimaryController
 
             Session::forget('module');
 
-            return redirect()->action('Backend\DashboardController@index')->with(['success' => trans('messages.success.edited')]);
+            return redirect()->action('Backend\DashboardController@index')->with('success', trans('messages.success.updated'));
         }
 
-        return redirect()->action('Backend\UsersController@index')->with(['success' => trans('messages.success.edited')]);
+        return redirect()->action('Backend\UsersController@index')->with('success', trans('messages.success.updated'));
 
     }
 
@@ -193,7 +193,7 @@ class UsersController extends PrimaryController
 
         $user->save();
 
-        return redirect()->action('Backend\UsersController@index')->with(['success' => trans('messages.sucess.updated')]);
+        return redirect()->action('Backend\UsersController@index')->with('success', trans('messages.success.deleted'));
     }
 
     public function getEditConditions()
@@ -224,10 +224,10 @@ class UsersController extends PrimaryController
 
             Cache::forever('conditions', $instructions);
 
-            return redirect()->back()->with(['success' => trans('general.success.updated')]);
+            return redirect()->back()->with('success', trans('messages.success.updated'));
         }
 
-        return redirect()->back()->with(['success' => trans('general.error.updated')]);
+        return redirect()->back()->with('error', trans('messages.error.updated'));
     }
 
 }
