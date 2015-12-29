@@ -30,6 +30,12 @@ class UpdateUserAbilities extends Job implements SelfHandling
 
         $userRole = $this->request->user()->roles()->first();
 
+        $modules = $userRole->perms()->where('level', '=', '1')->get();
+
+        $modulesList = $modules->lists('name', 'id')->toArray();
+
+        Cache::put('Modules.' . $userRole->name . '.' . Auth::id(), array_values($modulesList), 120);
+
         $userPermissions = $userRole->perms()->get()->lists('name','id')->toArray();
 
         Cache::put('Abilities.' . $userRole->name . '.' . Auth::id(), array_values($userPermissions), 120);
