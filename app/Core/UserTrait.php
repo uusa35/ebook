@@ -95,7 +95,7 @@ trait UserTrait
 
     public function getUserAbilities()
     {
-        if (Cache::get('Abilities.' . $this->getUserRole() . '.' . Auth::id())) {
+        if (Session::get('roles')) {
 
             return Cache::get('Abilities.' . $this->getUserRole() . '.' . Auth::id());
 

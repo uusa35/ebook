@@ -34,10 +34,6 @@ class PoliciesCollection
     public function __construct()
     {
 
-        //$this->userRole = $this->getUserRole();
-
-        //$this->userAbilities = Auth::user()->getUserAbilities();
-
     }
 
 

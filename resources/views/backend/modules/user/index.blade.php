@@ -46,7 +46,6 @@
                         <span class="label label-info">{{ $role->name }}</span>
                     @endforeach
                 </td>
-
                 <td width="50">
                     <a class="{{ Config::get('button.btn-edit') }}"
                        title="{{ trans('general.edit') }}"
