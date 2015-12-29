@@ -7,6 +7,7 @@ use App\Core\PrimaryModel;
 class Chapter extends PrimaryModel
 {
     protected $guarded = ['id'];
+    protected $dates = ['created_at', 'updated_at', 'published_at'];
 
     public function book()
     {
@@ -50,6 +51,8 @@ class Chapter extends PrimaryModel
     {
         return $query->where('status', $status);
     }
+
+
 
 
 }

@@ -119,7 +119,7 @@ class BookController extends PrimaryController
 
         $commentsRender = $this->commentsRender;
 
-        $publishedDate = Carbon::parse($book->chapters->first()->published_at);
+        //$publishedDate = Carbon::parse($book->chapters->first()->published_at);
 
         $chaptersPublishedOnly = $book->chapters->where('status', 'published');
 
@@ -133,7 +133,7 @@ class BookController extends PrimaryController
 
             $total_pages = $this->chapterRepository->totalPagesForChapter($book->id);
 
-            return view('frontend.modules.book.show', compact('book', 'total_pages', 'blockedUsersofAuthor', 'chaptersPublishedOnly', 'commentsRender','publishedDate'));
+            return view('frontend.modules.book.show', compact('book', 'total_pages', 'blockedUsersofAuthor', 'chaptersPublishedOnly', 'commentsRender'));
 
         }
 
