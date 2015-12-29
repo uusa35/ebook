@@ -97,7 +97,7 @@
                                     {{ trans('general.published_at') }} :
                                 </td>
                                 <td>
-                                    {{ $book->created_at->toFormattedDateString() }}
+                                    {{ $publishedDate->toDateString() }}
                                 </td>
                             </tr>
                             <tr>

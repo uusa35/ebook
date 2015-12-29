@@ -8,6 +8,7 @@ use App\Src\Favorite\FavoriteRepository;
 use App\Src\Like\LikeRepository;
 use App\Src\Purchase\PurchaseRepository;
 use App\Src\User\UserRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -118,6 +119,8 @@ class BookController extends PrimaryController
 
         $commentsRender = $this->commentsRender;
 
+        $publishedDate = Carbon::parse($book->chapters->first()->published_at);
+
         $chaptersPublishedOnly = $book->chapters->where('status', 'published');
 
         $blockedUsersofAuthor = $book->author->blocked->Lists('blocked_id', 'blocked_id')->toArray();
@@ -130,7 +133,7 @@ class BookController extends PrimaryController
 
             $total_pages = $this->chapterRepository->totalPagesForChapter($book->id);
 
-            return view('frontend.modules.book.show', compact('book', 'total_pages', 'blockedUsersofAuthor', 'chaptersPublishedOnly', 'commentsRender'));
+            return view('frontend.modules.book.show', compact('book', 'total_pages', 'blockedUsersofAuthor', 'chaptersPublishedOnly', 'commentsRender','publishedDate'));
 
         }
 
