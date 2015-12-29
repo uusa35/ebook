@@ -70,7 +70,7 @@ class BookRepository extends PrimaryRepository
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published');
             })
-            ->with('usersLikes', 'meta')
+            ->with('usersLikes', 'meta','chapters')
             ->orderBy('created_at', 'DESC')
             ->first();
     }
@@ -84,7 +84,7 @@ class BookRepository extends PrimaryRepository
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published');
             })
-            ->with('usersFavorites', 'meta')
+            ->with('usersFavorites', 'meta','chapters')
             ->orderBy('created_at', 'DESC')
             ->paginate(8);
     }

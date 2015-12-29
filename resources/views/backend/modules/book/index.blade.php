@@ -122,7 +122,7 @@
 
                                                 </td>
                                                 <td class="hidden-xs">
-                                                    <span> {{ $book->created_at->format('Y-m-d') }} </span>
+                                                    <span >{{ $book->chapters->first()->published_at->toDateString() }}</span>
                                                 </td>
                                                 <td>
                                                     <a class="{{ Config::get('button.btn-index') }}"
