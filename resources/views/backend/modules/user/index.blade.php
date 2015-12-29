@@ -37,7 +37,6 @@
         <tbody>
         @foreach($users as $user)
             <tr>
-
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->phone }}</td>
@@ -48,17 +47,13 @@
                     @endforeach
                 </td>
 
-
                 <td width="50">
-                    @can('checkAssignedPermission','user_edit')
                     <a class="{{ Config::get('button.btn-edit') }}"
                        title="{{ trans('general.edit') }}"
                        href="{{ action('Backend\UsersController@edit', $user->id) }}"><i
                                 class="fa fa-xs fa-edit"></i></a>
-                    @endcan
                 </td>
                 <td width="50">
-                    @can('checkAssignedPermission','user_change')
                     {!! Form::open(['action' => ['Backend\UsersController@postChangeActiveStatus',
                     $user->id,$user->active], 'method' => 'post']) !!}
 
@@ -68,7 +63,6 @@
                         {!! ($user->active) ? Config::get('button.icon-active')  : Config::get('button.icon-not-active') !!}
                         </button>
                     {!! Form::close() !!}
-                    @endcan
                 </td>
             </tr>
         @endforeach

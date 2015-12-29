@@ -47,7 +47,8 @@
     <div class="panel-body">
         @section('titlebar')
             @can('create','book_create')
-            <a class="{{ Config::get('button.btn-create') }} hidden-xs" href="{{ action('Backend\BooksController@create') }} hidden-xs"
+            <a class="{{ Config::get('button.btn-create') }} hidden-xs"
+               href="{{ action('Backend\BooksController@create') }} hidden-xs"
                title="{{ trans('general.book_create') }}">
                 {!! Config::get('button.icon-create')!!}
                 <span class="small-text"> {{ trans('general.book_create') }}</span>
@@ -97,7 +98,7 @@
                                             <th>{{ trans('general.add') }}</th>
                                             <th>{{ trans('general.active') }}</th>
                                             <th>{{ trans('general.edit') }}</th>
-                                            @if(Request::user()->isAdmin())
+                                            @if(Request::user()->isAdminSession())
                                                 <th>{{ trans('general.delete') }}</th>
                                             @endif
                                             <th>{{ trans('general.send_message') }}</th>
@@ -132,40 +133,35 @@
                                                 </td>
                                                 <td>
                                                     {{-- Notice that you can not create Chapter if you don't have permission to Access the book --}}
-                                                    @can('edit',$book->author_id)
                                                     <a class="{{ Config::get('button.btn-create') }}"
                                                        title="{{ trans('general.add_chapter') }}"
                                                        href="{{ action('Backend\ChaptersController@create',['book_id' => $book->id]) }}">
                                                         {!! Config::get('button.icon-create') !!}
                                                     </a>
-                                                    @endcan
                                                 </td>
                                                 <td class="text-center">
-                                                    @can('change',$book->author_id)
-                                                    <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}"
-                                                       title="{{ ($book->active) ? trans('general.active') : trans('general.not_active') }}"
-                                                       href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->author_id,$book->active]) }}">
-                                                        @if($book->active == 1)
-                                                            {!! Config::get('button.icon-active') !!}
-                                                        @else
-                                                            {!! Config::get('button.icon-not-active') !!}
-                                                        @endif
+                                                    @if(Auth::user()->isAdminSession() || Auth::user()->isEditorSession())
+                                                        <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}"
+                                                           title="{{ ($book->active) ? trans('general.active') : trans('general.not_active') }}"
+                                                           href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->author_id,$book->active]) }}">
+                                                            @if($book->active == 1)
+                                                                {!! Config::get('button.icon-active') !!}
+                                                            @else
+                                                                {!! Config::get('button.icon-not-active') !!}
+                                                            @endif
 
-                                                    </a>
-                                                    @endcan
+                                                        </a>
+                                                    @endif
                                                 </td>
                                                 <td class="text-center">
-                                                    @can('edit',$book->author_id)
                                                     <a class="{{ Config::get('button.btn-edit') }}"
                                                        title="{{ trans('general.edit') }}"
                                                        href="{{ action('Backend\BooksController@edit',$book->id) }}">
                                                         {!! Config::get('button.icon-edit') !!}
                                                     </a>
-                                                    @endcan
                                                 </td>
-                                                @if(Request::user()->isAdmin())
-                                                    @can('delete',$book->author_id)
-                                                    <td class="text-center">
+                                                <td class="text-center">
+                                                    @if(Auth::user()->isAdminSession())
                                                         <button type="button"
                                                                 class="{{ Config::get('button.btn-delete') }}"
                                                                 id="delete-{{$book->id}}"
@@ -174,9 +170,8 @@
                                                                 data-target="#myModal">
                                                             {!! Config::get('button.icon-delete') !!}
                                                         </button>
-                                                    </td>
-                                                    @endcan
-                                                @endif
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <a class="{!! Config::get('button.btn-send') !!}"
                                                        href="{{ action('Backend\MessagesController@create',['book_id' => $book->id,'book_serial'=> $book->serial]) }}"

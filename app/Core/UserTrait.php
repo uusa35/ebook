@@ -6,6 +6,7 @@ namespace App\Core;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
 
 /**
@@ -34,6 +35,16 @@ trait UserTrait
         return false;
     }
 
+    public function isAdminSession()
+    {
+        if (Session::get('Admin')) {
+
+            return true;
+
+        }
+        return false;
+    }
+
     public function isEditor()
     {
 
@@ -44,6 +55,17 @@ trait UserTrait
 
         return false;
     }
+
+    public function isEditorSession()
+    {
+        if (Session::get('Editor')) {
+
+            return true;
+
+        }
+        return false;
+    }
+
 
     public function isAuthor()
     {

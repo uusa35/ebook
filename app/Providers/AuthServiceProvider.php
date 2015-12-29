@@ -31,14 +31,14 @@ class AuthServiceProvider extends ServiceProvider
 
         $policy = new PoliciesCollection();
 
-        $gate->define('index', function ($user,$module) use ($policy) {
+        $gate->define('index', function ($user, $module) use ($policy) {
 
             return $policy->index($module);
 
         });
 
         // book_create
-        $gate->define('create', function ($user,$permission) use ($policy) {
+        $gate->define('create', function ($user, $permission) use ($policy) {
 
             return $policy->create($permission);
 
@@ -46,23 +46,23 @@ class AuthServiceProvider extends ServiceProvider
 
 
         // book_edit
-        $gate->define('edit', function ($user,$element) use ($policy) {
+        $gate->define('edit', function ($user, $element) use ($policy) {
 
             return $policy->edit($element);
 
         });
 
         // book_change
-        $gate->define('change', function ($user,$element) use ($policy) {
+        $gate->define('change', function ($user, $element) use ($policy) {
 
             return $policy->change($element);
 
         });
 
         // book_delete
-        $gate->define('delete', function ($user,$element) use ($policy) {
+        $gate->define('delete', function ($user, $element) use ($policy) {
 
-            return $policy->delete($user,$element);
+            return $policy->delete($user, $element);
 
         });
 
@@ -90,7 +90,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // Check for abstracted permission
-        $gate->define('checkAssignedPermission', function ($user,$permission) use ($policy) {
+        $gate->define('checkAssignedPermission', function ($user, $permission) use ($policy) {
 
             return $policy->checkAssignedPermission($permission);
 

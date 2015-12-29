@@ -24,7 +24,7 @@ class BookController extends PrimaryController
     protected $likeRepository;
     protected $authUser;
     protected $comments;
-    public $commentRender;
+    public $commentsRender;
 
     public function __construct(
         BookRepository $bookRepository,
@@ -111,17 +111,13 @@ class BookController extends PrimaryController
             ->with(['chapters', 'author', 'author.following',
                 'comments' => function ($q) {
                     //$q->paginate(3);
-                    $this->commentRender = $q->latest()->paginate(3)->render();
+                    $this->commentsRender = $q->latest()->paginate(3)->render();
                 }
                 , 'comments.user', 'comments.children.user'])
             ->first();
 
-        $commentsRender = $this->commentRender;
+        $commentsRender = $this->commentsRender;
 
-        /*$commentsRender = $book->load(['comments' => function ($q){
-            return $q->paginate(3)->render();
-            }]);*/
-        //$commentsRender = $book->comments->orderBy('created_at', 'desc')->paginate(3)->render();
         $chaptersPublishedOnly = $book->chapters->where('status', 'published');
 
         $blockedUsersofAuthor = $book->author->blocked->Lists('blocked_id', 'blocked_id')->toArray();

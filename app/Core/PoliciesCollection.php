@@ -131,20 +131,15 @@ class PoliciesCollection
     {
         if (in_array($this->getModule() . '_delete', $this->getUserAbilities(), true)) {
 
-            if ($this->isAuthor()) {
+            if ($this->isAdmin()) {
 
-                if (Auth::id() == $ownerId) {
+                return true;
 
-                    return true;
-
-                }
-
-                return false;
             }
 
-            return true;
-
+            return false;
         }
+
         return false;
     }
 

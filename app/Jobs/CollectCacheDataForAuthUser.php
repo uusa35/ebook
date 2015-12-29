@@ -7,10 +7,12 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 
 class CollectCacheDataForAuthUser extends Job implements SelfHandling
 {
     public $request;
+
     /**
      * Create a new job instance.
      *
@@ -30,7 +32,10 @@ class CollectCacheDataForAuthUser extends Job implements SelfHandling
     {
         $authUserRole = $this->request->user()->roles()->first();
 
-        if(is_null(Cache::get('Permissions.' . $authUserRole->name.'.'.Auth::id()))) {
+        // Session used to check roles inside the views
+        Session::put($authUserRole->name, \Crypt::encrypt(Auth::id()));
+
+        if (is_null(Cache::get('Permissions.' . $authUserRole->name . '.' . Auth::id()))) {
 
             Cache::put($authUserRole->name, $authUserRole->name, 120);
 

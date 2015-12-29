@@ -92,6 +92,8 @@ class BooksController extends PrimaryController
 
         if ($this->isAdmin() || $this->isEditor()) {
 
+            $this->authorize('checkAssignedPermission', 'book_delete');
+
             $books = $this->bookRepository->model
                 ->with('meta', 'author', 'chapters')
                 ->orderBy('created_at', 'DESC')
@@ -140,7 +142,6 @@ class BooksController extends PrimaryController
         $this->getPageTitle('book.create');
 
         $this->authorize('create', 'book_create');
-
 
         $fieldsCategories = $this->fieldCategory->all();
 

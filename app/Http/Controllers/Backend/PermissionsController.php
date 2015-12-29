@@ -62,6 +62,8 @@ class PermissionsController extends PrimaryController
     {
         $this->getPageTitle('permission.edit');
 
+        $this->isAdmin();
+
         $this->authorize('checkAssignedPermission','permission_edit');
 
         $permission = $this->permissionRepository->model->find($id);

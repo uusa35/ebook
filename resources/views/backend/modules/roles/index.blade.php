@@ -44,30 +44,23 @@
                     @endforeach
                 </td>
                 <td width="80">
-                    @can('checkAssignedPermission','role_edit')
                     <a class="{{ Config::get('button.btn-edit') }}"
                        title="{{ trans('buttons.edit') }}"
                        href="{{ action('Backend\RolesController@edit', $role->id) }}"><i
                                 class="fa faw fa-edit"></i></a>
-                    @endcan
                 </td>
 
                 <td width="80">
-                    @can('checkAssignedPermission','role_delete')
                     {!! Form::open(['action' => ['Backend\RolesController@update', $role->id], 'method'
                     => 'DELETE']) !!}
                     <button type="submit" class="{{ Config::get('button.btn-delete') }}"
                             title="{{ trans('buttons.role_delete') }}">
                         <i class="fa fa=fw fa-times"></i></button>
                     {!! Form::close() !!}
-                    @endcan
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
 </div>
-
-{{--    {!! $roles->render() !!}--}}
-
 @stop

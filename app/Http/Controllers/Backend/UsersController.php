@@ -42,7 +42,12 @@ class UsersController extends PrimaryController
 
         $this->authorize('index', Session::get('module'));
 
+        // you can pass the ability name itself if the user is not author
+        // if the user is an author you have to pass the OwnerId of the page itself.
+        $this->authorize('edit','user_edit');
+
         $users = $this->userRepository->model->with('roles')->get();
+
         return view('backend.modules.user.index', compact('users'));
     }
 
@@ -100,7 +105,10 @@ class UsersController extends PrimaryController
         $this->getPageTitle('user.edit');
 
         Session::put('module', 'Users');
-
+        /*
+         * here you calling a method called "edit" inside the Core\PolciesCollection
+         * takes the userId that trying to access this page then see the abilities of such user if he is ['owner' or 'admin']
+         * */
         $this->authorize('edit', $id);
 
         $user = $this->userRepository->model->with('roles')->find($id);

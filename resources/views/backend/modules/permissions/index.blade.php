@@ -43,32 +43,26 @@
                 </td>
 
                 <td width="80">
-                    @can('checkAssignedPermission','permission_edit')
                     <a class="{{ Config::get('button.btn-edit') }}"
                        href="{{ action('Backend\PermissionsController@edit', $permission->id) }}"
                        title="{{ trans('buttons.permission_edit') }}">
                         <i class="fa faw fa-edit"></i>
                     </a>
-                    @endcan
                 </td>
 
 
                 <td width="80">
-                    @can('checkAssignedPermission','permission_delete')
                     {!! Form::open(['action' => ['Backend\PermissionsController@update', $permission->id], 'method'
                     => 'DELETE']) !!}
                     <button type="submit" class="{{ Config::get('button.btn-delete') }}"
                             title="{{ trans('buttons.permission_delete') }}"><i class=" fa fa=fw fa-times
                         "></i></button>
                     {!! Form::close() !!}
-                    @endcan
                 </td>
 
             </tr>
         @endforeach
         </tbody>
     </table>
-
-    {{--{!! $permissions->render() !!}--}}
 </div>
 @stop
