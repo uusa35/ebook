@@ -59,6 +59,7 @@
                                     <th class="hidden-xs">{{ trans('general.title') }}</th>
                                     <th>{{ trans('general.status') }}</th>
                                     <th>{{ trans('general.change_status') }}</th>
+                                    <th>{{ trans('general.published_at') }}</th>
                                     <th>{{ trans('general.edit') }}</th>
                                     <th>{{ trans('general.view') }}</th>
                                     <th>{{ trans('general.create_preview') }}</th>
@@ -76,6 +77,9 @@
                                         <td>{{ $chapter->status }}</td>
                                         <td>
                                             @include('backend.partials.buttons._chapter_change_status_btn')
+                                        </td>
+                                        <td>
+                                            {{ $chapter->published_at }}
                                         </td>
                                         <td>
                                             @include('backend.partials.buttons._chapter_edit_btn')
