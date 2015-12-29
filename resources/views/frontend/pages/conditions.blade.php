@@ -11,9 +11,9 @@
                 </div>
                 <div class="panel-body">
                     <h4>
-                        {{ (App::getLocale('lang') == 'ar') ? $conditions->title_ar : $conditions->title_en }}
+                        {!!  (App::getLocale('lang') == 'ar') ? $conditions->title_ar : $conditions->title_en !!}
                     </h4>
-                    {{ (App::getLocale('lang') == 'ar') ? $conditions->body_ar : $conditions->body_en }}
+                    {!! (App::getLocale('lang') == 'ar') ? $conditions->body_ar : $conditions->body_en !!}
                     <hr/>
                     <form class="form-virtical" action="">
                         <div class="form-group">

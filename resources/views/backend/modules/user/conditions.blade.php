@@ -31,7 +31,7 @@
         <div class="form-group">
             {!! Form::label('body_en',trans('general.body_en')) !!}
             {!!
-            Form::textarea('body_en',$terms->body_en,['class'=>'form-control','placeholder'=>trans('general.body_en')])
+            Form::textarea('body_en',$terms->body_en,['class'=>'form-control editor','placeholder'=>trans('general.body_en')])
             !!}
         </div>
 

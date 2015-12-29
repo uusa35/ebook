@@ -72,12 +72,11 @@ class AuthController extends PrimaryController
 
             $user->roles()->attach(3);
 
-            //return redirect()->action('Backend\DashboardController@index');
             return $user;
 
         } else {
 
-            dd('error roles not created for a user');
+            abort('503');
         }
     }
 
@@ -85,6 +84,7 @@ class AuthController extends PrimaryController
     public function getLogout()
     {
         \Session::flush();
+
         if (Cache::get('role.' . Auth::id())) {
             Cache::get('Modules.' . $this->getUserRole() . '.' . Auth::id())->forget();
             Cache::get('Permissions.' . $this->getUserRole() . '.' . Auth::id())->forget();

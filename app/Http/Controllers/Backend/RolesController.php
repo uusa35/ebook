@@ -1,10 +1,13 @@
 <?php namespace App\Http\Controllers\Backend;
 
 use App\Core\PrimaryController;
+use App\Jobs\UpdateUserAbilities;
 use App\Src\Role\RoleRepository;
 use App\Src\Permission\PermissionRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class RolesController extends PrimaryController
@@ -91,6 +94,8 @@ class RolesController extends PrimaryController
         $role->update($request->all());
 
         $role->savePermissions($request->get('perms'));
+
+        $this->dispatch(new UpdateUserAbilities($request));
 
         return redirect()->action('Backend\RolesController@index')->with(['success' => 'messeages.success.role_edit']);
 

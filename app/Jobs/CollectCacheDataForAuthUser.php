@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 class CollectCacheDataForAuthUser extends Job implements SelfHandling
 {
-    public $request;
+    protected $request;
 
     /**
      * Create a new job instance.
@@ -47,7 +46,7 @@ class CollectCacheDataForAuthUser extends Job implements SelfHandling
 
             $permissionsList = $permissions->lists('name', 'id')->toArray();
 
-            $abilities = $authUserRole->perms()->get();;
+            $abilities = $authUserRole->perms()->get();
 
             $abilitiesList = $abilities->Lists('name', 'id')->toArray();
 
