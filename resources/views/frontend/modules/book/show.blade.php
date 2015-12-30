@@ -79,7 +79,7 @@
                                     {{ trans('general.total_chapters') }} :
                                 </td>
                                 <td>
-                                    {{ count($book->chapters) }}
+                                    {{ count($chaptersPublishedOnly) }}
                                 </td>
                             </tr>
                             <tr>
