@@ -1,4 +1,4 @@
-@if(Request::user()->isAdmin() ||  Request::user()->isEditor())
+@if(Request::user()->isAdminSession() ||  Request::user()->isEditorSession())
     <a class="{!! Config::get('button.btn-edit') !!}"
        title="{{ trans('general.edit') }}"
        href="{{ action('Backend\ChaptersController@edit',['chapter_id' => $chapter->id,'book_id'=>$book->id]) }}">

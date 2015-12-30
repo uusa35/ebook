@@ -17,7 +17,6 @@ class DashboardController extends PrimaryController
 
     public function index()
     {
-
         if (\Session::has('roles')) {
 
             $this->getPageTitle('dashboard.index');

@@ -66,6 +66,16 @@ trait UserTrait
         return false;
     }
 
+    public function isAuthorSession()
+    {
+        if (Session::get('Author')) {
+
+            return true;
+
+        }
+        return false;
+    }
+
 
     public function isAuthor()
     {

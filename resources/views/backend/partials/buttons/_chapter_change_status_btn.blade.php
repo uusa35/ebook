@@ -1,4 +1,4 @@
-@if(Request::user()->isAuthor())
+@if(Request::user()->isAuthorSession())
     @can('change',$chapter->book->author_id)
     {{-- If the User just created the book --}}
     @if($chapter->status == 'pending')
@@ -17,7 +17,7 @@
     @endif--}}
         @endif
     @endcan
-@elseif(Request::user()->isAdmin() || Request::user()->isEditor())
+@elseif(Request::user()->isAdminSession() || Request::user()->isEditorSession())
     @if($chapter->status == 'pending')
         <a class="{!! Config::get('button.btn-drafted') !!}"
            href="{{ action('Backend\ChaptersController@getUpdateChapterStatus',[$chapter->id,'drafted']) }}"
