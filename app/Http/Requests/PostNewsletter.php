@@ -13,7 +13,7 @@ class PostNewsletter extends Request
      */
     public function authorize()
     {
-        return $this->user()->can('checkAssignedPermission','newsletter_create');
+        return true;
     }
 
     /**
