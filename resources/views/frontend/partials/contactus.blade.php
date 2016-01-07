@@ -43,14 +43,16 @@
                         @endif
                     </address>
 
-                    <div id="mapwrap">
+                    <div id="mapwrap" style="overflow: hidden;">
                         <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
                         <div style='overflow:hidden;height:429px;width:495px;'>
                             <div id='gmap_canvas' style='height:429px;width:686px;'></div>
-                            <style>#gmap_canvas img {
+                            <style>
+                                #gmap_canvas img {
                                     max-width: none !important;
                                     background: none !important
-                                }</style>
+                                }
+                            </style>
                         </div>
                         <a href='http://maps-generator.com/'>maps-generator</a>
                         <script type='text/javascript'
