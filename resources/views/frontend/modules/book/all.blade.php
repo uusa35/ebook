@@ -71,7 +71,7 @@
                 </div>
             @endforeach
             <div class="row">
-                <div class="col-lg-4 col-lg-offset-4 text-center">
+                <div class="col-lg-4 col-xs-6 col-xs-3 col-lg-offset-4 text-center">
                     {!! $allBooks->render() !!}
                 </div>
             </div>
