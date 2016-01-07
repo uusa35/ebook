@@ -1,10 +1,5 @@
 @extends('frontend.layouts.one_col')
 
-
-@section('slider')
-
-@stop
-
 @section('content')
 
 
@@ -66,7 +61,6 @@
                                     </h5>
 
                                     {{ \Illuminate\Support\Str::words($book->description,3) }}
-
                             </span>
                                     </a>
                                 </div>
