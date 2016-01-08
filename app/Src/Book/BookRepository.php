@@ -54,7 +54,7 @@ class BookRepository extends PrimaryRepository
             ->where('active', '=', '1')
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
-                    '=', 'published')->take(1)->orderBy('published_at','DESC');
+                    '=', 'published')->orderBy('published_at','DESC');
             })
             ->with('usersFavorites', 'meta', 'chapters')
             ->paginate(8);
