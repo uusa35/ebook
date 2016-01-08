@@ -102,9 +102,11 @@ class Book extends PrimaryModel
         return $this
             ->selectRaw('books.*, count(*) as book_count')
             ->whereExists(function ($query) {
-                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status', '=', 'published');
+                $query->select(DB::raw(1))->from('chapters')
+                      ->whereRaw('chapters.book_id = books.id')
+                      ->where('chapters.status', '=', 'published');
             })
-            ->with('meta', 'author', 'usersFavorites','chapters')
+            ->with('meta', 'author', 'usersFavorites', 'chapters')
             ->join('book_user', 'books.id', '=', 'book_user.book_id')
             ->where('books.active', '1')
             ->groupBy('book_id')// responsible to get the sum of books returned
@@ -134,7 +136,7 @@ class Book extends PrimaryModel
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status', '=', 'published');
             })
-            ->with('meta', 'author', 'usersFavorites','chapters')
+            ->with('meta', 'author', 'usersFavorites', 'chapters')
             ->join('book_likes', 'books.id', '=', 'book_likes.book_id')
             ->where('books.active', '1')
             ->groupBy('book_id')// responsible to get the sum of books returned

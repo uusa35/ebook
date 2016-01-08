@@ -41,10 +41,9 @@ class BookRepository extends PrimaryRepository
             ->where('active', '=', '1')
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
-                    '=', 'published');
+                    '=', 'published')->orderBy('chapters.published_at','DESC');
             })
             ->with('usersFavorites', 'meta','chapters')
-            ->orderBy('books.created_at', 'DESC')
             ->paginate($paginate);
     }
 
@@ -54,10 +53,9 @@ class BookRepository extends PrimaryRepository
             ->where('active', '=', '1')
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
-                    '=', 'published');
+                    '=', 'published')->orderBy('chapters.published_at','DESC');
             })
             ->with('usersFavorites', 'meta','chapters')
-            ->orderBy('created_at', 'DESC')
             ->paginate(8);
     }
 
@@ -68,10 +66,9 @@ class BookRepository extends PrimaryRepository
             ->where(['active' => '1', 'id' => $id])
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
-                    '=', 'published');
+                    '=', 'published')->orderBy('chapters.published_at','DESC');
             })
             ->with('usersLikes', 'meta','chapters')
-            ->orderBy('created_at', 'DESC')
             ->first();
     }
 
@@ -82,10 +79,9 @@ class BookRepository extends PrimaryRepository
             ->where(['active' => '1', 'field_category_id' => $categoryId])
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
-                    '=', 'published');
+                    '=', 'published')->orderBy('chapters.published_at','DESC');
             })
             ->with('usersFavorites', 'meta','chapters')
-            ->orderBy('created_at', 'DESC')
             ->paginate(8);
     }
 
@@ -137,7 +133,7 @@ class BookRepository extends PrimaryRepository
             // no results for drafts -- only for published
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
-                    '=', 'published');
+                    '=', 'published')->orderBy('chapters.published_at','DESC');
             })
             ->where('active', '=', '1')
             // the first where will filter the whole query

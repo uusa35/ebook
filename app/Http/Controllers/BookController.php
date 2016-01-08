@@ -99,6 +99,7 @@ class BookController extends PrimaryController
         return view('frontend.modules.book.all', compact('allBooks'));
     }
 
+
     /**
      * Display the specified resource.
      *

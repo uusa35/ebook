@@ -13,6 +13,4 @@
         relative_urls: true,
         paste_data_images: true
     });
-
-
 </script>
