@@ -51,7 +51,10 @@ class BookController extends PrimaryController
      */
     public function index()
     {
-        // get 4 published books for index
+        // get the most recentest 4 published_at books for index
+        /*
+         * get the recentest books that first book was published
+         * */
         $recentBooks = $this->bookRepository->getRecentBooks(4);
 
         // get 4 published and most favorite books for index
