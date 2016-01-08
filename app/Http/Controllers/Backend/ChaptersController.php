@@ -202,7 +202,16 @@ class ChaptersController extends PrimaryController
 
         $chapter = $chapter->with('book')->first();
 
+        $currentBook = $chapter->book;
+
+        $firstChapterOfCurrentBook = $currentBook->chapters()->where('status', 'published')->orderBy('published_at')->first();
+
         if ($chapterUpdated) {
+
+            if ($status === 'published' && $firstChapterOfCurrentBook->id === $chapter->id) {
+
+                $chapter->book()->update(['created_at' => time()]);
+            }
 
             event(new ChapterStatusChanged($chapter, $status));
 
