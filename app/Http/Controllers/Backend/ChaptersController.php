@@ -204,7 +204,7 @@ class ChaptersController extends PrimaryController
 
         $currentBook = $chapter->book;
 
-        $firstChapterOfCurrentBook = $currentBook->chapters()->where('status', 'published')->orderBy('published_at')->first();
+        $firstChapterOfCurrentBook = $currentBook->chapters()->where('status', 'published')->orderBy('published_at','ASC')->first();
 
         if ($chapterUpdated) {
 
