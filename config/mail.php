@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER','mandrill'),
+    'driver' => env('MAIL_DRIVER','smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST','smtp.mandrill.com'),
+    'host' => env('MAIL_HOST','smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT','587'),
+    'port' => env('MAIL_PORT','465'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => '7orof.com@gmail.com', 'name' => '7orof.com Teamwork'],
+    'from' => ['address' => 'inf@7orof.com', 'name' => '7orof.com Teamwork'],
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION'),
+    'encryption' => env('MAIL_ENCRYPTION','TLS'),
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME','uusa35@gmail.com'),
+    'username' => env('MAIL_USERNAME','info@7orof.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'password' => env('MAIL_PASSWORD','ET2EpmbghDxbCI79s-dvNw'),
+    'password' => env('MAIL_PASSWORD','info1234'),
 
     /*
     |--------------------------------------------------------------------------
