@@ -12,11 +12,11 @@ SESSION_DRIVER=file
 QUEUE_DRIVER=sync
 
 MAIL_DRIVER=smtp
-MAIL_HOST=smtp-relay.gmail.com
+MAIL_HOST=smtp.gmail.com
 MAIL_PORT=465
-MAIL_USERNAME=info@7orof.com
-MAIL_PASSWORD=info1234
-MAIL_ENCRYPTION=TLS
+MAIL_USERNAME=7orof.com@gmail.com
+MAIL_PASSWORD=Jimmy11223344
+MAIL_ENCRYPTION=ssl
 
 
 
@@ -33,8 +33,8 @@ GITHUB_CLIENT_SECRET=981c66868911c55af54002b04439fa7aeea8ae0e
 GITHUB_REDIRECT_URI=http://7orof.com/auth/github/callback
 
 
-GOOGLE_KEY=535985071980-ac56en2hi3duvmonpthpagrqiv19pfkv.apps.googleusercontent.com
-GOOGLE_SECRET=UmlpraKBYl4XazUZRBVz0vtT
+GOOGLE_KEY=1073699830481-6t6iqgnm4i4qtjoe4p9aur10g1neptu7.apps.googleusercontent.com
+GOOGLE_SECRET=gA2wXd1PDxUATGv8J1rOpTGL
 GOOGLE_REDIRECT_URI=http://7orof.com/auth/google/callback
 
 TWITTER_KEY=isYXmZ1LXLXEs6lLfKSFZtFTt

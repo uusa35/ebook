@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'inf@7orof.com', 'name' => '7orof.com Teamwork'],
+    'from' => ['address' => '7orof.com@gmail.com', 'name' => '7orof.com Teamwork'],
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION','TLS'),
+    'encryption' => env('MAIL_ENCRYPTION','ssl'),
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME','info@7orof.com'),
+    'username' => env('MAIL_USERNAME','7orof.com@gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'password' => env('MAIL_PASSWORD','info1234'),
+    'password' => env('MAIL_PASSWORD','Jimmy11223344'),
 
     /*
     |--------------------------------------------------------------------------
