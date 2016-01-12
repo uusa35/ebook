@@ -1,5 +1,5 @@
 APP_ENV=production
-APP_DEBUG=false
+APP_DEBUG=true
 APP_KEY=TPs48D65dJqLWbCW1UC2efJoTIfsmHBX
 
 DB_HOST=localhost
