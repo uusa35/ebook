@@ -44,15 +44,8 @@ class CreatePdf implements ShouldQueue
          *
          * */
         $bodyForPdf = $this->cleanBody($event->chapter->body);
-        //$bodyForPdf = ($event->chapter->body);
-
-        //dd($bodyForPdf);
-
-
 
         $bodyForPdf = '<div style="border: 1px dotted #d7d7d7 !important;">' . $bodyForPdf . '</div>';
-
-//        dd($bodyForPdf);
 
         $this->pdf->setOption('encoding', 'UTF-8');
 

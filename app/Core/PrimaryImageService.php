@@ -20,7 +20,7 @@ class PrimaryImageService
 
         $fileName = $currentImage->getClientOriginalName();
 
-        $fileName = rand(0, 10000) . '' . $fileName;
+        $fileName = rand(0, 10000) . '' . e($fileName);
 
         $realPath = $currentImage->getRealPath();
 
