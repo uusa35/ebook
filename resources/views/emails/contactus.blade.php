@@ -262,10 +262,10 @@
                                                                 <div class='contentEditableContainer contentTextEditable'>
                                                                     <div class='contentEditable'
                                                                          style='text-align: center;color:#AAAAAA;'>
-                                                                        <p> 7orof.com Teamwork <br/>
-                                                                            Kuwait, Sharq <br/>
-                                                                            123456 <br/>
-                                                                            <a href="http://ebook.ideasowners.net">E-boook</a>
+                                                                        <p> 7orof.com<br/>
+                                                                            {{ Cache::get('contactusInfo')->address }}<br/>
+                                                                            {{ Cache::get('contactusInfo')->phone }}<br/>
+                                                                            <a href="http://7orof.com">7orof.com</a>
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -293,7 +293,7 @@
                                                                 <div class='contentEditableContainer contentTwitterEditable'>
                                                                     <div class='contentEditable'
                                                                          style='text-align: center;color:#AAAAAA;'>
-                                                                        <a href="http://twitter.com/{{Cache::get('twitter')}}">
+                                                                        <a href="http://twitter.com/{{Cache::get('contactusInfo')->twitter}}">
                                                                         <img src="{{ $message->embed('images/twitter.png') }}"
                                                                              alt="twitter" width='40' height='40'
                                                                              data-max-width="40" data-customIcon="true">
@@ -306,7 +306,7 @@
                                                                 <div class='contentEditableContainer contentImageEditable'>
                                                                     <div class='contentEditable'
                                                                          style='text-align: center;color:#AAAAAA;'>
-                                                                        <a href="http://youtube.com/{{Cache::get('youtube')}}">
+                                                                        <a href="http://youtube.com/{{Cache::get('contactusInfo')->youtube}}">
                                                                             <img src="{{ $message->embed('images/youtube.png') }}"
                                                                                  alt="Pinterest" width='40' height='40'
                                                                                  data-max-width="40">
@@ -319,7 +319,7 @@
                                                                 <div class='contentEditableContainer contentImageEditable'>
                                                                     <div class='contentEditable'
                                                                          style='text-align: center;color:#AAAAAA;'>
-                                                                        <a href="http://instagram.com/{{Cache::get('instagram')}}">
+                                                                        <a href="http://instagram.com/{{Cache::get('contactusInfo')->instagram}}">
                                                                         <img src="{{ $message->embed('images/instagram.png') }}"
                                                                              alt="Pinterest" width='40' height='40'
                                                                              data-max-width="40">

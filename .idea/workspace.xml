@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9681848a-2c07-43d6-bc7a-61ca3dae0de9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.envDev" afterPath="$PROJECT_DIR$/.envDev" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/emails/contactus.blade.php" afterPath="$PROJECT_DIR$/resources/views/emails/contactus.blade.php" />
     </list>
     <ignored path="ebook.iws" />
@@ -55,11 +56,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".envDev" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".envDev" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.envDev">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.018072288">
+            <state vertical-scroll-proportion="0.0">
               <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6141439">
+              <caret line="38" column="2" selection-start-line="38" selection-start-column="2" selection-end-line="38" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -78,8 +89,8 @@
       <file leaf-file-name="contactus.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/emails/contactus.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.2916665">
-              <caret line="289" column="60" selection-start-line="289" selection-start-column="60" selection-end-line="289" selection-end-column="60" />
+            <state vertical-scroll-proportion="88.291664">
+              <caret line="141" column="8" selection-start-line="141" selection-start-column="8" selection-end-line="141" selection-end-column="8" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#td#5;n#tr#0;n#table#0;n#td#1;n#tr#1;n#table#0;n#div#3;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -115,7 +126,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Core/PrimaryEmailService.php" />
         <option value="$PROJECT_DIR$/vendor/usama/commentpack/src/Views/Frontend/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" />
         <option value="$PROJECT_DIR$/config/database.php" />
@@ -164,8 +174,9 @@
         <option value="$PROJECT_DIR$/app/Src/Book/BookRepository.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Backend/ChaptersController.php" />
         <option value="$PROJECT_DIR$/config/mail.php" />
-        <option value="$PROJECT_DIR$/resources/views/emails/contactus.blade.php" />
         <option value="$PROJECT_DIR$/.envDev" />
+        <option value="$PROJECT_DIR$/resources/views/emails/contactus.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
       </list>
     </option>
   </component>
@@ -299,7 +310,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../turnkw" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="SearchEverywhereHistoryKey" value="contactus.b&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/emails/contactus.blade.php&#10;Prim&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Core/PrimaryEmailService.php&#10;.&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/.envDev&#10;mail&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/mail.php&#10;.env&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/.envDev&#10;service&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/services.php&#10;mail.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/mail.php&#10;app.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/app.php&#10;BookC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/BookController.php&#10;ChaptersC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;EventSer&#9;null&#9;null&#10;ker&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Kernel.php&#10;ChaptersCo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;ALL.&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/book/all.blade.php&#10;all.b&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/book/all.blade.php&#10;index.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/book/index.blade.php&#10;Chapter&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/Chapter/Chapter.php&#10;BooksC&#9;null&#9;null&#10;BookCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/BookController.php&#10;all&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/scripts/allscripts.blade.php&#10;contact.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/partials/contactus.blade.php&#10;all.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/book/all.blade.php&#10;Primary&#9;null&#9;null&#10;Create&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Requests/CreateNewsletter.php&#10;HomeCon&#9;null&#9;null&#10;footer&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/partials/footer.blade.php&#10;NewsLe&#9;null&#9;null&#10;PostNew&#9;null&#9;null&#10;style&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/styles/stylesheets.blade.php&#10;Chapter.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/Chapter/Chapter.php&#10;styles&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/styles/stylesheets.blade.php&#10;toolbar&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/partials/toolbar.blade.php&#10;create.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/create.blade.php&#10;master&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/layouts/master.blade.php&#10;Local&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Middleware/Locale.php&#10;LanguageC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/LanguageController.php&#10;routes&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/routes.php&#10;kerna&#9;null&#9;null&#10;gul&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/gulpfile.js&#10;button.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/button.php&#10;routes.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/routes.php&#10;toolbar.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/partials/toolbar.blade.php&#10;header.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/header.blade.php&#10;master.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/layouts/master.blade.php&#10;master.bla&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/layouts/master.blade.php&#10;composer&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/composer.json&#10;show.blad&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/book/show.blade.php&#10;usertr&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Core/UserTrait.php&#10;Collect&#9;FILE&#9;file:///Users/usamaahmed/Desktop/code/homestead/projects/ebook/app/Jobs/CollectCacheDataForAuthUser.php&#10;usert&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="Home&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/HomeController.php&#10;contactus&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/emails/contactus.blade.php&#10;View&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Providers/ViewServiceProvider.php&#10;ViewSer&#9;null&#9;null&#10;footer&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/partials/footer.blade.php&#10;footer.&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/partials/footer.blade.php&#10;HomeC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/HomeController.php&#10;contactus.b&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/emails/contactus.blade.php&#10;Prim&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Core/PrimaryEmailService.php&#10;.&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/.envDev&#10;mail&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/mail.php&#10;.env&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/.envDev&#10;service&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/services.php&#10;mail.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/mail.php&#10;app.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/app.php&#10;BookC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/BookController.php&#10;ChaptersC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;EventSer&#9;null&#9;null&#10;ker&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Kernel.php&#10;ChaptersCo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;ALL.&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/book/all.blade.php&#10;all.b&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/book/all.blade.php&#10;index.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/book/index.blade.php&#10;Chapter&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/Chapter/Chapter.php&#10;BooksC&#9;null&#9;null&#10;BookCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/BookController.php&#10;all&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/scripts/allscripts.blade.php&#10;contact.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/partials/contactus.blade.php&#10;all.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/book/all.blade.php&#10;Primary&#9;null&#9;null&#10;Create&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Requests/CreateNewsletter.php&#10;HomeCon&#9;null&#9;null&#10;NewsLe&#9;null&#9;null&#10;PostNew&#9;null&#9;null&#10;style&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/styles/stylesheets.blade.php&#10;Chapter.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/Chapter/Chapter.php&#10;styles&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/styles/stylesheets.blade.php&#10;toolbar&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/partials/toolbar.blade.php&#10;create.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/create.blade.php&#10;master&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/layouts/master.blade.php&#10;Local&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Middleware/Locale.php&#10;LanguageC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/LanguageController.php&#10;routes&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/routes.php&#10;kerna&#9;null&#9;null&#10;gul&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/gulpfile.js&#10;button.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/button.php&#10;routes.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/routes.php&#10;toolbar.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/partials/toolbar.blade.php&#10;header.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/header.blade.php&#10;master.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/layouts/master.blade.php" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
     <property name="LayoutCode.rearrangeEntriesBlade" value="false" />
     <property name="recentsLimit" value="5" />
@@ -530,13 +541,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/Locale.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5210918">
-          <caret line="28" column="19" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/frontend.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -674,20 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.018656716">
           <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/frontend/partials/footer.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27238807">
-          <caret line="83" column="107" selection-start-line="83" selection-start-column="107" selection-end-line="83" selection-end-column="107" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49626866">
-          <caret line="50" column="44" selection-start-line="50" selection-start-column="44" selection-end-line="50" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -872,6 +862,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.envDev">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/frontend/partials/footer.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37220845">
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="108" />
+          <folding>
+            <marker date="1451314419000" expanded="true" signature="1932:2069" placeholder="..." />
+            <marker date="1451314419000" expanded="true" signature="1944:2067" placeholder="..." />
+            <marker date="1451314419000" expanded="true" signature="1945:2022" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/ViewServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44913152">
+          <caret line="46" column="49" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Core/PrimaryEmailService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.25">
@@ -882,18 +900,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/emails/contactus.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.2916665">
-          <caret line="289" column="60" selection-start-line="289" selection-start-column="60" selection-end-line="289" selection-end-column="60" />
+        <state vertical-scroll-proportion="88.291664">
+          <caret line="141" column="8" selection-start-line="141" selection-start-column="8" selection-end-line="141" selection-end-column="8" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#td#5;n#tr#0;n#table#0;n#td#1;n#tr#1;n#table#0;n#div#3;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.envDev">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.018072288">
-          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.6141439">
+          <caret line="38" column="2" selection-start-line="38" selection-start-column="2" selection-end-line="38" selection-end-column="2" />
           <folding />
         </state>
       </provider>

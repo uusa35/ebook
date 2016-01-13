@@ -4,6 +4,7 @@ use App\Core\PrimaryController;
 use App\Core\PrimaryEmailService;
 use App\Http\Requests\contactusSubmit;
 use App\Http\Requests\PostNewsletter;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends PrimaryController
@@ -27,12 +28,15 @@ class HomeController extends PrimaryController
 
     public function getContactus()
     {
+
         return view('frontend.partials.contactus');
     }
 
 
     public function sendContactUs(contactusSubmit $request)
     {
+
+//        $request->merge(['youtube' => Cache::get('contactusInfo')->youtube,'twitter' => Cache::get('contactusInfo')->twitter,'instagram' => Cache::get('contactusInfo')->instagram]);
 
         $data = $request->all();
 
@@ -56,8 +60,6 @@ class HomeController extends PrimaryController
         $element = $newsLetter->where('email', $request->get('email'))->first();
 
         if ($element) {
-
-            dd('from inside if');
 
             return redirect()->back()->with(['error' => 'messages.error.newsletter']);
 
