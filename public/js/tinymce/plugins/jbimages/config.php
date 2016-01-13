@@ -119,7 +119,7 @@ $config['upload_path'] = $_SERVER['DOCUMENT_ROOT'] . $config['img_path']; // Phy
 | -------------------------------------------------------------------*/
 
 	
-	$config['encrypt_name'] = FALSE;
+	$config['encrypt_name'] = TRUE;
 
 
 /*-------------------------------------------------------------------
