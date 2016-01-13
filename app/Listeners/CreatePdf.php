@@ -37,11 +37,22 @@ class CreatePdf implements ShouldQueue
         // to enforce the app to use UTF-8 for arabic content
 
         // create PDF
-        //dd($this->uploadPath . $event->book->url);
-
+        /*
+         * concolusion :
+         * for pdf the imag link must be relivant to the server which means /home/vagrant/www/public/images ...
+         * for editing the tinymac form link must be relative to public only '/images/....
+         *
+         * */
         $bodyForPdf = $this->cleanBody($event->chapter->body);
+        //$bodyForPdf = ($event->chapter->body);
+
+        //dd($bodyForPdf);
+
+
 
         $bodyForPdf = '<div style="border: 1px dotted #d7d7d7 !important;">' . $bodyForPdf . '</div>';
+
+//        dd($bodyForPdf);
 
         $this->pdf->setOption('encoding', 'UTF-8');
 
@@ -65,8 +76,9 @@ class CreatePdf implements ShouldQueue
     public function cleanBody($body)
     {
 
-        $bodyContent = str_replace('../../../images/', public_path('images/'), $body);
-        $bodyContent = str_replace('../../images/', public_path('images/'), $bodyContent);
+        //$bodyContent = str_replace('../../../images/', public_path('images/'), $body);
+        //$bodyContent = str_replace('../../images/', public_path('images/'), $bodyContent);
+        $bodyContent = str_replace('/images', public_path('images'), $body);
 
         return $bodyContent;
     }
