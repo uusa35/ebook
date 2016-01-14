@@ -232,7 +232,7 @@
                                                                         <br>
                                                                         <hr/>
                                                                         <p>
-                                                                            <a href="http://eboook.ideasowners.net/frontend/book/{{$data['book_id']}}">View the book</a>
+                                                                            <a href="http://7orof.com/frontend/book/{{$data['book_id']}}">View the book</a>
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -267,7 +267,7 @@
                                                                         <p> 7orof.com Teamwork <br/>
                                                                             Kuwait, Sharq <br/>
                                                                             123456 <br/>
-                                                                            <a href="http://ebook.ideasowners.net">E-boook</a>
+                                                                            <a href="{{ base_path() }}">7orof</a>
                                                                         </p>
                                                                     </div>
                                                                 </div>
