@@ -56,9 +56,9 @@
                 @endif
                 <h3 class="profile-username text-center">{{ $user->name }}</h3>
 
-                <p class="text-muted text-center"> {{ $user->email }}</p>
+                <p class="text-muted text-center hidden"> {{ $user->email }}</p>
 
-                <p class="text-muted text-center"><i class="fa fa-fw fa-phone"></i> : {{  $user->phone }}</p>
+                <p class="text-muted text-center hidden"><i class="fa fa-fw fa-phone"></i> : {{  $user->phone }}</p>
 
 
                 <p class="text-muted text-center">{{ trans('general.member_since') }}
