@@ -14,7 +14,7 @@
                     <div class="carousel-inner">
                         @foreach($sliders as $slider)
                             <div class="item {{ ($slider->id == 1) ? 'active' : '' }}">
-                                <a href="{{ URL::to($slider->url,true) }}">
+                                <a href="{{ URL::secure($slider->url) }}">
                                 <img style="width:100%; height:auto;" src="{{ asset('images/uploads/slide/large/'.$slider->slide) }}" alt="{{ $slider->caption }}">
                                 <div class="carousel-caption">
                                     {{ $slider->caption }}
