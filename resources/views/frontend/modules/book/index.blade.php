@@ -68,7 +68,10 @@
 
                                     </h5>
 
-                                    {{ \Illuminate\Support\Str::words($book->description,3) }}
+                                    {{--{{ \Illuminate\Support\Str::words($book->description,3) }}--}}
+                                    <a href="{{ action('UserController@show',$book->author_id) }}">
+                                        {{ trans('general.author').' : '. $book->author->name }}
+                                    </a>
 
                                 </span>
                                     </a>
@@ -150,7 +153,10 @@
 
                                     </h5>
 
-                                    {{ \Illuminate\Support\Str::words($book->description,3) }}
+{{--                                    {{ \Illuminate\Support\Str::words($book->description,3) }}--}}
+                                    <a href="{{ action('UserController@show',$book->author_id) }}">
+                                        {{ trans('general.author').' : '. $book->author->name }}
+                                    </a>
 
                                 </span>
                                         </a>
@@ -231,7 +237,10 @@
 
                                     </h5>
 
-                                    {{ \Illuminate\Support\Str::words($book->description,3) }}
+                                    {{--{{ \Illuminate\Support\Str::words($book->description,3) }}--}}
+                                    <a href="{{ action('UserController@show',$book->author_id) }}">
+                                        {{ trans('general.author').' : '. $book->author->name }}
+                                    </a>
 
                             </span>
                                     </a>
