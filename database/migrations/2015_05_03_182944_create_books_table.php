@@ -20,15 +20,8 @@ class CreateBooksTable extends Migration {
             $table->integer('field_category_id');
             $table->integer('lang_category_id');
             $table->string('title');
-            //$table->text('title_en');
-            //$table->text('title_ar');
             $table->text('description');
-            //$table->string('description_ar');
-            //$table->string('description_en');
             $table->string('cover');
-            //$table->string('cover_en');
-            //$table->string('cover_ar');
-            //$table->text('url');
             $table->boolean('free')->default(1); // url or html
             $table->bigInteger('views'); // url or html
             $table->enum('active',[0,1]);

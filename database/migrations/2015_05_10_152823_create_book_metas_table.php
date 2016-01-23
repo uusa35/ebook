@@ -16,7 +16,8 @@ class CreateBookMetasTable extends Migration {
 		{
 			//
             $table->increments('id');
-            $table->integer('book_id');
+			$table->integer('book_id')->foreign('book_id')->references('id')->on('books')
+				  ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('total_chapters')->nullable();
 			$table->integer('total_pages')->nullable();
             $table->decimal('price',6,2)->nullable();

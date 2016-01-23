@@ -20,7 +20,8 @@ class CreateCommentsChildrenTable extends Migration
             $table->integer('level');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('comment_id')->references('id')->on('comments');
+            $table->foreign('comment_id')->references('id')->on('comments')
+                  ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

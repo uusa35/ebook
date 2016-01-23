@@ -16,10 +16,10 @@ class CreateBookLikesTable extends Migration {
 		{
 			//
             $table->increments('id');
-            $table->integer('book_id');
-            $table->integer('user_id');
+			$table->integer('book_id')->foreign('book_id')->references('id')->on('books')
+				  ->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
-            $table->softDeletes();
 		});
 	}
 

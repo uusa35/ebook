@@ -193,7 +193,7 @@ class BooksController extends PrimaryController
             return redirect()->action('Backend\ChaptersController@create', ['book_id' => $book->id])->with(['success' => trans('messages.success.created')]);
         }
 
-        return redirect()->back()->with('error' , trans('messages.error.created'));
+        return redirect()->back()->with('error', trans('messages.error.created'));
     }
 
     /**
@@ -308,26 +308,25 @@ class BooksController extends PrimaryController
 
         $this->authorize('delete', $book->author_id);
 
-        if ($book->delete()) {
+        if ($book) {
 
-            if ($book->meta()) {
+            $book->comments()->delete();
 
-                $book->meta()->delete();
+            $book->chapters()->delete();
 
-                $book->chapters()->delete();
+            $book->meta()->delete();
 
-                $book->favorites()->delete();
+            $book->likes()->delete();
 
-                $book->likes()->delete();
+            $book->favorites()->delete();
 
-            }
+            $book->delete();
 
             return redirect()->back()->with('success', trans('messages.success.deleted'));
 
         }
 
         return redirect()->back()->with('error', trans('messages.error.deleted'));
-
 
     }
 
@@ -361,7 +360,7 @@ class BooksController extends PrimaryController
             return redirect()->back()->with('success', trans('messages.success.deleted'));
 
         }
-        return redirect()->back()->with('error' , 'messages.error.deleted');
+        return redirect()->back()->with('error', 'messages.error.deleted');
     }
 
 
@@ -402,12 +401,12 @@ class BooksController extends PrimaryController
             ]);
 
             if ($favorited) {
-                return redirect()->back()->with('success' ,trans('messages.success.created'));
+                return redirect()->back()->with('success', trans('messages.success.created'));
             }
 
         }
 
-        return redirect()->back()->with('error',trans('messages.error.created'));
+        return redirect()->back()->with('error', trans('messages.error.created'));
     }
 
     /**
