@@ -104,24 +104,16 @@ $factory->define('App\Src\Advertisement\Advertisement', function ($faker) {
 });
 
 $factory->define('App\Src\Slider\Slider', function ($faker) {
+    DB::table('role_user')->insert([
+        'user_id' => App\Src\User\User::all()->random()->id,
+        'role_id' => App\Src\Role\Role::all()->random()->id
+    ]);
     return [
         'slide' => 'http://placehold.it/1500*900',
         'caption' => $faker->paragraph(1)
     ];
 });
 
-for ($i = 1; $i <= 23; $i++) {
-    /*DB::table('user_roles')->insert([
-        'user_id' => '1',
-        'role_id' => rand(1, 3)
-    ]);*/
-
-    DB::table('book_report')->insert([
-        'user_id' => rand(1, 3),
-        'book_id' => rand(1, 3)
-    ]);
-
-}
 
 DB::table('conditions')->insert([
     'title_ar' => 'this is title arabic',
@@ -129,6 +121,7 @@ DB::table('conditions')->insert([
     'body_ar' => 'this is the content in arabic',
     'body_en' => 'this is the content in english'
 ]);
+
 
 $factory->define(Config::get('CommentPack.model'), function ($faker) {
 
@@ -144,6 +137,6 @@ $factory->define(Config::get('CommentPack.childModel'), function ($faker) {
         'body' => $faker->paragraph(2),
         'user_id' => App\Src\User\User::all()->random()->id,
         'comment_id' => Usama\CommentPack\Model\Comment::all()->random()->id,
-        'level' => rand(1,10)
+        'level' => rand(1, 10)
     ];
 });

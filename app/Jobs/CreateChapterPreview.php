@@ -76,10 +76,11 @@ class CreateChapterPreview extends Job implements SelfHandling
     {
         //logo
         $this->pdfPreview->Image(public_path('images/logo-150.png'), 5, 8, 35);
+
         // Arial bold 15
         $this->pdfPreview->SetFont('Arial', 'B', 12);
-        // Move to the right
 
+        // Move to the right
         $this->pdfPreview->Cell(10);
         // Title
 

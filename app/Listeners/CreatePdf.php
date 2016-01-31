@@ -49,6 +49,8 @@ class CreatePdf implements ShouldQueue
 
         $this->pdf->setOption('encoding', 'UTF-8');
 
+        $this->pdf->set
+
         $this->pdf->generateFromHtml($bodyForPdf, $this->uploadPath . $event->chapter->url, ['encoding' => 'UTF-8', 'images' => true, 'enable-external-links' => true], true);
 
         /*
