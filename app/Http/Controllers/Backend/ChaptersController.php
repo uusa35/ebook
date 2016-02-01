@@ -12,6 +12,7 @@ use App\Src\Book\Chapter\Chapter;
 use App\Src\Book\Chapter\ChapterRepository;
 use App\Src\User\Follower\Follower;
 use App\Src\User\UserRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
@@ -81,11 +82,13 @@ class ChaptersController extends PrimaryController
             'title' => $request->get('title'),
             'body' => $request->get('body'),
             'book_id' => $request->get('book_id'),
-            'url' => rand(1, 9999) . str_random(10) . '.pdf'
+            'url' => rand(1, 9999) . str_random(10) . '.pdf',
+            'published_at' => Carbon::now()
         ]);
 
         if ($chapter) {
 
+            // creating the PDF file
             event(new CreateChapter($chapter));
 
             return redirect()->action('Backend\BooksController@show',
@@ -145,6 +148,24 @@ class ChaptersController extends PrimaryController
 
     }
 
+
+    public function destroy($id)
+    {
+        $chapter = $this->chapterRepository->model->findOrFail(['id' => $id])->first();
+
+        $this->authorize('delete', $chapter->author_id);
+
+        if ($chapter) {
+
+            $chapter->delete();
+
+            return redirect()->back()->with('success', trans('messages.success.deleted'));
+
+        }
+
+        return redirect()->back()->with('error', trans('messages.error.deleted'));
+
+    }
 
     /**
      * @param $bookUrl

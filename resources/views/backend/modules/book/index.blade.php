@@ -98,9 +98,7 @@
                                             <th>{{ trans('general.add') }}</th>
                                             <th>{{ trans('general.active') }}</th>
                                             <th>{{ trans('general.edit') }}</th>
-                                            @if(Request::user()->isAdminSession())
-                                                <th>{{ trans('general.delete') }}</th>
-                                            @endif
+                                            <th>{{ trans('general.delete') }}</th>
                                             <th>{{ trans('general.send_message') }}</th>
                                         </tr>
                                         </thead>
@@ -161,16 +159,15 @@
                                                     </a>
                                                 </td>
                                                 <td class="text-center">
-                                                    @if(Auth::user()->isAdminSession())
-                                                        <button type="button"
-                                                                class="{{ Config::get('button.btn-delete') }}"
-                                                                id="delete-{{$book->id}}"
-                                                                title="{{ trans('general.delete') }}"
-                                                                data-toggle="modal"
-                                                                data-target="#myModal">
-                                                            {!! Config::get('button.icon-delete') !!}
-                                                        </button>
-                                                    @endif
+                                                    <button type="button"
+                                                            class="{{ Config::get('button.btn-delete') }}"
+                                                            id="delete-{{$book->id}}"
+                                                            title="{{ trans('general.delete') }}"
+                                                            data-toggle="modal"
+                                                            data-target="#myModal">
+                                                        {!! Config::get('button.icon-delete') !!}
+                                                    </button>
+
                                                 </td>
                                                 <td>
                                                     <a class="{!! Config::get('button.btn-send') !!}"

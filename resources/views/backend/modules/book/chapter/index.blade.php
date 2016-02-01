@@ -17,6 +17,15 @@
             $('#chapters_declined').DataTable({
                 "order": [[0, "asc"]]
             });
+            $("button[id^='delete-']").on('click', function () {
+                var btnId = $(this).attr('id');
+                var element = btnId.split("-", 2);
+                var btnId = element[1];
+                var action = $('#formDelete').attr('action');
+                var action = action.split('%', 2);
+                var action = (action[0] + btnId);
+                $('#formDelete').attr('action', action);
+            });
 
         });
     </script>
@@ -65,6 +74,7 @@
                                     <th>{{ trans('general.create_preview') }}</th>
                                     <th>{{ trans('general.all_previews') }}</th>
                                     <th>{{ trans('general.send_message') }}</th>
+                                    <th>{{ trans('general.delete') }}</th>
                                     <th class="hidden-xs">{{ trans('general.total_pages') }}</th>
                                 </tr>
                                 </thead>
@@ -112,14 +122,25 @@
                                                 {!! Config::get('button.icon-send') !!}
                                             </a>
                                         </td>
+                                        <td class="text-center">
+                                            <button type="button"
+                                                    class="{{ Config::get('button.btn-delete') }}"
+                                                    id="delete-{{$chapter->id}}"
+                                                    title="{{ trans('general.delete') }}"
+                                                    data-toggle="modal"
+                                                    data-target="#myModal">
+                                                {!! Config::get('button.icon-delete') !!}
+                                            </button>
+
+                                        </td>
                                         <td class="hidden-xs">
                                             {{ $chapter->total_pages }}
                                         </td>
 
                                     </tr>
-
+                                    @endforeach
                                     </tbody>
-                                @endforeach
+                                    @include('backend.partials._delete_modal',['action'=> 'Backend\ChaptersController@destroy'])
                             </table>
                         </div>
                     </div>

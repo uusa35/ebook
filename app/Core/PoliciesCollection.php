@@ -131,8 +131,11 @@ class PoliciesCollection
 
                 return true;
 
-            }
+            } elseif (Auth::id() === $ownerId->id) {
 
+                return true;
+            }
+            
             return false;
         }
 

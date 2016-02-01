@@ -45,11 +45,19 @@ class CreatePdf implements ShouldQueue
          * */
         $bodyForPdf = $this->cleanBody($event->chapter->body);
 
-        $bodyForPdf = '<div style="border: 1px dotted #d7d7d7 !important;">' . $bodyForPdf . '</div>';
+        $bodyForPdf = '
+        <style>
+        @import url("http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css");
+        html,body,div,h1,h2,h3,h4,span,p {
+        font-family: \'Droid Arabic Naskh\', sans-serif !important;
+        }
+        </style>
+        <div style="border: 1px dotted #d7d7d7 !important;">'
+            . $bodyForPdf .
+            '</div>';
 
         $this->pdf->setOption('encoding', 'UTF-8');
 
-        $this->pdf->set
 
         $this->pdf->generateFromHtml($bodyForPdf, $this->uploadPath . $event->chapter->url, ['encoding' => 'UTF-8', 'images' => true, 'enable-external-links' => true], true);
 
