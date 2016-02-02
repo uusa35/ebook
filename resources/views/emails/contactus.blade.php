@@ -227,11 +227,12 @@
                                                                         <h2 style="font-size: 20px;">{{ ucfirst(trans('general.contact_us')) }}</h2>
                                                                         <br>
 
-                                                                        <p>{{ $data['content'] }}.</p>
+                                                                        <p>Message : {{ $data['content'] }}.</p>
                                                                         <hr/>
                                                                         <p>
-                                                                            <small>{{ $data['name'] }}</small>
-                                                                            <small>from : {{ $data['email'] }}</small>
+                                                                            <p>Name : {{ $data['name'] }}</p>
+                                                                            <br>
+                                                                            <p>from : {{ $data['email'] }}</p>
                                                                         </p>
                                                                     </div>
                                                                 </div>
