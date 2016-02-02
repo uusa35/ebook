@@ -135,7 +135,7 @@ class PoliciesCollection
 
                 return true;
             }
-            
+
             return false;
         }
 

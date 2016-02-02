@@ -12,6 +12,7 @@
                         <img src="{{ asset('images/logo-150.png') }}" alt=""
                              class="img-responsive text-center col-lg-3 col-md-3 col-lg-offset-4 col-md-offset-4"/>
                     </div>
+                    <hr>
                     <address>
                         @if(trim($contactusInfo->company))
                             <strong>{{ $contactusInfo->company }}</strong><br>
@@ -43,7 +44,7 @@
                         @endif
                     </address>
 
-                    <div id="mapwrap" style="overflow: hidden;">
+                   {{-- <div id="mapwrap" style="overflow: hidden;">
                         <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
                         <div style='overflow:hidden;height:429px;width:495px;'>
                             <div id='gmap_canvas' style='height:429px;width:686px;'></div>
@@ -76,7 +77,7 @@
                             }
                             google.maps.event.addDomListener(window, 'load', init_map);</script>
 
-                    </div>
+                    </div>--}}
                     <!-- END CONTENT ITEM -->
 
                 </div>

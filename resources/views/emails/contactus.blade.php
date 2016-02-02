@@ -231,6 +231,7 @@
                                                                         <hr/>
                                                                         <p>
                                                                             <small>{{ $data['name'] }}</small>
+                                                                            <small>from : {{ $data['email'] }}</small>
                                                                         </p>
                                                                     </div>
                                                                 </div>
