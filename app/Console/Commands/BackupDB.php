@@ -46,10 +46,6 @@ class BackupDB extends Command
         //$extention = '--tab=' . storage_path('app/dbBackups/');
         $fileName = 'ebooktemp-' . Carbon::now()->format('d-m-Y');
         $command = "mysqldump -u [$username] -p[$password] [$dbName] > [$fileName.sql]";
-        \SSH::run(array(
-            'cd /var/www',
-            'git pull origin master',
-        ));
         $process = new Process($command);
         $process->start();
         while ($process->isRunning()) {
