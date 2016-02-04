@@ -12,6 +12,7 @@
         {{-- Most Recent--}}
         <div class="col-lg-12 col-xs-12 z-shadow-1">
             <h3>{{ trans('general.most_recent') }}</h3>
+            <hr>
         </div>
         <div class="row">
             @foreach($recentBooks as $book)

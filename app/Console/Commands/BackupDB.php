@@ -41,10 +41,15 @@ class BackupDB extends Command
     public function handle()
     {
         $username = env('DB_USERNAME');
+
         $password = env('DB_PASSWORD');
+
         $dbName = env('DB_DATABASE');
+
         $extention = storage_path('app/dbBackups/');
+
         $fileName = $extention . 'ebooktemp-' . Carbon::now()->format('d-m-Y');
+
         $command = "mysqldump -e -f -u $username -p$password $dbName > $fileName.sql";
 
         $process = new Process($command);
@@ -53,7 +58,7 @@ class BackupDB extends Command
 
         while ($process->isRunning()) {
 
-            $this->info('backup is running now');
+            $this->info('backup is running now ..');
 
         }
 

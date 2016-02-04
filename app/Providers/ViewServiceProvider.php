@@ -18,7 +18,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        if (is_null(Cache::get('fieldsCategories'))
+        /*if (is_null(Cache::get('fieldsCategories'))
             || is_null(Cache::get('contactusInfo'))
             || is_null(Cache::get('conditions'))
             || is_null(Cache::get('sliders'))
@@ -67,7 +67,7 @@ class ViewServiceProvider extends ServiceProvider
                 'conditions' => Cache::get('conditions'),
                 'sliders' => Cache::get('sliders')
             ]);
-        }
+        }*/
 
     }
 
