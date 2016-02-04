@@ -43,7 +43,7 @@ class BackupDB extends Command
         $username = env('DB_USERNAME');
         $password = env('DB_PASSWORD');
         $dbName = env('DB_DATABASE');
-        $fileName = '/var/www/ebooktemp/storage/app/dbBackups/ebooktemp-'.Carbon::now()->format('d-m-Y');
+        $fileName = 'storage/app/dbBackups/ebooktemp-'.Carbon::now()->format('d-m-Y');
         $command = "mysqldump -u [$username] -p[$password] [$dbName] > [$fileName.sql]";
         $process = new Process($command);
         $process->start();
