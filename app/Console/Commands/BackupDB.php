@@ -43,19 +43,22 @@ class BackupDB extends Command
         $username = env('DB_USERNAME');
         $password = env('DB_PASSWORD');
         $dbName = env('DB_DATABASE');
-        $extention = '--tab='.storage_path('app/dbBackups/');
-        $fileName = 'ebooktemp-'.Carbon::now()->format('d-m-Y');
+        $extention = '--tab=' . storage_path('app/dbBackups/');
+        $fileName = 'ebooktemp-' . Carbon::now()->format('d-m-Y');
         $command = "mysqldump -u [$username] -p[$password] [$dbName] $extention > [$fileName.sql]";
+        \SSH::run(array(
+            'cd /var/www',
+            'git pull origin master',
+        ));
         $process = new Process($command);
         $process->start();
-        while($process->isRunning()) {
+        while ($process->isRunning()) {
             \Log::info($command);
             $this->info('backup is running now');
         }
-        if($process->isSuccessful()) {
+        if ($process->isSuccessful()) {
             $this->info('backup is done');
-        }
-        else {
+        } else {
             $this->error('error occured !!' . $process->getErrorOutput());
         }
         //\Log::info( $command);

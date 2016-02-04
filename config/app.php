@@ -162,8 +162,6 @@ return [
         /*
          * my package development
          * */
-        /*Usama\ModulePack\ModulePackServiceProvider::class*/
-        /*Usama\CommentPack\CommentPackServiceProvider::class*/
         Usama\CommentPack\CommentPackServiceProvider::class
 
 
@@ -224,7 +222,6 @@ return [
         'PDF'      => 'Barryvdh\Snappy\Facades\SnappyPdf',
         'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
         'Gate' => 'Illuminate\Support\Facades\Gate',
-        /*'ModulePack' => Usama\ModulePack\Facade\ModulePack::class*/
         'CommentPack' => Usama\CommentPack\Facade\CommentPack::class
 
     ],
