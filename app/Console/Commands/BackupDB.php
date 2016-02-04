@@ -47,6 +47,15 @@ class BackupDB extends Command
         $command = "mysqldump -u [$username] -p[$password] [$dbName] > [$fileName.sql]";
         $process = new Process($command);
         $process->start();
+        while($process->isRunning()) {
+            $this->info('backup is running now');
+        }
+        if($process->isSuccessful()) {
+            $this->info('backup is done');
+        }
+        else {
+            $this->error('error occured !!' . $process->getErrorOutput());
+        }
         //\Log::info( $command);
     }
 }
