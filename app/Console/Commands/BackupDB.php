@@ -43,20 +43,28 @@ class BackupDB extends Command
         $username = env('DB_USERNAME');
         $password = env('DB_PASSWORD');
         $dbName = env('DB_DATABASE');
-        //$extention = '--tab=' . storage_path('app/dbBackups/');
-        $fileName = 'ebooktemp-' . Carbon::now()->format('d-m-Y');
-        $command = "mysqldump -u [$username] -p[$password] [$dbName] > [$fileName.sql]";
+        $extention = storage_path('app/dbBackups/');
+        $fileName = $extention . 'ebooktemp-' . Carbon::now()->format('d-m-Y');
+        $command = "mysqldump -e -f -u $username -p$password $dbName > $fileName.sql";
+
         $process = new Process($command);
+
         $process->start();
+
         while ($process->isRunning()) {
-            \Log::info($command);
+
             $this->info('backup is running now');
+
         }
+
         if ($process->isSuccessful()) {
+
             $this->info('backup is done');
+
         } else {
+
             $this->error('error occured !!' . $process->getErrorOutput());
         }
-        //\Log::info( $command);
+
     }
 }

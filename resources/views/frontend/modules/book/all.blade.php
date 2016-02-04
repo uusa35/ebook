@@ -38,7 +38,7 @@
                                             <h5 class="description-header"><i
                                                         class="fa fa-fw fa-calendar text-success"></i>
                                             </h5>
-                                            <span class="description-text">{{ $book->chapters->where('status','published')->first()->published_at->toDateString()}}</span>
+                                            <span class="description-text">{{ $book->created_at->toDateString()}}</span>
                                         </div>
                                         <!-- /.description-block -->
                                     </div>
