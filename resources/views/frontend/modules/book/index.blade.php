@@ -98,7 +98,7 @@
             <hr>
         </div>
         <div class="row">
-            <div class="col-lg-12 ">
+
                 @foreach($mostFavoriteBooks as $book)
 
                     <div class="col-lg-3 col-md-3 col-xs-10 col-md-offset-0 col-lg-offset-0 col-xs-offset-1">
@@ -169,7 +169,6 @@
                     </div>
 
                 @endforeach
-            </div>
         </div>
 
         <div class="row">

@@ -104,6 +104,9 @@ class BooksController extends PrimaryController
 
             $booksFavorited = $this->bookRepository->getMostFavorited(10);
 
+            return view('backend.modules.book.index',
+                compact('books', 'booksReported', 'booksFavorited', 'booksPreviews'));
+
         } elseif ($this->isAuthor()) {
 
             $books = $this->bookRepository->model
@@ -118,14 +121,10 @@ class BooksController extends PrimaryController
 
             $booksFavorited = $this->bookRepository->getUserFavorites(Auth::id());
 
-        }
-
-        if ($books) {
-
             return view('backend.modules.book.index',
                 compact('books', 'booksReported', 'booksFavorited', 'booksPreviews'));
-        }
 
+        }
         return redirect()->back()->with('error', trans('messages.info.no_books_found'));
 
     }
