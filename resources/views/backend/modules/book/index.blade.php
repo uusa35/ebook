@@ -160,7 +160,7 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <button type="button"
-                                                            class="{{ Config::get('button.btn-delete') }}"
+                                                            class="disabled {{ Config::get('button.btn-delete') }}"
                                                             id="delete-{{$book->id}}"
                                                             title="{{ trans('general.delete') }}"
                                                             data-toggle="modal"
@@ -178,7 +178,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                                        @include('backend.partials._delete_modal',['action'=> 'Backend\BooksController@destroy'])
+                                        @include('backend.partials._delete_modal',['action'=> 'Backend\BooksController@destroy' ])
                                         </tbody>
                                     </table>
                                 @else
