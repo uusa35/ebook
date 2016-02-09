@@ -10,5 +10,6 @@
 /packages
 .env
 .env.example
+.envDev
 .DS_Store*
 
