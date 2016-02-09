@@ -159,14 +159,14 @@
                                                     </a>
                                                 </td>
                                                 <td class="text-center">
-                                                    {{--<button type="button"
-                                                            class="disabled  {{ Config::get('button.btn-delete') }}"
+                                                    <button type="button"
+                                                            class="hidden {{ Config::get('button.btn-delete') }}"
                                                             id="delete-{{$book->id}}"
                                                             title="{{ trans('general.delete') }}"
                                                             data-toggle="modal"
                                                             data-target="#myModal">
                                                         {!! Config::get('button.icon-delete') !!}
-                                                    </button>--}}
+                                                    </button>
 
                                                 </td>
                                                 <td>
