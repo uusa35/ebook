@@ -13,9 +13,6 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\OnUserLogin' => [
-            'App\Listeners\CollectDataAfterLogin',
-        ],
         'App\Events\CreateChapter' => [
             'App\Listeners\CreatePdf',
             'App\Listeners\CalculateChapterPage'

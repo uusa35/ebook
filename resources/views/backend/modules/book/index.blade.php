@@ -32,10 +32,17 @@
                 var btnId = $(this).attr('id');
                 var element = btnId.split("-", 2);
                 var btnId = element[1];
-                var action = $('#formDelete').attr('action');
+                var action = $('#formDelete').attr('default');
                 var action = action.split('%', 2);
                 var action = (action[0] + btnId);
+                console.log('new action : ' + action);
                 $('#formDelete').attr('action', action);
+                //console.log(action);
+            });
+            $("div[id^='myModal']").on('hidden.bs.modal', function () {
+                //console.log('modal disappeared');
+                var defaultAction = $('#formDelete').attr('default');
+                //console.log(defaultAction);
             });
         });
     </script>
@@ -160,7 +167,7 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <button type="button"
-                                                            class="hidden {{ Config::get('button.btn-delete') }}"
+                                                            class="{{ Config::get('button.btn-delete') }}"
                                                             id="delete-{{$book->id}}"
                                                             title="{{ trans('general.delete') }}"
                                                             data-toggle="modal"
@@ -178,7 +185,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                                        @include('backend.partials._delete_modal',['action'=> 'Backend\BooksController@destroy' ])
+                                        @include('backend.partials._delete_modal',['action'=> 'Backend\BooksController@destroy'],['defaultAction' => action('Backend\BooksController@destroy')])
                                         </tbody>
                                     </table>
                                 @else

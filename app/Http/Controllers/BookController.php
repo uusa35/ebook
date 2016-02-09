@@ -59,7 +59,6 @@ class BookController extends PrimaryController
 
         // get 4 published and most favorite books for index
         $mostFavoriteBooks = $this->bookRepository->getMostFavorited(4);
-        //dd($mostFavoriteBooks);
 
         // get mostliked
         $mostLikedBooks = $this->bookRepository->getMostLiked(4);

@@ -43,8 +43,8 @@ class BookRepository extends PrimaryRepository
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published');
             })
-            ->with('usersFavorites', 'meta','chapters')
-            ->orderBy('books.created_at','DESC')
+            ->with('usersFavorites', 'meta', 'chapters')
+            ->orderBy('books.created_at', 'DESC')
             ->paginate($paginate);
     }
 
@@ -56,8 +56,8 @@ class BookRepository extends PrimaryRepository
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published');
             })
-            ->with('usersFavorites', 'meta','chapters')
-            ->orderBy('created_at','DESC')
+            ->with('usersFavorites', 'meta', 'chapters')
+            ->orderBy('created_at', 'DESC')
             ->paginate(8);
     }
 
@@ -68,9 +68,9 @@ class BookRepository extends PrimaryRepository
             ->where(['active' => '1', 'id' => $id])
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
-                    '=', 'published')->orderBy('chapters.published_at','DESC');
+                    '=', 'published')->orderBy('chapters.published_at', 'DESC');
             })
-            ->with('usersLikes', 'meta','chapters')
+            ->with('usersLikes', 'meta', 'chapters')
             ->first();
     }
 
@@ -81,9 +81,9 @@ class BookRepository extends PrimaryRepository
             ->where(['active' => '1', 'field_category_id' => $categoryId])
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
-                    '=', 'published')->orderBy('chapters.published_at','DESC');
+                    '=', 'published')->orderBy('chapters.published_at', 'DESC');
             })
-            ->with('usersFavorites', 'meta','chapters')
+            ->with('usersFavorites', 'meta', 'chapters')
             ->paginate(8);
     }
 
@@ -135,7 +135,7 @@ class BookRepository extends PrimaryRepository
             // no results for drafts -- only for published
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
-                    '=', 'published')->orderBy('chapters.published_at','DESC');
+                    '=', 'published')->orderBy('chapters.published_at', 'DESC');
             })
             ->where('active', '=', '1')
             // the first where will filter the whole query
@@ -169,6 +169,11 @@ class BookRepository extends PrimaryRepository
         return $favorites;
     }
 
+
+    public function getFavoritedBooksListForUser()
+    {
+        return $this->model->FavoritedBooksListForUser();
+    }
 
     /**
      *
@@ -231,16 +236,6 @@ class BookRepository extends PrimaryRepository
 
     public function getReportsAbuse($paginate = 10)
     {
-
-        /*return DB::table('book_report')
-
-            ->join('books','books.id','=','book_report.book_id')
-            ->select('books.*')
-            ->join('users','users.id','=','book_report.id')
-            ->select('users.*','books.*')
-            ->groupBy('book_id')// responsible to get the sum of books returned
-            ->orderBy('book_report.created_at', 'DESC')
-            ->paginate($paginate);*/
 
         return $this->model
             ->selectRaw('books.*')

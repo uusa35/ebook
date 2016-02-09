@@ -48,6 +48,10 @@ class Book extends PrimaryModel
         return $this->belongsToMany('App\Src\User\User', 'book_user');
     }
 
+    public function user_favorites() {
+        return $this->hasMany('App\Src\Favorite\Favorite');
+    }
+
     public function usersLikes()
     {
         return $this->belongsToMany('App\Src\User\User', 'book_likes');
@@ -114,19 +118,17 @@ class Book extends PrimaryModel
             ->paginate($paginate);
     }
 
-    /*public function userFavorites($userId)
-    {
-        return $this
-            ->selectRaw('books.*, count(*) as book_count')
-            ->with('meta','author','users')
-            ->whereExists(function ($query) {
-                $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status','=','published');
-            })
-            ->join('book_user', 'books.id', '=', 'book_user.book_id')
-            ->where(['books.active'=> '1','book_user.user_id' => $userId])
-            ->groupBy('book_id')// responsible to get the sum of books returned
-            ->orderBy('book_count', 'DESC')->get();
-    }*/
+    /**
+     * this function is responsible to fetch all books that has been favorited by a user to show in the control panel
+     * @return mixed
+     */
+    public function FavoritedBooksListForUser() {
+        return $this->selectRaw('books.*')
+            ->join('book_user','book_user.book_id', '=', 'books.id')
+            ->where('book_user.user_id',\Auth::id())
+            ->orderBy('books.created_at')
+            ->get();
+    }
 
 
     public function mostLiked($paginate = 8)

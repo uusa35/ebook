@@ -119,7 +119,7 @@ class BooksController extends PrimaryController
 
             $booksPreviews = $this->preview->allPreviewsForUser();
 
-            $booksFavorited = $this->bookRepository->getUserFavorites(Auth::id());
+            $booksFavorited = $this->bookRepository->getFavoritedBooksListForUser();
 
             return view('backend.modules.book.index',
                 compact('books', 'booksReported', 'booksFavorited', 'booksPreviews'));
@@ -491,3 +491,4 @@ class BooksController extends PrimaryController
 
 
 }
+

@@ -27,7 +27,7 @@ class BeforeAccessModule
         /*
          * Only cheds if there is index within the route
          * */
-        if (count($requestedRouteName) > 1 && in_array('index',$requestedRouteName,true)) {
+        if (count($requestedRouteName) > 1 && in_array('index', $requestedRouteName, true)) {
 
             Session::remove('module');
 
@@ -49,22 +49,19 @@ class BeforeAccessModule
 
         $moduleDecrypted = Crypt::decrypt($moduleEncrypted);
 
-        //\Cache::put('module', $moduleDecrypted, 120);
+        $role = Cache::get('role.' . Auth::id());
 
-        $role = Cache::get('role.'.Auth::id());
-
-        $array = Cache::get('Abilities.'.$role.'.'.Auth::id());
-
-        //dd($array);
-        //dd($moduleDecrypted);
+        $array = Cache::get('Abilities.' . $role . '.' . Auth::id());
 
         if (in_array($moduleDecrypted, $array, true)) {
 
             return Session::put('module', $moduleDecrypted);
+
+        } else {
+
+            return Auth::logout();
+
         }
 
-        return Auth::logout();
-
-        dd('out of scope from inside the nextRequest funciton');
     }
 }
