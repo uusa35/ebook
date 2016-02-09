@@ -28,6 +28,6 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('inspire')
                  ->hourly();
-        $schedule->command('backup:db')->weekly();
+        $schedule->command('backup:db')->dailyAt('24');
     }
 }

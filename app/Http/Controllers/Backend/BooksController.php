@@ -421,11 +421,11 @@ class BooksController extends PrimaryController
 
         if ($favoriteDelete) {
 
-            return redirect()->back()->with(['success', trans('general.success.deleted')]);
+            return redirect()->back()->with(['success', trans('messages.success.deleted')]);
 
         }
 
-        return redirect()->back()->with('error', trans('general.error.deleted'));
+        return redirect()->back()->with('error', trans('messages.error.deleted'));
 
     }
 

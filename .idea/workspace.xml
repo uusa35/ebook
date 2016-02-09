@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9681848a-2c07-43d6-bc7a-61ca3dae0de9" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Events/OnUserLogin.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Listeners/CollectDataAfterLogin.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Kernel.php" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Middleware/BeforeAccessModule.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/BeforeAccessModule.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Src/Book/Book.php" afterPath="$PROJECT_DIR$/app/Src/Book/Book.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Src/Book/BookRepository.php" afterPath="$PROJECT_DIR$/app/Src/Book/BookRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/book/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/book/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/partials/_delete_modal.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/partials/_delete_modal.blade.php" />
     </list>
     <ignored path="ebook.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,11 +35,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EventServiceProvider.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EventServiceProvider.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Providers/EventServiceProvider.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7444169">
-              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+            <state vertical-scroll-proportion="-16.875">
+              <caret line="28" column="7" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BooksController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="12.041667">
+              <caret line="427" column="64" selection-start-line="427" selection-start-column="64" selection-end-line="427" selection-end-column="64" />
+              <folding>
+                <element signature="e#48#79#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Kernel.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Console/Kernel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.53970224">
+              <caret line="30" column="55" selection-start-line="30" selection-start-column="55" selection-end-line="30" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -96,7 +109,6 @@
         <option value="$PROJECT_DIR$/app/Console/Commands/BackupDB.php" />
         <option value="$PROJECT_DIR$/app/Providers/ViewServiceProvider.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/partials/sidebar.blade.php" />
-        <option value="$PROJECT_DIR$/app/Console/Kernel.php" />
         <option value="$USER_HOME$/class-wpml-media-attachments-duplication.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/AfterUserLoginCollectData.php" />
         <option value="$PROJECT_DIR$/resources/views/frontend/modules/book/index.blade.php" />
@@ -108,11 +120,12 @@
         <option value="$PROJECT_DIR$/app/Src/User/UserRepository.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/BookController.php" />
         <option value="$PROJECT_DIR$/app/Src/Book/Book.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/modules/book/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Src/Favorite/Favorite.php" />
         <option value="$PROJECT_DIR$/app/Src/Book/BookRepository.php" />
         <option value="$PROJECT_DIR$/app/Src/User/User.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php" />
+        <option value="$PROJECT_DIR$/app/Console/Kernel.php" />
       </list>
     </option>
   </component>
@@ -522,7 +535,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../testApps/reactApp/strngo" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="SearchEverywhereHistoryKey" value="EventS&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Providers/EventServiceProvider.php&#10;User.&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/User/User.php&#10;BeforeA&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Middleware/BeforeAccessModule.php&#10;Favo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Favorite/Favorite.php&#10;index.bl&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/index.blade.php&#10;bookR&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/BookRepository.php&#10;Book&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/Book.php&#10;BookC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/BookController.php&#10;Book.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/Book.php&#10;Fav&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Favorite/Favorite.php&#10;User&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/User/User.php&#10;book.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/Book.php&#10;BooksC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/BooksController.php&#10;Favor&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Favorite/Favorite.php&#10;User.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/User/User.php&#10;Favori&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Favorite/Favorite.php&#10;routes&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/routes.php&#10;favorit&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Favorite/Favorite.php&#10;userRe&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/User/UserRepository.php&#10;_d&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/_delete_modal.blade.php&#10;index.blad&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/index.blade.php&#10;BooksCo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/BooksController.php&#10;Polic&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Core/PoliciesCollection.php&#10;chaptersC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;BeforeAc&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Middleware/BeforeAccessModule.php&#10;_delete_mod&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/_delete_modal.blade.php&#10;index.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/index.blade.php&#10;_mod&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/_delete_modal.blade.php&#10;BooksCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/BooksController.php&#10;.env&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/.env&#10;After&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Middleware/AfterUserLoginCollectData.php&#10;ker&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Console/Kernel.php&#10;Back&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Console/Commands/BackupDB.php&#10;header&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/partials/header.blade.php&#10;sidebar&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/sidebar.blade.php&#10;toolbar&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/toolbar.blade.php&#10;ViewService&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Providers/ViewServiceProvider.php&#10;index&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/book/index.blade.php&#10;backU&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Console/Commands/BackupDB.php&#10;database&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/database.php&#10;show.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/category/show.blade.php&#10;BookCo&#9;null&#9;null&#10;Categor&#9;null&#9;null&#10;all.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/book/all.blade.php&#10;_chapter_ch&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/buttons/_chapter_change_status_btn.blade.php&#10;backup&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Console/Commands/BackupDB.php&#10;Backup&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Console/Commands/BackupDB.php&#10;ChaptersCo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;_chapter_edi&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/buttons/_chapter_edit_btn.blade.php&#10;database.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/database.php" />
+    <property name="SearchEverywhereHistoryKey" value="BooksC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/BooksController.php&#10;EventS&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Providers/EventServiceProvider.php&#10;User.&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/User/User.php&#10;BeforeA&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Middleware/BeforeAccessModule.php&#10;Favo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Favorite/Favorite.php&#10;index.bl&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/index.blade.php&#10;bookR&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/BookRepository.php&#10;Book&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/Book.php&#10;BookC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/BookController.php&#10;Book.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/Book.php&#10;Fav&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Favorite/Favorite.php&#10;User&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/User/User.php&#10;book.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/Book.php&#10;Favor&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Favorite/Favorite.php&#10;User.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/User/User.php&#10;Favori&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Favorite/Favorite.php&#10;routes&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/routes.php&#10;favorit&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Favorite/Favorite.php&#10;userRe&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/User/UserRepository.php&#10;_d&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/_delete_modal.blade.php&#10;index.blad&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/index.blade.php&#10;BooksCo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/BooksController.php&#10;Polic&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Core/PoliciesCollection.php&#10;chaptersC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;BeforeAc&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Middleware/BeforeAccessModule.php&#10;_delete_mod&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/_delete_modal.blade.php&#10;index.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/index.blade.php&#10;_mod&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/_delete_modal.blade.php&#10;BooksCon&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/BooksController.php&#10;.env&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/.env&#10;After&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Middleware/AfterUserLoginCollectData.php&#10;ker&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Console/Kernel.php&#10;Back&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Console/Commands/BackupDB.php&#10;header&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/partials/header.blade.php&#10;sidebar&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/sidebar.blade.php&#10;toolbar&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/toolbar.blade.php&#10;ViewService&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Providers/ViewServiceProvider.php&#10;index&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/book/index.blade.php&#10;backU&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Console/Commands/BackupDB.php&#10;database&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/database.php&#10;show.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/category/show.blade.php&#10;BookCo&#9;null&#9;null&#10;Categor&#9;null&#9;null&#10;all.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/frontend/modules/book/all.blade.php&#10;_chapter_ch&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/buttons/_chapter_change_status_btn.blade.php&#10;backup&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Console/Commands/BackupDB.php&#10;Backup&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Console/Commands/BackupDB.php&#10;ChaptersCo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;_chapter_edi&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/buttons/_chapter_edit_btn.blade.php&#10;database.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/config/database.php" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
     <property name="LayoutCode.rearrangeEntriesBlade" value="false" />
     <property name="recentsLimit" value="5" />
@@ -738,13 +751,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/frontend/partials/header.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39179105">
-          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/backend/partials/sidebar.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.67164177">
@@ -798,13 +804,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14925373">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Console/Kernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4661017">
-          <caret line="23" column="65" selection-start-line="23" selection-start-column="65" selection-end-line="23" selection-end-column="65" />
         </state>
       </provider>
     </entry>
@@ -1016,16 +1015,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.708334">
-          <caret line="129" column="5" selection-start-line="129" selection-start-column="5" selection-end-line="129" selection-end-column="5" />
-          <folding>
-            <element signature="e#48#79#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/backend/modules/book/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-19.375">
@@ -1132,8 +1121,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Providers/EventServiceProvider.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7444169">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+        <state vertical-scroll-proportion="-16.875">
+          <caret line="28" column="7" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="12.041667">
+          <caret line="427" column="64" selection-start-line="427" selection-start-column="64" selection-end-line="427" selection-end-column="64" />
+          <folding>
+            <element signature="e#48#79#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Console/Scheduling/Event.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34243175">
+          <caret line="355" column="20" selection-start-line="355" selection-start-column="20" selection-end-line="355" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53970224">
+          <caret line="30" column="55" selection-start-line="30" selection-start-column="55" selection-end-line="30" selection-end-column="55" />
           <folding />
         </state>
       </provider>
