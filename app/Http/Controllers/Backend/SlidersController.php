@@ -107,15 +107,15 @@ class SlidersController extends PrimaryController
 
             $this->dispatch(new CreateImages($slider, $request, 'slide', ['slide'], ['', ''], ['1500', '500']));
 
+        }
+
+        if ($slider) {
+
             $sliders = $this->slider->all();
 
             \Cache::forget('sliders');
 
             \Cache::forever('sliders', $sliders);
-
-        }
-
-        if ($slider) {
 
             return redirect()->action('Backend\SlidersController@index')->with(['success' => trans('messages.sucess.update')]);
 
