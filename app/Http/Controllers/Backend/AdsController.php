@@ -100,6 +100,8 @@ class AdsController extends PrimaryController
 
             $allAds = $this->ad->all();
 
+            \Cache::forget('allAds');
+
             \Cache::forever('allAds', $allAds);
 
             return redirect()->action('Backend\AdsController@index')->with(['success' => trans('sucess.updated')]);

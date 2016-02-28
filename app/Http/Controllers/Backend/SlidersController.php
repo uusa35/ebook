@@ -109,6 +109,8 @@ class SlidersController extends PrimaryController
 
             $sliders = $this->slider->all();
 
+            \Cache::forget('sliders');
+
             \Cache::forever('sliders', $sliders);
 
         }

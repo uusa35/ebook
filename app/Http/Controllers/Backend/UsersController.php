@@ -222,6 +222,8 @@ class UsersController extends PrimaryController
 
             $instructions = DB::table('conditions')->first();
 
+            Cache::forget('conditions');
+
             Cache::forever('conditions', $instructions);
 
             return redirect()->back()->with('success', trans('messages.success.updated'));

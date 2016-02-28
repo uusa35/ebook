@@ -103,6 +103,8 @@ class FieldCategoriesController extends PrimaryController
 
         $fieldsCategories = $this->fieldCategory->all();
 
+        Cache::forget('fieldsCategories');
+
         Cache::forever('fieldsCategories', $fieldsCategories);
 
         return redirect()->back()->with('success', trans('messages.success.updated'));

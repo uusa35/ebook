@@ -34,8 +34,6 @@ class ContactUsController extends PrimaryController
 
         $contactInfo = $this->contactus->first();
 
-        \Cache::forever('contactusInfo', $contactInfo);
-
         return view('backend.modules.contactus.edit', ['contactInfo' => $contactInfo]);
     }
 
@@ -45,6 +43,12 @@ class ContactUsController extends PrimaryController
         $this->authorize('index',Session::get('module'));
 
         $this->contactus->update($request->except('_token'));
+
+        $contactInfo = $this->contactus->first();
+
+        \Cache::forget('contactusInfo');
+
+        \Cache::forever('contactusInfo', $contactInfo);
 
         return redirect()->back()->with('success', 'Contact Us Information has been updated');
 
