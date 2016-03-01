@@ -58,8 +58,8 @@ class LangCategoriesController extends PrimaryController
         $this->authorize('create','category_create');
 
         $this->langCategory->create($request->except('_token'));
-
-        return redirect()->back()->with('success', trans('messages.success.created'));
+        
+        return redirect()->action('Backend\LangCategoriesController@index')->with('success', trans('messages.success.created'));
     }
 
 
