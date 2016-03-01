@@ -28,7 +28,7 @@ class LangCategoriesController extends PrimaryController
 
         $this->getPageTitle('category.index');
 
-        $categories = $this->langCategory->take(2)->get();
+        $categories = $this->langCategory->all();
 
         return view('backend.modules.category.lang.index', ['categories' => $categories]);
     }

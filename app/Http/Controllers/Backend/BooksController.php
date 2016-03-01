@@ -144,7 +144,7 @@ class BooksController extends PrimaryController
 
         $fieldsCategories = $this->fieldCategory->all();
 
-        $langsCategories = $this->langCategory->limit(2);
+        $langsCategories = $this->langCategory->all();
 
         $getLang = App()->getLocale();
 

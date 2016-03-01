@@ -62,6 +62,8 @@ class FieldCategoriesController extends PrimaryController
 
         $fieldsCategories = $this->fieldCategory->all();
 
+        Cache::forget('fieldsCategories');
+
         Cache::forever('fieldsCategories', $fieldsCategories);
 
         return redirect()->action('Backend\FieldCategoriesController@index')->with('success', trans('messages.success.created'));
