@@ -12,4 +12,4 @@
 .env.example
 .envDev
 .DS_Store*
-
+npm-debug.log
