@@ -112,7 +112,7 @@ class BookController extends PrimaryController
     {
         // get all books by book ID
         $book = $this->bookRepository->model->where(['id' => $id])
-            ->with(['chapters', 'author', 'author.following',
+            ->with(['chapters', 'author', 'author.followingMe',
                 'comments' => function ($q) {
                     //$q->paginate(3);
                     $this->commentsRender = $q->latest()->paginate(3)->render();
