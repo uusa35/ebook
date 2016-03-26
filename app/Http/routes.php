@@ -312,6 +312,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth','collectData']], fu
         ['uses' => 'Backend\BooksController@getRemoveBookFromUserFavoriteList']);
 
     Route::get('/favorites', ['uses' => 'Backend\BooksController@index']);
+    Route::get('/most favorites', ['uses' => 'Backend\BooksController@index']);
 
     // Likes
     Route::get('/like/{userId}/{bookId}', ['uses' => 'Backend\BooksController@getCreateLikeBook']);

@@ -2,83 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9681848a-2c07-43d6-bc7a-61ca3dae0de9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/php.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/testing.sqlite" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/DashboardTest.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Http/Middleware/AfterUserLoginActiveCheck.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Http/Middleware/BeforeAccessModule.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ebook.iml" afterPath="$PROJECT_DIR$/.idea/ebook.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Core/PoliciesCollection.php" afterPath="$PROJECT_DIR$/app/Core/PoliciesCollection.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Core/PrimaryController.php" afterPath="$PROJECT_DIR$/app/Core/PrimaryController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Core/PrimaryRepository.php" afterPath="$PROJECT_DIR$/app/Core/PrimaryRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Core/UserTrait.php" afterPath="$PROJECT_DIR$/app/Core/UserTrait.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/AdsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/AdsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/BooksController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/ChaptersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/ChaptersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/ContactUsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/ContactUsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/DashboardController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/DashboardController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/FieldCategoriesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/FieldCategoriesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/LangCategoriesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/LangCategoriesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/MessagesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/MessagesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/NewsletterController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/NewsletterController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/PermissionsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/PermissionsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/PreviewsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/PreviewsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/RolesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/RolesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/SlidersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/SlidersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/UsersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Kernel.php" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Middleware/AfterUserLoginCollectData.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/AfterUserLoginCollectData.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/CreateBook.php" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateBook.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/CreateCategory.php" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateCategory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/CreateChapter.php" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateChapter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/CreateMessage.php" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateMessage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/CreateNewsletter.php" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateNewsletter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/CreatePreview.php" afterPath="$PROJECT_DIR$/app/Http/Requests/CreatePreview.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/CreateUser.php" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateUser.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/EditAd.php" afterPath="$PROJECT_DIR$/app/Http/Requests/EditAd.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/EditSlide.php" afterPath="$PROJECT_DIR$/app/Http/Requests/EditSlide.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateBook.php" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateBook.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateChapter.php" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateChapter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateUser.php" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateUser.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Jobs/CollectCacheDataForAuthUser.php" afterPath="$PROJECT_DIR$/app/Jobs/CollectCacheDataForAuthUser.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Jobs/UpdateUserAbilities.php" afterPath="$PROJECT_DIR$/app/Jobs/UpdateUserAbilities.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Src/Book/Book.php" afterPath="$PROJECT_DIR$/app/Src/Book/Book.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Src/Book/BookRepository.php" afterPath="$PROJECT_DIR$/app/Src/Book/BookRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Src/Permission/Permission.php" afterPath="$PROJECT_DIR$/app/Src/Permission/Permission.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Src/User/Follower/Follower.php" afterPath="$PROJECT_DIR$/app/Src/User/Follower/Follower.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/button.php" afterPath="$PROJECT_DIR$/config/button.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.php" afterPath="$PROJECT_DIR$/config/database.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/title.php" afterPath="$PROJECT_DIR$/config/title.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/factories/ModelFactory.php" afterPath="$PROJECT_DIR$/database/factories/ModelFactory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2014_10_28_180224_create_participants_table.php" afterPath="$PROJECT_DIR$/database/migrations/2014_10_28_180224_create_participants_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/PermissionRoleTableSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/PermissionRoleTableSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/phpunit.xml" afterPath="$PROJECT_DIR$/phpunit.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/ad/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/ad/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/book/chapter/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/book/chapter/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/book/chapter/preview/_create_preview_form.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/book/chapter/preview/_create_preview_form.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/book/chapter/preview/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/book/chapter/preview/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/book/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/book/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/book/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/book/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/messenger/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/messenger/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/newsletter/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/newsletter/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/permissions/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/permissions/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/roles/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/roles/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/slider/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/slider/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/user/dashboard/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/user/dashboard/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/modules/user/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/modules/user/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/partials/buttons/_chapter_change_status_btn.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/partials/buttons/_chapter_change_status_btn.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/backend/partials/sidebar.blade.php" afterPath="$PROJECT_DIR$/resources/views/backend/partials/sidebar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/frontend/modules/book/all.blade.php" afterPath="$PROJECT_DIR$/resources/views/frontend/modules/book/all.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/frontend/modules/category/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/frontend/modules/category/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/styles/stylesheets.blade.php" afterPath="$PROJECT_DIR$/resources/views/styles/stylesheets.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/ExampleTest.php" afterPath="$PROJECT_DIR$/tests/ExampleTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/TestCase.php" afterPath="$PROJECT_DIR$/tests/TestCase.php" />
     </list>
     <ignored path="ebook.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -120,10 +44,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PoliciesCollection.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PoliciesCollection.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Core/PoliciesCollection.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.61165047">
+            <state vertical-scroll-proportion="-18.666666">
               <caret line="34" column="37" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
               <folding />
             </state>
@@ -140,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.481482">
-              <caret line="218" column="32" selection-start-line="218" selection-start-column="32" selection-end-line="218" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.37621358">
+              <caret line="314" column="79" selection-start-line="314" selection-start-column="79" selection-end-line="314" selection-end-column="79" />
               <folding />
             </state>
           </provider>
@@ -255,10 +179,10 @@
         <option value="$PROJECT_DIR$/app/Src/Permission/Permission.php" />
         <option value="$PROJECT_DIR$/app/Jobs/CollectCacheDataForAuthUser.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/AfterUserLoginCollectData.php" />
-        <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/modules/slider/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Backend/SlidersController.php" />
         <option value="$PROJECT_DIR$/app/Core/PoliciesCollection.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
       </list>
     </option>
   </component>
@@ -484,7 +408,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../mytest" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="SearchEverywhereHistoryKey" value="Slider&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Controllers/Backend/SlidersController.php&#10;index.blade&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/resources/views/backend/modules/slider/index.blade.php&#10;Polic&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Core/PoliciesCollection.php&#10;routes.ph&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/routes.php&#10;SlidersC&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Controllers/Backend/SlidersController.php&#10;Permission&#9;null&#9;null&#10;VIEWSER&#9;null&#9;null&#10;Sliders&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Controllers/Backend/SlidersController.php&#10;routes&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/routes.php&#10;ContactusCon&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Controllers/Backend/ContactUsController.php&#10;Contact&#9;null&#9;null&#10;categ&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Controllers/CategoryController.php&#10;Catego&#9;null&#9;null&#10;BooksC&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Controllers/Backend/BooksController.php&#10;UsersC&#9;null&#9;null&#10;routes.php&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/routes.php&#10;POLIC&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Core/PoliciesCollection.php&#10;UserC&#9;null&#9;null&#10;Book.php&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Src/Book/Book.php&#10;User.php&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Src/User/User.php&#10;User&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Src/User/User.php&#10;Books&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/tests/phpunit/BooksTest.php&#10;database&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/config/database.php&#10;ModelFac&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/database/factories/ModelFactory.php&#10;ModelF&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/database/factories/ModelFactory.php&#10;Dashb&#9;null&#9;null&#10;Collect&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Middleware/AfterUserLoginCollectData.php&#10;database.php&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/config/database.php&#10;ChaptersC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;index.bla&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/index.blade.php&#10;_ch&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/buttons/_chapter_change_status_btn.blade.php&#10;_chapter&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/buttons/_chapter_edit_btn.blade.php&#10;_chapter_change&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/buttons/_chapter_change_status_btn.blade.php&#10;index.blade.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/chapter/index.blade.php&#10;index.blade.ph&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/newsletter/index.blade.php&#10;News&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/NewsletterController.php&#10;kerna&#9;null&#9;null&#10;booksC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/BooksController.php&#10;Chapter&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;Mes&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/MessagesController.php&#10;index&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/index.blade.php&#10;Dash&#9;null&#9;null&#10;sidebar&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/sidebar.blade.php&#10;index.&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/chapter/index.blade.php&#10;Chapters&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;BOOKSC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/BooksController.php&#10;Chapter.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/Chapter/Chapter.php&#10;ChaptersCo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;_chapter_chang&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/buttons/_chapter_change_status_btn.blade.php&#10;show.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/show.blade.php" />
+    <property name="SearchEverywhereHistoryKey" value="routes&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/routes.php&#10;Slider&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Controllers/Backend/SlidersController.php&#10;index.blade&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/resources/views/backend/modules/slider/index.blade.php&#10;Polic&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Core/PoliciesCollection.php&#10;routes.ph&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/routes.php&#10;SlidersC&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Controllers/Backend/SlidersController.php&#10;Permission&#9;null&#9;null&#10;VIEWSER&#9;null&#9;null&#10;Sliders&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Controllers/Backend/SlidersController.php&#10;ContactusCon&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Controllers/Backend/ContactUsController.php&#10;Contact&#9;null&#9;null&#10;categ&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Controllers/CategoryController.php&#10;Catego&#9;null&#9;null&#10;BooksC&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Controllers/Backend/BooksController.php&#10;UsersC&#9;null&#9;null&#10;routes.php&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/routes.php&#10;POLIC&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Core/PoliciesCollection.php&#10;UserC&#9;null&#9;null&#10;Book.php&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Src/Book/Book.php&#10;User.php&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Src/User/User.php&#10;User&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Src/User/User.php&#10;Books&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/tests/phpunit/BooksTest.php&#10;database&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/config/database.php&#10;ModelFac&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/database/factories/ModelFactory.php&#10;ModelF&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/database/factories/ModelFactory.php&#10;Dashb&#9;null&#9;null&#10;Collect&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/app/Http/Middleware/AfterUserLoginCollectData.php&#10;database.php&#9;FILE&#9;file:///Users/usamaahmed/home/Homestead/www/ebook/config/database.php&#10;ChaptersC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;index.bla&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/index.blade.php&#10;_ch&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/buttons/_chapter_change_status_btn.blade.php&#10;_chapter&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/buttons/_chapter_edit_btn.blade.php&#10;_chapter_change&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/buttons/_chapter_change_status_btn.blade.php&#10;index.blade.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/chapter/index.blade.php&#10;index.blade.ph&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/newsletter/index.blade.php&#10;News&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/NewsletterController.php&#10;kerna&#9;null&#9;null&#10;booksC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/BooksController.php&#10;Chapter&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;Mes&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/MessagesController.php&#10;index&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/index.blade.php&#10;Dash&#9;null&#9;null&#10;sidebar&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/sidebar.blade.php&#10;index.&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/chapter/index.blade.php&#10;Chapters&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;BOOKSC&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/BooksController.php&#10;Chapter.php&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Src/Book/Chapter/Chapter.php&#10;ChaptersCo&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/app/Http/Controllers/Backend/ChaptersController.php&#10;_chapter_chang&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/partials/buttons/_chapter_change_status_btn.blade.php&#10;show.blade&#9;FILE&#9;file:///Users/usamaahmed/Desktop/Homestead/www/ebook/resources/views/backend/modules/book/show.blade.php" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
     <property name="LayoutCode.rearrangeEntriesBlade" value="false" />
     <property name="recentsLimit" value="5" />
@@ -1104,14 +1028,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.481482">
-          <caret line="218" column="32" selection-start-line="218" selection-start-column="32" selection-end-line="218" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/backend/modules/slider/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.0">
@@ -1130,8 +1046,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Core/PoliciesCollection.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61165047">
+        <state vertical-scroll-proportion="-18.666666">
           <caret line="34" column="37" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37621358">
+          <caret line="314" column="79" selection-start-line="314" selection-start-column="79" selection-end-line="314" selection-end-column="79" />
           <folding />
         </state>
       </provider>
