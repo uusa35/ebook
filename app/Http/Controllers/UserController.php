@@ -41,10 +41,11 @@ class UserController extends PrimaryController
 
         $usersFollowingMe = $user->followingMe()->get();
 
-        $userFollowersList = $usersFollowingMe->Lists('user_id','user_id');
+        $userFollowersList = $usersFollowingMe->Lists('user_id','user_id')->toArray();
 
         $usersFollowingThem = $user->followingThem()->get();
-        $userFollowingList = $usersFollowingThem->Lists('follower_id','follower_id');
+
+        $userFollowingList = $usersFollowingThem->Lists('follower_id','follower_id')->toArray();
 
         // blocked list of the profile owner // WRONG
         //$userBlockedList = $user->blocked->Lists('blocked_id', 'blocked_id')->toArray();
