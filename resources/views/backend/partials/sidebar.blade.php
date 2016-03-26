@@ -8,31 +8,20 @@
         <div class="row">
             <div class="col-lg-6 col-lg-offset-3" style="margin-bottom: 6px;">
                 <a class="" href="{{ action('Backend\DashboardController@index') }}"><img
-                            class="center-block img-responsive img-thumbnail" src="{{ asset('images/logo-main.png') }}" alt=""/></a>
+                            class="center-block img-responsive img-thumbnail" src="{{ asset('images/logo-main.png') }}"
+                            alt=""/></a>
             </div>
         </div>
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu {{ session('pullClass') }}">
 
-            @if(Session::has('roles'))
-                @if(Cache::has('Abilities.Admin.'.Auth::id()))
-                    @foreach(Cache::get('Modules.Admin.'.Auth::id()) as $module)
-                        <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
-                                <span>{{ (trans('general.'.strtolower($module))) }}</span></a></li>
-                    @endforeach
-                @elseif(Cache::has('Abilities.Editor.'.Auth::id()))
-                    @foreach(Cache::get('Modules.Editor.'.Auth::id()) as $module)
-                        <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
-                                <span>{{ (trans('general.'.strtolower($module))) }}</span></a></li>
-                    @endforeach
-                @elseif(Cache::has('Abilities.Author.'.Auth::id()))
-                    @foreach(Cache::get('Modules.Author.'.Auth::id()) as $module)
-                        <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
-                                <span>{{ (trans('general.'.strtolower($module))) }}</span></a></li>
-                    @endforeach
-                @endif
-            @endif
 
+            @if(Cache::has('ROLE.'.Auth::id()))
+                @foreach(Cache::get('MODULES.'.Auth::id()) as $module)
+                    <li><a href="{{ URL::to('backend/'.strtolower($module)) }}"><i class="fa fa-folder"></i>
+                            <span>{{ (ucfirst(trans('general.'.strtolower($module)))) }}</span></a></li>
+                @endforeach
+            @endif
 
         </ul>
         <!-- /.sidebar-menu -->

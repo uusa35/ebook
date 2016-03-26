@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Core\PoliciesCollection;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Session;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -28,10 +27,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-
         $policy = new PoliciesCollection();
 
-        $gate->define('index', function ($user, $module) use ($policy) {
+      /*  $gate->define('index', function ($user,$module) use ($policy) {
 
             return $policy->index($module);
 
@@ -42,29 +40,29 @@ class AuthServiceProvider extends ServiceProvider
 
             return $policy->create($permission);
 
-        });
+        });*/
 
 
-        // book_edit
-        $gate->define('edit', function ($user, $element) use ($policy) {
+        // all permission
+        $gate->define('authorizeAccess', function ($user,$ownerId) use ($policy) {
 
-            return $policy->edit($element);
+            return $policy->authorizeAccess($ownerId);
 
         });
 
         // book_change
-        $gate->define('change', function ($user, $element) use ($policy) {
+        $gate->define('authorizeOwnership', function ($user, $module) use ($policy) {
 
-            return $policy->change($element);
-
-        });
-
-        // book_delete
-        $gate->define('delete', function ($user, $element) use ($policy) {
-
-            return $policy->delete($user, $element);
+            return $policy->authorizeOwnership($module);
 
         });
+
+        /*// book_delete
+        $gate->define('delete', function ($user, $permission) use ($policy) {
+
+            return $policy->delete($permission);
+
+        });*/
 
 
         // Admin
@@ -90,12 +88,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // Check for abstracted permission
-        $gate->define('checkAssignedPermission', function ($user, $permission) use ($policy) {
+        $gate->define('authorizeAccess', function ($user, $permission) use ($policy) {
 
-            return $policy->checkAssignedPermission($permission);
+            return $policy->authorizeAccess($permission);
 
         });
-
 
     }
 }

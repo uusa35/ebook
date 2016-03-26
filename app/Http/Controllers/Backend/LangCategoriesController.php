@@ -24,7 +24,7 @@ class LangCategoriesController extends PrimaryController
      */
     public function index()
     {
-        $this->authorize('index',Session::get('module'));
+        $this->authorize('authorizeAccess','categories');
 
         $this->getPageTitle('category.index');
 
@@ -42,7 +42,7 @@ class LangCategoriesController extends PrimaryController
     {
         $this->getPageTitle('category.create');
 
-        $this->authorize('create','category_create');
+        $this->authorize('authorizeAccess','category_create');
 
         return view('backend.modules.category.lang.create');
     }
@@ -55,7 +55,7 @@ class LangCategoriesController extends PrimaryController
      */
     public function store(CreateCategory $request)
     {
-        $this->authorize('create','category_create');
+        $this->authorize('authorizeAccess','category_create');
 
         $this->langCategory->create($request->except('_token'));
         
@@ -73,7 +73,7 @@ class LangCategoriesController extends PrimaryController
     {
         $this->getPageTitle('category.edit');
 
-        $this->authorize('checkAssignedPermission','category_edit');
+        $this->authorize('authorizeAccess','category_edit');
 
         $category = $this->langCategory->find($id);
 
@@ -89,7 +89,7 @@ class LangCategoriesController extends PrimaryController
      */
     public function update($id, Request $request)
     {
-        $this->authorize('checkAssignedPermission','category_edit');
+        $this->authorize('authorizeAccess','category_edit');
 
         $this->langCategory->where('id', '=', $id)->update([
             'name_ar' => $request->input('name_ar'),

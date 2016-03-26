@@ -39,7 +39,6 @@ class DatabaseSeeder extends Seeder
             Model::unguard();
 
             $this->cleanDatabase();
-            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
             $this->call('UsersTableSeeder');
             $this->call('EntrustTableSeeder');
             $this->call('BooksTableSeeder');

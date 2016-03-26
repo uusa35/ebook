@@ -24,26 +24,40 @@ class AfterUserLoginCollectData
      */
     public function handle($request, Closure $next)
     {
-        if (!Session::has('roles')) {
 
-            $this->dispatch(new CollectCacheDataForAuthUser($request));
 
-            Session::put('roles', \Crypt::encrypt(str_random(16)));
+        // IF THERE IS NO ROLE SESSION
 
-            return $next($request);
+        if(!Session::get('ROLE.'.Auth::id())) {
 
-        } elseif (Cache::get('role.' . Auth::id()) && Session::get('roles')) {
+            $activeUser = Auth::user()->active;
 
-            return $next($request);
+            if($activeUser) {
+                /*
+                 * GATHER ALL INFO ABOUT THE USER WITHIN THE CACHE
+                 * */
 
-        } else {
+                $this->dispatch(new CollectCacheDataForAuthUser($request));
+
+                return $next($request);
+            }
+
+            // IN CASE THE USER IS NOT ACTIVE
+
+            Cache::forget('ROLE.'.Auth::id());
+            Cache::forget('MODULES.'.Auth::id());
+            Cache::forget('ABILITIES.'.Auth::id());
 
             Session::flush();
 
             Auth::logout();
 
             return $next($request);
+
+
         }
+
+        return $next($request);
 
     }
 }

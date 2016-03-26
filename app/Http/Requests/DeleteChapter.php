@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
-class CreateChapter extends Request
+use App\Http\Requests\Request;
+
+class DeleteChapter extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -11,7 +13,7 @@ class CreateChapter extends Request
      */
     public function authorize()
     {
-        return $this->user()->can('authorizeAccess','chapter_create');
+        return $this->user()->can('authorizeAccess','chapter_delete');
     }
 
     /**
@@ -22,9 +24,7 @@ class CreateChapter extends Request
     public function rules()
     {
         return [
-            'title' => 'min:5|required|max:500',
-            'book_id' => 'required',
-            'body' => 'required|min:10',
+            //
         ];
     }
 }

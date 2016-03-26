@@ -11,7 +11,7 @@ class CreateMessage extends Request
      */
     public function authorize()
     {
-        return $this->user()->can('checkAssignedPermission','message_create');
+        return $this->user()->can('authorizeAccess','message_create');
     }
 
     /**

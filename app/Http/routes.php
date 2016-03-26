@@ -13,8 +13,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-
 /***************************************************************************************************
  * ▂ ▃ ▅ ▆ █ Frontend  █ ▆ ▅ ▃ ▂
  ***************************************************************************************************/
@@ -158,7 +156,7 @@ Route::group(['prefix' => 'frontend'], function () {
  * 4- for a user .. only followers he can control authentication for commenting on his own books.
  *
  * */
-Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collectData']], function () {
+Route::group(['prefix' => 'backend', 'middleware' => ['auth','collectData']], function () {
 
     /***************************************************************************************************
      * Dashboard Module
@@ -174,11 +172,12 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
 
 
     // Middleware RolePermissionRouteAccess
-    Route::group(['middleware' => 'access'], function () {
+    //Route::group(['middleware' => 'auth'], function () {
         /***************************************************************************************************
          * User Module
          ***************************************************************************************************/
         Route::resource('users', 'Backend\UsersController');
+        Route::get('/followers',['uses' => 'Backend\UsersController@showFollowers']);
 
         /***************************************************************************************************
          * Role Module
@@ -217,7 +216,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
          *                                          Sliders
          *
          ***************************************************************************************************/
-        Route::resource('slider', 'Backend\SlidersController');
+        Route::resource('sliders', 'Backend\SlidersController');
 
         /***************************************************************************************************
          *                                          Categories
@@ -241,7 +240,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
          ***************************************************************************************************/
         Route::resource('messages', 'Backend\MessagesController');
 
-    });
+   // });
 
 
     Route::post('users/active/{id}/{status}', 'Backend\UsersController@postChangeActiveStatus');
@@ -250,6 +249,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
     // change book activation status
     Route::get('/activation/{bookId}/{userId}/{activeStatus}', 'Backend\BooksController@getChangeActivationBook');
 
+    // change status of the chapter
     Route::get('/books/chapters/status/{chapterId}/{status}', [
         'as' => 'backend.books.chapters.status',
         'uses' => 'Backend\ChaptersController@getUpdateChapterStatus'
@@ -310,6 +310,8 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'active', 'collect
 
     Route::get('/favorite/remove/{userId}/{bookId}',
         ['uses' => 'Backend\BooksController@getRemoveBookFromUserFavoriteList']);
+
+    Route::get('/favorites', ['uses' => 'Backend\BooksController@index']);
 
     // Likes
     Route::get('/like/{userId}/{bookId}', ['uses' => 'Backend\BooksController@getCreateLikeBook']);

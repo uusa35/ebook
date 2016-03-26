@@ -32,17 +32,18 @@
                                     <span>{{ $slide->url }}</span>
                                 </td>
                                 <td>
-                                    <img  class="img-responsive" src="{{ asset('images/uploads/slide/thumbnail/'.$slide->slide) }}" alt="" style="width:10%; height:auto;"/>
+                                    <img class="img-responsive"
+                                         src="{{ asset('images/uploads/slide/thumbnail/'.$slide->slide) }}" alt=""
+                                         style="width:10%; height:auto;"/>
                                 </td>
                                 <td>
                                     <span> {{ $slide->created_at->format('Y-m-d') }} </span>
                                 </td>
                                 <td>
-                                    @can('checkAssignedPermission','slider_edit')
-                                    <a class="{{ Config::get('button.btn-edit') }}" href="{{ action('Backend\SlidersController@edit',$slide->id) }}">
+                                    <a class="{{ Config::get('button.btn-edit') }}"
+                                       href="{{ action('Backend\SlidersController@edit',$slide->id) }}">
                                         {!! Config::get('button.icon-edit') !!}
-                                        </a>
-                                    @endcan
+                                    </a>
                                 </td>
 
                             </tr>

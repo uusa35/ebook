@@ -20,6 +20,7 @@ use App\Src\Role\RoleRepository;
 use App\Src\User\UserRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -85,14 +86,11 @@ class BooksController extends PrimaryController
      */
     public function index()
     {
-
         $this->getPageTitle('book.index');
 
-        $this->authorize('index', Session::get('module'));
+        $this->authorize('authorizeAccess', 'books');
 
         if ($this->isAdmin() || $this->isEditor()) {
-
-            $this->authorize('checkAssignedPermission', 'book_delete');
 
             $books = $this->bookRepository->model
                 ->with('meta', 'author', 'chapters')
@@ -102,6 +100,7 @@ class BooksController extends PrimaryController
 
             $booksReported = $this->bookRepository->getReportsAbuse();
 
+            // will get the most favorited for the whole site for the admin use
             $booksFavorited = $this->bookRepository->getMostFavorited(10);
 
             return view('backend.modules.book.index',
@@ -111,7 +110,7 @@ class BooksController extends PrimaryController
 
             $books = $this->bookRepository->model
                 ->where(['author_id' => Auth::id()])
-                ->with('meta', 'author')
+                ->with('meta', 'author','chapters')
                 ->orderBy('created_at', 'ASC')
                 ->get();
 
@@ -125,6 +124,7 @@ class BooksController extends PrimaryController
                 compact('books', 'booksReported', 'booksFavorited', 'booksPreviews'));
 
         }
+
         return redirect()->back()->with('error', trans('messages.info.no_books_found'));
 
     }
@@ -140,7 +140,7 @@ class BooksController extends PrimaryController
 
         $this->getPageTitle('book.create');
 
-        $this->authorize('create', 'book_create');
+        $this->authorize('authorizeAccess','book_create');
 
         $fieldsCategories = $this->fieldCategory->all();
 
@@ -166,13 +166,14 @@ class BooksController extends PrimaryController
     {
 
         $this->getPageTitle('book.create');
-        // create a book record
 
+        // create a book record
         $book = $this->bookRepository->model->create($request->except('_token', 'cover'));
 
         if ($book) {
 
             $active = ($request->get('active')) ? 1 : 0;
+
             // create serial and update the book
             $serial = $this->createBookSerial($request->user()->id, $book->id);
 
@@ -186,7 +187,7 @@ class BooksController extends PrimaryController
 
             $book->save();
 
-            // create a cover
+            // create a
             $this->CreateBookCover($request, $book);
 
             return redirect()->action('Backend\ChaptersController@create', ['book_id' => $book->id])->with(['success' => trans('messages.success.created')]);
@@ -197,17 +198,19 @@ class BooksController extends PrimaryController
 
     /**
      * Display the specified resource.
-     *
+     * SHOW LIST OF CHAPTERS FOR THIS BOOKS
      * @param  int $id
      * @return Response
      */
     public function show($id)
     {
+
+
         $this->getPageTitle('book.show');
 
-        $book = $this->bookRepository->model->where('id', '=', $id)->with(['meta', 'chapters'])->first();
+        $book = $this->bookRepository->model->where('id', '=', $id)->with(['meta', 'chapters','chapters.book','author'])->first();
 
-        $this->authorize('change', $book->author_id);
+        $this->authorize('authorizeOwnership', $book->author_id);
 
         Session::put('book_id', $id);
 
@@ -220,8 +223,7 @@ class BooksController extends PrimaryController
 
 
         return view('backend.modules.book.show',
-            compact('book', 'allChapters', 'publishedChapters', 'draftedChapters', 'pendingChapters',
-                'declinedChapters'));
+            compact('book', 'allChapters', 'publishedChapters', 'draftedChapters', 'pendingChapters', 'declinedChapters'));
 
     }
 
@@ -233,11 +235,11 @@ class BooksController extends PrimaryController
      */
     public function edit($id)
     {
-        $book = $this->bookRepository->model->where('id', '=', $id)->with('meta')->first();
-
-        $this->authorize('edit', $book->author_id);
-
         $this->getPageTitle('book.edit');
+
+        $book = $this->bookRepository->model->where('id', '=', $id)->first();
+
+        $this->authorize('authorizeOwnership', $book->author_id);
 
         $fieldsCategories = $this->fieldCategory->all();
 
@@ -271,7 +273,7 @@ class BooksController extends PrimaryController
     {
         $book = $this->bookRepository->getById($id);
 
-        $this->authorize('edit', $book->author_id);
+        $this->authorize('authorizeOwnership', $book->author_id);
 
         if ($request->file('cover')) {
 
@@ -305,7 +307,7 @@ class BooksController extends PrimaryController
     {
         $book = $this->bookRepository->model->findOrFail(['id' => $id])->first();
 
-        $this->authorize('delete', $book->author_id);
+        $this->authorize('authorizeOwnership', $book->author_id);
 
         if ($book) {
 
@@ -334,7 +336,7 @@ class BooksController extends PrimaryController
     {
         $book = $this->bookRepository->getById($bookId);
 
-        $this->authorize('change', $book->author_id);
+        $this->authorize('authorizeOwnership', $book->author_id);
 
         $book->update([
             'status' => $status

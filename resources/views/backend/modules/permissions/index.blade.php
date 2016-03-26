@@ -13,7 +13,7 @@
 @section('content')
     {!! Breadcrumbs::render('permissions') !!}
 @section('titlebar')
-    @can('create','permission_create')
+    @can('authorizeAccess','permission_create')
     <a class="{{ Config::get('button.btn-create') }}"
        href="{{ action('Backend\PermissionsController@create') }}"><i
                 class="fa fa-x1 fa-plus icon-material-indigo-200"></i></a>

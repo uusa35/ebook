@@ -29,7 +29,7 @@ class NewsletterController extends PrimaryController
      */
     public function index()
     {
-        $this->authorize('index', 'Newsletter');
+        $this->authorize('authorizeAccess', 'newsletter');
 
         $subscribers = $this->newsLetter->all();
 
@@ -45,7 +45,7 @@ class NewsletterController extends PrimaryController
     {
         $this->getPageTitle('newsletter.create');
 
-        $this->authorize('checkAssignedPermission', 'newsletter_create');
+        $this->authorize('authorizeAccess', 'newsletter_create');
 
         return view('backend.modules.newsletter.create');
     }
@@ -121,6 +121,7 @@ class NewsletterController extends PrimaryController
      */
     public function destroy($id)
     {
+        $this->authorize('authorizeAccess', 'newsletter_delete');
         $subscriber = $this->newsLetter->where('id', $id)->first();
 
         $subscriber->delete();

@@ -124,6 +124,7 @@ class Book extends PrimaryModel
      */
     public function FavoritedBooksListForUser() {
         return $this->selectRaw('books.*')
+            ->with('author')
             ->join('book_user','book_user.book_id', '=', 'books.id')
             ->where('book_user.user_id',\Auth::id())
             ->orderBy('books.created_at')

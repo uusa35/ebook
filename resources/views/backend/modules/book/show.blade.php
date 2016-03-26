@@ -22,7 +22,6 @@
         {!! Config::get('button.icon-create') !!}
     </a>
     <span class="small-text"> {{ trans('general.chapter_create') }}</span>
-
     @endcan
 @endsection
 

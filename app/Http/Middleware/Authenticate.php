@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use App\Events\OnUserLogin;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class Authenticate
 {

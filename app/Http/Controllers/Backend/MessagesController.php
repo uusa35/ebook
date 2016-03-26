@@ -9,6 +9,7 @@ use Cmgmyr\Messenger\Models\Participant;
 use Cmgmyr\Messenger\Models\Thread as Thread;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
@@ -42,7 +43,9 @@ class MessagesController extends PrimaryController
 
         $this->getPageTitle('message.index');
 
-        $this->authorize('index', Session::get('module'));
+        //var_dump(Cache::get('MODULES.'.Auth::id()));
+
+        $this->authorize('authorizeAccess', 'messages');
 
         $currentUserId = Auth::user()->id;
 
@@ -92,7 +95,7 @@ class MessagesController extends PrimaryController
     public function create()
     {
 
-        $this->authorize('create', 'message_create');
+        $this->authorize('authorizeAccess', 'message_create');
 
         $this->getPageTitle('message.create');
 

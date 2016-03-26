@@ -23,7 +23,7 @@ class PermissionsController extends PrimaryController
     {
         $this->getPageTitle('permission.index');
 
-        $this->authorize('index', Session::get('module'));
+        $this->authorize('authorizeAccess', 'permissions');
 
         $permissions = $this->permissionRepository->model->all();
 
@@ -34,14 +34,14 @@ class PermissionsController extends PrimaryController
     {
         $this->getPageTitle('permission.create');
 
-        $this->authorize('create', 'permission_create');
+        $this->authorize('authorizeAccess', 'permission_create');
 
         return view('backend.modules.permissions.create');
     }
 
     public function store(Request $request)
     {
-        $this->authorize('create', 'permission_create');
+        $this->authorize('authorizeAccess', 'permission_create');
 
         $this->validate($request, array(
             'name' => 'required|unique:permissions,name',
@@ -64,7 +64,7 @@ class PermissionsController extends PrimaryController
 
         $this->isAdmin();
 
-        $this->authorize('checkAssignedPermission', 'permission_edit');
+        $this->authorize('authorizeAccess', 'permission_edit');
 
         $permission = $this->permissionRepository->model->find($id);
 
@@ -74,7 +74,7 @@ class PermissionsController extends PrimaryController
 
     public function update(Request $request, $id)
     {
-        $this->authorize('checkAssignedPermission', 'permission_edit');
+        $this->authorize('authorizeAccess', 'permission_edit');
 
         $this->validate($request, array('name' => 'required', 'display_name' => 'required'));
 
@@ -89,7 +89,7 @@ class PermissionsController extends PrimaryController
 
     public function destroy($id)
     {
-        $this->authorize('checkAssignedPermission', 'permission_delete');
+        $this->authorize('authorizeAccess', 'permission_delete');
 
         $permission = $this->permissionRepository->model->where('id', '=', $id)->first();
 

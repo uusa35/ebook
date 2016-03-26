@@ -12,7 +12,7 @@ class UpdateChapter extends Request
      */
     public function authorize()
     {
-        return $this->user()->can('checkAssignedPermission','chapter_change');
+        return $this->user()->can('authorizeAccess', 'chapter_change');
     }
 
     /**

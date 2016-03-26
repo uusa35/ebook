@@ -13,7 +13,7 @@
 @section('content')
     {!! Breadcrumbs::render('newsletter') !!}
 @section('titlebar')
-    @can('create','newsletter_create')
+    @can('authorizeAccess','newsletter_create')
     <a class="{{ Config::get('button.btn-create') }}"
        href="{{ action('Backend\NewsletterController@create') }}"><i
                 class="fa fa-x1 fa-plus icon-material-indigo-200"></i></a>
@@ -37,7 +37,7 @@
                 <td>{{ $subscriber->name }}</td>
                 <td>{{ $subscriber->email }}</td>
                 <td width="80">
-                    @can('checkAssignedPermission','newsletter_delete')
+                    @can('authorizeAccess','newsletter_delete')
                     {!! Form::open(['action' => ['Backend\NewsletterController@destroy', $subscriber->id], 'method'
                     => 'DELETE']) !!}
                     <button type="submit" class="{{ Config::get('button.btn-delete') }}"

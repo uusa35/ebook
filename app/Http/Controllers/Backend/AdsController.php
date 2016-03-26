@@ -26,7 +26,7 @@ class AdsController extends PrimaryController
     {
         $this->getPageTitle('ad.index');
 
-        $this->authorize('index', Session::get('module'));
+        $this->authorize('authorizeAccess', 'books');
 
         $allAdsStored = $this->ad->take(2)->get();
 
@@ -66,7 +66,7 @@ class AdsController extends PrimaryController
     {
         $this->getPageTitle('ad.edit');
 
-        $this->authorize('checkAssignedPermission', 'ad_edit');
+        $this->authorize('authorizeAccess', 'ad_edit');
 
         $ad = $this->ad->where(['id' => $id])->first();
 
@@ -81,7 +81,7 @@ class AdsController extends PrimaryController
      */
     public function update(Requests\EditAd $request)
     {
-        $this->authorize('checkAssignedPermission', 'ad_edit');
+        $this->authorize('authorizeAccess', 'ad_edit');
 
         $ad = $this->ad->where(['id' => $request->get('id')])->first();
 

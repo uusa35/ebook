@@ -13,7 +13,7 @@
 @section('content')
     {!! Breadcrumbs::render('roles') !!}
 @section('titlebar')
-    @can('create','role_create')
+    @can('authorizeAccess','role_create')
     <a href="{{ action('Backend\RolesController@create') }}" class="{{ Config::get('button.btn-create') }}"
        title="{{ trans('buttons.role_create') }}">
         <i class="fa fa-plus"></i></a>

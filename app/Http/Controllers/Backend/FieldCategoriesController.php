@@ -27,7 +27,7 @@ class FieldCategoriesController extends PrimaryController
     {
         $this->getPageTitle('category.index');
 
-        $this->authorize('index',Session::get('module'));
+        $this->authorize('authorizeAccess','categories');
 
         $categories = $this->fieldCategory->all();
 
@@ -43,7 +43,7 @@ class FieldCategoriesController extends PrimaryController
     {
         $this->getPageTitle('category.create');
 
-        $this->authorize('create','category_create');
+        $this->authorize('authorizeAccess','category_create');
 
         return view('backend.modules.category.field.create');
     }
@@ -56,7 +56,7 @@ class FieldCategoriesController extends PrimaryController
      */
     public function store(CreateCategory $request)
     {
-        $this->authorize('create','category_create');
+        $this->authorize('authorizeAccess','category_create');
 
         $this->fieldCategory->create($request->except('_token'));
 
@@ -79,7 +79,7 @@ class FieldCategoriesController extends PrimaryController
     {
         $this->getPageTitle('category.edit');
 
-        $this->authorize('checkAssignedPermission','category_edit');
+        $this->authorize('authorizeAccess','category_edit');
 
         $category = $this->fieldCategory->find($id);
 
@@ -96,7 +96,7 @@ class FieldCategoriesController extends PrimaryController
     public function update($id, Request $request)
     {
 
-        $this->authorize('checkAssignedPermission','category_edit');
+        $this->authorize('authorizeAccess','category_edit');
 
         $this->fieldCategory->where('id', '=', $id)->update([
             'name_ar' => $request->input('name_ar'),

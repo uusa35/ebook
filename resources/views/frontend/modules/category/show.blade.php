@@ -64,7 +64,10 @@
                                         {{ \Illuminate\Support\Str::words($book->title,4) }}
                                     </h5>
 
-                                    {{ \Illuminate\Support\Str::words($book->description,3) }}
+                                    <a href="{{ action('UserController@show',$book->author_id) }}">
+                                        {{ trans('general.author').' : '. $book->author->name }}
+                                    </a>
+                                    {{--{{ \Illuminate\Support\Str::words($book->description,3) }}--}}
 
                             </span>
                                 </a>

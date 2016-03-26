@@ -6,7 +6,9 @@ use App\Http\Requests\EditUser;
 use App\Http\Requests\UpdateUser;
 use App\Jobs\CreateImages;
 use App\Src\Role\RoleRepository;
+use App\Src\User\Follower\Follower;
 use App\Src\User\UserRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -21,15 +23,17 @@ class UsersController extends PrimaryController
      */
     protected $userRepository;
     protected $roleRepository;
+    protected $follower;
 
     /**
      * @param User $user
      * @param Role $role
      */
-    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository)
+    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository, Follower $follower)
     {
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
+        $this->follower = $follower;
     }
 
     /**
@@ -40,11 +44,9 @@ class UsersController extends PrimaryController
 
         $this->getPageTitle('user.index');
 
-        $this->authorize('index', Session::get('module'));
-
         // you can pass the ability name itself if the user is not author
         // if the user is an author you have to pass the OwnerId of the page itself.
-        $this->authorize('edit','user_edit');
+        $this->authorize('authorizeAccess','users');
 
         $users = $this->userRepository->model->with('roles')->get();
 
@@ -57,7 +59,7 @@ class UsersController extends PrimaryController
     public function create()
     {
 
-        $this->authorize('create', 'user_create');
+        $this->authorize('authorizeAccess', 'user_create');
 
         $this->getPageTitle('user.create');
 
@@ -79,7 +81,7 @@ class UsersController extends PrimaryController
 
         $user = $this->userRepository->model->create($request->all());
 
-        $this->authorize('create', 'user_create');
+        $this->authorize('authorizeAccess', 'user_create');
 
         if ($request->get('role')) {
 
@@ -103,13 +105,12 @@ class UsersController extends PrimaryController
     {
 
         $this->getPageTitle('user.edit');
-
-        Session::put('module', 'Users');
         /*
          * here you calling a method called "edit" inside the Core\PolciesCollection
          * takes the userId that trying to access this page then see the abilities of such user if he is ['owner' or 'admin']
          * */
-        $this->authorize('edit', $id);
+
+        $this->authorize('authorizeOwnership', $id);
 
         $user = $this->userRepository->model->with('roles')->find($id);
 
@@ -127,15 +128,15 @@ class UsersController extends PrimaryController
     public function update(UpdateUser $request, $id)
     {
 
+        $this->authorize('authorizeOwnership',$id);
+
         $user = $this->userRepository->model->find($id);
 
         $user->update($request->all());
 
         $user->save();
 
-        Session::put('module', 'Users');
-
-        $this->authorize('edit', $id);
+        $this->authorize('authorizeOwnership', $id);
 
 
         $user->fill($request->all());
@@ -172,7 +173,7 @@ class UsersController extends PrimaryController
      */
     public function destroy($id)
     {
-        $this->authorize('checkAssignedPermission', 'user_delete');
+        $this->authorize('authorizeAccess', 'user_delete');
 
         $this->userRepository->delete($id);
 
@@ -181,7 +182,7 @@ class UsersController extends PrimaryController
 
     public function postChangeActiveStatus($id, $status)
     {
-        $this->authorize('checkAssignedPermission', 'user_change');
+        $this->authorize('authorizeAccess', 'user_change');
 
         ($status == '0') ? $newStatus = 1 : $newStatus = 0;
 
@@ -200,7 +201,7 @@ class UsersController extends PrimaryController
     {
         $this->getPageTitle('user.edit');
 
-        $this->authorize('checkAssignedPermission', 'condition_edit');
+        $this->authorize('authorizeAccess', 'condition_edit');
 
         $terms = DB::table('conditions')->first();
 
@@ -209,7 +210,7 @@ class UsersController extends PrimaryController
 
     public function postEditConditions()
     {
-        $this->authorize('checkAssignedPermission', 'condition_edit');
+        $this->authorize('authorizeAccess', 'condition_edit');
 
         $instructions = DB::table('conditions')->update([
             'title_ar' => Input::get('title_ar'),
@@ -230,6 +231,20 @@ class UsersController extends PrimaryController
         }
 
         return redirect()->back()->with('error', trans('messages.error.updated'));
+    }
+
+    /*
+     * all users following (Me = current user)
+     * */
+    public function showFollowers() {
+
+        $this->getPageTitle('user.followers');
+
+        $usersFollowingMe = $this->follower->where('follower_id',Auth::id())->with('users')->first();
+
+        $users = $usersFollowingMe->users;
+
+        return view('backend.modules.user.index', compact('users'));
     }
 
 }

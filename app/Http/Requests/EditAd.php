@@ -11,7 +11,7 @@ class EditAd extends Request
      */
     public function authorize()
     {
-        return $this->user()->can('checkAssignedPermission','ad_edit');
+        return $this->user()->can('authorizeAccess','ad_edit');
     }
 
     /**

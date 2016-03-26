@@ -59,11 +59,12 @@ class ChaptersController extends PrimaryController
      */
     public function create()
     {
+
         $this->getPageTitle('chapter.create');
 
         $bookId = Input::get('book_id');
 
-        $this->authorize('create', 'chapter_create');
+        $this->authorize('authorizeAccess', 'chapter_create');
 
         return view('backend.modules.book.chapter.create', compact('bookId'));
     }
@@ -76,7 +77,6 @@ class ChaptersController extends PrimaryController
      */
     public function store(Requests\CreateChapter $request)
     {
-        $this->authorize('create', 'chapter_create');
 
         $chapter = $this->chapterRepository->model->create([
             'title' => $request->get('title'),
@@ -110,7 +110,7 @@ class ChaptersController extends PrimaryController
 
         $chapter = $this->chapterRepository->model->with('book')->where(['id' => $id])->first();
 
-        $this->authorize('edit', $chapter->book->author_id);
+        $this->authorize('authorizeOwnership', $chapter->book->author_id);
 
         if ($chapter) {
 
@@ -130,7 +130,7 @@ class ChaptersController extends PrimaryController
 
         $chapter = $this->chapterRepository->model->with('book')->where(['id' => $request->id])->first();
 
-        $this->authorize('edit', $chapter->book->author_id);
+        $this->authorize('authorizeOwnership', $chapter->book->author_id);
 
         $request->merge([
             'url' => rand(1, 9999) . str_random(10) . '.pdf',
@@ -149,11 +149,11 @@ class ChaptersController extends PrimaryController
     }
 
 
-    public function destroy($id)
+    public function destroy(Requests\DeleteChapter $request)
     {
-        $chapter = $this->chapterRepository->model->findOrFail(['id' => $id])->first();
+        $chapter = $this->chapterRepository->model->findOrFail(['id' => $request->get('id')])->with('book.author')->first();
 
-        $this->authorize('delete', $chapter->author_id);
+        $this->authorize('authorizeOwnership',$chapter->book->author);
 
         if ($chapter) {
 
@@ -215,17 +215,16 @@ class ChaptersController extends PrimaryController
      */
     public function getUpdateChapterStatus($chapterId, $status)
     {
-        $chapter = $this->chapterRepository->getWhereId($chapterId);
+
+        $chapter = $this->chapterRepository->model->where('id',$chapterId)->with('book')->first();
+
+        $this->authorize('authorizeOwnership',$chapter->book->author_id);
 
         $chapterUpdated = $chapter->update([
             'status' => $status
         ]);
 
-        $chapter = $chapter->with('book')->first();
-
-        $currentBook = $chapter->book;
-
-        //$firstChapterOfCurrentBook = $currentBook->chapters()->where('status', 'published')->orderBy('published_at','ASC')->first();
+        //$chapter = $chapter->with('book')->first();
 
         if ($chapterUpdated) {
 

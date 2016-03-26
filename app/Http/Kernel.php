@@ -31,7 +31,7 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'active' => \App\Http\Middleware\AfterUserLoginActiveCheck::class,
+        //'active' => \App\Http\Middleware\AfterUserLoginActiveCheck::class,
         'collectData' => \App\Http\Middleware\AfterUserLoginCollectData::class,
         'access' => \App\Http\Middleware\BeforeAccessModule::class,
     ];

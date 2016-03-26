@@ -23,9 +23,10 @@ class SlidersController extends PrimaryController
      */
     public function index()
     {
+
         $this->getPageTitle('slider.index');
 
-        $this->authorize('index', 'Slider');
+        $this->authorize('authorizeAccess', 'sliders');
 
         $allSlides = $this->slider->get();
 
@@ -73,9 +74,10 @@ class SlidersController extends PrimaryController
      */
     public function edit($id)
     {
+
         $this->getPageTitle('slider.edit');
 
-        $this->authorize('checkAssignedPermission', 'slider_edit');
+        $this->authorize('authorizeAccess', 'slider_edit');
 
         $slide = $this->slider->where('id', '=', $id)->first();
 
@@ -90,7 +92,7 @@ class SlidersController extends PrimaryController
      */
     public function update(Requests\EditSlide $request)
     {
-        $this->authorize('checkAssignedPermission', 'slider_edit');
+        $this->authorize('authorizeAccess', 'slider_edit');
 
         $slider = $this->slider->where('id', '=', $request->get('id'))->first();
 

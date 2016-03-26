@@ -14,13 +14,13 @@
             @foreach(Cache::get('counters') as $counterKey => $counterValue)
                 <div class="col-lg-3">
                     <!-- small box -->
-                    <div class="small-box well-material-blue-grey-A200">
+                    <div class="small-box well-material-blue-grey-A200" style="margin: 10px;">
                         <div class="inner">
                             <h3>{{ $counterValue }}</h3>
 
                             <p>{{ $counterValue.' '.$counterKey }} </p>
                         </div>
-                        <div class="icon">
+                        <div class="icon" style="right: 25px; top: 4px;">
                             {{--<i class="fa fa-fw fa-{{str_singular(strtolower($counterKey))}}"></i>--}}
                             {!! Config::get('button.icon-'.str_singular(strtolower($counterKey))) !!}
                         </div>

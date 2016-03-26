@@ -19,7 +19,7 @@ class ContactUsController extends PrimaryController
 
     public function index() {
 
-        $this->authorize('index',Session::get('module'));
+        $this->authorize('authorizeAccess','contactus');
 
         $contactInfo = $this->contactus->first();
 
@@ -28,7 +28,7 @@ class ContactUsController extends PrimaryController
 
     public function edit()
     {
-        $this->authorize('index',Session::get('module'));
+        $this->authorize('authorizeAccess','contactus');
 
         $this->getPageTitle('dashboard.contactus');
 
@@ -40,7 +40,7 @@ class ContactUsController extends PrimaryController
     public function update(Request $request)
     {
 
-        $this->authorize('index',Session::get('module'));
+        $this->authorize('authorizeAccess','contactus');
 
         $this->contactus->update($request->except('_token'));
 

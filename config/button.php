@@ -54,5 +54,7 @@ return [
     'icon-block' =>"<i class='fa fa-xs fa-ban'></i>",
     'icon-follow' =>"<i class='fa fa-xs fa-user-plus'></i>",
     'icon-unfollow' =>"<i class='fa fa-xs fa-user-times'></i>",
-    'icon-unblock' =>"<i class='fa fa-xs fa-male'></i>"
+    'icon-unblock' =>"<i class='fa fa-xs fa-male'></i>",
+    'icon-most favorite' => '<i class=\'fa fa-xs fa-gratipay\'></i>',
+    'icon-follower' => '<i class=\'fa fa-xs fa-user-plus\'></i>',
 ];

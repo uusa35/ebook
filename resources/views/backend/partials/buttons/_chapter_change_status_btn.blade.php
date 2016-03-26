@@ -1,5 +1,4 @@
 @if(Request::user()->isAuthorSession())
-    @can('change',$chapter->book->author_id)
     {{-- If the User just created the book --}}
     @if($chapter->status == 'pending')
         <a class="{!! Config::get('button.btn-drafted') !!}"
@@ -15,7 +14,7 @@
             {!! Config::get('button.icon-published') !!}
         </a>
     @endif
-    @endcan
+
 @elseif(Request::user()->isAdminSession() || Request::user()->isEditorSession())
     @if($chapter->status == 'pending')
         <a class="{!! Config::get('button.btn-drafted') !!}"

@@ -16,6 +16,7 @@ return [
         'index' => 'general.users',
         'create' => 'general.user_create',
         'edit' => 'general.user_edit',
+        'followers' => 'general.followers'
     ],
     'permission' => [
         'index' => 'general.permissions',

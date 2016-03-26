@@ -8,7 +8,7 @@
 
         {!! Breadcrumbs::render('preview_create') !!}
 
-        @can('create','preview_create')
+        @can('authorizeAccess','preview_create')
         {!! Form::open(['action'=>'Backend\PreviewsController@store','method'=>'post'],['class'=>'form-horizontal']) !!}
         @endcan
 

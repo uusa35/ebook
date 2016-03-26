@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 /**
@@ -27,7 +28,7 @@ trait UserTrait
 
     public function isAdmin()
     {
-        if (Cache::get('role.Admin.' . Auth::id()) === 'Admin') {
+        if (Cache::get('ROLE.' . Auth::id()) === 'Admin') {
 
             return true;
         }
@@ -37,18 +38,19 @@ trait UserTrait
 
     public function isAdminSession()
     {
-        if (Session::get('Admin')) {
+        if (Session::get('ROLE.' . Auth::id()) === 1) {
 
             return true;
 
         }
+
         return false;
     }
 
     public function isEditor()
     {
 
-        if (Cache::get('role.Editor.' . Auth::id()) === 'Editor') {
+        if (Cache::get('ROLE.' . Auth::id()) === 'Editor') {
 
             return true;
         }
@@ -56,23 +58,26 @@ trait UserTrait
         return false;
     }
 
+
     public function isEditorSession()
     {
-        if (Session::get('Editor')) {
+        if (Session::get('ROLE.' . Auth::id()) === 2) {
 
             return true;
 
         }
+
         return false;
     }
 
     public function isAuthorSession()
     {
-        if (Session::get('Author')) {
+        if (Session::get('ROLE.' . Auth::id()) === 3) {
 
             return true;
 
         }
+
         return false;
     }
 
@@ -80,7 +85,8 @@ trait UserTrait
     public function isAuthor()
     {
 
-        if (Cache::get('role.Author.' . Auth::id()) === 'Author') {
+        if (Cache::get('ROLE.' . Auth::id()) === 'Author') {
+
             return true;
         }
 
@@ -90,7 +96,7 @@ trait UserTrait
     public function getUserRole()
     {
 
-        return Cache::get('role.' . Auth::id());
+        return Cache::get('ROLE.' . Auth::id());
 
     }
 
@@ -98,6 +104,7 @@ trait UserTrait
     public function isOwner($userId)
     {
         if ($userId === Auth::id()) {
+
             return true;
         }
         return false;
@@ -105,11 +112,13 @@ trait UserTrait
 
     public function getUserAbilities()
     {
-        if (Session::get('roles')) {
 
-            return Cache::get('Abilities.' . $this->getUserRole() . '.' . Auth::id());
+        return Cache::get('ABILITIES.' . Auth::id());
 
-        }
-        return false;
+    }
+
+    public function getUserModules()
+    {
+        return Cache::get('MODULES.' . Auth::id());
     }
 }

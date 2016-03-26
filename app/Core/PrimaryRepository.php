@@ -25,7 +25,7 @@ class PrimaryRepository extends Model
 
     public function  getAll()
     {
-        return $this->model->all();
+        return $this->model->with('book.author')->all();
     }
 
     public function getById($id)

@@ -9,7 +9,7 @@ class CreateUser extends Request {
 	 */
 	public function authorize()
 	{
-		return $this->user()->can('checkAssignedPermission','user_create');
+		return $this->user()->can('authorizeAccess','user_create');
 	}
 
 	/**

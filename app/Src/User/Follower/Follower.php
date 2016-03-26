@@ -21,6 +21,10 @@ class Follower extends PrimaryModel
         return $this->belongsTo('App\Src\User\User','follower_id');
     }
 
+    public function users() {
+        return $this->hasMany('App\Src\User\User','id','user_id');
+    }
+
 
 
 }

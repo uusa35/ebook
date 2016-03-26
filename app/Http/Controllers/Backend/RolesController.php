@@ -1,13 +1,11 @@
 <?php namespace App\Http\Controllers\Backend;
 
 use App\Core\PrimaryController;
-use App\Jobs\UpdateUserAbilities;
+use App\Jobs\CollectCacheDataForAuthUser;
 use App\Src\Role\RoleRepository;
 use App\Src\Permission\PermissionRepository;
 use App\Src\User\UserRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class RolesController extends PrimaryController
@@ -35,7 +33,7 @@ class RolesController extends PrimaryController
         //$roles = $this->role->pushCriteria(new RolesWithPermissions())->paginate(10);
         $this->getPageTitle('role.index');
 
-        $this->authorize('index', Session::get('module'));
+        $this->authorize('authorizeAccess', 'roles');
 
         $roles = $this->roleRepository->model->with('users', 'perms')->get();
 
@@ -46,7 +44,7 @@ class RolesController extends PrimaryController
     {
         $this->getPageTitle('role.create');
 
-        $this->authorize('create', 'role_create');
+        $this->authorize('authorizeAccess', 'role_create');
 
         $permissions = $this->permissionRepository->model->all();
 
@@ -55,7 +53,7 @@ class RolesController extends PrimaryController
 
     public function store(Request $request)
     {
-        $this->authorize('create', 'role_create');
+        $this->authorize('authorizeAccess', 'role_create');
 
         $this->validate($request,
             array('name' => 'required|unique:roles,name', 'display_name' => 'required|unique:roles,display_name'));
@@ -72,7 +70,7 @@ class RolesController extends PrimaryController
     {
         $this->getPageTitle('role.edit');
 
-        $this->authorize('checkAssignedPermission', 'role_edit');
+        $this->authorize('authorizeAccess', 'role_edit');
 
         $role = $this->roleRepository->model->find($id);
 
@@ -86,7 +84,7 @@ class RolesController extends PrimaryController
     public function update(Request $request, $id)
     {
 
-        $this->authorize('checkAssignedPermission', 'role_edit');
+        $this->authorize('authorizeAccess', 'role_edit');
 
         $this->validate($request, array('name' => 'required', 'display_name' => 'required'));
 
@@ -96,7 +94,7 @@ class RolesController extends PrimaryController
 
         $role->savePermissions($request->get('perms'));
 
-        $this->dispatch(new UpdateUserAbilities($request));
+        $this->dispatch(new CollectCacheDataForAuthUser($request));
 
         return redirect()->action('Backend\RolesController@index')->with('success', trans('messages.success.updated'));
 
@@ -105,7 +103,7 @@ class RolesController extends PrimaryController
     public function destroy($id)
     {
 
-        $this->authorize('checkAssignedPermission', 'role_delete');
+        $this->authorize('authorizeAccess', 'role_delete');
 
         $role = $this->roleRepository->model->find($id);
 

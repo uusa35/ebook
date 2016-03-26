@@ -17,7 +17,7 @@ $factory->define('App\Src\User\User', function ($faker) {
     return [
         'name' => $faker->name,
         //'name_ar' => $faker->country,
-        'email' => "admin" . $faker->numberBetween(0, 50) . "@email.com",
+        'email' => "admin" . $faker->numberBetween(0, 9) . "@email.com",
         'active' => 1,
         'level' => 3,
         'password' => Hash::make("admin"),
@@ -30,17 +30,11 @@ $factory->define('App\Src\Book\Book', function ($faker) {
         'author_id' => App\Src\User\User::all()->random()->id,
         'serial' => $faker->numberBetween(10000000, 9999999999),
         'cover' => 'cover.png',
-        //'cover_en' => '',
-        //'cover_ar' => '',
         'views' => '',
         'field_category_id' => $faker->numberBetween(1, 10),
         'lang_category_id' => 1,
         'title' => $faker->word,
-        //'title_en' => $faker->word,
-        //'title_ar' => $faker->word,
         'description' => $faker->paragraph(2),
-        //'description_ar' => 'تفاصيل الموضوع تفاصيل الموضوع',
-        //'description_en' => $faker->paragraph(2),
         'active' => 1,
         'free' => 1,
     ];
@@ -91,11 +85,11 @@ $factory->define('App\Src\Book\BookMeta', function ($faker) {
     ];
 });
 
-/*$factory->define('App\Src\Role\Role', function ($faker) {
+$factory->define('App\Src\Role\Role', function ($faker) {
     return [
-        'name' => $faker->randomElement(['Admin', 'Editor', 'Subscriber'])
+        'name' => $faker->randomElement(['Admin'])
     ];
-});*/
+});
 
 $factory->define('App\Src\Advertisement\Advertisement', function ($faker) {
     return [

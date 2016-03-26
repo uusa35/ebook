@@ -36,7 +36,6 @@ class PreviewsController extends PrimaryController
         $previews = $this->preview->where(['chapter_id' => $chapterId])->with('chapter', 'book', 'users',
             'author')->get();
 
-
         return view('backend.modules.book.chapter.preview.index', compact('previews', 'chapterId'));
     }
 
@@ -51,7 +50,7 @@ class PreviewsController extends PrimaryController
 
         $chapter = $this->chapterRepository->model->where('id', $chapterId)->with('book')->first();
 
-        $this->authorize('edit',$chapter->book->author_id);
+        $this->authorize('authorizeOwnership',$chapter->book->author_id);
         /*
          * get all users without admin , editors and the author id of the book itself
          * */

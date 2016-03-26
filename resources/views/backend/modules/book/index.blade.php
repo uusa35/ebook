@@ -37,12 +37,9 @@
                 var action = (action[0] + btnId);
                 console.log('new action : ' + action);
                 $('#formDelete').attr('action', action);
-                //console.log(action);
             });
             $("div[id^='myModal']").on('hidden.bs.modal', function () {
-                //console.log('modal disappeared');
                 var defaultAction = $('#formDelete').attr('default');
-                //console.log(defaultAction);
             });
         });
     </script>
@@ -53,7 +50,7 @@
 
     <div class="panel-body">
         @section('titlebar')
-            @can('create','book_create')
+            @can('authorizeAccess','book_create')
             <a class="{{ Config::get('button.btn-create') }} hidden-xs"
                href="{{ action('Backend\BooksController@create') }}"
                title="{{ trans('general.book_create') }}">
@@ -145,7 +142,7 @@
                                                     </a>
                                                 </td>
                                                 <td class="text-center">
-                                                    @if(Auth::user()->isAdminSession() || Auth::user()->isEditorSession())
+                                                    @if(Auth::user()->isAdmin() || Auth::user()->isEditor())
                                                         <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}"
                                                            title="{{ ($book->active) ? trans('general.active') : trans('general.not_active') }}"
                                                            href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->author_id,$book->active]) }}">

@@ -17,7 +17,7 @@
     {!! Breadcrumbs::render('book_edit') !!}
 
 @section('titlebar')
-    @can('create','chapter_create')
+    @can('authorizeAccess','chapter_create')
     <a class="{{ Config::get('button.btn-create') }}"
        href="{{ action('Backend\PreviewsController@create', $chapter->id) }}"
        title="{{ trans('general.add') }}">

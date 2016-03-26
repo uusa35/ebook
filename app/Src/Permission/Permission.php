@@ -12,4 +12,9 @@ use Zizaco\Entrust\EntrustPermission;
 class Permission extends EntrustPermission
 {
     protected $fillable = ['name','level','display_name','description'];
+
+    public function getNameAttribute($value)
+    {
+        return strtolower($value);
+    }
 }

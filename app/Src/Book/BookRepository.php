@@ -43,7 +43,7 @@ class BookRepository extends PrimaryRepository
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published');
             })
-            ->with('usersFavorites', 'meta', 'chapters')
+            ->with('usersFavorites', 'meta', 'chapters','author')
             ->orderBy('books.created_at', 'DESC')
             ->paginate($paginate);
     }
@@ -56,7 +56,7 @@ class BookRepository extends PrimaryRepository
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published');
             })
-            ->with('usersFavorites', 'meta', 'chapters')
+            ->with('usersFavorites', 'meta', 'chapters','author')
             ->orderBy('created_at', 'DESC')
             ->paginate(8);
     }
@@ -70,7 +70,7 @@ class BookRepository extends PrimaryRepository
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published')->orderBy('chapters.published_at', 'DESC');
             })
-            ->with('usersLikes', 'meta', 'chapters')
+            ->with('usersLikes', 'meta', 'chapters','author')
             ->first();
     }
 
@@ -83,7 +83,7 @@ class BookRepository extends PrimaryRepository
                 $query->select(DB::raw(1))->from('chapters')->whereRaw('chapters.book_id = books.id')->where('chapters.status',
                     '=', 'published')->orderBy('chapters.published_at', 'DESC');
             })
-            ->with('usersFavorites', 'meta', 'chapters')
+            ->with('usersFavorites', 'meta', 'chapters','author')
             ->paginate(8);
     }
 
@@ -143,7 +143,7 @@ class BookRepository extends PrimaryRepository
             ->where('description', 'like', '%' . $searchItem . '%')
             ->orWhere('title', 'like', '%' . $searchItem . '%')
             ->orWhere('serial', 'like', '%' . $searchItem . '%')
-            ->with('meta', 'usersFavorites', 'chapters')
+            ->with('meta', 'usersFavorites', 'chapters','author')
             ->paginate(12);
 
     }

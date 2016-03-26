@@ -38,11 +38,11 @@
                                     <span> {{ $ad->created_at->format('Y-m-d') }} </span>
                                 </td>
                                 <td>
-                                    @can('edit',$ad->id)
+                                    @if(Request::user()->isAdminSession())
                                     <a class="{{ Config::get('button.btn-edit') }}" href="{{ action('Backend\AdsController@edit',$ad->id) }}">
                                         {!! Config::get('button.icon-edit') !!}
                                         </a>
-                                    @endcan
+                                    @endif
                                 </td>
 
                             </tr>
