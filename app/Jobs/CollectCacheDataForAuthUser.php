@@ -48,6 +48,7 @@ class CollectCacheDataForAuthUser extends Job implements SelfHandling
         $authUserRole = $this->user->roles()->first();
 
         Session::put('ROLE.' . Auth::id(), $authUserRole->id);
+        Session::put('ROLE.' .$authUserRole, md5($authUserRole->id));
 
         $modules = $this->userRoles->perms()->where('level','=','1');
 

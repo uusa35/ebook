@@ -38,7 +38,7 @@ trait UserTrait
 
     public function isAdminSession()
     {
-        if (Session::get('ROLE.' . Auth::id()) === 1) {
+        if (Session::get('ROLE.Admin')) {
 
             return true;
 
@@ -61,7 +61,7 @@ trait UserTrait
 
     public function isEditorSession()
     {
-        if (Session::get('ROLE.' . Auth::id()) === 2) {
+        if (Session::get('ROLE.Editor')) {
 
             return true;
 
@@ -72,7 +72,7 @@ trait UserTrait
 
     public function isAuthorSession()
     {
-        if (Session::get('ROLE.' . Auth::id()) === 3) {
+        if (Session::get('ROLE.Author')) {
 
             return true;
 

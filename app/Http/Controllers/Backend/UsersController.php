@@ -245,7 +245,7 @@ class UsersController extends PrimaryController
 
         $users = $user->followingMe()->get();
 
-        return view('backend.modules.user.index', compact('users'));
+        return view('backend.modules.user.following_me', compact('users'));
     }
 
 }

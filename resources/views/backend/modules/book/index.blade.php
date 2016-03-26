@@ -70,12 +70,12 @@
                     <li id="tab-2"><a href="#step2" data-toggle="tab"><i
                                     class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.favorite') }}
                         </a></li>
-                    @if(Request::user()->isAdmin())
+                    @if(Request::user()->isAdminSession())
                         <li id="tab-3"><a href="#step3" data-toggle="tab"><i
                                         class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.report') }}
                             </a></li>
                     @endif
-                    @if(Request::user()->isAuthor())
+                    @if(Request::user()->isAuthorSession())
                         <li id="tab-4"><a href="#step4" data-toggle="tab"><i
                                         class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.preview') }}
                             </a></li>
@@ -142,7 +142,7 @@
                                                     </a>
                                                 </td>
                                                 <td class="text-center">
-                                                    @if(Auth::user()->isAdmin() || Auth::user()->isEditor())
+                                                    @if(Auth::user()->isAdminSession() || Auth::user()->isEditorSession())
                                                         <a class="{{ ($book->active) ? Config::get('button.btn-active')  : Config::get('button.btn-not-active')}}"
                                                            title="{{ ($book->active) ? trans('general.active') : trans('general.not_active') }}"
                                                            href="{{ action('Backend\BooksController@getChangeActivationBook',[$book->id,$book->author_id,$book->active]) }}">
