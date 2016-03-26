@@ -69,7 +69,7 @@
                         <div class="col-lg-12 text-center">
                             <b>
                                 <a data-toggle="modal"
-                                   data-target="#followers"
+                                   data-target="#followingme"
                                    class="btn btn-material-light-blue-A400">
                                     {!! Config::get('button.icon-users') !!} |
                                     {{ trans('general.followers') }} | {{ count($usersFollowingMe) }}
@@ -83,6 +83,7 @@
 
                             <b>
                                 <a data-toggle="modal"
+                                   data-target="#followingthem"
                                    class="btn btn-material-lime-500">
                                     {!! Config::get('button.icon-users') !!} |
                                     {{ trans('general.following') }} | {{ count($usersFollowingThem) }}

@@ -1,4 +1,4 @@
-<div class="modal" id="followers">
+<div class="modal" id="followingthem">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
