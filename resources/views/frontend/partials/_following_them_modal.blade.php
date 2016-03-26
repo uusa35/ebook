@@ -9,10 +9,10 @@
                 <hr/>
 
 
-                @foreach($followers as $follower)
-                    <a href="{{ action('UserController@show',$follower->user->id) }}" class="btn btn-material-cyan-A700">
+                @foreach($usersFollowingThem as $follower)
+                    <a href="{{ action('UserController@show',$follower->id) }}" class="btn btn-material-cyan-A700">
                         {!! Config::get('button.icon-user') !!}
-                        {{ $follower->user->name }}
+                        {{ $follower->name }}
                     </a>
                 @endforeach
 

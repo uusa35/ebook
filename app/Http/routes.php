@@ -177,7 +177,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth','collectData']], fu
          * User Module
          ***************************************************************************************************/
         Route::resource('users', 'Backend\UsersController');
-        Route::get('/followers',['uses' => 'Backend\UsersController@showFollowers']);
+        Route::get('/followers',['uses' => 'Backend\UsersController@showFollowingMe']);
 
         /***************************************************************************************************
          * Role Module

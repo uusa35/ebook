@@ -54,20 +54,36 @@ class User extends PrimaryModel implements AuthenticatableContract, CanResetPass
         return $this->hasMany('App\Src\Book\Book', 'author_id');
     }
 
+//    /*
+//     * all users following this user
+//     * */
+//    public function followers()
+//    {
+//        return $this->hasMany('App\Src\User\Follower\Follower', 'user_id');
+//    }
+//
+//    /*
+//     * All users followed by this user
+//     * */
+//    public function following()
+//    {
+//        return $this->hasMany('App\Src\User\Follower\Follower', 'follower_id');
+//    }
+
     /*
-     * all users following this user
-     * */
-    public function followers()
+       * all users i follow
+       * */
+    public function followingThem()
     {
-        return $this->hasMany('App\Src\User\Follower\Follower', 'user_id');
+        return $this->belongsToMany('App\Src\User\User', 'user_followers','follower_id','user_id');
     }
 
     /*
-     * All users followed by this user
+     * All users following me
      * */
-    public function following()
+    public function followingMe()
     {
-        return $this->hasMany('App\Src\User\Follower\Follower', 'follower_id');
+        return $this->belongsToMany('App\Src\User\User', 'user_followers','user_id','follower_id');
     }
 
 

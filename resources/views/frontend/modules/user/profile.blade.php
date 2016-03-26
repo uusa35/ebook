@@ -72,10 +72,10 @@
                                    data-target="#followers"
                                    class="btn btn-material-light-blue-A400">
                                     {!! Config::get('button.icon-users') !!} |
-                                    {{ trans('general.followers') }} | {{ count($user->followers) }}
+                                    {{ trans('general.followers') }} | {{ count($usersFollowingMe) }}
                                 </a>
                             </b>
-                            @include('frontend.partials._followers_modal')
+                            @include('frontend.partials._following_me_modal')
                         </div>
                     </li>
                     <li class="list-group-item">
@@ -85,10 +85,10 @@
                                 <a data-toggle="modal"
                                    class="btn btn-material-lime-500">
                                     {!! Config::get('button.icon-users') !!} |
-                                    {{ trans('general.following') }} | {{ count($user->following) }}
+                                    {{ trans('general.following') }} | {{ count($usersFollowingThem) }}
                                 </a>
                             </b>
-                            @include('frontend.partials._followers_modal')
+                            @include('frontend.partials._following_them_modal')
                         </div>
                     </li>
                 </ul>

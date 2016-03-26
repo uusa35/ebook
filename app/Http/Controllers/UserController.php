@@ -30,15 +30,21 @@ class UserController extends PrimaryController
 
     public function show($id)
     {
-        $user = $this->userRepository->getWhereId($id)->with('followers', 'following', 'blocked')->first();
+        $user = $this->userRepository->getWhereId($id)->with('followingMe', 'followingThem', 'blocked')->first();
 
+//        // all users that are followed by the profile owner
+//        $userFollowersList = $user->followers->Lists('follower_id', 'follower_id')->toArray();
+//
+//        // all users that following the profile owner
+//
+//        $userFollowingList = $user->following->Lists('user_id', 'user_id')->toArray();
 
-        // all users that are followed by the profile owner
-        $userFollowersList = $user->followers->Lists('follower_id', 'follower_id')->toArray();
+        $usersFollowingMe = $user->followingMe()->get();
 
-        // all users that following the profile owner
+        $userFollowersList = $usersFollowingMe->Lists('user_id','user_id');
 
-        $userFollowingList = $user->following->Lists('user_id', 'user_id')->toArray();
+        $usersFollowingThem = $user->followingThem()->get();
+        $userFollowingList = $usersFollowingThem->Lists('follower_id','follower_id');
 
         // blocked list of the profile owner // WRONG
         //$userBlockedList = $user->blocked->Lists('blocked_id', 'blocked_id')->toArray();
@@ -52,7 +58,7 @@ class UserController extends PrimaryController
 
         }
 
-        $followers = $this->follower->where(['user_id' => $user->id])->with('user')->get();
+        //$followers = $this->follower->where(['user_id' => $user->id])->with('user')->get();
 
         $userBooks = $user->books()
             ->whereExists(function ($query) {
@@ -62,7 +68,7 @@ class UserController extends PrimaryController
             ->paginate(5);
 
         return view('frontend.modules.user.profile',
-            compact('user', 'userBooks', 'followers', 'userFollowersList', 'userBlockedList', 'userFollowingList', 'userAuthenticatedBlockedList'));
+            compact('user', 'userBooks','usersFollowingMe', 'usersFollowingThem','userFollowersList', 'userBlockedList', 'userFollowingList', 'userAuthenticatedBlockedList'));
     }
 
     public function getUserRole()

@@ -236,13 +236,14 @@ class UsersController extends PrimaryController
     /*
      * all users following (Me = current user)
      * */
-    public function showFollowers() {
+    public function showFollowingMe() {
 
         $this->getPageTitle('user.followers');
 
-        $usersFollowingMe = $this->follower->where('follower_id',Auth::id())->with('users')->first();
+        //$user = $this->follower->where('follower_id',Auth::id())->with('users')->first();
+        $user = $this->userRepository->model->whereId(Auth::id())->first();
 
-        $users = $usersFollowingMe->users;
+        $users = $user->followingMe()->get();
 
         return view('backend.modules.user.index', compact('users'));
     }
