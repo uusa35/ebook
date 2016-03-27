@@ -47,7 +47,7 @@ class PrimaryController extends Controller
 
         ];
 
-        Cache::put('counters',$counters,120);
+        Cache::put('counters.'.Auth::id(),$counters,120);
 
     }
 
@@ -63,7 +63,7 @@ class PrimaryController extends Controller
             'messages' => DB::table('messages')->where(['user_id'=> Auth::id()])->count('id'),
         ];
 
-        Cache::put('counters',$counters,120);
+        Cache::put('counters.'.Auth::id(),$counters,120);
 
     }
 }
