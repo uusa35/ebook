@@ -41,7 +41,7 @@ class PrimaryController extends Controller
             'books' => DB::table('books')->count('id'),
             'Most favorites' => DB::table('book_user')->count('id'),
             'favorites' => DB::table('book_user')->where('user_id',Auth::id())->count('id'),
-            'followers' => DB::table('user_followers')->where('follower_id','=', Auth::id())->count('id'),
+            'followers' => DB::table('user_followers')->where('user_id','=', Auth::id())->count('id'),
             'messages' => DB::table('messages')->count('id'),
             'categories' => DB::table('fields_categories')->count('id'),
 
