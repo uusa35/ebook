@@ -10,8 +10,8 @@
 
 
     <div class="row">
-        @if(!is_null(Cache::get('counters')))
-            @foreach(Cache::get('counters') as $counterKey => $counterValue)
+        @if(!is_null(Cache::get('counters.'.Auth::id())))
+            @foreach(Cache::get('counters.'.Auth::id()) as $counterKey => $counterValue)
                 <div class="col-lg-3">
                     <!-- small box -->
                     <div class="small-box well-material-blue-grey-A200" style="margin: 10px;">
