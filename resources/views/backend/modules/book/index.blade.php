@@ -76,8 +76,8 @@
                             </a></li>
                     @endif
                     @if(Request::user()->isAuthorSession())
-                        <li id="tab-4"><a href="#step4" data-toggle="tab"><i
-                                        class="fa fa-aw fa-exclamation-triangle"></i>&nbsp;{{ trans('general.preview') }}
+                        <li id="tab-4" class="hidden"><a href="#step4" data-toggle="tab"><i
+                                        class="fa fa-aw fa-exclamation-triangle hidden"></i>&nbsp;{{ trans('general.preview') }}
                             </a></li>
                     @endif
                 </ul>
