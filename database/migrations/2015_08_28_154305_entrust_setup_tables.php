@@ -25,12 +25,11 @@ class EntrustSetupTables extends Migration
         Schema::create('role_user', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->integer('role_id')->unsigned();
-
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')
                 ->onUpdate('cascade')->onDelete('cascade');
-
+            // they are both unique , it can not be repeated 1 - 1
             $table->primary(['user_id', 'role_id']);
         });
 
@@ -54,6 +53,7 @@ class EntrustSetupTables extends Migration
             $table->foreign('role_id')->references('id')->on('roles')
                 ->onUpdate('cascade')->onDelete('cascade');
 
+            // can not be repeated
             $table->primary(['permission_id', 'role_id']);
         });
     }

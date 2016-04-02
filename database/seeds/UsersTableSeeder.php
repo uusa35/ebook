@@ -8,9 +8,8 @@ class UsersTableSeeder extends Seeder {
 
 	public function run()
 	{
-		//DB::table('users')->truncate();
 
-		factory('App\Src\User\User',20)->create();
+		factory('App\Src\User\User',3)->create();
 
 
 	}

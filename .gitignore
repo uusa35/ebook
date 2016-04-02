@@ -13,3 +13,5 @@
 .envDev
 .DS_Store*
 npm-debug.log
+/storage/*.sqlite
+.vagrant
