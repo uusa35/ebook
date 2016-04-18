@@ -10,7 +10,7 @@
 
     <div class="row">
         {{-- Most Recent--}}
-        <div class="col-lg-12 col-xs-12 z-shadow-1">
+        <div class="col-lg-12 col-xs-12 z-shadow-1 pull-left">
             <h3>{{ trans('general.most_recent') }}</h3>
             <hr>
         </div>

@@ -71,8 +71,8 @@
                                     <th>{{ trans('general.published_at') }}</th>
                                     <th>{{ trans('general.edit') }}</th>
                                     <th>{{ trans('general.view') }}</th>
-                                    <th>{{ trans('general.create_preview') }}</th>
-                                    <th>{{ trans('general.all_previews') }}</th>
+                                    {{--<th>{{ trans('general.create_preview') }}</th>--}}
+                                    {{--<th>{{ trans('general.all_previews') }}</th>--}}
                                     <th>{{ trans('general.send_message') }}</th>
                                     <th>{{ trans('general.delete') }}</th>
                                     <th class="hidden-xs">{{ trans('general.total_pages') }}</th>
@@ -101,7 +101,7 @@
                                                 {!! Config::get('button.icon-view') !!}
                                             </a>
                                         </td>
-                                        <td>
+                                        {{--<td>
                                             <a class="{!! Config::get('button.btn-create') !!}"
                                                title="{{ trans('general.create_preview') }}"
                                                href="{{ action('Backend\PreviewsController@create',$chapter->id) }}">
@@ -114,7 +114,7 @@
                                                href="{{ action('Backend\PreviewsController@index',$chapter->id) }}">
                                                 {!! Config::get('button.icon-index') !!}
                                             </a>
-                                        </td>
+                                        </td>--}}
                                         <td>
                                             <a class="{!! Config::get('button.btn-send') !!}"
                                                href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book->author_id, 'chapter_id' => $chapter->id]) }}"
@@ -160,8 +160,8 @@
                                         <th>{{ trans('general.change_status') }}</th>
                                         <th>{{ trans('general.edit') }}</th>
                                         <th>{{ trans('general.view') }}</th>
-                                        <th>{{ trans('general.create_preview') }}</th>
-                                        <th>{{ trans('general.all_previews') }}</th>
+                                        {{--<th>{{ trans('general.create_preview') }}</th>--}}
+                                        {{--<th>{{ trans('general.all_previews') }}</th>--}}
                                         <th>{{ trans('general.send_message') }}</th>
                                         <th class="hidden-xs">{{ trans('general.total_pages') }}</th>
                                     </tr>
@@ -186,7 +186,7 @@
                                                     {!! Config::get('button.icon-view') !!}
                                                 </a>
                                             </td>
-                                            <td>
+                                            {{--<td>
                                                 <a class="{!! Config::get('button.btn-create') !!}"
                                                    title="{{ trans('general.create_preview') }}"
                                                    href="{{ action('Backend\PreviewsController@create',[$chapter->id]) }}">
@@ -199,7 +199,7 @@
                                                    href="{{ action('Backend\PreviewsController@index',[$chapter->id]) }}">
                                                     {!! Config::get('button.icon-index') !!}
                                                 </a>
-                                            </td>
+                                            </td>--}}
                                             <td>
                                                 <a class="{!! Config::get('button.btn-send') !!}"
                                                    href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
@@ -243,8 +243,8 @@
                                         <th>{{ trans('general.change_status') }}</th>
                                         <th>{{ trans('general.edit') }}</th>
                                         <th>{{ trans('general.view') }}</th>
-                                        <th>{{ trans('general.create_preview') }}</th>
-                                        <th>{{ trans('general.all_previews') }}</th>
+                                        {{--<th>{{ trans('general.create_preview') }}</th>--}}
+                                        {{--<th>{{ trans('general.all_previews') }}</th>--}}
                                         <th>{{ trans('general.send_message') }}</th>
                                         <th>{{ trans('general.total_pages') }}</th>
                                     </tr>
@@ -269,7 +269,7 @@
                                                     {!! Config::get('button.icon-view') !!}
                                                 </a>
                                             </td>
-                                            <td>
+                                           {{-- <td>
                                                 <a class="{!! Config::get('button.btn-create') !!}"
                                                    title="{{ trans('general.create_preview') }}"
                                                    href="{{ action('Backend\PreviewsController@create',[$chapter->id]) }}">
@@ -282,7 +282,7 @@
                                                    href="{{ action('Backend\PreviewsController@index',[$chapter->id]) }}">
                                                     {!! Config::get('button.icon-view') !!}
                                                 </a>
-                                            </td>
+                                            </td>--}}
                                             <td>
                                                 <a class="{!! Config::get('button.btn-send') !!}"
                                                    href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
@@ -324,8 +324,8 @@
                                             <th>{{ trans('general.change_status') }}</th>
                                             <th>{{ trans('general.edit') }}</th>
                                             <th>{{ trans('general.view') }}</th>
-                                            <th>{{ trans('general.create_preview') }}</th>
-                                            <th>{{ trans('general.all_previews') }}</th>
+                                            {{--<th>{{ trans('general.create_preview') }}</th>--}}
+                                            {{--<th>{{ trans('general.all_previews') }}</th>--}}
                                             <th>{{ trans('general.send_message') }}</th>
                                             <th>{{ trans('general.total_pages') }}</th>
                                         </tr>
@@ -350,7 +350,7 @@
                                                         {!! Config::get('button.icon-view') !!}
                                                     </a>
                                                 </td>
-                                                <td>
+                                               {{-- <td>
                                                     <a class="{!! Config::get('button.btn-create') !!}"
                                                        title="{{ trans('general.create_preview') }}"
                                                        href="{{ action('Backend\PreviewsController@create',[$chapter->id]) }}">
@@ -363,7 +363,7 @@
                                                        href="{{ action('Backend\PreviewsController@index',[$chapter->id]) }}">
                                                         {!! Config::get('button.icon-view') !!}
                                                     </a>
-                                                </td>
+                                                </td>--}}
                                                 <td>
                                                     <a class="{!! Config::get('button.btn-send') !!}"
                                                        href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
@@ -406,8 +406,8 @@
                                                 <th>{{ trans('general.change_status') }}</th>
                                                 <th>{{ trans('general.edit') }}</th>
                                                 <th>{{ trans('general.view') }}</th>
-                                                <th>{{ trans('general.create_preview') }}</th>
-                                                <th>{{ trans('general.all_previews') }}</th>
+                                                {{--<th>{{ trans('general.create_preview') }}</th>--}}
+                                                {{--<th>{{ trans('general.all_previews') }}</th>--}}
                                                 <th>{{ trans('general.send_message') }}</th>
                                                 <th>{{ trans('general.total_pages') }}</th>
                                             </tr>
@@ -432,7 +432,7 @@
                                                             {!! Config::get('button.icon-view') !!}
                                                         </a>
                                                     </td>
-                                                    <td>
+                                                    {{--<td>
                                                         <a class="{!! Config::get('button.btn-create') !!}"
                                                            title="{{ trans('general.create_preview') }}"
                                                            href="{{ action('Backend\PreviewsController@create',[$chapter->id]) }}">
@@ -445,7 +445,7 @@
                                                            href="{{ action('Backend\PreviewsController@index',[$chapter->id]) }}">
                                                             {!! Config::get('button.icon-view') !!}
                                                         </a>
-                                                    </td>
+                                                    </td>--}}
                                                     <td>
                                                         <a class="{!! Config::get('button.btn-send') !!}"
                                                            href="{{ action('Backend\MessagesController@create',['book_id' => $chapter->book_id, 'chapter_id' => $chapter->id]) }}"
