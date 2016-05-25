@@ -25,7 +25,7 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\SendEmailForChapterStatusChanged'
         ],
         'App\Events\SendRegisterationConfirmationEmail' => [
-            'App\Listeners\SendRegisterationConfirmationEmail'
+            'App\Listeners\SendRegisterationConfirmationEmailListener'
         ],
 
     ];
