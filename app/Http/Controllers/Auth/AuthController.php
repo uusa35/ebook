@@ -67,7 +67,7 @@ class AuthController extends PrimaryController
             'active' => 0,
             'level' => 3,
             'avatar' => 'avatar.png',
-            'remember_token' => md5($data['_token'])
+            'remember_token' => $data['_token']
         ]);
 
         if ($user) {

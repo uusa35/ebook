@@ -70,15 +70,13 @@ class HomeController extends PrimaryController
      * @param  string $token
      * @return mixed
      */
-    public function confirmEmail($token)
+    public function confirmEmail($id)
     {
         $this->middleware('guest');
 
-        $user = User::where('remember_token', $token)->firstOrFail();
+        $user = User::where('id', $id)->firstOrFail();
 
         if (!$user) {
-
-            dd('failure');
 
             session()->put('error', 'your account still not activated .. please check with the administrator');
 
