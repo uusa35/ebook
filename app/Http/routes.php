@@ -95,7 +95,7 @@ Route::group(['prefix' => 'frontend'], function () {
      *                                          User
      *
      ***************************************************************************************************/
-    Route::get('/conditions', ['uses' => 'HomeController@getConditions']);
+    Route::get('/conditions', ['uses' => 'HomeControllerg@getConditions']);
     Route::resource('user', 'UserController', ['only' => 'show']);
 
     /*

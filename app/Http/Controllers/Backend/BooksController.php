@@ -137,7 +137,6 @@ class BooksController extends PrimaryController
      */
     public function create()
     {
-
         $this->getPageTitle('book.create');
 
         $this->authorize('authorizeAccess','book_create');

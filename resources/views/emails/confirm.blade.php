@@ -9,6 +9,5 @@
 <p>
     We just need you to <a href='{{ url("register/confirm/").'/'.$data['token'] }}'>confirm your email address</a> real quick!
 </p>
-{{ dd('testing') }}
 </body>
 </html>

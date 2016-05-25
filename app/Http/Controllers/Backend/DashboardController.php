@@ -46,7 +46,7 @@ class DashboardController extends PrimaryController
 
         }
 
-        return redirect()->back()->with(['error' => 'messeages.error.no_auth']);
+        return redirect()->back()->with(['error' => 'messeages.error.activate_your_account']);
     }
 
 }
