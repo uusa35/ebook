@@ -30,6 +30,11 @@ class SendRegisterationConfirmationEmail
         $user = $event->user;
         $email = $user->email;
 
-
+        Mail::later(1, 'emails.confirm', ['data' => ['token' => $user->remember_token]], function ($message) use ($email) {
+            $message->from(\Cache::get('contactusInfo')->email, ' | 7orof.com');
+            $message->subject('7orof.com | Email Confirmation');
+            $message->priority('high');
+            $message->to($email);
+        });
     }
 }

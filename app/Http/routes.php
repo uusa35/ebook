@@ -35,7 +35,7 @@ Route::controllers([
 ]);
 
 
-get('register/confirm/{token}', 'RegistrationController@confirmEmail');
+get('register/confirm/{remember_token}', 'HomeController@confirmEmail');
 
 Route::get('/', ['as' => 'home', 'uses' => 'BookController@index']);
 Route::get('/home', ['uses' => 'BookController@index']);

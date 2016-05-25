@@ -46,9 +46,9 @@ class AuthController extends PrimaryController
     protected function validator(array $data)
     {
         return Validator::make($data, [
-//            'name' => 'required|max:255',
-//            'email' => 'required|email|max:255|unique:users',
-//            'password' => 'required|confirmed|min:6',
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
         ]);
     }
 
@@ -67,7 +67,7 @@ class AuthController extends PrimaryController
             'active' => 0,
             'level' => 3,
             'avatar' => 'avatar.png',
-            'remember_token' => $data['_token']
+            'remember_token' => md5($data['_token'])
         ]);
 
         if ($user) {
