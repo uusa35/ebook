@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Core\PrimaryController;
 use App\Core\SocialAuthTrait;
+use App\Events\SendRegisterationConfirmationEmail;
 use App\Src\User\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -45,9 +46,9 @@ class AuthController extends PrimaryController
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+//            'name' => 'required|max:255',
+//            'email' => 'required|email|max:255|unique:users',
+//            'password' => 'required|confirmed|min:6',
         ]);
     }
 
@@ -63,14 +64,17 @@ class AuthController extends PrimaryController
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'active' => 1,
+            'active' => 0,
             'level' => 3,
-            'avatar' => 'avatar.png'
+            'avatar' => 'avatar.png',
+            'remember_token' => $data['_token']
         ]);
 
         if ($user) {
 
             $user->roles()->attach(3);
+
+            event(new SendRegisterationConfirmationEmail($user));
 
             return $user;
 
@@ -78,6 +82,7 @@ class AuthController extends PrimaryController
 
             abort('503');
         }
+
     }
 
 
@@ -96,6 +101,8 @@ class AuthController extends PrimaryController
         Auth::logout();
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
+
+
 
 
 }

@@ -1,18 +1,5 @@
 <?php
 
-
-//\Debugbar::enable();
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
 /***************************************************************************************************
  * ▂ ▃ ▅ ▆ █ Frontend  █ ▆ ▅ ▃ ▂
  ***************************************************************************************************/
@@ -41,10 +28,14 @@ Route::get('auth/google/callback', 'Auth\AuthController@handleProviderGoogleCall
 /***************************************************************************************************
  * Default Authentication
  ***************************************************************************************************/
+
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
+
+
+get('register/confirm/{token}', 'RegistrationController@confirmEmail');
 
 Route::get('/', ['as' => 'home', 'uses' => 'BookController@index']);
 Route::get('/home', ['uses' => 'BookController@index']);

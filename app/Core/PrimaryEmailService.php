@@ -21,7 +21,6 @@ trait PrimaryEmailService
             $message->subject('7orof.com | Contact Us | ' . $data['subject']);
             $message->priority('high');
             $message->to(\Cache::get('contactusInfo')->email);
-            $message->cc('uusa35@gmail.com');
         });
 
     }
@@ -33,7 +32,6 @@ trait PrimaryEmailService
             $message->subject('7orof.com | New Drafted Book | ' . $book->title);
             $message->priority('high');
             $message->to(\Cache::get('contactusInfo')->email);
-            $message->cc('uusa35@gmail.com');
         });
     }
 
@@ -44,7 +42,6 @@ trait PrimaryEmailService
             $message->subject('7orof.com | New Published Book | ' . $book->title);
             $message->priority('high');
             $message->to($emailsFollowingList, \Cache::get('contactusInfo')->email);
-            $message->cc('uusa35@gmail.com');
         });
 
     }
@@ -56,8 +53,8 @@ trait PrimaryEmailService
             $message->subject('7orof.com | Newsletter | ' . $title);
             $message->priority('high');
             $message->to($email);
-            $message->cc('uusa35@gmail.com');
 
         });
     }
+
 }

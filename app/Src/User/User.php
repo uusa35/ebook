@@ -35,14 +35,14 @@ class User extends PrimaryModel implements AuthenticatableContract, CanResetPass
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'avatar', 'active', 'phone', 'level'];
+    protected $fillable = ['name', 'email', 'password', 'avatar', 'active', 'phone', 'level','remember_token'];
 
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password'];
 
     public function previews()
     {

@@ -23,7 +23,11 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\ChapterStatusChanged' => [
             'App\Listeners\SendEmailForChapterStatusChanged'
-        ]
+        ],
+        'App\Events\SendRegisterationConfirmationEmail' => [
+            'App\Listeners\SendRegisterationConfirmationEmail'
+        ],
+
     ];
 
     /**
