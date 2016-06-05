@@ -45,10 +45,13 @@ class PoliciesCollection
     public function authorizeOwnership($ownerId)
     {
 
-        if ($this->isAuthor()) {
+        if ($this->isAdmin()) {
 
+            return true;
 
-            if (Auth::id() == $ownerId) {
+        } else {
+
+            if (Auth::id() === $ownerId) {
 
                 return true;
 
@@ -56,7 +59,6 @@ class PoliciesCollection
 
             return false;
         }
-        
-        return true;
+
     }
 }

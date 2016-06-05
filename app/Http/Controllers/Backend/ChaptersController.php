@@ -149,9 +149,10 @@ class ChaptersController extends PrimaryController
     }
 
 
-    public function destroy(Requests\DeleteChapter $request)
+    public function destroy(Requests\DeleteChapter $request,$id)
     {
-        $chapter = $this->chapterRepository->model->findOrFail(['id' => $request->get('id')])->with('book.author')->first();
+
+        $chapter = $this->chapterRepository->model->findOrFail($id)->with('book.author')->first();
 
         $this->authorize('authorizeOwnership',$chapter->book->author);
 
