@@ -23,6 +23,26 @@ class Book extends PrimaryModel
 
     protected $localeStrings = [];
 
+    // this is a recommended way to declare event handlers
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($book) { // before delete() method call this
+
+            $book->comments()->delete();
+
+            $book->chapters()->delete();
+
+            $book->meta()->delete();
+
+            $book->likes()->delete();
+
+            $book->favorites()->delete();
+
+        });
+    }
+
     /**
      * one to Many Relation
      * a user has many books
@@ -48,7 +68,8 @@ class Book extends PrimaryModel
         return $this->belongsToMany('App\Src\User\User', 'book_user');
     }
 
-    public function user_favorites() {
+    public function user_favorites()
+    {
         return $this->hasMany('App\Src\Favorite\Favorite');
     }
 
@@ -107,8 +128,8 @@ class Book extends PrimaryModel
             ->selectRaw('books.*, count(*) as book_count')
             ->whereExists(function ($query) {
                 $query->select(DB::raw(1))->from('chapters')
-                      ->whereRaw('chapters.book_id = books.id')
-                      ->where('chapters.status', '=', 'published');
+                    ->whereRaw('chapters.book_id = books.id')
+                    ->where('chapters.status', '=', 'published');
             })
             ->with('meta', 'author', 'usersFavorites', 'chapters')
             ->join('book_user', 'books.id', '=', 'book_user.book_id')
@@ -122,11 +143,12 @@ class Book extends PrimaryModel
      * this function is responsible to fetch all books that has been favorited by a user to show in the control panel
      * @return mixed
      */
-    public function FavoritedBooksListForUser() {
+    public function FavoritedBooksListForUser()
+    {
         return $this->selectRaw('books.*')
             ->with('author')
-            ->join('book_user','book_user.book_id', '=', 'books.id')
-            ->where('book_user.user_id',\Auth::id())
+            ->join('book_user', 'book_user.book_id', '=', 'books.id')
+            ->where('book_user.user_id', \Auth::id())
             ->orderBy('books.created_at')
             ->get();
     }
