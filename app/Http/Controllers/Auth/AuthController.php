@@ -64,7 +64,7 @@ class AuthController extends PrimaryController
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'active' => 0,
+            'active' => 1,
             'level' => 3,
             'avatar' => 'avatar.png',
             'remember_token' => $data['_token']
