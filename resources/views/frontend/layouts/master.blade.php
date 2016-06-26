@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <link href="{{ asset('icons/logo.ico') }}" rel="shortcut icon" type="image/x-icon">
+    <link rel="icon" type="image/png" href="{{ asset('icons/favicon-32x32.png') }}" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{{ asset('icons/favicon-16x16.png') }}" sizes="16x16" />
+
+
+    <link rel="shortcut icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
+
+
     <meta charset="UTF-8">
     <title>7orof.com</title>
     @section('styles')
