@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <link rel="icon" type="image/png" href="{{ asset('icons/favicon-32x32.png') }}" sizes="32x32" />
+    <!-- for FF, Chrome, Opera -->
     <link rel="icon" type="image/png" href="{{ asset('icons/favicon-16x16.png') }}" sizes="16x16" />
-
-
-    <link rel="shortcut icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
-
+    <link rel="icon" type="image/png" href="{{ asset('icons/favicon-32x32.png') }}" sizes="32x32" />
+    <!-- for IE -->
+    <link rel="icon" type="image/x-icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
 
     <meta charset="UTF-8">
     <title>7orof.com</title>
@@ -15,6 +15,9 @@
     @show
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="7orof is a book libarary for all authors.">
+    <meta name="author" content="ideasowners.net">
+    <meta name="keywords" content="books,book,author,kuwait,ksa,saudi,write,poem,thoughts,ideas,library,arabic">
 </head>
 <body>
 
