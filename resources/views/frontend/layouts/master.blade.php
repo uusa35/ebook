@@ -2,8 +2,8 @@
 <html>
 <head lang="en">
     <!-- for FF, Chrome, Opera -->
-    <link rel="icon" type="image/png" href="{{ asset('icons/favicon-16x16.png') }}" sizes="16x16" />
-    <link rel="icon" type="image/png" href="{{ asset('icons/favicon-32x32.png') }}" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{{ public_path('icons/favicon-16x16.png') }}" sizes="16x16" />
+    <link rel="icon" type="image/png" href="{{ public_path('icons/favicon-32x32.png') }}" sizes="32x32" />
     <!-- for IE -->
     <link rel="icon" type="image/x-icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
